@@ -1,9 +1,13 @@
 ![Profile Image for Andy Jarrett](https://www.andyjarrett.com/public/img/AJ_ICON.png)
 
 ## Andy Jarrett
-MD / Founder / Developer / R&D
+*MD / Founder / Developer / R&D*
+
+### View the site at [AndyJarrett.com](https://www.andyjarrett.com)
 
 ---
+
+#### Find me:
 
 [![Web](https://img.shields.io/badge/Web-000000?style=flat&logo=globe&logoColor=white)](https://andyjarrett.com)
 [![BlueSky](https://img.shields.io/badge/BlueSky-000000?style=flat&logo=cloud&logoColor=white)](https://bsky.app/profile/andyjarrett.com)
