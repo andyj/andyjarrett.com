@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="description" content="Andy Jarrett online pressence">
+<meta name="keywords" content="Andy Jarrett, andyjarrett, mytag">
+<meta name="author" content="Andy Jarrett">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Multi-lingual site with Model-Glue and Coldspring</title>
+<link rel="canonical" href="https://andyjarrett.com">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Multi-lingual site with Model-Glue and Coldspring">
+<meta name="twitter:description" content="Go to AndyJarrett.com for more">
+<meta name="twitter:creator" content="@andyj" />
+<meta property="og:title" content="Multi-lingual site with Model-Glue and Coldspring">
+<meta property="og:description" content="Go to AndyJarrett.com for more">
+<meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="/public/css/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
+<link rel="stylesheet" href="/public/prismjs/prism.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L0V74G0Q65"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-L0V74G0Q65');
+</script>
+
+</head>
+<body>
+  <div class="container border-bottom pb-2">
+  <header class="d-flex flex-wrap justify-content-center">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+      <span class="fs-2">Andy Jarrett // <span class="lead">Code. Develop. Create.</span></span>
+    </a>
+    <ul class="nav nav-pills">
+      <li class="nav-item  p-2">
+        <a href="/" class="btn btn-outline-primary rounded-circle p-3 lh-1">
+          <i class="bi bi-house fs-5"></i>
+          <span class="visually-hidden">Dismiss</span>
+        </a>
+      </li>
+      <li class="nav-item  p-2">
+        <a href="/feed.xml" class="btn btn-outline-primary rounded-circle p-3 lh-1">
+          <i class="bi bi-rss fs-5"></i>
+        </a>
+      </li>
+      <li class="nav-item  p-2">
+        <a href="/linktree" class="btn btn-outline-primary rounded-circle p-3 lh-1" title="Linktree for Andy Jarrett">
+          <i class="bi bi-tree fs-5"></i>
+        </a>
+      </li>
+      <li class="nav-item  p-2">
+        <a href="https://buymeacoffee.com/mailgw" class="btn btn-outline-primary rounded-circle p-3 lh-1">
+          <i class="bi bi-cup-hot-fill fs-5"></i>
+        </a>
+      </li>
+    </ul>
+  </header>
+</div>  
+
+
+  <div class="container">
+    <h1 class="mt-5 mb-5"><b>Multi-lingual site with Model-Glue and Coldspring</b></h1>
+    <main class="mw fw-lighter fs-5">
+      
+Now and then through my work I get asked to create a site with multi-lingual support. In the past I have usually just created a custom tag or UDF. This time, now that I am on A href="http://model-glue.com/">Model Glue: Unity</a> I wanted something that was a little more integrated so I decided to use Ray Camden modified ResourceBundle.cfc. This cfc was actually created by Paul Hastings and you can find more information <a href="http://www.sustainablegis.com/unicode/resourceBundle/rb.cfm">here</a>.There are two reasons I am posting this mini guide, first to share and the second is that knowing me I am probably doing something inefficient and by letting the community see it hopefully someone will point out any errors or an easier way to do things :o) I've zipped up Pauls/Rays <a href="http://www.andyjarrett.co.uk/downloads/resourcebundle.cfc.zip">ResourceBundle.cfc</a> that comes with <a href="http://www.blogcfc.com">BlogCFC</a> and you can download it by clicking <a href="http://www.andyjarrett.co.uk/downloads/resourcebundle.cfc.zip">here</a>. Lets's begin:<ol> <li>Download the file and put it in your projects model directory, so the url to this CFC would be http://yourlocalproject/model/resourcebundle.cfc.</li> <li>Also in your model directory create new folder called "locale_data" and in there add a file called en_US.properties.</li> <li>Open up <a href="http://www.andyjarrett.co.uk/downloads/resourcebundle.cfc.zip">resourceBundle.cfc</a> and change the method(function) "loadResourceBundle" to "init". The reason for this is that we are going to get <a href="http://www.coldspringframework.org">ColdSpring</a> to inject our required variables into the resource bundle.</li>  <li>Then around line 53 look for the following bit of code<code><cfset thisRBfile=arguments.rbFile&".properties"></code>and change it to<code><cfset thisRBfile = expandPath(arguments.rbFile&".properties")></code>  </li> <li>Next open up your ColdSpring.xml file and add the following:<code><bean id="resourcebundle" class="model.resourcebundle"> <constructor-arg name="rbFile"><value>/model/locale_data/en_US</value></constructor-arg>  <constructor-arg name="rbLocale"><value>en_US</value></constructor-arg></bean></code> What we are doing here is initiated the resourcebundle.cfc and passing two arguments to the init method. These arguments consist of the:<br>  <b>rbFile:</b> This must be the path + filename UP to but NOT including the locale. We auto-add .properties to the end. This location is the file we created in point 2.<br>  <b>rbLocale:</b> The locale.  </li> <li>Then we are going to <a href="http://www.andyjarrett.co.uk/andy/blog/index.cfm/2006/11/23/ColdSpring-and-Dependency-Injection-for-the-beginner-part-1">inject this into our controller</a> and to do this add the following code snippet to your ColdSpring.xml File:<code><bean id="controller" class="controller.controller"> <property name="resourcebundle">    <ref bean="resourcebundle" /> </property>   </bean> </code>   and in your Model Glue controller add<code><cffunction name="setResourcebundle" returntype="void" access="public" output="false">  <cfargument name="Resourcebundle" required="true" type="any" />   <cfset variables.Resourcebundle = arguments.Resourcebundle /></cffunction><cffunction name="getResourcebundle" returntype="any" access="public" output="false">   <cfreturn variables.Resourcebundle /></cffunction></code>    </li>   <li>At this point a lot of the hard work is done. Point 1-3 were just about setting up our environment and 4-6 were about some modification  to get everything to play together nicely.</li>    <li>We'll carry on with the controller. Because we have injected the resourcebundle.cfc in the Controller we can access it via the variable "variables.resourcebundle" and assign it to the viewState with the following code in the onRequestStart function:<code>  <cfset arguments.event.setValue('rb', variables.Resourcebundle) /></code> By doing this we have the bundle in the application scope and ready. For our view files we'll just need to accees the viewState variable but before we do that.....</li>   <li>Lets populate the en_US.properties file with the following before we go any further:<code>name=Namedob=Date Of birthelevator=elevatorcigarette=cigarettesidewalk=sidewalk</code>If you haven't used blogCFC or the resoucebundle then you probably should know that the for each language/region you need to create a new .properties file with the relevant prefix(from the CFMX's locales) and values. So for France the prefix would be fr_FR and UK(English) file would be called en_GB.properties, and the content would be something like:<code>name=Namedob=Date Of birthelevator=liftcigarette=fagsidewalk=pavement</code></li>   <li>      All we need to do now is get the variable we set earlier in OnRequestStart at point xxxxxxxxxxx. Anyone familiar with MG should know this already<code> <cfset rb = viewState.getValue('rb') /> </code>   </li>   <li>      Now that the resourcebundle is referenced to the "rb" variable we use the method "getResource" to access our .properties file and retrieve the translations. So in your view file the final code to display the users name and dob will then look something like<code><cfset rb = viewState.getValue('rb') /> <cfoutput>  #rg.getResource('name')#: #users_name#<br/> #rg.getResource('dob')#: #dateFormat(dob, 'dd-mm-yyyy')#<br/> </cfoutput></code>          </li></ol>Thats pretty much covered the basics of setting this up. You'll notice in my last code snippet I use the UK date format style, this won't do if you are creating a multilingual site but there is a utilities package that goes with the resource bundle for this and I hope to cover that in another post. At the moment I just wait feedback/comment with this approach before I continue.<br>
+    </main>
+
+    <div class="row mt-5 ">
+      <div class="col-6">
+        <strong>Recent Posts</strong>
+        <ul>
+        
+          <li ><a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow</a></li>
+        
+          <li ><a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Off</a></li>
+        
+          <li ><a href="/posts/2024/basic-javascript-console-logging-methods/" class="card-link link-underline-light">Basic Javascript Console Logging Techniques Every Developer Should Know</a></li>
+        
+          <li ><a href="/posts/2024/reduce-clutter-and-confusion-by-finally-deleting-those-old-branches-local-and-remote/" class="card-link link-underline-light">Reduce clutter and confusion by finally deleting those old branches, local and remote.</a></li>
+        
+        </ul>
+      </div>
+      <div class="col-6 pt-3 text-end">
+        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+      </div>
+    </div>
+  </div>
+  <footer class="container mt-5 border-top pt-2">
+  <div class="row justify-content-md-center">
+    <div class="col">
+      ©AndyJarrett
+      <a href="/linktree" title="Linktree for AndyJarrett" target="_blank"><i class="bi bi-tree"></i></a>
+      <a href="/sitemap.xml" title="Site map for AndyJarrett.com" target="_blank"><i class="bi bi-map"></i></a>
+      <!-- Home Link -->
+      <a href="https://andyjarrett.com" class=""><i class="bi bi-globe me-2"></i></a>
+      <!-- linkedin Link -->
+      <a href="https://www.linkedin.com/in/andyjarrett/" title="inkedIn" target="_blank"><i class="bi bi-linkedin me-2"></i></a>
+      <!-- Twitter Link -->
+      <a href="https://twitter.com/andyj" title="Twitter" target="_blank"><i class="bi bi-twitter me-2"></i></a>
+      <!-- GitHub Link -->
+      <a href="https://github.com/andyj" title="GitHub" target="_blank"><i class="bi bi-github me-2"></i></a>
+      <!-- Stack Overflow Link -->
+      <a href="https://stackoverflow.com/users/371761/andy-jarrett" title="Stack overflow" target="_blank"><i class="bi bi-stack-overflow me-2"></i></a>
+      <!-- BlueSky Link -->
+      <a href="https://bsky.app/profile/andyjarrett.com" title="BlueSky" target="_blank"><i class="bi bi-cloud me-2"></i></a>
+      <!-- Instagram Link -->
+      <a href="https://instagram.com/andyjarrett" title="Instragram" target="_blank"><i class="bi bi-instagram me-2"></i></a>
+      <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee" target="_blank"><i class="bi bi-cup-hot-fill fs-5"></i></a>
+    </div>
+    <div class="col">
+      <div class="text-end">
+        <div class="btn-group">
+          <a href="#" class="btn btn-secondary btn-sm" id="lightThemeButton" data-bs-theme-value="light">
+            <i class="bi bi-sun"></i>
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" id="darkThemeButton" data-bs-theme-value="dark">
+            <i class="bi bi-moon-stars-fill"></i>
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" id="autoThemeButton" data-bs-theme-value="auto">
+            <i class="bi bi-circle-half"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script src="/public/js/toggle.js" type="text/javascript"></script>
+<script src="/public/prismjs/prism.js"></script>
+</body>
+</html>
+
+
+<!-- <div class="card m-2" style="width: 15rem;">
+            <div class="card-body">
+              <h5 class="card-title">
+
+              </h5>
+            </div>
+            <div class="card-footer text-end">
+              <a href="" class="card-link link-underline-light"></a>
+            </div>
+          </div> -->

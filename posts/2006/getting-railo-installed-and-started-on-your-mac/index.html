@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="description" content="Andy Jarrett online pressence">
+<meta name="keywords" content="Andy Jarrett, andyjarrett, mytag">
+<meta name="author" content="Andy Jarrett">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Getting Railo installed and started on your Mac</title>
+<link rel="canonical" href="https://andyjarrett.com">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Getting Railo installed and started on your Mac">
+<meta name="twitter:description" content="Go to AndyJarrett.com for more">
+<meta name="twitter:creator" content="@andyj" />
+<meta property="og:title" content="Getting Railo installed and started on your Mac">
+<meta property="og:description" content="Go to AndyJarrett.com for more">
+<meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="/public/css/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
+<link rel="stylesheet" href="/public/prismjs/prism.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L0V74G0Q65"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-L0V74G0Q65');
+</script>
+
+</head>
+<body>
+  <div class="container border-bottom pb-2">
+  <header class="d-flex flex-wrap justify-content-center">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+      <span class="fs-2">Andy Jarrett // <span class="lead">Code. Develop. Create.</span></span>
+    </a>
+    <ul class="nav nav-pills">
+      <li class="nav-item  p-2">
+        <a href="/" class="btn btn-outline-primary rounded-circle p-3 lh-1">
+          <i class="bi bi-house fs-5"></i>
+          <span class="visually-hidden">Dismiss</span>
+        </a>
+      </li>
+      <li class="nav-item  p-2">
+        <a href="/feed.xml" class="btn btn-outline-primary rounded-circle p-3 lh-1">
+          <i class="bi bi-rss fs-5"></i>
+        </a>
+      </li>
+      <li class="nav-item  p-2">
+        <a href="/linktree" class="btn btn-outline-primary rounded-circle p-3 lh-1" title="Linktree for Andy Jarrett">
+          <i class="bi bi-tree fs-5"></i>
+        </a>
+      </li>
+      <li class="nav-item  p-2">
+        <a href="https://buymeacoffee.com/mailgw" class="btn btn-outline-primary rounded-circle p-3 lh-1">
+          <i class="bi bi-cup-hot-fill fs-5"></i>
+        </a>
+      </li>
+    </ul>
+  </header>
+</div>  
+
+
+  <div class="container">
+    <h1 class="mt-5 mb-5"><b>Getting Railo installed and started on your Mac</b></h1>
+    <main class="mw fw-lighter fs-5">
+      
+Woohoo, this has been fun. As most of you know i'm a total Mac newbie. So not having everything done and wrapped in .exe files has been hard to process this year.Don't get me wrong. Installing and uninstalling apps on a Mac couldn't be easier and anyone who has made the switch can testify to that. But when it comes to servers its just never seems as straight forwads as a Windows experience.So after a couple of hours of reading and understanding command lines and arguments etc i've finally managed to get Railo installed without emailing anyone and screaming helppppp! which for me is a first. <em>(Hat tip here for <a href="http://www.markdrew.co.uk">Mark Drew</a> who has been on the other end of most of my screams and always helped me)</em><p><em>These were instructions oringinally for the *nix platform (which is what Mac is in essence), so if you are having trouble getting off the ground with Ubuntu etc. you can use these steps as well.</em></p>So back to installing Railo on your Mac (in as easy as I could make it steps). You should know that we are going to use the application server that comes with Railo called <a href="http://www.caucho.com/">Resin</a>. <ol> <li>Goto <a href="http://www.railo.ch/en/index.cfm?treeID=224">Railo downloads section</a> and get the "Railo Server unix/linux" version. At the moment this is Unix/Linux          railo-1.0.0.027-resin-3.0.14-with-jre-linux.tar.gz (39 MB). I download everything to my desktop.</li> <li>Once downloaded unpack the contents. On your desktop you should now have a folder called "railo-1.0.0.027-resin-3.0.14-with-jre-linux", modify this to "railo" and copy it do your    /applications/ folder.</li> <li>Via Finder open up /applications/railo/contrib/ and open "init.resin" with a text editor. This script is your start/stop script for the Resin server (and in affect Railo). You     need to make the following changes to this file:    <ol>      <li>Around line 12 change       <code>JAVA_HOME=/usr/java</code> to <code>JAVA_HOME=/System/Library/Frameworks/JavaVM.framework/Versions/1.4.2/Home/bin/java</code> As you can see we are just pointing the         variable JAVA_HOME to the location of the Java folder on your system. The above change "should" work for most Macs out of the box. If you have modified the location of the Java root then this will need to be reflected upon here.</li>     <li> The line after should read; <code>RESIN_HOME=/home/ferg/test/resin-pro</code> Change this to <code>RESIN_HOME=/applications/railo</code> This is just the path we copied the Railo folder too.</li>    </ol></li>  <li>Thats all the changes made to the configuration files done for now.. Next open up a Terminal window (found in  /applications/utilities/terminal)</li> <li>Then via the command line navigate to the Railo/contrib folder put entering <code>    cd /applications/railo/contrib  </code>     Then hit return </li> <li>    Now we are in the Contrib folder all we need to do is call our "init.resin" file we edited earlier    <code>      sudo -s init.resin start      </code>   You should then see something like    <code>      Starting resin:       Resin httpd start at Wed Nov 29 13:01:30 GMT 2006   </code> </li> <li>Now open up your browser and goto http://localhost:8600/ to see it in action.</li>  <li>To access the Railo Administator go to http://localhost:8600/railo-context/admin/index.cfm</li> <li>Thats it!</li>    </ol>If you want to change the IP address then via Finder open /applications/railo/conf/resin.conf and change <code><!-- The http port --><http server-id="" host="*" port="8600"/></code>to<code><!-- The http port --><http server-id="" host="*" port="80"/></code><p>p.s. You might want to stop the server :o) if so just enter via the Terminal window:<code>sudo -s init.resin stop  </code></p><br>
+    </main>
+
+    <div class="row mt-5 ">
+      <div class="col-6">
+        <strong>Recent Posts</strong>
+        <ul>
+        
+          <li ><a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow</a></li>
+        
+          <li ><a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Off</a></li>
+        
+          <li ><a href="/posts/2024/basic-javascript-console-logging-methods/" class="card-link link-underline-light">Basic Javascript Console Logging Techniques Every Developer Should Know</a></li>
+        
+          <li ><a href="/posts/2024/reduce-clutter-and-confusion-by-finally-deleting-those-old-branches-local-and-remote/" class="card-link link-underline-light">Reduce clutter and confusion by finally deleting those old branches, local and remote.</a></li>
+        
+        </ul>
+      </div>
+      <div class="col-6 pt-3 text-end">
+        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+      </div>
+    </div>
+  </div>
+  <footer class="container mt-5 border-top pt-2">
+  <div class="row justify-content-md-center">
+    <div class="col">
+      ©AndyJarrett
+      <a href="/linktree" title="Linktree for AndyJarrett" target="_blank"><i class="bi bi-tree"></i></a>
+      <a href="/sitemap.xml" title="Site map for AndyJarrett.com" target="_blank"><i class="bi bi-map"></i></a>
+      <!-- Home Link -->
+      <a href="https://andyjarrett.com" class=""><i class="bi bi-globe me-2"></i></a>
+      <!-- linkedin Link -->
+      <a href="https://www.linkedin.com/in/andyjarrett/" title="inkedIn" target="_blank"><i class="bi bi-linkedin me-2"></i></a>
+      <!-- Twitter Link -->
+      <a href="https://twitter.com/andyj" title="Twitter" target="_blank"><i class="bi bi-twitter me-2"></i></a>
+      <!-- GitHub Link -->
+      <a href="https://github.com/andyj" title="GitHub" target="_blank"><i class="bi bi-github me-2"></i></a>
+      <!-- Stack Overflow Link -->
+      <a href="https://stackoverflow.com/users/371761/andy-jarrett" title="Stack overflow" target="_blank"><i class="bi bi-stack-overflow me-2"></i></a>
+      <!-- BlueSky Link -->
+      <a href="https://bsky.app/profile/andyjarrett.com" title="BlueSky" target="_blank"><i class="bi bi-cloud me-2"></i></a>
+      <!-- Instagram Link -->
+      <a href="https://instagram.com/andyjarrett" title="Instragram" target="_blank"><i class="bi bi-instagram me-2"></i></a>
+      <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee" target="_blank"><i class="bi bi-cup-hot-fill fs-5"></i></a>
+    </div>
+    <div class="col">
+      <div class="text-end">
+        <div class="btn-group">
+          <a href="#" class="btn btn-secondary btn-sm" id="lightThemeButton" data-bs-theme-value="light">
+            <i class="bi bi-sun"></i>
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" id="darkThemeButton" data-bs-theme-value="dark">
+            <i class="bi bi-moon-stars-fill"></i>
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" id="autoThemeButton" data-bs-theme-value="auto">
+            <i class="bi bi-circle-half"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script src="/public/js/toggle.js" type="text/javascript"></script>
+<script src="/public/prismjs/prism.js"></script>
+</body>
+</html>
+
+
+<!-- <div class="card m-2" style="width: 15rem;">
+            <div class="card-body">
+              <h5 class="card-title">
+
+              </h5>
+            </div>
+            <div class="card-footer text-end">
+              <a href="" class="card-link link-underline-light"></a>
+            </div>
+          </div> -->

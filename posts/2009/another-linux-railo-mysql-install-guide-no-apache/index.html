@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="description" content="Andy Jarrett online pressence">
+<meta name="keywords" content="Andy Jarrett, andyjarrett, mytag">
+<meta name="author" content="Andy Jarrett">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Another Linux Railo MySQL install guide (no Apache)</title>
+<link rel="canonical" href="https://andyjarrett.com">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Another Linux Railo MySQL install guide (no Apache)">
+<meta name="twitter:description" content="Go to AndyJarrett.com for more">
+<meta name="twitter:creator" content="@andyj" />
+<meta property="og:title" content="Another Linux Railo MySQL install guide (no Apache)">
+<meta property="og:description" content="Go to AndyJarrett.com for more">
+<meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="/public/css/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
+<link rel="stylesheet" href="/public/prismjs/prism.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L0V74G0Q65"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-L0V74G0Q65');
+</script>
+
+</head>
+<body>
+  <div class="container border-bottom pb-2">
+  <header class="d-flex flex-wrap justify-content-center">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+      <span class="fs-2">Andy Jarrett // <span class="lead">Code. Develop. Create.</span></span>
+    </a>
+    <ul class="nav nav-pills">
+      <li class="nav-item  p-2">
+        <a href="/" class="btn btn-outline-primary rounded-circle p-3 lh-1">
+          <i class="bi bi-house fs-5"></i>
+          <span class="visually-hidden">Dismiss</span>
+        </a>
+      </li>
+      <li class="nav-item  p-2">
+        <a href="/feed.xml" class="btn btn-outline-primary rounded-circle p-3 lh-1">
+          <i class="bi bi-rss fs-5"></i>
+        </a>
+      </li>
+      <li class="nav-item  p-2">
+        <a href="/linktree" class="btn btn-outline-primary rounded-circle p-3 lh-1" title="Linktree for Andy Jarrett">
+          <i class="bi bi-tree fs-5"></i>
+        </a>
+      </li>
+      <li class="nav-item  p-2">
+        <a href="https://buymeacoffee.com/mailgw" class="btn btn-outline-primary rounded-circle p-3 lh-1">
+          <i class="bi bi-cup-hot-fill fs-5"></i>
+        </a>
+      </li>
+    </ul>
+  </header>
+</div>  
+
+
+  <div class="container">
+    <h1 class="mt-5 mb-5"><b>Another Linux Railo MySQL install guide (no Apache)</b></h1>
+    <main class="mw fw-lighter fs-5">
+      
+<p>This was meant to be a guide about setting up your server with Linux, Railo, Apache, and MySQL but I've dropped Apache. Why? Well its an overhead I don't need. Resin functions perfectly well as a HTTP server and it does all I need. Why add another bit of software to fail? .... simplify :) In the long run I might change but for now I'd rather save the resources.</p><p>So ... where did this guide come from considering there are quite a few guides for this setup? Well for one reason or another I just didn't get on with them and by the end something went wrong which was mainly because I am Mac boy more than a Linux guy and sometimes I just missed the points here and there. The aim of my guide is to be clear and simple. So with a fresh Ubuntu install i'm planning on gettingt Railo running via Resin so I can call http://www.mysite.com/index.cfm</p><p>I won't lie, to make this post I have "borrowed" from other sources out there which I will try and link to at the end.</p><p>Im running Ubuntu 8.10 (Intrepid) without a graphical interface. </p><p><b>Note:</b> If you are doing this on a clean, new server then before you even read on check out Slicehost.com documentation about setting up a Ubuntu server. These guides are the best and clearest I've seen online to date and cover everything you need!!!!</p><ol><li><a href="http://articles.slicehost.com/2008/11/28/ubuntu-intrepid-setup-page-1">http://articles.slicehost.com/2008/11/28/ubuntu-intrepid-setup-page-1</a></li><li><a href="http://articles.slicehost.com/2008/11/28/ubuntu-intrepid-setup-page-2">http://articles.slicehost.com/2008/11/28/ubuntu-intrepid-setup-page-2</a></li></ol><p>On to Railo</p> <ol> <li>On your ubuntu server, open the Terminal and run:<br/><code>  $ sudo apt-get install build-essential apache2 sun-java6-jdk</code>   This will install all the pieces you need for Java and compiling. If there are any problems installing Java then check out <a href="http://www.javadesign.info/SystemsHardware/OS/Ubuntu/install-java-on-ubuntu">http://www.javadesign.info/SystemsHardware/OS/Ubuntu/install-java-on-ubuntu</a></li> <li>    We are going to install Railo into the <b>/opt/</b> folder. So next we are going to move in to the <b>/opt/</b> folder and download Railo;<code>$ cd /opt</code>      </li> <li>Go to <a href="http://www.getrailo.org/">Get Railo.org</a> and the Download section. Find the links under <b>Railo Server</b> and copy the link for the <b>ALL OS</b>, tar.gz, and without JRE version. Currently this is <a href="http://www.getrailo.org/down.cfm?item=/railo/remote/download/3.1.0.012/server/all/railo-3.1.0.012-resin-3.1.2-without-jre.tar.gz">http://www.getrailo.org/down.cfm?item=/railo/remote/download/3.1.0.012/server/all/railo-3.1.0.012-resin-3.1.2-without-jre.tar.gz</a></li>  <li>With this link copied go back to the terminal and type <i>$ wget {paste the URL link here with out the brackets}</i>. So with the current URL your terminal syntax will be <code> $ wget http://www.getrailo.org/down.cfm?item=/railo/remote/download/3.1.0.012/server/all/railo-3.1.0.012-resin-3.1.2-without-jre.tar.gz</code>          </li> <li>We now have the downloaded Railo server in <b>/opt/</b> and we're gonna unpack this with the following command<code> $ sudo tar -xf railo-3.1.0.012-resin-3.1.2-without-jre.tar.gz</code>  This command will unpack the Railo file you downloaded in to a folder called "railo-3.1.0.012-resin-3.1.2-without-jre". </li> <li>Don't worry about the long folder name for now as we will create a symbolic link in the next step to make referencing it easier. <code>  $ sudo ln -s railo-3.1.0.012-resin-3.1.2-without-jre railo  $ sudo chown -R {your username} railo</code>    </li> <li>A quick recap; at this point we have Java, Railo, and Resin installed and we are ready check we've done it right by firing up Railo<code>  $ /opt/railo/bin/httpd.sh</code>      now go to http://localhost:8600/ and Railo should be running and a link to the administrator. At the moment the only way to stop this service is with <b>ctrl-c</b>. Later on will start this in the background by adding an argument but before we continue <b>ctrl-c</b> in the terminal to stop Railo/Resin.</li>  <li>This is all well and good, but its not running off port 80 which is what most people, if like me, want. We're going to edit the Resin.conf file now and change the port from 8600 to port 80</b> </li> <li>    Open the Resin.conf file    <code>$ sudo nano /opt/railo/conf/resin.conf</code>   look for the line <b>&lt;http address="*" port="8600"/></b>, we're going to change the port to 80    <code><!-- The http port --><http address="*" port="80"/></code>  </li> <li>For each site you need edit the Resin configuration file again. Im going to add my sites to the directory <b>/var/www/</b>. So lets create our first site<code>$ mkdir /var/www/mysite</code></li>  <li> Now edit our Resin.conf file at <b>/opt/railo/conf/resin.conf</b><code>$ sudo nano /opt/railo/conf/resin.conf</code>Then around line 250, just before the following comment <b>&lt;!-- configures the default host, matching any host name --></b> add a host and <b>host-alias</b>'s if you use them:<code><host id="mysite.com" root-directory="/var/www/mysite"> <web-app id="/" root-directory=""/> <host-alias>www.mysite.com</host-alias>   <host-alias>www.mysite.co.uk</host-alias>   </host></code>You can find out more about this <a href="http://nlc.nlc.go.cn/resin-doc/config/resin.xtp#host">here</a>. Its even possible to use RegEx in there as well.</li><li> Now restart the server    <code>      $ sudo /opt/railo/bin/httpd.sh start    </code>   This time we have passed "start" to the Resin command, this will load it as a service in the background. Then go to http://mysite.com and check it all work.  </li></ol> <p>References:</p><ul><li><a href="http://www.ubuntu.com/">Ubuntu</a></li><li><a href="http://www.getrailo.org/">Get Railo</a></li><li><a href="http://www.caucho.com/">Caucho Resin</a></li><li><a href="http://www.mysql.com/">MySQL</a></li><li>A BIG THANKS to <a href="http://www.compoundtheory.com/?action=displayPost&ID=393">Mark Mandel and his blog post</a> which this is taken from and expanded.</li></ul><br>
+    </main>
+
+    <div class="row mt-5 ">
+      <div class="col-6">
+        <strong>Recent Posts</strong>
+        <ul>
+        
+          <li ><a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow</a></li>
+        
+          <li ><a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Off</a></li>
+        
+          <li ><a href="/posts/2024/basic-javascript-console-logging-methods/" class="card-link link-underline-light">Basic Javascript Console Logging Techniques Every Developer Should Know</a></li>
+        
+          <li ><a href="/posts/2024/reduce-clutter-and-confusion-by-finally-deleting-those-old-branches-local-and-remote/" class="card-link link-underline-light">Reduce clutter and confusion by finally deleting those old branches, local and remote.</a></li>
+        
+        </ul>
+      </div>
+      <div class="col-6 pt-3 text-end">
+        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+      </div>
+    </div>
+  </div>
+  <footer class="container mt-5 border-top pt-2">
+  <div class="row justify-content-md-center">
+    <div class="col">
+      ©AndyJarrett
+      <a href="/linktree" title="Linktree for AndyJarrett" target="_blank"><i class="bi bi-tree"></i></a>
+      <a href="/sitemap.xml" title="Site map for AndyJarrett.com" target="_blank"><i class="bi bi-map"></i></a>
+      <!-- Home Link -->
+      <a href="https://andyjarrett.com" class=""><i class="bi bi-globe me-2"></i></a>
+      <!-- linkedin Link -->
+      <a href="https://www.linkedin.com/in/andyjarrett/" title="inkedIn" target="_blank"><i class="bi bi-linkedin me-2"></i></a>
+      <!-- Twitter Link -->
+      <a href="https://twitter.com/andyj" title="Twitter" target="_blank"><i class="bi bi-twitter me-2"></i></a>
+      <!-- GitHub Link -->
+      <a href="https://github.com/andyj" title="GitHub" target="_blank"><i class="bi bi-github me-2"></i></a>
+      <!-- Stack Overflow Link -->
+      <a href="https://stackoverflow.com/users/371761/andy-jarrett" title="Stack overflow" target="_blank"><i class="bi bi-stack-overflow me-2"></i></a>
+      <!-- BlueSky Link -->
+      <a href="https://bsky.app/profile/andyjarrett.com" title="BlueSky" target="_blank"><i class="bi bi-cloud me-2"></i></a>
+      <!-- Instagram Link -->
+      <a href="https://instagram.com/andyjarrett" title="Instragram" target="_blank"><i class="bi bi-instagram me-2"></i></a>
+      <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee" target="_blank"><i class="bi bi-cup-hot-fill fs-5"></i></a>
+    </div>
+    <div class="col">
+      <div class="text-end">
+        <div class="btn-group">
+          <a href="#" class="btn btn-secondary btn-sm" id="lightThemeButton" data-bs-theme-value="light">
+            <i class="bi bi-sun"></i>
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" id="darkThemeButton" data-bs-theme-value="dark">
+            <i class="bi bi-moon-stars-fill"></i>
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" id="autoThemeButton" data-bs-theme-value="auto">
+            <i class="bi bi-circle-half"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script src="/public/js/toggle.js" type="text/javascript"></script>
+<script src="/public/prismjs/prism.js"></script>
+</body>
+</html>
+
+
+<!-- <div class="card m-2" style="width: 15rem;">
+            <div class="card-body">
+              <h5 class="card-title">
+
+              </h5>
+            </div>
+            <div class="card-footer text-end">
+              <a href="" class="card-link link-underline-light"></a>
+            </div>
+          </div> -->

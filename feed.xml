@@ -1,0 +1,947 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" xml:base="https://andyjarrett.com/" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>AndyJarrett.com</title>
+    <link>https://andyjarrett.com/</link>
+    <description>Posts about web app development</description>
+    <language>en</language>
+    <atom:link href="https://andyjarrett.com/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Shortcut Differences When Moving Between Sublime Text And VScode on Macos</title>
+      <link>https://andyjarrett.com/posts/2024/shortcut-differences-when-moving-between-macos-sublime-text-and-vscode/</link>
+      <description><![CDATA[
+&lt;div class=&quot;image-container my-2&quot;&gt;
+  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/florian-olivo-4hbJ-eymZ1o-unsplash.jpg&quot; alt=&quot;Man running towards mountains&quot; class=&quot;img-fluid&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;text-end&quot;&gt;
+  &lt;sup&gt;
+    &lt;cite&gt;
+      Photo by &lt;a href=&quot;https://unsplash.com/@florianolv?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Florian Olivo&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/lines-of-html-codes-4hbJ-eymZ1o?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;
+    &lt;/cite&gt;
+  &lt;/sup&gt;
+&lt;/div&gt;
+
+&lt;p&gt;
+  &lt;strong&gt;TL;DR:&lt;/strong&gt;
+  the GIST here: &lt;a href=&quot;https://gist.github.com/andyj/bf4082bb6fcf8a432c5aa3526df686b2&quot; target=&quot;_blank&quot;&gt;gist.github.com/andyj/bf4082bb6fcf8a432c5aa3526df686b2&lt;/a&gt;
+&lt;/p&gt;
+&lt;p&gt;As I transition between &lt;a href=&quot;https://www.sublimetext.com/&quot; target=&quot;_blank&quot;&gt;Sublime Text&lt;/a&gt;, my preferred editor for its speed, and &lt;a href=&quot;https://code.visualstudio.com/&quot; target=&quot;_blank&quot;&gt;VSCode&lt;/a&gt;, which I appreciate for its functionality despite some layout and design choices, the biggest challenge has been adjusting to the new shortcuts. Here is a list of the different shortcuts between the two editors that I have compiled to ease this transition:&lt;/p&gt;
+
+&lt;p&gt;I&#39;ve made this into a &lt;a href=&quot;https://gist.github.com/andyj/bf4082bb6fcf8a432c5aa3526df686b2&quot; target=&quot;_blank&quot;&gt;GIST&lt;/a&gt; so it can be edited and updated, as there are probably many I have still missed.&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/andyj/bf4082bb6fcf8a432c5aa3526df686b2.js&quot;&gt;&lt;/script&gt;
+
+]]></description>
+      <pubDate>Tue, 18 Jun 2024 10:30:00 +0000</pubDate>
+      <dc:creator>Andy Jarrett</dc:creator>
+      <guid>https://andyjarrett.com/posts/2024/shortcut-differences-when-moving-between-macos-sublime-text-and-vscode/</guid>
+      <enclosure url="https://andyjarrett.com/public/blogimage/florian-olivo-4hbJ-eymZ1o-unsplash.jpg" type="image/jpeg" />
+      <category>posts, shortcuts, code, sublime</category>
+      <author>Andy Jarrett &lt;email@example.com&gt;</author>
+    </item>
+    <item>
+      <title>Demystifying DMARC</title>
+      <link>https://andyjarrett.com/posts/2024/Demystifying-DMARC/</link>
+      <description><![CDATA[
+&lt;p&gt;One of the recent items I&#39;ve been overseeing internally is ensuring that every email sent from our domain genuinely belongs to us. This is paramount nowadays, especially with the increasing sophistication of email scams. DMARC is a guardian for your email&#39;s reputation. It&#39;s important to note that DMARC is just one part of a trio, with the other two being Sender Policy Framework (SPF) and DomainKeys Identified Mail (DKIM).&lt;/p&gt;
+
+&lt;p&gt;Implementing DMARC is one thing but explaining in simple terms can often be challenging. With this in mind, I created this post to help others (and me when I come back to this) understand and implement DMARC effectively. Hopefully, this makes it more accessible and understandable for everyone to see the crucial role DMARC plays in protecting your email domain.&lt;/p&gt;
+
+&lt;h6&gt;A DMARC report, presented in XML format, is like a detailed note from your mailbox. It tells you a few important things:&lt;/h6&gt;
+
+&lt;ul class=&quot;mt-3&quot;&gt;
+  &lt;li&gt;&lt;strong&gt;Who&#39;s Sending Letters in Your Name:&lt;/strong&gt; It shows which emails have been sent from your domain (like example.com).&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Checking the Signature:&lt;/strong&gt; It checks if these emails have a special signature (called DKIM) that proves they&#39;re really from you. A correct signature is akin to a secret handshake that only you and your friends know.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Where the Letters are Posted From:&lt;/strong&gt; It examines where the emails are being sent from (SPF). If an email claims to be from you but is sent from an unfamiliar location, the mailbox gets suspicious.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;What Happens to Odd Letters:&lt;/strong&gt; If an email looks odd (fails DKIM or SPF checks), the mailbox decides what to do based on the rules you&#39;ve set. Maybe it puts them in a special &#39;maybe dodgy&#39; part of the mailbox (quarantine), or perhaps it discards them outright.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Telling You the Story:&lt;/strong&gt; After all this, the smart mailbox compiles a report about what emails it received, their origins, whether they had the correct secret handshake, and what it did with the odd ones.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In essence, a DMARC report acts as your personal auditor, meticulously tracking the authenticity of each email associated with your domain. It&#39;s a tool that not only identifies imposters but also aids in making informed decisions to strengthen your email security. By providing a transparent overview of your email&#39;s health, DMARC ensures that your digital correspondence remains trusted and secure.&lt;/p&gt;
+
+&lt;p&gt;I won&#39;t delve into the details in this post (perhaps in a future one), but essentially DMARC is a TXT record published in the DNS for a specific domain, outlining the policy for email authentication, reporting, and conformance. Here&#39;s an example DMARC record for the domain example.com:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;v=DMARC1; p=none; rua=mailto:dmarc-reports@example.com; ruf=mailto:dmarc-failures@example.com; fo=1; &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In short, a DMARC report helps you keep an eye on your &#39;email mailbox&#39;, ensuring that no one is pretending to be you and that your friends (people you email) can trust the letters they receive in your name. It&#39;s an effective way to stop tricksters and maintain your email reputation.&lt;/p&gt;
+
+&lt;p&gt;Jumping on the DMARC bandwagon is more than just a techie step; it&#39;s about keeping your email chats as real and as secure as the talks we have over coffee. In our fast-moving digital world, getting DMARC on your side isn&#39;t just smart; it&#39;s a must for anyone who wants to keep their email game safe and sound.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://mxtoolbox.com/dmarc.aspx&quot; target=&quot;_blank&quot;&gt;Check your DMARC/DKIM/SPF records now&lt;/a&gt;&lt;/p&gt;
+]]></description>
+      <pubDate>Tue, 18 Jun 2024 15:30:00 +0000</pubDate>
+      <dc:creator>Andy Jarrett</dc:creator>
+      <guid>https://andyjarrett.com/posts/2024/Demystifying-DMARC/</guid>
+      <enclosure url="https://andyjarrett.com/undefined" type="image/jpeg" />
+      <category>posts, EMAIL, DMARC</category>
+      <author>Andy Jarrett &lt;email@example.com&gt;</author>
+    </item>
+    <item>
+      <title>How to Set Up Automatic Updates on Ubuntu 22.04.4 LTS</title>
+      <link>https://andyjarrett.com/posts/2024/how-to-set-up-automatic-updates-on-ubuntu-22-lts/</link>
+      <description><![CDATA[
+
+
+
+
+&lt;div class=&quot;image-container my-2&quot;&gt;
+  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/gabriel-heinzer-4Mw7nkQDByk-unsplash.jpg&quot; alt=&quot;Ubuntu Prompt&quot; class=&quot;img-fluid&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;text-end&quot;&gt;
+  &lt;sup&gt;
+    &lt;cite&gt;Photo by &lt;a href=&quot;https://unsplash.com/@6heinz3r?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Gabriel Heinzer&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/text-4Mw7nkQDByk?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;&lt;/cite&gt;
+  &lt;/sup&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;container mt-5&quot;&gt;
+  &lt;h1 class=&quot;mb-4&quot;&gt;How to Set Up Automatic Updates on Ubuntu 22.04.4 LTS&lt;/h1&gt;
+  &lt;p&gt;I don&#39;t set up servers often, but this is always something I need to find, so I&#39;m leaving this here for me, for later. In fact I might turn this in to a GIST later for feedback.&lt;/p&gt;
+  &lt;p&gt;The idea of this to to help set up Ubuntu 22.04.4 LTS, to ensure all critical updates are installed without manual intervention using the &lt;code&gt;unattended-upgrades&lt;/code&gt; package.&lt;/p&gt;
+
+  &lt;h3&gt;Step 1: Install Unattended Upgrades&lt;/h3&gt;
+  &lt;p&gt;First, ensure the &lt;code&gt;unattended-upgrades&lt;/code&gt; package is installed. Open a terminal and run:&lt;/p&gt;
+  &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;sudo apt update &amp;&amp; sudo apt install unattended-upgrades&lt;/code&gt;&lt;/pre&gt;
+
+  &lt;h3&gt;Step 2: Enable Unattended Upgrades&lt;/h3&gt;
+  &lt;p&gt;Next, enable automatic updates by running the following command with high priority for a quicker setup:&lt;/p&gt;
+  &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;sudo dpkg-reconfigure --priority=high unattended-upgrades&lt;/code&gt;&lt;/pre&gt;
+
+  &lt;h4 class=&quot;text-primary&quot;&gt;Why Choose &quot;High&quot; Priority?&lt;/h4&gt;
+  &lt;p&gt;Choosing the &quot;high&quot; priority setting simplifies the configuration process by focusing on essential settings. This is  useful if you want to quickly enable automatic updates without being prompted to much. Might not be for everyone one, but works for me.&lt;/p&gt;
+
+  &lt;h3&gt;Step 3: Configure Unattended Upgrades&lt;/h3&gt;
+  &lt;p&gt;To fine-tune which updates are installed, edit the configuration file:&lt;/p&gt;
+  &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;sudo nano /etc/apt/apt.conf.d/50unattended-upgrades&lt;/code&gt;&lt;/pre&gt;
+  &lt;p&gt;In this file, locate the &lt;code&gt;Unattended-Upgrade::Allowed-Origins&lt;/code&gt; section. By default, it might look like this:&lt;/p&gt;
+  &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;Unattended-Upgrade::Allowed-Origins {
+  &quot;${distro_id}:${distro_codename}&quot;;
+  &quot;${distro_id}:${distro_codename}-security&quot;;
+  // &quot;${distro_id}:${distro_codename}-updates&quot;;
+  // &quot;${distro_id}:${distro_codename}-proposed&quot;;
+  // &quot;${distro_id}:${distro_codename}-backports&quot;;
+};&lt;/code&gt;&lt;/pre&gt;
+  &lt;p&gt;Uncomment the lines for &lt;code&gt;-updates&lt;/code&gt; and &lt;code&gt;-backports&lt;/code&gt; to include these in your automatic updates:&lt;/p&gt;
+  &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;Unattended-Upgrade::Allowed-Origins {
+  &quot;${distro_id}:${distro_codename}&quot;;
+  &quot;${distro_id}:${distro_codename}-security&quot;;
+  &quot;${distro_id}:${distro_codename}-updates&quot;;
+  &quot;${distro_id}:${distro_codename}-backports&quot;;
+};&lt;/code&gt;&lt;/pre&gt;
+
+  &lt;h3&gt;Step 4: Configure the Update Interval&lt;/h3&gt;
+  &lt;p&gt;Edit the &lt;code&gt;20auto-upgrades&lt;/code&gt; file to set how frequently the system checks for updates:&lt;/p&gt;
+  &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;sudo nano /etc/apt/apt.conf.d/20auto-upgrades&lt;/code&gt;&lt;/pre&gt;
+  &lt;p&gt;Add or modify the following lines:&lt;/p&gt;
+  &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;APT::Periodic::Update-Package-Lists &quot;1&quot;;
+APT::Periodic::Download-Upgradeable-Packages &quot;1&quot;;
+APT::Periodic::AutocleanInterval &quot;7&quot;;
+APT::Periodic::Unattended-Upgrade &quot;1&quot;;&lt;/code&gt;&lt;/pre&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;code&gt;Update-Package-Lists &quot;1&quot;;&lt;/code&gt; – Update the package list daily.&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt;Download-Upgradeable-Packages &quot;1&quot;;&lt;/code&gt; – Download package updates daily.&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt;AutocleanInterval &quot;7&quot;;&lt;/code&gt; – Clean up old packages every 7 days.&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt;Unattended-Upgrade &quot;1&quot;;&lt;/code&gt; – Install updates daily.&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;h3&gt;Step 5: Verify the Configuration&lt;/h3&gt;
+  &lt;p&gt;Run a dry-run to ensure your configuration is correct:&lt;/p&gt;
+  &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;sudo unattended-upgrades --dry-run --debug&lt;/code&gt;&lt;/pre&gt;
+
+
+  &lt;p&gt;This setup ensures your Ubuntu system remains secure and efficient by automatically applying the latest updates without requiring manual intervention. Happy updating!&lt;/p&gt;
+&lt;/div&gt;
+]]></description>
+      <pubDate>Tue, 09 Jul 2024 10:30:00 +0000</pubDate>
+      <dc:creator>Andy Jarrett</dc:creator>
+      <guid>https://andyjarrett.com/posts/2024/how-to-set-up-automatic-updates-on-ubuntu-22-lts/</guid>
+      <enclosure url="https://andyjarrett.com/public/blogimage/gabriel-heinzer-4Mw7nkQDByk-unsplash.jpg" type="image/jpeg" />
+      <category>posts, ubuntu, update, guide, examples</category>
+      <author>Andy Jarrett &lt;email@example.com&gt;</author>
+    </item>
+    <item>
+      <title>Exploring Timestamps and Millisecond Precision with MariaDB</title>
+      <link>https://andyjarrett.com/posts/2023/exploring-millisecond-precision-in-mariadb-timestamps/</link>
+      <description><![CDATA[
+&lt;div class=&quot;image-container my-2&quot;&gt;
+  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/peter-yost-I9jJXmNkXR4-unsplash.jpg&quot; alt=&quot;Stopwatch on desk&quot; class=&quot;img-fluid&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;text-end&quot;&gt;
+  &lt;sup&gt;
+    &lt;cite&gt;
+      Photo by &lt;a href=&quot;https://unsplash.com/@odysseus_?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Peter Yost&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/silver-and-white-round-analog-watch-I9jJXmNkXR4?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;
+    &lt;/cite&gt;
+  &lt;/sup&gt;
+&lt;/div&gt;
+
+
+
+
+  &lt;div class=&quot;container my-5&quot;&gt;
+
+    &lt;section&gt;
+      &lt;h2&gt;Understanding Timestamps&lt;/h2&gt;
+      &lt;p&gt;
+        In MariaDB, the timestamp data type can be defined with an optional fractional seconds part.
+        You can specify fractional seconds support using the syntax timestamp(N), where N represents
+        the number of digits in the fractional seconds part, ranging from 1 to 6. This is needed when
+        you&#39;re dealing with time-sensitive applications and is easy to do with MariaDB and &lt;code&gt;now(N)&lt;/code&gt;.
+      &lt;/p&gt;
+      &lt;p&gt;Example:&lt;/p&gt;
+    &lt;/section&gt;
+
+    &lt;section&gt;
+      &lt;h2&gt;The Table Schema&lt;/h2&gt;
+      &lt;pre class=&quot;bg-light p-4 rounded&quot;&gt;&lt;code class=&quot;language-sql&quot;&gt;CREATE TABLE `_timetest` (
+  `n_ct` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `n` timestamp NULL DEFAULT NULL,
+  `n_1` timestamp(1) NULL DEFAULT NULL,
+  `n_2` timestamp(2) NULL DEFAULT NULL,
+  `n_3` timestamp(3) NULL DEFAULT NULL,
+  `n_4` timestamp(4) NULL DEFAULT NULL,
+  `n_5` timestamp(5) NULL DEFAULT NULL,
+  `n_6` timestamp(6) NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;&lt;/code&gt;
+      &lt;/pre&gt;
+    &lt;/section&gt;
+
+
+    &lt;section&gt;
+      &lt;h2 class=&quot;mt-5&quot;&gt;Example Input&lt;/h2&gt;
+      &lt;p&gt;While you can insert timestamps manually, MariaDB provides the &lt;code&gt;now()&lt;/code&gt; function for inserting the current timestamp, which can also be used with fractional seconds.&lt;/p&gt;
+      &lt;pre class=&quot;bg-light p-4 rounded&quot;&gt;&lt;code class=&quot;language-sql&quot;&gt;INSERT INTO _timetest (n, n_1, n_2, n_3, n_4, n_5, n_6)
+VALUES (
+  now(),
+  now(1),
+  now(2),
+  now(3),
+  now(4),
+  now(5),
+  now(6)
+);&lt;/code&gt;&lt;/pre&gt;
+    &lt;/section&gt;
+
+    &lt;section&gt;
+      &lt;h2 class=&quot;mt-5&quot;&gt;Example Output&lt;/h2&gt;
+      &lt;p&gt;The &lt;code class=&quot;language-sql&quot;&gt;SELECT&lt;/code&gt; statement:&lt;/p&gt;
+      &lt;pre class=&quot;bg-light p-4 rounded&quot;&gt; &lt;code class=&quot;language-sql&quot;&gt; SELECT * FROM _timetest; &lt;/code&gt; &lt;/pre&gt;
+      &lt;p&gt;The output&lt;/p&gt;
+      &lt;pre class=&quot;bg-light p-4 rounded&quot;&gt;&lt;code&gt;
++---------------------+---------------------+---------------------+---------------------+-------------------------+--------------------------+---------------------------+----------------------------+
+| n_ct                | n                   | n_1                 | n_2                 | n_3                     | n_4                      | n_5                       | n_6                        |
++---------------------+---------------------+---------------------+---------------------+-------------------------+--------------------------+---------------------------+----------------------------+
+| 2023-09-10 12:34:56 | 2023-09-10 12:34:56 | 2023-09-10 12:34:56 | 2023-09-10 12:34:56 | 2023-09-10 12:34:56.123 | 2023-09-10 12:34:56.1234 | 2023-09-10 12:34:56.12345 | 2023-09-10 12:34:56.123456 |
++---------------------+---------------------+---------------------+---------------------+-------------------------+--------------------------+---------------------------+----------------------------+
+&lt;/code&gt; &lt;/pre&gt;
+    &lt;/section&gt;
+
+  &lt;/div&gt;
+]]></description>
+      <pubDate>Tue, 09 Jul 2024 23:16:00 +0000</pubDate>
+      <dc:creator>Andy Jarrett</dc:creator>
+      <guid>https://andyjarrett.com/posts/2023/exploring-millisecond-precision-in-mariadb-timestamps/</guid>
+      <enclosure url="https://andyjarrett.com/public/blogimage/peter-yost-I9jJXmNkXR4-unsplash.jpg" type="image/jpeg" />
+      <category>posts</category>
+      <author>Andy Jarrett &lt;email@example.com&gt;</author>
+    </item>
+    <item>
+      <title>Exploring JS array methods, including push, pop, shift, unshift, map, filter, reduce, and others</title>
+      <link>https://andyjarrett.com/posts/2024/exploring-array-methods-including-push-pop-shift-unshift-map-filter-reduce-and-others/</link>
+      <description><![CDATA[&lt;style&gt;pre div {margin-bottom: 20px; }&lt;/style&gt;
+&lt;div class=&quot;image-container my-2&quot;&gt;
+  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/gabriel-heinzer-g5jpH62pwes-unsplash.jpg&quot; alt=&quot;Man running towards mountains&quot; class=&quot;img-fluid&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;text-end&quot;&gt;
+  &lt;sup&gt;
+    &lt;cite&gt;
+      Photo by &lt;a href=&quot;https://unsplash.com/@6heinz3r?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Gabriel Heinzer&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/text-g5jpH62pwes?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;
+    &lt;/cite&gt;
+  &lt;/sup&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;
+    &lt;h3&gt;Classification:&lt;/h3&gt;
+    &lt;p&gt;
+      Arrays are a fundamental most languages including JavaScript. Allowing us developers to store and manipulate collections of data with ease.
+      &lt;s&gt;Mastering&lt;/s&gt; Just rembering array methods is a good start for writing clean and reusable code.
+    &lt;/p&gt;
+    &lt;p&gt;
+      In this post, like some of my others, I&#39;ve explored some various array methods, such as push, pop, shift, unshift, map, filter, reduce, and many others. I&#39;ve also tried to visually display them too.
+    &lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;row g-4 mb-4&quot;&gt;
+  &lt;div class=&quot;col-lg-3 col-md-6 col-sm-1&quot;&gt;
+    &lt;div class=&quot;card border-primary  h-100&quot;&gt;
+      &lt;div class=&quot;card-header text-primary&quot;&gt;&lt;b&gt;Mutating Methods:&lt;/b&gt;&lt;/div&gt;
+      &lt;div class=&quot;card-body&quot;&gt;
+        &lt;p class=&quot;card-text&quot;&gt; Methods that change the original array (e.g., push, pop, shift, unshift).&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;col-lg-3 col-md-6 col-sm-1 row-cols-xs-2&quot;&gt;
+    &lt;div class=&quot;card border-primary  h-100&quot;&gt;
+      &lt;div class=&quot;card-header text-primary&quot;&gt;&lt;b&gt;Iterative Methods:&lt;/b&gt;&lt;/div&gt;
+      &lt;div class=&quot;card-body&quot;&gt;
+        &lt;p class=&quot;card-text&quot;&gt; Methods that iterate over each element of the array to produce a result (e.g., map, filter, reduce, some, every, find, findIndex).&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;col-lg-3 col-md-6 col-sm-1 row-cols-xs-2&quot;&gt;
+    &lt;div class=&quot;card border-primary  h-100&quot;&gt;
+      &lt;div class=&quot;card-header text-primary&quot;&gt;&lt;b&gt;Accessor Methods:&lt;/b&gt;&lt;/div&gt;
+      &lt;div class=&quot;card-body&quot;&gt;
+        &lt;p class=&quot;card-text&quot;&gt; Methods that return a modified copy of the array or a specific element (e.g., reverse, at, slice, concat, includes, indexOf, join).&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;col-lg-3 col-md-6 col-sm-1 row-cols-xs-2&quot;&gt;
+    &lt;div class=&quot;card border-primary  h-100&quot;&gt;
+      &lt;div class=&quot;card-header text-primary&quot;&gt;&lt;b&gt;Flattening Methods:&lt;/b&gt;&lt;/div&gt;
+      &lt;div class=&quot;card-body&quot;&gt;
+        &lt;p class=&quot;card-text&quot;&gt; Methods that flatten arrays (e.g., flat, flatMap).&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+
+
+    &lt;h3&gt;Examples:&lt;/h3&gt;
+
+
+&lt;pre&gt;&lt;/pre&gt;
+
+&lt;script&gt;
+const preElement = document.querySelector(&#39;pre&#39;);
+
+// Example arrays
+const myArray1 = [&#39;🥶&#39;, &#39;🥶&#39;, &#39;🥶&#39;, &#39;🥶&#39;];
+const myArray2 = [&#39;😎&#39;, &#39;🥵&#39;, &#39;🥶&#39;,&#39;🤢&#39;];
+const numberArray = [1, 2, 3];
+
+// MUTATING METHODS
+const pushExample = `${JSON.stringify(myArray1)}.push(&#39;🥵&#39;) = ${JSON.stringify([...myArray1, &#39;🥵&#39;])}`;
+const popExample = `${JSON.stringify(myArray2)}.pop() = ${JSON.stringify(myArray2.slice(0, -1))}`;
+const shiftExample = `${JSON.stringify(myArray2)}.shift() = ${JSON.stringify(myArray2.slice(1))}`;
+const unshiftExample = `${JSON.stringify(myArray2)}.unshift(&#39;💩&#39;) = ${JSON.stringify([&#39;💩&#39;, ...myArray2])}`;
+
+// ITERATIVE METHODS
+const mapExample = `${JSON.stringify(myArray2)}.map(item =&gt; item + &#39;!&#39;) = ${JSON.stringify(myArray2.map(item =&gt; item + &#39;!&#39;))}`;
+const filterExample = `${JSON.stringify(myArray2)}.filter(item =&gt; item === &#39;🥶&#39;) = ${JSON.stringify(myArray2.filter(item =&gt; item === &#39;🥶&#39;))}`;
+const reduceExample = `${JSON.stringify(numberArray)}.reduce((acc, val) =&gt; acc + val, 0) = ${numberArray.reduce((acc, val) =&gt; acc + val, 0)}`;
+const someExample = `${JSON.stringify(numberArray)}.some(val =&gt; val &gt; 2) = ${numberArray.some(val =&gt; val &gt; 2)}`;
+const everyExample = `${JSON.stringify(numberArray)}.every(val =&gt; val &gt; 0) = ${numberArray.every(val =&gt; val &gt; 0)}`;
+const findExample = `${JSON.stringify(numberArray)}.find(val =&gt; val &gt; 2) = ${numberArray.find(val =&gt; val &gt; 2)}`;
+const findIndexExample = `${JSON.stringify(numberArray)}.findIndex(val =&gt; val &gt; 2) = ${numberArray.findIndex(val =&gt; val &gt; 2)}`;
+
+// ACCESSOR METHODS
+const reverseExample = `${JSON.stringify(myArray2)}.reverse() = ${JSON.stringify([...myArray2].reverse())}`;
+const atExample = `${JSON.stringify(myArray2)}.at(1) = ${myArray2.at(1)}`;
+const sliceExample = `${JSON.stringify(myArray2)}.slice(1, 2) = ${JSON.stringify(myArray2.slice(1, 2))}`;
+const concatExample = `${JSON.stringify([&#39;🥶&#39;])}.concat([&#39;🥵&#39;]) = ${JSON.stringify([&#39;🥶&#39;].concat([&#39;🥵&#39;]))}`;
+const includesExample = `${JSON.stringify(myArray2)}.includes(&#39;🥵&#39;) = ${myArray2.includes(&#39;🥵&#39;)}`;
+const indexOfExample = `${JSON.stringify(myArray2)}.indexOf(&#39;🥵&#39;) = ${myArray2.indexOf(&#39;🥵&#39;)}`;
+const joinExample = `${JSON.stringify(myArray2)}.join(&#39; &#39;) = &quot;${myArray2.join(&#39; &#39;)}&quot;`;
+
+// FLATTENING METHODS
+const nestedArray = [1, [2, 3], [4, 5]];
+const flatExample = `${JSON.stringify(nestedArray)}.flat() = ${JSON.stringify(nestedArray.flat())}`;
+const flatMapExample = `${JSON.stringify(numberArray)}.flatMap(val =&gt; [val, val * 2]) = ${JSON.stringify(numberArray.flatMap(val =&gt; [val, val * 2]))}`;
+
+// Array of examples
+const examples = [
+  pushExample, popExample, shiftExample, unshiftExample, mapExample, filterExample, reduceExample,
+  someExample, everyExample, findExample, findIndexExample, reverseExample, atExample, sliceExample,
+  concatExample, includesExample, indexOfExample, joinExample, flatExample, flatMapExample
+];
+
+// Create and append &lt;div&gt; elements within &lt;pre&gt;
+examples.forEach(example =&gt; {
+  const codeElement = document.createElement(&#39;code&#39;);
+  codeElement.classList.add(&#39;language-javascript&#39;);
+  codeElement.textContent = example;
+
+  const divElement = document.createElement(&#39;div&#39;);
+  divElement.appendChild(codeElement);
+
+  preElement.appendChild(divElement);
+});
+
+&lt;/script&gt;]]></description>
+      <pubDate>Mon, 15 Jul 2024 10:30:00 +0000</pubDate>
+      <dc:creator>Andy Jarrett</dc:creator>
+      <guid>https://andyjarrett.com/posts/2024/exploring-array-methods-including-push-pop-shift-unshift-map-filter-reduce-and-others/</guid>
+      <enclosure url="https://andyjarrett.com/public/blogimage/gabriel-heinzer-g5jpH62pwes-unsplash.jpg" type="image/jpeg" />
+      <category>posts, javascript, arrays, examples</category>
+      <author>Andy Jarrett &lt;email@example.com&gt;</author>
+    </item>
+    <item>
+      <title>Outputting Git Branches to a CSV</title>
+      <link>https://andyjarrett.com/posts/2024/outputting-git-branches-in-a-csv-format/</link>
+      <description><![CDATA[
+
+
+&lt;div class=&quot;image-container my-2&quot;&gt;
+  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/simon-berger-Qa2tSHWgh84-unsplash.jpg&quot; alt=&quot;A branch ... like Git Branch ... get it?&quot; class=&quot;img-fluid&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;text-end&quot;&gt;
+  &lt;sup&gt;
+    &lt;cite&gt;
+      Photo by &lt;a href=&quot;https://unsplash.com/@8moments?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Simon Berger&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/orange-leaf-near-body-of-water-and-mountains-during-daytime-Qa2tSHWgh84?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;
+    &lt;/cite&gt;
+  &lt;/sup&gt;
+&lt;/div&gt;
+
+&lt;p&gt;This solution isn&#39;t perfect, especially if you have commas in your commit messages, but it gets the job done. Initially, I planned to write a quick bash script, but in true developer style, it turned into a 50-line beast. The concept seemed straightforward, like &lt;code&gt;git branch -av &gt;&gt; ~/Downloads/branches.txt&lt;/code&gt;, but I wanted something I could easily import into Excel.&lt;/p&gt;
+
+&lt;p&gt;That approach didn&#39;t work as well as I hoped, so I thought I&#39;d tweak that one-liner... it&#39;s now a lot bigger.&lt;/p&gt;
+
+&lt;ol class=&quot;list&quot;&gt;
+  &lt;li&gt;Run &lt;code&gt;$ touch export_branches.sh&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Run &lt;code&gt;$ chmod +x export_branches.sh&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;$ nano export_branches.sh&lt;/code&gt; and add the following:&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;#!/bin/bash
+
+# Initialise repo_path and output_csv as empty strings.
+repo_path=&quot;&quot;
+output_csv=&quot;&quot;
+
+# Use the getopts command to parse command-line arguments:
+# -p for the Git repository path.
+# -o for the output CSV file path.
+while getopts &quot;p:o:&quot; opt; do
+  case ${opt} in
+    p )
+      repo_path=$OPTARG
+      ;;
+    o )
+      output_csv=$OPTARG
+      ;;
+    &#92;? )
+      echo &quot;Usage: cmd [-p] &lt;repo_path&gt; [-o] &lt;output_csv&gt;&quot;
+      exit 1
+      ;;
+  esac
+done
+
+# The script checks if both repo_path and output_csv are provided. If not, it displays an error message and usage information, then exits.
+if [[ -z &quot;$repo_path&quot; ]] || [[ -z &quot;$output_csv&quot; ]]; then
+  echo &quot;Error: Both repository path and output CSV file must be specified.&quot;
+  echo &quot;Usage: $0 -p &lt;repo_path&gt; -o &lt;output_csv&gt;&quot;
+  exit 1
+fi
+
+# The script checks if the specified path is a valid directory and contains a .git folder to confirm it&#39;s a Git repository.
+if [ -d &quot;$repo_path&quot; ] &amp;&amp; [ -d &quot;$repo_path/.git&quot; ]; then
+  # Navigate to the directory
+  cd &quot;$repo_path&quot; || exit
+
+  # Captures the output of git branch -av, processes it, and writes the results to the specified CSV file.
+  git branch -av &gt; branches.txt
+
+  # Process the output and write to the specified CSV file.
+  echo &quot;Branch,Commit,Message&quot; &gt; &quot;$output_csv&quot;
+  while IFS= read -r line; do
+    branch=$(echo &quot;$line&quot; | awk &#39;{print $1}&#39;)
+    commit=$(echo &quot;$line&quot; | awk &#39;{print $2}&#39;)
+    message=$(echo &quot;$line&quot; | cut -d&#39; &#39; -f 3-)
+    echo &quot;$branch,$commit,$message&quot; &gt;&gt; &quot;$output_csv&quot;
+  done &lt; branches.txt
+
+  # The script removes the temporary branches.txt file.
+  rm branches.txt
+
+  # Success output
+  echo &quot;Branches have been exported to $output_csv&quot;
+else
+  # Something went wrong output
+  echo &quot;The specified directory does not exist or is not a Git repository.&quot;
+  exit 1
+fi
+  &lt;/output_csv&gt;&lt;/repo_path&gt;&lt;/output_csv&gt;&lt;/repo_path&gt;&lt;/code&gt;
+&lt;/pre&gt;
+
+&lt;p&gt;To run, simply call:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;./export_branches.sh -p /path/to/git/repository -o /path/to/output/branches.csv&lt;/code&gt;&lt;/pre&gt;
+
+
+]]></description>
+      <pubDate>Wed, 24 Jul 2024 22:30:00 +0000</pubDate>
+      <dc:creator>Andy Jarrett</dc:creator>
+      <guid>https://andyjarrett.com/posts/2024/outputting-git-branches-in-a-csv-format/</guid>
+      <enclosure url="https://andyjarrett.com/public/blogimage/simon-berger-Qa2tSHWgh84-unsplash.jpg" type="image/jpeg" />
+      <category>posts, git, csv, script, bash</category>
+      <author>Andy Jarrett &lt;email@example.com&gt;</author>
+    </item>
+    <item>
+      <title>Reduce clutter and confusion by finally deleting those old branches, local and remote.</title>
+      <link>https://andyjarrett.com/posts/2024/reduce-clutter-and-confusion-by-finally-deleting-those-old-branches-local-and-remote/</link>
+      <description><![CDATA[
+&lt;div class=&quot;image-container my-2&quot;&gt;
+  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/brina-blum-Bb_X4JgSqIM-unsplash.jpg&quot; alt=&quot;Github dongle, because this post is about Git&quot; class=&quot;img-fluid&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;text-end&quot;&gt;
+  &lt;sup&gt;
+    &lt;cite&gt;
+      Photo by &lt;a href=&quot;https://unsplash.com/@brina_blum?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Brina Blum&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/black-usb-flash-drive-Bb_X4JgSqIM?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;
+    &lt;/cite&gt;
+  &lt;/sup&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;TL;DR:&lt;/strong&gt; Jump to the &lt;a href=&quot;https://andyjarrett.com/posts/2024/reduce-clutter-and-confusion-by-finally-deleting-those-old-branches-local-and-remote/#thescript&quot;&gt;script&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;I know my way around &lt;a href=&quot;https://git-scm.com/&quot;&gt;Git&lt;/a&gt; well enough to get by, but recently, I realised just how many old branches we have in our project—some dating back years! It&#39;s definitely time for a clean-up. There are plenty of good reasons to do this, like reducing clutter, preventing confusion, improving performance, ensuring security, and freeing up space. So, I decided to tackle the mess. Now, there might be a better way to go about this, but using a script seemed like the most straightforward way to clear out the remote and local branches that are no longer needed.&lt;/p&gt;
+
+&lt;h4&gt;Deleting Local Branches&lt;/h4&gt;
+&lt;p&gt;For local branches, you can use the following command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;git branch -d [branch name]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This command deletes the branch if it has been fully merged into its upstream branch (usually the branch you&#39;re currently on, like main or master).&lt;/p&gt;
+
+&lt;p&gt;If the branch has not been merged, you might need to force delete it using:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;git branch -D [branch name]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &lt;code&gt;-D&lt;/code&gt; flag is a shorthand for &lt;code&gt;--delete --force&lt;/code&gt;, which forcefully deletes the branch, even if it hasn&#39;t been merged.&lt;/p&gt;
+
+&lt;h4&gt;Deleting Remote Branches&lt;/h4&gt;
+&lt;p&gt;For remote branches, use the following command:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;git push origin --delete [branch name]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Note that it&#39;s &lt;code&gt;--delete&lt;/code&gt;, not &lt;code&gt;-d&lt;/code&gt;, when deleting remote branches.&lt;/p&gt;
+
+&lt;p&gt;That&#39;s manageable for a few branches, but if you need a larger cleanup, a script can save a lot of time and effort:&lt;/p&gt;
+&lt;a name=&quot;thescript&quot;&gt;&lt;/a&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;#!/bin/bash
+
+branches=(
+  &quot;main_test&quot;
+  &quot;main_example&quot;
+  &quot;remotes/origin/main_bkp&quot;
+  &quot;remotes/origin/main_bkp_bkp&quot;
+  &quot;remotes/origin/main_bkp_bkp_20240201&quot;
+)
+
+for branch in &quot;${branches[@]}&quot;
+do
+  # Check if branch is remote or local
+  if [[ $branch == remotes/origin/* ]]; then
+    remote_branch=${branch#remotes/origin/}
+    echo &quot;Deleting remote branch $remote_branch&quot;
+    git push origin --delete $remote_branch
+  else
+    echo &quot;Deleting local branch $branch&quot;
+    git branch -D $branch
+  fi
+done
+&lt;/code&gt;&lt;/pre&gt;]]></description>
+      <pubDate>Tue, 30 Jul 2024 21:02:00 +0000</pubDate>
+      <dc:creator>Andy Jarrett</dc:creator>
+      <guid>https://andyjarrett.com/posts/2024/reduce-clutter-and-confusion-by-finally-deleting-those-old-branches-local-and-remote/</guid>
+      <enclosure url="https://andyjarrett.com/public/blogimage/brina-blum-Bb_X4JgSqIM-unsplash.jpg" type="image/jpeg" />
+      <category>posts, git, csv, script, bash</category>
+      <author>Andy Jarrett &lt;email@example.com&gt;</author>
+    </item>
+    <item>
+      <title>Basic Javascript Console Logging Techniques Every Developer Should Know</title>
+      <link>https://andyjarrett.com/posts/2024/basic-javascript-console-logging-methods/</link>
+      <description><![CDATA[
+
+&lt;div class=&quot;image-container my-2&quot;&gt;
+  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/zan-lazarevic--gxW3aq6onU-unsplash.jpg&quot; alt=&quot;Developer debugging&quot; class=&quot;img-fluid&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;text-end&quot;&gt;
+  &lt;sup&gt;
+    &lt;cite&gt;
+      Photo by &lt;a href=&quot;https://unsplash.com/@zanlazarevic?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Zan Lazarevic&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/black-iphone-near-macbook-pro--gxW3aq6onU?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;
+    &lt;/cite&gt;
+  &lt;/sup&gt;
+&lt;/div&gt;
+
+
+&lt;p&gt;In JavaScript, the console object provides access to the browser&#39;s debugging console. There are more methods available on the console object than I ever realised or looked into. Over the next few posts, I hope to list them all out along with some examples.&lt;/p&gt;
+
+&lt;p&gt;FYI: Part 2 is &lt;a href=&quot;https://andyjarrett.com/posts/2024/advanced-javascript-console-methods/&quot; title=&quot;Advanced Javascript Console Techniques Every Developer Should Be Aware Off&quot;&gt;now out&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3&gt;These are the ones that you should all know&lt;/h3&gt;
+
+&lt;div class=&quot;row mb-5&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;
+    &lt;div class=&quot;card&quot;&gt;
+      &lt;div class=&quot;card-header&quot;&gt;
+        &lt;code&gt;console.log();&lt;/code&gt; // General logging and the basics
+      &lt;/div&gt;
+      &lt;div class=&quot;card-body&quot;&gt;
+        &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;let someVar = 42;
+console.log(someVar); // Direct output of variables
+console.log(&quot;This is a log message&quot;); // Strings
+console.log(`The answer is ${someVar}`); //Embedded Expression allowed too
+console.log(&quot;Variable value:&quot;, someVar);&lt;/code&gt;&lt;/pre&gt;
+        &lt;p&gt;Output:&lt;/p&gt;
+        &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;42
+This is a log message
+The answer is 42
+Variable value: 42&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;row mb-5&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;
+    &lt;div class=&quot;card&quot;&gt;
+      &lt;div class=&quot;card-header&quot;&gt;
+        &lt;code&gt;console.error();&lt;/code&gt; // Logging errors
+      &lt;/div&gt;
+      &lt;div class=&quot;card-body&quot;&gt;
+        &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;console.error(&quot;This is an error message&quot;);
+console.error(&quot;Error details:&quot;, new Error(&quot;Something went wrong&quot;));&lt;/code&gt;&lt;/pre&gt;
+        &lt;p&gt;Output:&lt;/p&gt;
+        &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;This is an error message
+Error details: Error: Something went wrong
+    at &amp;lt;anonymous&amp;gt;:1:42&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;row mb-5&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;
+    &lt;div class=&quot;card&quot;&gt;
+      &lt;div class=&quot;card-header&quot;&gt;
+        &lt;code&gt;console.warn();&lt;/code&gt; // Logging warnings
+      &lt;/div&gt;
+      &lt;div class=&quot;card-body&quot;&gt;
+        &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;console.warn(&quot;This is a warning message&quot;);
+console.warn(&quot;Warning details:&quot;, &quot;Low disk space&quot;);&lt;/code&gt;&lt;/pre&gt;
+        &lt;p&gt;Output:&lt;/p&gt;
+        &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;This is a warning message
+Warning details: Low disk space&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;row mb-5&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;
+    &lt;div class=&quot;card&quot;&gt;
+      &lt;div class=&quot;card-header&quot;&gt;
+        &lt;code&gt;console.info();&lt;/code&gt; // Logging informational messages
+      &lt;/div&gt;
+      &lt;div class=&quot;card-body&quot;&gt;
+        &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;console.info(&quot;This is an informational message&quot;);
+console.info(&quot;Info details:&quot;, { status: &quot;OK&quot; });&lt;/code&gt;&lt;/pre&gt;
+        &lt;p&gt;Output:&lt;/p&gt;
+        &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;This is an informational message
+Info details: { status: &quot;OK&quot; }&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;row mb-5&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;
+    &lt;div class=&quot;card&quot;&gt;
+      &lt;div class=&quot;card-header&quot;&gt;
+        &lt;code&gt;console.debug();&lt;/code&gt; // Logging debug messages
+      &lt;/div&gt;
+      &lt;div class=&quot;card-body&quot;&gt;
+        &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;console.debug(&quot;This is a debug message&quot;);
+console.debug(&quot;Debug details:&quot;, { debugMode: true });&lt;/code&gt;&lt;/pre&gt;
+        &lt;p&gt;Output:&lt;/p&gt;
+        &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;This is a debug message
+Debug details: { debugMode: true }&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;
+    &lt;p&gt;Why not try it out now in the developer console now? If you&#39;re on Chrone/Edge check out &lt;a href=&quot;https://developer.chrome.com/docs/devtools/console/javascript&quot; target=&quot;_blank&quot;&gt;this guide&lt;/a&gt;.&lt;/p&gt;
+
+  &lt;/div&gt;
+&lt;/div&gt;]]></description>
+      <pubDate>Thu, 08 Aug 2024 01:01:00 +0000</pubDate>
+      <dc:creator>Andy Jarrett</dc:creator>
+      <guid>https://andyjarrett.com/posts/2024/basic-javascript-console-logging-methods/</guid>
+      <enclosure url="https://andyjarrett.com/public/blogimage/zan-lazarevic--gxW3aq6onU-unsplash.jpg" type="image/jpeg" />
+      <category>posts, javascript, console, debug</category>
+      <author>Andy Jarrett &lt;email@example.com&gt;</author>
+    </item>
+    <item>
+      <title>Advanced Javascript Console Techniques Every Developer Should Be Aware Off</title>
+      <link>https://andyjarrett.com/posts/2024/advanced-javascript-console-methods/</link>
+      <description><![CDATA[
+
+&lt;div class=&quot;image-container my-2&quot;&gt;
+  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/kevin-ku-w7ZyuGYNpRQ-unsplash.jpg&quot; alt=&quot;Developer debugging&quot; class=&quot;img-fluid&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;text-end&quot;&gt;
+  &lt;sup&gt;
+    &lt;cite&gt;
+      Photo by &lt;a href=&quot;https://unsplash.com/@ikukevk?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Kevin Ku&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/closeup-photo-of-eyeglasses-w7ZyuGYNpRQ?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;
+    &lt;/cite&gt;
+  &lt;/sup&gt;
+&lt;/div&gt;
+
+
+
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;
+    &lt;p&gt;
+      If you&#39;ve missed it, Part 1 of this series is &lt;a href=&quot;https://andyjarrett.com/posts/2024/basic-javascript-console-logging-methods/&quot; titl=&quot;Basic Javascript Console Logging Techniques Every Developer Should Know&quot;&gt;here&lt;/a&gt;
+    &lt;/p&gt;
+    &lt;p&gt;Second part of this short series. This is when I started to really learn something new. It covers methods that offer more advanced features and capabilities for console logging rather than simply dumping variable values.&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://andyjarrett.com/posts/2024/advanced-javascript-console-methods/#consoleassert&quot;&gt;console.assert()&lt;/a&gt; &lt;em&gt;- Conditional logging to verify assumptions&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://andyjarrett.com/posts/2024/advanced-javascript-console-methods/#consoletable&quot;&gt;console.table()&lt;/a&gt; &lt;em&gt;- Display data in a tabular format&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://andyjarrett.com/posts/2024/advanced-javascript-console-methods/#consolegroup&quot;&gt;console.group()&lt;/a&gt; &lt;em&gt;- Group related log messages together&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://andyjarrett.com/posts/2024/advanced-javascript-console-methods/#consoletrace&quot;&gt;console.trace()&lt;/a&gt; &lt;em&gt;- Print a stack trace from the point where it is called&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://andyjarrett.com/posts/2024/advanced-javascript-console-methods/#consolecount&quot;&gt;console.count()&lt;/a&gt; &lt;em&gt;- Count the number of times a label has been logged&lt;/em&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;a name=&quot;consoleassert&quot;&gt;&lt;/a&gt;
+&lt;div class=&quot;row mb-5&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;
+    &lt;div class=&quot;card&quot;&gt;
+      &lt;div class=&quot;card-header&quot;&gt;
+        &lt;code&gt;console.assert();&lt;/code&gt; // Conditional logging
+      &lt;/div&gt;
+      &lt;div class=&quot;card-body&quot;&gt;
+        &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;console.assert(1 === 1, &quot;This will not be logged&quot;);
+console.assert(1 === 2, &quot;This will be logged as an error&quot;);&lt;/code&gt;&lt;/pre&gt;
+        &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;Assertion failed: This will be logged as an error&lt;/code&gt;&lt;/pre&gt;
+        &lt;em&gt;n.b. This is the method that triggered me to look in to this further. So much better than simply &lt;code&gt;console.log()&lt;/code&gt;&lt;/em&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;a name=&quot;consoletable&quot;&gt;&lt;/a&gt;
+&lt;div class=&quot;row mb-5&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;
+    &lt;div class=&quot;card&quot;&gt;
+      &lt;div class=&quot;card-header&quot;&gt;
+        &lt;code&gt;console.table();&lt;/code&gt; // Tabular data display
+      &lt;/div&gt;
+      &lt;div class=&quot;card-body&quot;&gt;
+        &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;const people = [
+  { name: &quot;Alice&quot;, age: 30 },
+  { name: &quot;Bob&quot;, age: 25 }
+];
+console.table(people);&lt;/code&gt;&lt;/pre&gt;
+        &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;┌─────────┬────────────┬─────┐
+│ (index) │   name     │ age │
+├─────────┼────────────┼─────┤
+│    0    │   Alice    │ 30  │
+│    1    │    Bob     │ 25  │
+└─────────┴────────────┴─────┘&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;a name=&quot;consolegroup&quot;&gt;&lt;/a&gt;
+&lt;div class=&quot;row mb-5&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;
+    &lt;div class=&quot;card&quot;&gt;
+      &lt;div class=&quot;card-header&quot;&gt;
+        &lt;code&gt;console.group();&lt;/code&gt; and &lt;code&gt;console.groupEnd();&lt;/code&gt; // Grouping console messages
+      &lt;/div&gt;
+      &lt;div class=&quot;card-body&quot;&gt;
+        &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;console.group(&quot;Group 1&quot;);
+console.log(&quot;Message 1&quot;);
+console.group(&quot;Group 1.1&quot;);
+console.log(&quot;Message 1.1&quot;);
+console.groupEnd();
+console.log(&quot;Message 2&quot;);
+console.groupEnd();&lt;/code&gt;&lt;/pre&gt;
+        &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;Group 1
+  Message 1
+  Group 1.1
+    Message 1.1
+  Message 2&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;a name=&quot;consoletrace&quot;&gt;&lt;/a&gt;
+&lt;div class=&quot;row mb-5&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;
+    &lt;div class=&quot;card&quot;&gt;
+      &lt;div class=&quot;card-header&quot;&gt;
+        &lt;code&gt;console.trace();&lt;/code&gt; // Outputting stack traces
+      &lt;/div&gt;
+      &lt;div class=&quot;card-body&quot;&gt;
+        &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;function a() {
+  function b() {
+    console.trace(&quot;Trace message&quot;);
+  }
+  b();
+}
+a();&lt;/code&gt;&lt;/pre&gt;
+        &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;Trace message
+    at b (index.js:3:13)
+    at a (index.js:5:3)
+    at &lt;anonymous&gt;:1:1&lt;/anonymous&gt;&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;a name=&quot;consolecount&quot;&gt;&lt;/a&gt;
+&lt;div class=&quot;row mb-5&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;
+    &lt;div class=&quot;card&quot;&gt;
+      &lt;div class=&quot;card-header&quot;&gt;
+        &lt;code&gt;console.count();&lt;/code&gt; and &lt;code&gt;console.countReset();&lt;/code&gt; // Counting log occurrences
+      &lt;/div&gt;
+      &lt;div class=&quot;card-body&quot;&gt;
+        &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;console.count(&quot;Count label&quot;);
+console.count(&quot;Count label&quot;);
+console.countReset(&quot;Count label&quot;);
+console.count(&quot;Count label&quot;);&lt;/code&gt;&lt;/pre&gt;
+        &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;Count label: 1
+Count label: 2
+Count label: 1&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;
+    &lt;p&gt;Why not try it out now in the developer console now? If you&#39;re on Chrone/Edge check out &lt;a href=&quot;https://developer.chrome.com/docs/devtools/console/javascript&quot; target=&quot;_blank&quot;&gt;this guide&lt;/a&gt;.&lt;/p&gt;
+
+  &lt;/div&gt;
+&lt;/div&gt;]]></description>
+      <pubDate>Thu, 08 Aug 2024 19:02:00 +0000</pubDate>
+      <dc:creator>Andy Jarrett</dc:creator>
+      <guid>https://andyjarrett.com/posts/2024/advanced-javascript-console-methods/</guid>
+      <enclosure url="https://andyjarrett.com/public/blogimage/kevin-ku-w7ZyuGYNpRQ-unsplash.jpg" type="image/jpeg" />
+      <category>posts, javascript, console, debug</category>
+      <author>Andy Jarrett &lt;email@example.com&gt;</author>
+    </item>
+    <item>
+      <title>Utility Console Methods For Debugging Your Javascript Workflow</title>
+      <link>https://andyjarrett.com/posts/2024/utility-console-methods-for-debugging-workflow/</link>
+      <description><![CDATA[
+
+&lt;div class=&quot;image-container my-2&quot;&gt;
+  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/altumcode-PNbDkQ2DDgM-unsplash.jpg&quot; alt=&quot;Console debugging&quot; class=&quot;img-fluid&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;text-end&quot;&gt;
+  &lt;sup&gt;
+    &lt;cite&gt;
+      Photo by &lt;a href=&quot;https://unsplash.com/@altumcode?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;AltumCode&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/macbook-pro-on-black-wooden-table-PNbDkQ2DDgM?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;
+    &lt;/cite&gt;
+  &lt;/sup&gt;
+&lt;/div&gt;
+
+
+
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;
+    &lt;p&gt;
+      If you&#39;ve missed the previous parts of this series, you can find Part 1 &lt;a href=&quot;https://andyjarrett.com/posts/2024/basic-javascript-console-logging-methods/&quot; title=&quot;Basic Javascript Console Logging Techniques Every Developer Should Know&quot;&gt;here&lt;/a&gt; and Part 2 &lt;a href=&quot;https://andyjarrett.com/posts/2024/advanced-javascript-console-methods/&quot; title=&quot;Advanced Javascript Console Techniques Every Developer Should Be Aware Of&quot;&gt;here&lt;/a&gt;.
+    &lt;/p&gt;
+    &lt;p&gt;This final part of the series which all started with &lt;a href=&quot;https://andyjarrett.com/posts/2024/advanced-javascript-console-methods/#consoleassert&quot;&gt;&lt;code&gt;console.assert()&lt;/code&gt;&lt;/a&gt;. This one covers utility/debugging methods that go beyond simple logging and help in managing and measuring console outputs when you&#39;re debugging your code:&lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://andyjarrett.com/posts/2024/utility-console-methods-for-debugging-workflow/#consoleclear&quot;&gt;console.clear()&lt;/a&gt; &lt;em&gt;- Clearing the console&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://andyjarrett.com/posts/2024/utility-console-methods-for-debugging-workflow/#consoletime&quot;&gt;console.time() and console.timeEnd()&lt;/a&gt; &lt;em&gt;- Measuring execution time&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://andyjarrett.com/posts/2024/utility-console-methods-for-debugging-workflow/#consolecount&quot;&gt;console.count() and console.countReset()&lt;/a&gt; &lt;em&gt;- Counting occurrences&lt;/em&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;a name=&quot;consoleclear&quot;&gt;&lt;/a&gt;
+&lt;div class=&quot;row mb-5&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;
+    &lt;div class=&quot;card&quot;&gt;
+      &lt;div class=&quot;card-header&quot;&gt;
+        &lt;code&gt;console.clear();&lt;/code&gt; // Clearing the console
+      &lt;/div&gt;
+      &lt;div class=&quot;card-body&quot;&gt;
+        &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;console.log(&quot;This will be cleared&quot;);
+console.clear();&lt;/code&gt;&lt;/pre&gt;
+        &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;// Console gets cleared, no output visible&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;a name=&quot;consoletime&quot;&gt;&lt;/a&gt;
+&lt;div class=&quot;row mb-5&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;
+    &lt;div class=&quot;card&quot;&gt;
+      &lt;div class=&quot;card-header&quot;&gt;
+        &lt;code&gt;console.time();&lt;/code&gt; and &lt;code&gt;console.timeEnd();&lt;/code&gt; // Measuring execution time
+      &lt;/div&gt;
+      &lt;div class=&quot;card-body&quot;&gt;
+        &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;console.time(&quot;Timer&quot;);
+for(let i = 0; i &lt; 1000000; i++) {
+  // Simulate a process
+}
+console.timeEnd(&quot;Timer&quot;);&lt;/code&gt;&lt;/pre&gt;
+        &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;Timer: 2.345ms&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;a name=&quot;consolecount&quot;&gt;&lt;/a&gt;
+&lt;div class=&quot;row mb-5&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;
+    &lt;div class=&quot;card&quot;&gt;
+      &lt;div class=&quot;card-header&quot;&gt;
+        &lt;code&gt;console.count();&lt;/code&gt; and &lt;code&gt;console.countReset();&lt;/code&gt; // Counting log occurrences
+      &lt;/div&gt;
+      &lt;div class=&quot;card-body&quot;&gt;
+        &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;console.count(&quot;Process Count&quot;);
+console.count(&quot;Process Count&quot;);
+console.countReset(&quot;Process Count&quot;);
+console.count(&quot;Process Count&quot;);&lt;/code&gt;&lt;/pre&gt;
+        &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;Process Count: 1
+Process Count: 2
+Process Count: 1&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;
+    &lt;p&gt;This is NOT everything. Check out &lt;a href=&quot;https://developer.chrome.com/docs/devtools/console/api&quot;&gt;Chromes Console API reference&lt;/a&gt; and to delve even deeper, the &lt;a href=&quot;https://developer.chrome.com/docs/devtools/console/utilities&quot; target=&quot;_blank&quot;&gt;Chrome DevTools Console Utilities API&lt;/a&gt;.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+]]></description>
+      <pubDate>Thu, 15 Aug 2024 19:02:00 +0000</pubDate>
+      <dc:creator>Andy Jarrett</dc:creator>
+      <guid>https://andyjarrett.com/posts/2024/utility-console-methods-for-debugging-workflow/</guid>
+      <enclosure url="https://andyjarrett.com/public/blogimage/altumcode-PNbDkQ2DDgM-unsplash.jpg" type="image/jpeg" />
+      <category>posts, javascript, console, debug, utility</category>
+      <author>Andy Jarrett &lt;email@example.com&gt;</author>
+    </item>
+    <image>
+      <url>https://www.andyjarrett.com/public/img/Andy-Jarrett.com.png</url>
+      <title>Andy Jarrett. Code. Develop. Create.</title>
+      <link>https://www.andyjarrett.com/</link>
+    </image>
+  </channel>
+</rss>

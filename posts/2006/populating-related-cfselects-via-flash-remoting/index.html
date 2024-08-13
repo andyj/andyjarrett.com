@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="description" content="Andy Jarrett online pressence">
+<meta name="keywords" content="Andy Jarrett, andyjarrett, mytag">
+<meta name="author" content="Andy Jarrett">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Populating related cfselects via Flash Remoting</title>
+<link rel="canonical" href="https://andyjarrett.com">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Populating related cfselects via Flash Remoting">
+<meta name="twitter:description" content="Go to AndyJarrett.com for more">
+<meta name="twitter:creator" content="@andyj" />
+<meta property="og:title" content="Populating related cfselects via Flash Remoting">
+<meta property="og:description" content="Go to AndyJarrett.com for more">
+<meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="/public/css/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
+<link rel="stylesheet" href="/public/prismjs/prism.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L0V74G0Q65"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-L0V74G0Q65');
+</script>
+
+</head>
+<body>
+  <div class="container border-bottom pb-2">
+  <header class="d-flex flex-wrap justify-content-center">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+      <span class="fs-2">Andy Jarrett // <span class="lead">Code. Develop. Create.</span></span>
+    </a>
+    <ul class="nav nav-pills">
+      <li class="nav-item  p-2">
+        <a href="/" class="btn btn-outline-primary rounded-circle p-3 lh-1">
+          <i class="bi bi-house fs-5"></i>
+          <span class="visually-hidden">Dismiss</span>
+        </a>
+      </li>
+      <li class="nav-item  p-2">
+        <a href="/feed.xml" class="btn btn-outline-primary rounded-circle p-3 lh-1">
+          <i class="bi bi-rss fs-5"></i>
+        </a>
+      </li>
+      <li class="nav-item  p-2">
+        <a href="/linktree" class="btn btn-outline-primary rounded-circle p-3 lh-1" title="Linktree for Andy Jarrett">
+          <i class="bi bi-tree fs-5"></i>
+        </a>
+      </li>
+      <li class="nav-item  p-2">
+        <a href="https://buymeacoffee.com/mailgw" class="btn btn-outline-primary rounded-circle p-3 lh-1">
+          <i class="bi bi-cup-hot-fill fs-5"></i>
+        </a>
+      </li>
+    </ul>
+  </header>
+</div>  
+
+
+  <div class="container">
+    <h1 class="mt-5 mb-5"><b>Populating related cfselects via Flash Remoting</b></h1>
+    <main class="mw fw-lighter fs-5">
+      
+<p>First of let me say that as much as I would love this to be my code it mainly comes out of two posts [<a href="http://www.asfusion.com/blog/entry/how-to-populate-a-cfselect-with-flash" title="How to populate a cfselect with Flash Remoting">1</a>,<a href="http://www.asfusion.com/blog/entry/how-to-populate-a-cfselect-with-flash" title="How to populate a cfselect with Flash Remoting">2</a>] on <a href="http://www.asfusion.com/">ASFusion.com</a>.</p> <p>To sidetrack for a moment, I must point out now is that even if you don't find answers in the Asfusion posts always check the comments out! They get up to 50+ comments on some posts with hints and tips there as well.</p><p>Back to the form. I had a project which started life as a 5 page HTML form with the need to make it a little user friendly to the eyes and more organised. Any form over 2 pages I hate in general and I seem to be the only person in the world who thinks one long page is better than X amount of multiple pages this is whether i'm filling them in or creating them. </p><p>In moving my HTML form over to &lt;cfform format="flash"> I ran into the problem of having to duplicate some Ajax where one select is populated from a DB then another select is populated from there. It didn't take too much digging around and I thought i'd share in case it helps anyone else out. My Flash/As knowledge isn't 100% so if you see an easier way drop me a line in the comments.</p>First of the CFC <p><strong>flashRemotingResponder.cfc</strong></p><code><cfcomponent name="flashRemotingResponder" access="public" description="Responds to Flash remoting requests"><cffunction name="getBrands" output="false" access="remote" returntype="query">            <cfset var qry = ""/> <cfset var brandQry = queryNew("brand_code,brand_name") />  <cfscript>    queryAddRow(brandQry);      querySetCell(brandQry,'brand_code','dell');     querySetCell(brandQry,'brand_name','Dell');   queryAddRow(brandQry);      querySetCell(brandQry,'brand_code','apple');      querySetCell(brandQry,'brand_name','Apple Inc.');   queryAddRow(brandQry);      querySetCell(brandQry,'brand_code','microsoft');      querySetCell(brandQry,'brand_name','Microsoft Corp.');              </cfscript>           <cfquery dbtype="query" name="qry">   SELECT     brand_code, brand_name   FROM brandQry </cfquery>  <cfreturn qry /></cffunction><!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: ---><cffunction name="getModels" access="remote" output="false" returntype="query"> <cfargument name="brand" type="string" />   <cfset var qry = ""/> <cfset var modelQry = queryNew("model_number,model_description,brand_code") />  <cfset var brand_code = arguments.brand />  <cfscript>    queryAddRow(modelQry);      querySetCell(modelQry,'model_number','123-qwe');      querySetCell(modelQry,'model_description','Apple Mac Book Pro 15.4"');     querySetCell(modelQry,'brand_code','apple');    queryAddRow(modelQry);      querySetCell(modelQry,'model_number','987123-123');     querySetCell(modelQry,'model_description','Apple Mac Book Pro 17"');     querySetCell(modelQry,'brand_code','apple');    queryAddRow(modelQry);      querySetCell(modelQry,'model_number','asdpo-1232');     querySetCell(modelQry,'model_description','Apple 72" Monitor');      querySetCell(modelQry,'brand_code','apple');    queryAddRow(modelQry);      querySetCell(modelQry,'model_number','d123');     querySetCell(modelQry,'model_description','XPS Mobile Gaming Laptop');      querySetCell(modelQry,'brand_code','dell');   queryAddRow(modelQry);      querySetCell(modelQry,'model_number','d6534');      querySetCell(modelQry,'model_description','64" Monitor');      querySetCell(modelQry,'brand_code','dell');   queryAddRow(modelQry);      querySetCell(modelQry,'model_number','123-mqwe');     querySetCell(modelQry,'model_description','DRM removal tool');      querySetCell(modelQry,'brand_code','microsoft');    queryAddRow(modelQry);      querySetCell(modelQry,'model_number','123-serr');     querySetCell(modelQry,'model_description','Windows Vista inc. SP4');      querySetCell(modelQry,'brand_code','microsoft');        </cfscript> <cfquery dbtype="query" name="qry">   SELECT      model_number,     model_description   FROM      modelQry    WHERE     brand_code = <cfqueryparam cfsqltype="cf_sql_varchar" value="#brand_code#" /> </cfquery>    <cfreturn qry/></cffunction></cfcomponent></code><p>Second the action &lt;cfform></p><p><strong>flashRemoting.cfm</strong></p><code><!--- These queries are copied from you flashRemotingResponder.cfc ---><cfset brandQry = queryNew("brand_code,brand_name") /><cfset modelQry = queryNew("model_number,model_description,brand_code") /><cfsavecontent variable="getBrands"> <cfoutput>    //create connection   var connection:mx.remoting.Connection = mx.remoting.NetServices.createGatewayConnection("http://#cgi.HTTP_HOST#/flashservices/gateway/");   //declare service   var myService:mx.remoting.NetServiceProxy;  </cfoutput> var responseHandler = {}; //put the controls in scope to avoid calling _root  var brand = brand;    responseHandler.onResult = function( results: Object ):Void {   //when results are back, populate the cfselect    brand.labelField = "brand_name";    brand.dataProvider = results; }     responseHandler.onStatus  = function( stat: Object ):Void {   //if there is any error, show an alert    alert("Error while calling cfc:" + stat.description); }   //get service myService = connection.getService("flashRemotingResponder", responseHandler );  //make call myService.getBrands();</cfsavecontent><cfsavecontent variable="getModel"> <cfoutput>    //create connection   var connection:mx.remoting.Connection = mx.remoting.NetServices.createGatewayConnection("http://#cgi.HTTP_HOST#/flashservices/gateway/");   //declare service   var myService:mx.remoting.NetServiceProxy;  </cfoutput> var responseHandler = {}; //put the controls in scope to avoid calling _root  var model = model;    responseHandler.onResult = function( results: Object ):Void {   //when results are back, populate the cfselect    model.labelField = "model_description";   model.dataProvider = results; }     responseHandler.onStatus  = function( stat: Object ):Void {   //if there is any error, show an alert    alert(stat.description);  }   //get service myService = connection.getService("flashRemotingResponder", responseHandler );  //make call myService.getModels(brand.selectedItem.brand_code);</cfsavecontent><cfform format="flash" name="myform" onload="#getBrands#" width="500" height="400">  <cfformgroup type="panel" label="Example of flash remoting and dynamically populating cfselect">    <cfselect name="brand" id="brand" query="brandQry" display="brand_name"     value="brand_code" onchange="#getModel#" label="What is the brand name"></cfselect>     <cfselect name="model" id="model" query="modelQry" display="model_description"      value="model_number" label="What Model Number"></cfselect>  </cfformgroup></cfform></code><p>You can download the source at: <a href="http://www.andyjarrett.co.uk/flash_remoting_populate_select.zip" title="Populating related cfselects via Flash Remoting">http://www.andyjarrett.co.uk/flash_remoting_populate_select.zip</a></p><br>
+    </main>
+
+    <div class="row mt-5 ">
+      <div class="col-6">
+        <strong>Recent Posts</strong>
+        <ul>
+        
+          <li ><a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow</a></li>
+        
+          <li ><a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Off</a></li>
+        
+          <li ><a href="/posts/2024/basic-javascript-console-logging-methods/" class="card-link link-underline-light">Basic Javascript Console Logging Techniques Every Developer Should Know</a></li>
+        
+          <li ><a href="/posts/2024/reduce-clutter-and-confusion-by-finally-deleting-those-old-branches-local-and-remote/" class="card-link link-underline-light">Reduce clutter and confusion by finally deleting those old branches, local and remote.</a></li>
+        
+        </ul>
+      </div>
+      <div class="col-6 pt-3 text-end">
+        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+      </div>
+    </div>
+  </div>
+  <footer class="container mt-5 border-top pt-2">
+  <div class="row justify-content-md-center">
+    <div class="col">
+      ©AndyJarrett
+      <a href="/linktree" title="Linktree for AndyJarrett" target="_blank"><i class="bi bi-tree"></i></a>
+      <a href="/sitemap.xml" title="Site map for AndyJarrett.com" target="_blank"><i class="bi bi-map"></i></a>
+      <!-- Home Link -->
+      <a href="https://andyjarrett.com" class=""><i class="bi bi-globe me-2"></i></a>
+      <!-- linkedin Link -->
+      <a href="https://www.linkedin.com/in/andyjarrett/" title="inkedIn" target="_blank"><i class="bi bi-linkedin me-2"></i></a>
+      <!-- Twitter Link -->
+      <a href="https://twitter.com/andyj" title="Twitter" target="_blank"><i class="bi bi-twitter me-2"></i></a>
+      <!-- GitHub Link -->
+      <a href="https://github.com/andyj" title="GitHub" target="_blank"><i class="bi bi-github me-2"></i></a>
+      <!-- Stack Overflow Link -->
+      <a href="https://stackoverflow.com/users/371761/andy-jarrett" title="Stack overflow" target="_blank"><i class="bi bi-stack-overflow me-2"></i></a>
+      <!-- BlueSky Link -->
+      <a href="https://bsky.app/profile/andyjarrett.com" title="BlueSky" target="_blank"><i class="bi bi-cloud me-2"></i></a>
+      <!-- Instagram Link -->
+      <a href="https://instagram.com/andyjarrett" title="Instragram" target="_blank"><i class="bi bi-instagram me-2"></i></a>
+      <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee" target="_blank"><i class="bi bi-cup-hot-fill fs-5"></i></a>
+    </div>
+    <div class="col">
+      <div class="text-end">
+        <div class="btn-group">
+          <a href="#" class="btn btn-secondary btn-sm" id="lightThemeButton" data-bs-theme-value="light">
+            <i class="bi bi-sun"></i>
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" id="darkThemeButton" data-bs-theme-value="dark">
+            <i class="bi bi-moon-stars-fill"></i>
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" id="autoThemeButton" data-bs-theme-value="auto">
+            <i class="bi bi-circle-half"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script src="/public/js/toggle.js" type="text/javascript"></script>
+<script src="/public/prismjs/prism.js"></script>
+</body>
+</html>
+
+
+<!-- <div class="card m-2" style="width: 15rem;">
+            <div class="card-body">
+              <h5 class="card-title">
+
+              </h5>
+            </div>
+            <div class="card-footer text-end">
+              <a href="" class="card-link link-underline-light"></a>
+            </div>
+          </div> -->

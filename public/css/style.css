@@ -1,0 +1,26 @@
+.image-container {
+  height: 315px;
+  overflow: hidden;
+  position: relative;
+}
+.image-container img {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+code>pre {
+  border: 1px solid #6f6f6f;
+  padding: 8px;
+  border-radius: 8px;
+  filter: drop-shadow(2px 4px 6px #DDD);
+  background-color: white;
+}
+
+pre>code {
+ font-size:.9em!important;
+}
