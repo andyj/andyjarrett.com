@@ -564,7 +564,7 @@ done
 
 &lt;p&gt;In JavaScript, the console object provides access to the browser&#39;s debugging console. There are more methods available on the console object than I ever realised or looked into. Over the next few posts, I hope to list them all out along with some examples.&lt;/p&gt;
 
-&lt;p&gt;FYI: Part 2 is &lt;a href=&quot;https://andyjarrett.com/posts/2024/advanced-javascript-console-methods/&quot; title=&quot;Advanced Javascript Console Techniques Every Developer Should Be Aware Off&quot;&gt;now out&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;FYI: Part 2 is &lt;a href=&quot;https://andyjarrett.com/posts/2024/advanced-javascript-console-methods/&quot; title=&quot;Advanced Javascript Console Techniques Every Developer Should Be Aware Off&quot;&gt;now out&lt;/a&gt; and &lt;a href=&quot;https://andyjarrett.com/posts/2024/utility-console-methods-for-debugging-workflow/&quot; title=&quot;Utility Console Methods For Debugging Your Javascript Workflow&quot;&gt;Part 3&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h3&gt;These are the ones that you should all know&lt;/h3&gt;
 
@@ -691,10 +691,11 @@ Debug details: { debugMode: true }&lt;/code&gt;&lt;/pre&gt;
 
 
 
+
 &lt;div class=&quot;row&quot;&gt;
   &lt;div class=&quot;col&quot;&gt;
     &lt;p&gt;
-      If you&#39;ve missed it, Part 1 of this series is &lt;a href=&quot;https://andyjarrett.com/posts/2024/basic-javascript-console-logging-methods/&quot; titl=&quot;Basic Javascript Console Logging Techniques Every Developer Should Know&quot;&gt;here&lt;/a&gt;
+      If you&#39;ve missed it, Part 1 of this series is &lt;a href=&quot;https://andyjarrett.com/posts/2024/basic-javascript-console-logging-methods/&quot; titl=&quot;Basic Javascript Console Logging Techniques Every Developer Should Know&quot;&gt;here&lt;/a&gt; and the final post is  &lt;a href=&quot;https://andyjarrett.com/posts/2024/utility-console-methods-for-debugging-workflow/&quot;&gt;here&lt;/a&gt;.
     &lt;/p&gt;
     &lt;p&gt;Second part of this short series. This is when I started to really learn something new. It covers methods that offer more advanced features and capabilities for console logging rather than simply dumping variable values.&lt;/p&gt;
     &lt;ul&gt;
