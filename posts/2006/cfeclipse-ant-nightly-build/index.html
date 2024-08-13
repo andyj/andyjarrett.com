@@ -78,6 +78,26 @@
 I've been getting into ANT for the last couple days and while mucking about i've created a build.xml file for the CFE nightly build. Its nothing amazing, more of a modified version of <a href="http://swem.wm.edu/blogs/waynegraham/index.cfm?mode=cat&catid=78E95112-E08F-44D5-8A50DD0F5F905256">Wayne Grahams recent Model Glue build.xml</a>.The code for build.xml is below, to run the file from Eclipse just put the file into any directory, update line 10 with your CFEclipse folder location, right-click and then select Run As -- Ant Build.<code><?xml version="1.0" encoding="UTF-8"?><project name="build-nightly-cfe" default="setup" basedir=".">  <description>      Download the CFE nightly build and extracts to your pluggin folder  </description>    <!-- =================================  This includes our build.properties file ================================== -->  <property name="cfePluginFolder" value="d:/program files/eclipse/" />  <property name="srcURL" value="http://www.robrohan.com/client/includes/pods/cfeclipse_nightly.zip" />     <!-- =================================   target: setup   ================================= -->   <target name="setup" depends="init,downloadZip,unzip,cleanDirs"       description="-->Sets up your CFeclipse nightly build">      <tstamp/>      <echo message="Build fininshed at ${DSTAMP}" />   </target>   <!-- - - - - - - - - - - - - - - - - -   target: init   - - - - - - - - - - - - - - - - - -->   <target name="init" description="Build directory structure">      <mkdir dir="tmp"/>   </target>   <!-- - - - - - - - - - - - - - - - - -   target: cleanDirs   - - - - - - - - - - - - - - - - - -->   <target name="cleanDirs" description="clean up">     <delete dir="${basedir}/tmp" />   </target>   <!-- - - - - - - - - - - - - - - - - -   target: unzip   - - - - - - - - - - - - - - - - - -->   <target name="unzip" description="Unzip the file">      <unzip src="${basedir}/tmp/cfeclipse_nightly.zip" dest="${cfePluginFolder}" />   </target>   <!-- - - - - - - - - - - - - - - - - -   target: downloadZip   - - - - - - - - - - - - - - - - - -->   <target name="downloadZip" depends="init" description="Download the      zip file for ModelGlue">      <get src="${srcURL}" dest="${basedir}/tmp/cfeclipse_nightly.zip"         verbose="true" usetimestamp="true" />   </target></project></code><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@ I've been getting into ANT for the last couple days and while mucking about i've
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

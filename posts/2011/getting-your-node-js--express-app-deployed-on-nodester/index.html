@@ -78,6 +78,26 @@
 <p><a href="http://nodester.com/" title="Nodester -&gt; Open Source Node.JS PaaS">Nodester</a> Allows you to Deploy your Node.JS applications to Nodester.com for FREE  and is a good way to quickly get playing around with <a href="http://nodejs.org/" title="node.js">Node.js</a>. The site has some quick guides for getting your app created and deployed within 40 seconds, this post is about getting from  Hello World to having a Express+Jade site deployed. Before we continue some assumptions have been made: you know Git, you've installed Node, installed <a href="http://expressjs.com/" title="http://expressjs.com/">expressjs</a>,  signed up at <a href="http://nodester.com/" title="Nodester -&gt; Open Source Node.JS PaaS">nodester.com</a>, and now just want to get your web goodness deployed to show the world.</p>  <div class="alert-message block-message warning">The below commands are all run from a Mac terminal but should fire for any *nix.</div>   <ol>  <li>    $ nodester app create [app name]    <ul>      <li>For this example my app will be called <b>scribble</b> and can be seen at       <a href="http://scribble.nodester.com">scribble.nodester.com</a>. When you run this call        you will get a port number back i.e. 12332 Note this down!</li>   </ul> </li> <li>    $ nodester app init <b>scribble</b>   <ul>      <li>At this point your app is running at http://[app name].nodester.com and you should see "Hello World".       Basically you Node.js web app is running. Simples. Now we are going to add        <a href="http://expressjs.com/" title="Express - node web framework">Express.js</a> which is a node web framework.</li>   </ul>     </li> <li>$ cd [app name]</li>  <li>$ express   <ul>      <li>You'll get a message <b>destination is not empty, continue?</b>, type <b>Yes</b> and hit return at which point the       folder structure will be setup.</li>    </ul>       </li> <li>$ npm install <span class="help-block">dont forget to install dependencies</span></li>  <li>When Express sets up it uses <b>app.js</b> and Nodester uses <b>server.js</b> easiest way to fix this is to run <b>$ mv app.js server.js</b></li> <li>$ vi server.js  <span class="help-block">open server.js and change the port number at the bottom (<b>app.listen( xxxxx );</b>) to the one you noted earlier i.e. 12332</span></li>  <li>$ node server.js    <ul>      <li>We're running this to check everything is ok. Open your browser at <a herf="#">localhost:[port number]</a> and       you should get the "Welcome to Express" message. Once you're happy go back to the terminal and ctrl-c</li>   </ul>       </li> <li>$ git add .</li>  <li>$ git commit -m"My first express.js commit"</li>  <li>$ git push</li> <li>Thats it, the Push should of restarted your app, go to your Nodester URL and you should be up and running.</li></ol><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

@@ -78,6 +78,26 @@
 I've modified the <a href="http://livedocs.adobe.com/coldfusion/8/functions_e-g_01.html">ColdFusion 8 livedocs</a> version of Encrypt() to include:<ol><li>uploading a file e.g. .CSV</li><li>reading contents and encrypting</li><li>Zip the new encrypted file</li></ol>It could probably do with some refinement as I was just using it for some generic testing tonight. Hope it comes in useful. <code><h1>Encrypt and Zip Example</h1><!--- Do the following if the form+file has been submitted. ---><cfif IsDefined("Form.uplfile")>  <cftry> <!--- Upload the file --->  <cffile action = "upload"     fileField = "uplfile"     destination = "#expandPath('.')#"     nameConflict = "MakeUnique" result="uploadedFile">        <!--- Read the file --->  <cffile action="read" file="#uploadedFile.serverDirectory#/#uploadedFile.SERVERFILE#" variable="inFile">    <!--- For all encryption techniques, generate a secret key. --->  <cfset theKey=generateSecretKey(Form.myAlgorithm) />    <!--- Encrypt the filecontent. ---> <cfset encrypted=encrypt(inFile, theKey, Form.myAlgorithm,Form.myEncoding) />   <!--- Now we've encrypted the content lets create a new file' --->  <cfset encryptedCSVLoc = uploadedFile.serverDirectory &"/encoded_"& uploadedFile.SERVERFILE />    <!--- Write the newly encrypted file to server for reference ---> <cffile action="write" file="#encryptedCSVLoc#" output="#encrypted#" />   <!--- Lets zip the file now --->  <cfzip file="#uploadedFile.serverDirectory#/#uploadedFile.SERVERFILENAME#.zip" source="#encryptedCSVLoc#" />      <!--- Display the values used for encryption  --->  <cfoutput>  <h2>Encrypted details</h2>  <p><b>The algorithm:</b> #Form.myAlgorithm#</p> <p><b>The key:</B> <span style="color:red">#theKey#</span> <em>(- save this, it's uniquely generated per encryption')</em></p>  <p>Click the link to download the zip file with the encrypted file in it <a href="#uploadedFile.SERVERFILENAME#.zip">#uploadedFile.SERVERFILENAME#.zip</a></p>  <p><hr/></p>  </cfoutput>   <cfcatch type="any">    <cfdump var="#cfcatch#">  </cfcatch>  </cftry></cfif><h2>Encrypt new file</h2><!--- The input form. ---><cfoutput>  <form action="#CGI.SCRIPT_NAME#" method="post" enctype="multipart/form-data"><table><tr>  <th colspan="2"><b>Select the encoding</b></th></tr><tr>  <td>    <select size="1" name="myEncoding" >      <option selected>UU</option>      <option>Base64</option>     <option>Hex</option>    </select> </td> <td>    <ul>      <li>Base64: the Base64 algorithm, as specified by IETF RFC 2045.</li>     <li>Hex: the characters A-F0-9 represent the hexadecimal byte values.</li>      <li>UU: the UUEncode algorithm (default).</li>    </ul> </td></tr><tr>  <th colspan="2"><b>Select the algorithm</b></th></tr><tr> <td>   <select size="1" name="myAlgorithm" >       <option>AES</option>       <option>DES</option>       <option>DESEDE</option>   </select>      </td> <td>    <ul>      <li>AES: the Advanced Encryption Standard specified by the National Institute of Standards and Technology (NIST) FIPS-197.</li>     <li>DES: the Data Encryption Standard algorithm defined by NIST FIPS-46-3.</li>     <li>DESEDE: the &quot;Triple DES&quot; algorithm defined by NIST FIPS-46-3.</li>    </ul>     </td></tr><tr>  <th colspan="2">Upload CSV file</th></tr><tr> <td><input type="file" id="uplfile" name="uplfile" value="" /></td> <td></td></tr>  </table><input type="submit" value="Submit and encrypt" /></form> </cfoutput> </code><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@ I've modified the <a href="http://livedocs.adobe.com/coldfusion/8/functions_e-g_
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

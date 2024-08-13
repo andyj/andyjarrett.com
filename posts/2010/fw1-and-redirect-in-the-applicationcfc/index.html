@@ -78,6 +78,26 @@
 <p>Chatting with <a href="http://webonix.net">AJ Mercer</a> this morning (his evening) on getting redirect() to work in the Application.cfc for <a href="http://fw1.riaforge.org/">Framework One (FW/1)</a>. The code being he was using looked perfectly fine:</p><code>rc.variableToPass = "me";redirect(variables.framework.home, 'all', 'variableToPass');</code><p>As I said this looked fine and works in the controllers but in the Application.cfc we just saw "&amp;fw1pk=[some number]" appended to the URL. The fix was quite simple. The variable/structure RC is set as a shortcut to the Request.Context for the controllers but in the Application.cfc you need to reference Request.Context directly. The meant the above code changed to: </p><code>request.context.variableToPass = "me";redirect(variables.framework.home, 'all', 'variableToPass');</code><p>and all worked fine.</p><p>As a side note the fix for this came from it being such a simple framework to hack in to and see whats happening over others with multiple core files and components. Recently my work ethics has changed a lot and in its place 2 components now stand, convention over configuration and simplicity both of which <a href="http://fw1.riaforge.org/">FW/1</a> fits the bill. So if you haven't spent 30 minutes looking at it do so and also check out the Google group at <a href="http://groups.google.com/group/framework-one">http://groups.google.com/group/framework-one</a></p><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

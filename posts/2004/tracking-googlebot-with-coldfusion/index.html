@@ -78,6 +78,26 @@
 I came across this little script which is a kind of Googlebot alert at <a href="http://www.mitchkeeler.com/tutorial_tracking_google.php">http://www.mitchkeeler.com/tutorial_tracking_google.php</a>.  It could be worth sticking on a new site to be alerted when Google has arrived.Easy Version<div class="code"><FONT COLOR=MAROON>&lt;cfif findNoCase(<FONT COLOR=BLUE>"googlebot"</FONT>, cgi.HTTP_USER_AGENT)&gt;</FONT><br><FONT COLOR=MAROON>&lt;cfmail to=<FONT COLOR=BLUE>"<A HREF="mailto:you@youremail.com">you@youremail.com</A>"</FONT> from=<FONT COLOR=BLUE>"<A HREF="mailto:website@yourdomain.com">website@yourdomain.com</A>"</FONT> subject=<FONT COLOR=BLUE>"Google has crawled yourdomainname.com"</FONT>&gt;</FONT><FONT COLOR=MAROON>&lt;/cfmail&gt;</FONT><br><FONT COLOR=MAROON>&lt;/cfif&gt;</FONT></div>Expert Version<div class="code"><FONT COLOR=MAROON>&lt;cfif findNoCase(<FONT COLOR=BLUE>"googlebot"</FONT>, cgi.HTTP_USER_AGENT)&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset today = dateFormat(now(), 'dd/mm/yy')&timeFormat(now(), 'HH:mm:ss')&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset urlString = <FONT COLOR=BLUE>"http://"</FONT>&cgi.SERVER_NAME&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfif len(trim(cgi.QUERY_STRING))&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset urlString = urlString&<FONT COLOR=BLUE>"?"</FONT>&cgi.QUERY_STRING&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;/cfif&gt;</FONT>&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfmail to=<FONT COLOR=BLUE>"<A HREF="mailto:you@youremail.com">you@youremail.com</A>"</FONT> from=<FONT COLOR=BLUE>"<A HREF="mailto:website@yourdomain.com">website@yourdomain.com</A>"</FONT> subject=<FONT COLOR=BLUE>"Google has crawled yourdomainname.com"</FONT>&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Google Detected @ #urlString#<br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;/cfmail&gt;</FONT><br><FONT COLOR=MAROON>&lt;/cfif&gt;</FONT></div>Warning: they are not tested yet so use at own risk.Obviously this has a few other uses, it could even be modified to see when the MSN bot or all of them coming across.<br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@ I came across this little script which is a kind of Googlebot alert at <a href="
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

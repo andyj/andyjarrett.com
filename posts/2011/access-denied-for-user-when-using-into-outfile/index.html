@@ -78,6 +78,26 @@
 <p>I was getting the following error after promoting some code to my testing server:</p><p><i>Access denied for user '{username}'@'localhost' (using password: YES)</i></p><p>It turns out that the user {username} I had set up didn't have the MySQL File privilege which is something that needs to be set at a GLOBAL level.</p><p>So a quick bit of SQL can fix that. First make sure you are running the following sql against the <b>mysql</b> table ( USE mysql;)</p><code>update user set File_priv = 'Y' where User = '{username}';FLUSH PRIVILEGES;</code><p>You should be done at this point.</p><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

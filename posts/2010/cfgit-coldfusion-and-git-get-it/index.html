@@ -78,6 +78,26 @@
 <p>I wish I could be more original with project names, anyway ... this is just anexperiment I was playing around with tonight and I wanted to share before I left it in folder oblivion. At the  moment it is a rather bare bones CFC for talking to Git. You can run currentlyon run:<br>* Status<br>* Log<br>* Show<br>* But you can easily add more</p><p>The benefit (which is where the idea started) is that you don't have to be inthe git project to run this!</p><p>I've only tested on a Mac w/CF9 so would be glad for any feed back on other platforms or suggestions!</p><p>Below is the CFC code alone but if you want to check it all out (an index.cfm and Readme.txt file, thats it!) check out: <a href="http://github.com/andyj/CFGit">github.com/andyj/CFGit</a></p> <code><cfcomponent displayname="cfgit" hint="I interact with git" output="false"><!--- The setup ---><cfproperty  name="git_path" displayname="Git path"  hint="On *nix system you can find the git to path by running $which git"  type="string" />  <cfproperty name="git_folder" displayname="Repository folder" hint="I am the folder you are going to query" type="string" /><cffunction name="init" access="public" output="false" returntype="any">  <cfargument name="argGit_path" type="string" required="true"> <cfargument name="arggit_folder" type="string" required="true">   <cfscript>    setGit_path( argGit_path );   setgit_folder( arggit_folder );   return this;  </cfscript></cffunction><!--- End: the setup ---><!--- Commands ---><cffunction name="log" access="public" output="false" returntype="any"> <cfargument   name="argN"   type="numeric"    default="5"   hint="Limits the number of commits to show" />      <cfif len( trim( argN )) AND isValid( "integer", argN )>    <cfset argN = "-n " & argN> </cfif>   <cfreturn execGit( "log", argN )></cffunction><cffunction name="show" access="public" output="false" returntype="any">  <cfreturn execGit( "show" )></cffunction><cffunction name="status" access="public" output="false" returntype="any"> <cfreturn execGit( "status" )></cffunction><!--- End: Commands ---><!--- wrapped up the execute in a function to save repetition ---><cffunction name="execGit" access="private" output="false" returntype="string">  <cfargument name="argCommand" required="true" type="string">  <cfargument name="argArguments" required="true" type="string">    <cfset var local = {} />    <cfexecute name = "#getGit_path()#"       arguments = "--git-dir=#getgit_folder()# #argCommand# #argArguments#"       timeout = "1"   variable="local.out"    errorvariable="local.err">  </cfexecute>        <cfif len( trim( local.err ) )>   <cfreturn '<span style="color:red;">' & local.err  & "</span>"> <cfelse>    <cfreturn local.out>  </cfif></cffunction><!--- Getters and Setters ---><cffunction name="getGit_path" access="public" output="false" returntype="string">  <cfreturn git_path></cffunction><cffunction name="setGit_path" access="private" output="false" returntype="void"> <cfargument name="argGit_path" type="any">  <cfset git_path=argGit_path/></cffunction><cffunction name="getgit_folder" access="public" output="false" returntype="string">  <cfreturn git_folder></cffunction><cffunction name="setgit_folder" access="private" output="false" returntype="void"> <cfargument name="arggit_folder" type="any">  <cfscript>    // makse sure there is a trailing slash   if( right( arggit_folder, 1) NEQ "/"){ arggit_folder = arggit_folder & "/"; }   arggit_folder = arggit_folder & ".git";   git_folder=arggit_folder; </cfscript>   </cffunction></cfcomponent></code><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

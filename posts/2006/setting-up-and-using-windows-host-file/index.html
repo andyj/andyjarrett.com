@@ -78,6 +78,26 @@
 <p>Host files used in windows to describe many-to-one mapping of device names to IP addresses. Using this file is helpful when developing locally as it allows you to assign the URL of the site to a local IP. </p><p>First, find you host file:<br><strong>Windows NT/2000/XP Pro  c:\\winnt\\system32\\drivers\\etc\\hosts <br>Windows XP Home c:\\windows\\system32\\drivers\\etc\\hosts <br></strong></p><p>The HOST file doesn't have an extention and can be opened with notepad.</p><strong style="color:red">** Before we go any further make sure you back this up - just in case ***</strong> <p>You should see something like:</p><code>......# Additionally, comments (such as these) may be inserted on individual# lines or following the machine name denoted by a '#' symbol.# For example:# 102.54.94.97 rhino.acme.com # source server# 38.25.63.10 x.acme.com # x client host127.0.0.1  localhost  </code><p>As with SQL '#' mean comments, so the only active line there is </p><code> 127.0.0.1 localhost  </code><p>What does that mean. Well everytime you access localhost (like in a browser, or PING'd from a command line) you are acutally accessing the IP address 127.0.0.1. So lets say i'm developing a new blog. In Apache (or any web server) i'd set up the IP address 127.0.0.2 to look at my document root. Then in the HOST file i'd have </p><code> 127.0.0.2 www2.andyjarrett.co.uk </code><p>Alternatively I could just point the host to 127.0.0.1 instead of setting up a new IP. What you cannot do is map to a IP and port i.e. 127.0.0.1:8080</p><p>By the way, if you're wondering why i've changed the URL to have www2 as the prefix? It's that the HOST file is used first when going to a domain. For example try out the following</p><code> 127.0.0.1  www.google.co.uk </code><p>then goto <a href="http://www.google.co.uk">www.google.co.uk</a>.</p><p>N.B. If you use a proxy then you will need to bypass the proxy server for local addresses</p><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

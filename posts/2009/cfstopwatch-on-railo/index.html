@@ -78,6 +78,26 @@
 <p>After I found <a href="http://www.andyjarrett.com/blog/?p=1289">the Ternary Operator on Railo</a> I've decided to have a look over the <a href="http://wiki.getrailo.org/space/3-1-Tags">Tags documentation</a>, and <a href="http://wiki.getrailo.org/space/3-1-Functions">Functions documentation</a> viewer on <a href="http://wiki.getrailo.org/space">Railo Wiki</a>.</p><p>Then I came across <a href="http://wiki.getrailo.org/wiki/3-1-Tags:CFStopwatch">CFStopWatch</a>. It works like <a href="http://wiki.getrailo.org/wiki/3-1-Tags:cfTimer">CFTimer</a> in that its used to determine how long it takes for a block of code to execute. The difference is that CFStopWatch stores the time to execute in a variable so you can reference it later. It works by wrapping the tags around the code block you want to execute and setting the time to a variable:</p>[sourcecode language="plain"]&lt;cfstopwatch label=&quot;myLabel&quot; variable=&quot;var&quot; &gt;  CFML logic goes here  &lt;!--- pause for 1 second ---&gt; &lt;cfsleep time=&quot;1000&quot;/&gt;&lt;/cfstopwatch&gt;&lt;cfoutput&gt;&lt;p&gt;Your code took #var# milliseconds to run&lt;/p&gt;&lt;/cfoutput&gt;[/sourcecode]Running the above code will output<blockquote>CFML logic goes hereYour code took 1000 milliseconds to run  </blockquote><p>I can see me using this when running code blocks which I know might take ages, you could write of the time to a log or even send an email.</p><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

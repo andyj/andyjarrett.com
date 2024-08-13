@@ -78,6 +78,26 @@
 <p>I was a bit at a loss with version 3 of <a href="http://getbootstrap.com/">Bootstap</a> with the removal of the <code>.container-fluid</code> but when they moved to a mobile first system this actually translates to a "fluid system". By making the framework fluid and removing references to <code>.container-fluid</code> classes they cut out a lot of bloat.</p><p>What does this mean then .. well in in Bootstrap 2 you would define <code>&lt;div class="container-fluid"&gt;</code> now simply don't define a container at all. This makes sense in some parts as a "container" should contain your code, which it does now by providing max-widths at 728px, 940px en 1170px for the large grid system. If you need to overwrite the max width you should be able to do this in a new stylesheet placed after the Bootstrap source.</p><p><b>Basic fluid tempalte</b></p><code>&lt;!DOCTYPE html&gt;<br>&lt;html lang="en"&gt;<br>&lt;head&gt;<br>  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;<br>  &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;<br> &lt;title&gt;<br>Bootstrap 100% fluid&lt;/title&gt;<br> &lt;!-- Latest compiled and minified CSS --&gt;<br> &lt;link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0-rc1/css/bootstrap.min.css"&gt;<br>&lt;/head&gt;<br>&lt;body&gt;<br>  &lt;div class="row"&gt;<br>   &lt;div class="col-lg-6"&gt;<br>50% (col-lg-6)&lt;/div&gt;<br>    &lt;div class="col-lg-6"&gt;<br>50% (col-lg-6)&lt;/div&gt;<br>  &lt;/div&gt;<br>&lt;/body&gt;<br>&lt;/html&gt;<br></code><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

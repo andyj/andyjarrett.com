@@ -78,6 +78,26 @@
 <p>Google have made available, for free, their <a href="http://googleonlinesecurity.blogspot.com/2010/03/meet-skipfish-our-automated-web.html">automated web scanner, Skipfish</a>. This is a quick guide to setting it up on the Mac. You can download Skipfish from <a href="http://code.google.com/p/skipfish/">http://code.google.com/p/skipfish/</a> - I've put it in <em>/opt/skipfish/</em>.</p><p>To get this running you'll need <b>Libidn</b> which is easily available from <a href="http://www.macports.org/">Mac Ports</a> via:</p><code>$sudo port install libidn</code><p>With Libidn installed we can now make Skipfish. Before starting though we need to edit the Makefile and add some arguments (I use Textmate from the Terminal. You could swap "mate" for "vi").</p><code>$ mate Makefile</code><p>Change<br/><b>$ CFLAGS_GEN = -Wall -funsigned-char -g -ggdb -D_FORTIFY_SOURCE=0</b><br/>for<br/><b>$ CFLAGS_GEN = -Wall -funsigned-char -g -ggdb -D_FORTIFY_SOURCE=0 -I/opt/local/include -L/opt/local/lib</b><br/></p><p>Once thats done you should now be ready to MAKE Skipfish</p><code>$ cd /opt/skipfish/$ make</code><p>Once done you need to copy a dictionary file from the dictionaries/ directory (use <b>default.wl</b> for your first run) and rename this to <b>skipfish.wl</b>. </p><p>Im not going in to how to run this and what it does as the <a href="http://code.google.com/p/skipfish/wiki/SkipfishDoc">docs</a> does this quite well but below an example string which limits the requests to a 1000 so you can get feedback quickly (one scan took over an hour without the restriction).</p><code>$ ./skipfish -o test/ -r 1000 -B .google-analytics.com -B .googleapis.com http://www.[your site].co.uk/</code><p>To explain the flags used:<br/><dl><dd>-B</dd><dt>You do not want to actually crawl a third-party domain, but you trust the owner of that domain enough not to worry about cross-domain content inclusion from that location. To suppress warnings, you can use the -B option</dt><dd>-r</dd><dt>limits the total number of requests to send in a scan</dt><dd>-o</dd><dt>Reduces the risk of persistent effects of a scan which inhibits all form parsing and submission steps</dt></dl></p><p>N.B. the results file doesn't work in Google Chrome</p><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

@@ -78,6 +78,26 @@
 <p>A quick post as I couldn't find much on Google last night about getting this error with <a href="http://javaloader.riaforge.org/">javaloader (from riaforge.org)</a>. I was trying to load the 3 main jars from the POI library and was getting a lot of java heap space errors.</p><p>I went through the docs/settings and it appears you can set on load the jars as a "trustedsource" (which is what you should do for production systems!) meaning: "Whether or not the source is trusted, i.e. it is going to change?". This actually defaults to false meaning for each run changes will be recompiled and loaded which is great for testing. Setting this to true has stopped any memory issues. Below is a snippet of my code so you can see how</p><code><cfscript>if( NOT structKeyExists( server, "_loader")){  server._loader = createObject("component", "javaloader.JavaLoader").init(loadPaths = local.paths,trustedSource = true);}</cfscript></code><p>As always don't forget to read the docs as it also explains more about production settings. <a href="http://www.compoundtheory.com/javaloader/docs/">compoundtheory.com/javaloader/docs/</a></p><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

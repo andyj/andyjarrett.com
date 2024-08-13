@@ -78,6 +78,26 @@
 What a nice morning i had remembering that  you cannot reference an ALIAS or a variable in a WHERE clause. So for anyone else that has a memory like mine (i'm jealous of fish put it that way) <a href="http://dev.mysql.com/doc/mysql/en/problems-with-alias.html">standard SQL doesn't allow you to refer to a column alias in a where cause.</a> Which make total sense (now) as the column value is most likely not determined at time of execution. So....<div class="code">SELECT<br>\n  @total := date_add(datefield, INTERVAL 1 YEAR) AS newDate<br>\nFROM<br>\n  mytable<br>\n#WHERE<br>\n#  @total &gt; now() <FONT COLOR=GRAY><I>/*Invalid*/</I></FONT><br>\n#WHERE<br>\n#  newDate &gt; now() <FONT COLOR=GRAY><I>/*Invalid*/</I></FONT></div><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@ What a nice morning i had remembering that  you cannot reference an ALIAS or a v
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

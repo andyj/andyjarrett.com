@@ -78,6 +78,26 @@
 You most likely didn't notice but i have a new "pod" called "Weather". I got the idea this morning after reading <a href="http://www.flex-mx.com/archives/001531.html">this post at Flex-MX</a>. Its generated from a RSS feed from <a href="http://www.rssweather.com">RSSWeather.com</a>. If you want the code you can download it <a href="http://www.andyjarrett.co.uk/downloads/myWeather.rar">here</a> or its below for you if you click on "more" <div class="code"><FONT COLOR=MAROON>&lt;cfcomponent hint=<FONT COLOR=BLUE>"Return the weather"</FONT>&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&lt;!---<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Author: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Andy Jarrett - <A HREF="mailto:mail@andyjarrett.co.uk">mail@andyjarrett.co.uk</A><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Created:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20/08/04<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Desciption: Returns the weather for you area from a RSS feed<br>&nbsp;&nbsp;&nbsp;---&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cffunction name=<FONT COLOR=BLUE>"myWeather"</FONT> returntype=<FONT COLOR=BLUE>"struct"</FONT> hint=<FONT COLOR=BLUE>"Returns the weather from <A TARGET="_blank" HREF="http://www.rssweather.com">http://www.rssweather.com</A>"</FONT> &gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=GRAY><I>&lt;!--- Basic vars needed ---&gt;</I></FONT><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset var weatherRss = <FONT COLOR=BLUE>"<A TARGET="_blank" HREF="http://www.rssweather.com/rss.php?config=&forecast=zandh&icao=EGHI&alt=rss20a">http://www.rssweather.com/rss.php?config=&forecast=zandh&icao=EGHI&alt=rss20a</A>"</FONT>&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset var weatherXML = <FONT COLOR=BLUE>""</FONT>&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset var weatherToday = structNew()&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfif NOT isDefined(<FONT COLOR=BLUE>"application.weatherXML.lastParsed"</FONT>) OR NOW() GT dateAdd(<FONT COLOR=BLUE>"H"</FONT>,<FONT COLOR=BLUE> 3</FONT>, application.weatherXML.lastParsed)&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=GRAY><I>&lt;!--- Get feed ---&gt;</I></FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfhttp url=<FONT COLOR=BLUE>"#weatherRss#"</FONT> method=<FONT COLOR=BLUE>"GET"</FONT>&gt;</FONT><FONT COLOR=MAROON>&lt;/cfhttp&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=GRAY><I>&lt;!--- You need to know the reason it was last parsed because you will get banned if you hit several times within the hour. ---&gt;</I></FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset application.weatherXml.lastParsed = NOW()&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset application.weatherXml.parsed = xmlParse(cfhttp.filecontent)&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;/cfif&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfscript&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weatherXML = application.weatherXml.parsed;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weatherToday.text = weatherXML.rss.channel.item.description.xmlText;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weatherToday.link = weatherXML.rss.channel.item.link.xmlText;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;/cfscript&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfreturn weatherToday&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;/cffunction&gt;</FONT>&nbsp;&nbsp;&nbsp;<br><FONT COLOR=MAROON>&lt;/cfcomponent&gt;</FONT></div><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@ You most likely didn't notice but i have a new "pod" called "Weather". I got the
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

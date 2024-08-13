@@ -78,6 +78,26 @@
 I've been playing around with <a href="http://www.indiankey.com/cfajax/>CFAjax</a> over the weekend and all has been going well. For implementing <a href="http://en.wikipedia.org/wiki/Ajax_%28programming%29">AJAX</a> and CF its been an excellent starting point and a good wrapper. Better than debugging all your own XMLHttpRequest object.That said i've been getting an error with IE stating "Internet Explorer cannot open the Internet site http://127.0.0.1/xxxx , Operation aborted". It seems that IE does not like all the calls being in <div> tags, and to get around it i have had to put all of the Js calls at the bottom of my layout file after the last div.For more information (though this is related to Google Maps) you can go to <br/><a href="http://www.ryangrant.net/archives/internet-explorer-cannot-open-the-internet-site-operation-aborted-google-map-api/">http://www.ryangrant.net/</a><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@ I've been playing around with <a href="http://www.indiankey.com/cfajax/>CFAjax</
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

@@ -78,6 +78,26 @@
 Why is it the simple css/xhtml code takes the longest problems to solve sometimes.I've been creating a table and for each table row there is a hidden row (&lt;tr>) which spans the 13 columns. The idea is that when you click on the row the table expands to shows the hidden &lt;tr> and pull in data via Ajax about that record. Initially i was using the following css to hide the row<code>display:none;</code>This is fine for IE and Firefox when it comes to hiding a table row but when you then apply "display:block" to bring the row back IE renders it fine, but Firefox doesnt quite get it right. This is because you need to use: <code>display:table-row</code>I've test this in both IE 7 (beta) and FF and all seems fine, I will hopefully try this in some other browsers when I get back home.<br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@ Why is it the simple css/xhtml code takes the longest problems to solve sometime
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

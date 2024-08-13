@@ -78,6 +78,26 @@
 <p>Needed to do a basic validation check for a client which simply told the user that not all the fields have been completed are they sure they want to continue. Turns out jQuery made this simples with the command <b> $(":text[value=]")</b> which returns all the objects. In the end my (cut down) function that I used on submit of the form was:</p><code>function emptyFieldCount(){  var fieldCnt = $(":text[value=]");  var isOk = true;  if(fieldCnt.length > 10){   isOk = confirm('Are you sure you want to continue, not all fields have been filled out'); } return isOk;}</code><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

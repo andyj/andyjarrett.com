@@ -78,6 +78,26 @@
 <p>As i'm preparing to type this post what I'm about to says is so obvious its annoying.   When you are using the &lt;cfxml> tag you cannot have xml tags that begin with "cf" as Coldfusion tries to parse them. For example:</p><code><cfxml variable="xml1">  <myXml>   <cftest>my data</cftest>  </myXml></cfxml></code><p>Would fail with something like <em>"A tag starting with 'CF' has been detected. This tag is not supported by this version of ColdFusion. Please verify your typo and try again.Unknown tag: cftest. "</em></p>The workaround: Modify the tag from &lt;cftest>  to &lt;ctest><code><cfxml variable="xml2"><myXml>  <ctest>my data</ctest></myXml></cfxml></code>The afterwards get regex to make the changes.<code><cfset xml2 = reReplace(xml2, "<(.*?)c", "<\\1cf" , "all") /></code>To explain the regex. <ul><li>Attribute 1, is the string your are modifying.</li><li>Attribute 2, is the regex here. Here I am using creating a back reference (think of it as a variable) to catch the closing tag backslash.</li><li>Attribute 3, is the same as att. 2 but we remove the brackers and call the back reference via "\\1". </li><li>Tells us to capturing all occurances.</li></ul><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

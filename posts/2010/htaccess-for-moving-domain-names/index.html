@@ -78,6 +78,26 @@
 <p>Apache uses .htaccess files as a way to make configuration changes on a per-directory (and subdirectories) basis. They are a powerful tool when it comes to moving folders of changed files or in my case domain name rewriting. </p><p>Currently I am using a short domain name (<a href="http://www.prsos.co.uk">prsos.co.uk</a>) as a redirect to a specific page on the full domain name <a href="http://www.petrescuesos.co.uk">petrescuesos.co.uk</a>. In the past I've even used ColdFusion to do by putting something along the lines in my Application.cfm.</p><code><cfif findNoCase('prsos', cgi.server_name)><cfheader statustext="Moved permanently" statuscode="301" /><cfheader value="http://www.petrescuesos.co.uk" name="Location"></cfif></code><p>This still gives the browser/spider the correct http header but why waste cpu styles on even doing this when the web-server can handle it natively. Below is the Apache .htaccess I've just put in place.</p><code>#Turn rewrite onRewriteEngine on#Look at the HTTP_HOST and regex search for old domain namerewritecond %{http_host} ^(.*)prsos.co.uk [nc]# The rule. Change the http_host to the new domain location. NC means NoCaserewriterule ^(.*)$ http://www.petrescuesos.co.uk/index.cfm?action=pets.found [r=301,nc]</code><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

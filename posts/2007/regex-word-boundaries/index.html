@@ -78,6 +78,26 @@
 Recently I was looking for the word "fail" or "pass" in a string so I had the following regEx set up:<code>#reFindNoCase("pass|fail", status)#</code>Which worked fine until testing came along and "failed" got passed through successfully. To prevent this you need to use regex boundaries, "\\b", so my new statement becomes:<code>#reFindNoCase("\\bpass\\b|\\bfail\\b", status)#</code>In simple terms "\\b" perform a "whole word only" search means that it trapped 'failed', 'failure' you get the point.<br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@ Recently I was looking for the word "fail" or "pass" in a string so I had the fo
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

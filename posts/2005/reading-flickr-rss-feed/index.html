@@ -78,6 +78,26 @@
 This is nothing great, and it uses Ray Camden <a href="http://ray.camdenfamily.com/index.cfm?mode=entry&entry=C8B6CE92-0411-13B5-781AF39306642922">RSS.cfc</a> to read and execute your Flickr feed.<div class="code"><FONT COLOR=GRAY><I>&lt;!--- Your feed (this is mine) ---&gt;</I></FONT><br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset myRssFeed = <FONT COLOR=BLUE>"<A TARGET="_blank" HREF="http://www.flickr.com/services/feeds/photos_public.gne?id=38904643@N00&format=rss_200">http://www.flickr.com/services/feeds/photos_public.gne?id=38904643@N00&format=rss_200</A>"</FONT> /&gt;</FONT><br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfhttp method=<FONT COLOR=BLUE>"get"</FONT> url=<FONT COLOR=BLUE>"#myRssFeed#"</FONT>&gt;</FONT><FONT COLOR=MAROON>&lt;/cfhttp&gt;</FONT><br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset flickr_rss&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= cfhttp.FileContent /&gt;</FONT><br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfscript&gt;</FONT><br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feed &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= flickr_rss;<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rss &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= createObject(<FONT COLOR=BLUE>"component"</FONT>, <FONT COLOR=BLUE>"rss"</FONT>);<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entries = rss.getEntries(feed);<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;/cfscript&gt;</FONT>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfdump var=<FONT COLOR=BLUE>"#entries#"</FONT> /&gt;</FONT></div><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@ This is nothing great, and it uses Ray Camden <a href="http://ray.camdenfamily.c
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

@@ -78,6 +78,26 @@
 I've expanded a little on <a href="http://ray.camdenfamily.com/index.cfm?mode=entry&entry=7D7D1391-B023-5362-F39A0E2B50EEF69F">Ray Camdens post</a> about next/previous buttons in Flash &lt;cfform>'s. What this does is hides the previous button when the focus is on the first tab and removes the Next button on the last tab. <code><cfform id="frm" name="frm" method="post" action="#cgi.SCRIPT_NAME#" format="flash"> <cfformgroup type="tabnavigator" id="tabs">   <cfformgroup type="page" label="tab 1" id="_tab1">    </cfformgroup>    <cfformgroup type="page" label="tab 2" id="_tab2">    </cfformgroup>    <cfformgroup type="page" label="tab 3" id="_tab3">    </cfformgroup>      </cfformgroup>  <cfformgroup type="horizontal">   <cfinput type="button" name="btnPre" id="btnPre" value="Previous tab"             onClick="tabs.selectedIndex=tabs.selectedIndex-1" visible="{(tabs.selectedIndex == 0)?false:true}">   <cfinput type="button" name="btnNxt" id="btnNxt" value="Next tab"             onClick="tabs.selectedIndex=tabs.selectedIndex+1" visible="{(tabs.selectedIndex == 2)?false:true}"> </cfformgroup></cfform></code><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@ I've expanded a little on <a href="http://ray.camdenfamily.com/index.cfm?mode=en
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

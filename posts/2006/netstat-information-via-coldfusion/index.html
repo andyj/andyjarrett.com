@@ -78,6 +78,26 @@
 I just found an old bit of ColdFusion code which ouputs Netstats results which I thought someone might find useful. <code><!-- Name      : netstat.cfm Author    : Andy Jarrett  Purpose   : To display netstat information--><cfset argsList = "a,b,e,n,o,p tcp,p udp,r,s,v"/><cfparam name="form.args" default="-1"/><cfoutput>  <form action="netstat.cfm" method="post"> <fieldset>    <legend>Netstat test</legend>   <div>     <label>Choose you argument</label>      <select name="args">        <cfloop list="#argsList#" index="i">          <option value="#i#">#i#</option>        </cfloop>     </select>   </div>    <input type="submit" name="sbt" value="Run"/> </fieldset> </form>   <cfif form.args NEQ -1>   <cftry>   <cfexecute name = "C:\\windows\\System32\\netstat.exe"       arguments = "-#args#"       timeout = "3"       variable="netstat">    </cfexecute>    <xmp>#netstat#</xmp>  <cfcatch>   I don't know what you tried to do but it caused an error   <br/>   <strong>Problem:</strong> #cfcatch.message# </cfcatch>  </cftry>  </cfif></cfoutput></code><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@ I just found an old bit of ColdFusion code which ouputs Netstats results which I
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

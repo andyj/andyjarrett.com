@@ -78,6 +78,26 @@
 <p>I sometimes forget how useful/powerful RegEx can be. Take the following bit of CFIF logic</p>[sourcecode language="plain"]&lt;cfset username = trim(form.uname) /&gt;&lt;cfif len(username) LT 4&gt;  &lt;cfset errorMsg = &quot;Your username is too short&quot; /&gt;&lt;cfelseif NOT reFindNoCase(&quot;[\\w]&quot;, username, 1, &quot;false&quot;)&gt; &lt;cfset errorMsg = &quot;Your username is too short&quot; /&gt;&lt;/cfif&gt;[/sourcecode]<p>A quick regex guide: the "\\w" reference stands for "word character", which translates to [A-Za-z0-9_] n.b.the underscore as well</p><p>You can actually add on to the regex and at the same time cut down a lot of the logic by doing the following:</p>[sourcecode language="plain" gutter="true" toolbar="true" wraplines="true"]&lt;cfif NOT refindnocase(&quot;[\\w]{4,}&quot;, username, 1, &quot;false&quot;)&gt;  &lt;cfset errorMsg = &quot;Usernames must be 4 characters in length and contain [A-Za-z 0-9 _&quot; /&gt;&lt;/cfif&gt;[/sourcecode]<p>The key is "{4,}". Using the curly braces to specify a specific amount of repetition of "word characters" and is equivilant to "len(username) LT 4"</p> <br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

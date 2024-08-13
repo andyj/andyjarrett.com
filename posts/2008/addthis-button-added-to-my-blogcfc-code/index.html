@@ -78,6 +78,26 @@
 I've modified my BlogCFC code a little today. Instead of having the usual Digg/Delicious bookmark links I've swapped them for a <a href="http://www.addthis.com/">Add This button <img src="http://s7.addthis.com/button1-addthis.gif" alt="add this" align="absmiddle" /></a> which is apparently the #1 bookmarking and sharing button on the Internet.You need to sign up for a free account but this is only to allow tracking and stats that you view. When you create your button there is no need to really change the code as its picks up the page URL. But if you want to specify an alternate URL because you want to have the button multiple times on one page then you need to use the <b>addthis_url</b> and <b>addthis_title</b> variables (e.g. addthis_url='http://www.andyjarrett.com/andy/blog/alternate-page.html';).Below is the code I'm using for BlogCFC. All I've done is removed the Digg and Delicious links in the <b>index.cfm</b> template and replaced it with with the following:<code><!-- AddThis Button BEGIN --><script type="text/javascript"> addthis_pub  = 'andyj'; addthis_url = '#application.blog.makeLink(id)#';  addthis_title = '#application.blog.getProperty("blogTitle")#:#title#'; </script><a href="http://www.addthis.com/bookmark.php" onmouseover="return addthis_open(this, '', '[URL]', '[TITLE]')" onmouseout="addthis_close()" onclick="return addthis_sendto()"><img src="http://s7.addthis.com/button1-addthis.gif" width="125" height="16" border="0" alt="" /></a><script type="text/javascript" src="http://s7.addthis.com/js/152/addthis_widget.js"></script><!-- AddThis Button END --></code><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@ I've modified my BlogCFC code a little today. Instead of having the usual Digg/D
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

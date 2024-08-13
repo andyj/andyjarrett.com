@@ -78,6 +78,26 @@
 Here mainly because i forget this. If you want to set up a new <a href="http://httpd.apache.org/docs-2.0/vhosts/examples.html">VirtualHost</a> ,on your <a href="http://apache.org">Apache Server</a>,on new port i.e. 81 just add this to your <a href="http://httpd.apache.org/docs-2.0/configuring.html#main">HTTPD.conf</a> file<div class="code"><FONT COLOR=NAVY>&lt;VirtualHost 127.0.0.1:81&gt;</FONT><br>&nbsp;&nbsp;&nbsp;ServerAdmin <A HREF="mailto:temp@temp.com">temp@temp.com</A><br>&nbsp;&nbsp;&nbsp;DocumentRoot <FONT COLOR=BLUE>"c:/wwwroot/"</FONT><br>&nbsp;&nbsp;&nbsp;ServerName www.newsiteport81.com<br><FONT COLOR=NAVY>&lt;/VirtualHost&gt;</FONT></div>but before you restart the services don't forget to make Apache Listen on that port as well by adding the following under "LISTEN 80"<div class="code"># ADD PORT 81<br>Listen 81</div>Without this Apache will not be listening on PORT 81, and you'll be sitting in front of your box wondering what you've missed - you'll realise - then you'll blog about it ;o)<br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@ Here mainly because i forget this. If you want to set up a new <a href="http://h
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

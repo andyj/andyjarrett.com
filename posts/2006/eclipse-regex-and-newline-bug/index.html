@@ -78,6 +78,26 @@
 This is more of a case of just letting everyone know as to prevent head butting against the wall and going back through RegEx books.I was trying to replace a load of commas with newlines via the find/replace using regex a task I thought was simple:Find: ","Replace with: "\\n"All that happend was an "n" being inserted. I tried"Find: ","Replace with: "\\\\n"This inserted "\\n". So I grabbed the <a href="http://www.forta.com/blog/index.cfm?mode=e&entry=1082">RegEx book</a> and went online and all was working. Luckily I then came across <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=52338">Bug 52338</a> and found out this has been an issue since 2004, with the last 2 recent posts reading like this:<p>The bug is 2 years old and the required functionality is one of basics forextended editors (which I hope should be the Eclipse text editor too).For me it doesn't matter if JDK has this particular implementation problem(<a href="show_bug.cgi?id=52338#c12">comment 12</a>) - in other Java editors (JEdit for example) you could find/replacealmost everything - so they have also managed the problem somehow.Together with <a href="show_bug.cgi?id=44766" title="ASSIGNED - [find/replace] Regular expressions cannot match across lines">bug 44766</a> it would be really nice to have it fixed in 3.3.BTW, why this bug belongs to JDT/Text and not to the Platform/Text?</p><p>We will not have time to address this ourselves but would thankfully accept ahigh quality patch.</p><p>This has actually gotta be probably the one thing I miss with DWMX is the multiline find/replace dialogue. </p><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@ This is more of a case of just letting everyone know as to prevent head butting 
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

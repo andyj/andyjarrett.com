@@ -78,6 +78,26 @@
 CouchDB starting guide<p>GUI (Futon). From the browser go to <a href="http://127.0.0.1:5984/_utils">http://127.0.0.1:5984/_utils</a></p><p>List all DB's</p><b>$ curl -X GET http://127.0.0.1:5984/_all_dbs </b><p>Create DB</p><b>$ curl -X PUT http://127.0.0.1:5984/contacts </b><p>Delete DB</p><b>$ curl -X DELETE http://127.0.0.1:5984/contacts</b><p>Insert document (record)</p><b>$ curl -X put http://127.0.0.1:5984/contacts/andyjarrett -d '{"firstName":"Andy","lastName":"Jarrett","email":"andy.jarrett@example.com"}' </b><em>Using the -d flag, it is recommended that you encapsulate your JSON code using single quotes rather than double quote</em><p>Get documents</p><b>$ curl -X GET http://127.0.0.1:5984/contacts/andyjarrett</b><p>Delete document</p><b>$ curl -X DELETE http://127.0.0.1:5984/contacts/johndoe?rev={USE REV FROM THE GET RECORD COMMAND}</b><p>Copy record (document)</p><b>$ curl -X COPY http://127.0.0.1:5984/contacts/andyjarrett -H "Destination: tylerdurden"</b><p>Update record (document): You'll need the rev number which the GET record command can supply.</p><b>$ curl -X PUT http://127.0.0.1:5984/contacts/tylerdurden -d '{"_rev":"1-b2a7c335ac3e754f050eda2baff6bf89","firstName":"Tyler","lastName":"Durden","email":["tyler.durden@example.com","tyler.durden@example.com"]}</b><p>List all documents</p><b>$ curl -X GET http://127.0.0.1:5984/contacts/_all_docs </b><p>List all documents (ORDER and set LIMIT)</p><b>$ curl -X GET http://127.0.0.1:5984/contacts/_all_docs?descending=true\\&limit=1 </b><p>All documents in the DB (as well as deleted ones) ordered by last modified. Look for the following next to deleted records: "deleted":true </p><b>$ curl -X GET http://127.0.0.1:5984/contacts/_all_docs_by_seq</b><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@ CouchDB starting guide<p>GUI (Futon). From the browser go to <a href="http://127
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

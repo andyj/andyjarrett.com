@@ -78,6 +78,26 @@
 <p>I've seen this following IF logic before, even used it, but with having no Node.js actively live I've never known exactly how it "knows"</p><p><code>// development only<br>if ('development' == app.get('env')) app.use(express.errorHandler());</code></p><p>A little dig through <a href="https://github.com/visionmedia/express/blob/master/lib/application.js#L55" rel="nofollow">Express.js on Github</a> and it seems that it comes down to whether a <b>process.env.NODE_DEV</b> is set. Look around line 50 (look for)</p><p><code>this.set('env', process.env.NODE_ENV || 'development');</code></p><p>To test this I wrote a simple node app called "whatEnvironment.js" with one console.log line and it returned "undefined"</p><script src="https://gist.github.com/andyj/6663965.js"></script><p>A quick change the to the call (to set the environment variable) <code>$ NODE_ENV=Production node whatEnvironment.js</code> and this returned "Production"</p><p>When it comes to splitting out your servers (Dev, Staging, and Live) you can set NODE_ENV={environment} in the machine's ~/.bash_profile (for Mac)</p><script src="https://gist.github.com/andyj/6663838.js"></script><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

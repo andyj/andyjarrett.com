@@ -78,6 +78,26 @@
 I've been adding some performance variables to my Eclipse setup and have recently learnt that on the Mac you can use an Eclipse.ini file for the settings instead of the [non-standard] Info.plist file.To open the Eclipse.ini file gotoEclipse.app >> right-click >> Show Package ContentsThen navigate to /Contents/MacOS and use a text editor to open the file.<em>Note: A single VM argument ("-vmargs") specified in Info.plist will cause all other VM arguments in the eclipse.ini to be ignored.</em>So far from my trawlings around the web one consensus I've seen is that to improve performance you should give the VM as much ram as you can spare and and set your min and max  values to the same amounts to avoid resizing.So for reference I have added the following startup variables in my ini file:<code>-Xms512m-Xmx512m-XX:PermSize=128m-XX:MaxPermSize=128m-Xverify:none</code>The first 4 setting change how the memory is managed. Line 5 should reduce your startup time. This parameter turns off bytecode verification. I'm not a Java expert (so please someone jump in if I am wrong) but you should only set this if you know your plugins work fine. In essence this checks for the Java language rules for safety and the code may not have been produced by a known-to-be trustworthy Java compiler meaning that you could end up crashing Eclipse as your plugin might violate access restrictions etc.If you have any more changes/updates let me know!<br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@ I've been adding some performance variables to my Eclipse setup and have recentl
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

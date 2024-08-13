@@ -78,6 +78,26 @@
 I've been on a quest to find out how to show/hide/generate tabs in &lt;cfform> based on selected options (which I still cannot do, so if you know please post in the comments). But on my journey I have discovered how to completely remove (delete) a tab and thought it might be usful to others. <code><cfsavecontent variable="del"> tabs.destroyChildAt(1);</cfsavecontent><cfform id="form1" name="form1" method="post" action="#cgi.SCRIPT_NAME#" format="flash" skin="haloGreen">  <cfformgroup type="tabnavigator" id="tabs">   <cfformgroup type="page" label="Tab1">    </cfformgroup>    <cfformgroup type="page" label="Tab2">    </cfformgroup>    <cfformgroup type="page" label="Tab3">    </cfformgroup>          </cfformgroup>  <cfinput type="button" id="btnTab1" name="btnTab1" value="Remove tag" onclick="#del#"></cfform></code><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@ I've been on a quest to find out how to show/hide/generate tabs in &lt;cfform> b
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

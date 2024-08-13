@@ -78,6 +78,26 @@
 Never had a need to do this till today, but here's how you can delete from three tables in one query. Below is the SQL i used on a <a href="http://www.mysql.com">MySQL</a> DB.<br/><br/><div class="code"><FONT COLOR=MAROON>&lt;cfquery datasource=<FONT COLOR=BLUE>"#request.dsn#"</FONT> name=<FONT COLOR=BLUE>"delQry"</FONT>&gt;</FONT><br>\n  DELETE  FROM<br>\n    table_1,  table_2<br>\n  USING<br>\n    table_1, table_2<br>\n  WHERE<br>\n    table_1.id = table_2.id<br>\n      AND<br>\n        table_1.id = 1<br>\n<FONT COLOR=MAROON>&lt;/cfquery&gt;</FONT></div><br/><br/>Learn more at <a href="http://www.mysql.com/delete">www.mysql.com/delete</a><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@ Never had a need to do this till today, but here's how you can delete from three
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

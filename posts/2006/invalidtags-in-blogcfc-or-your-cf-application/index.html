@@ -78,6 +78,26 @@
 Adding the <a href="http://youtube.com/">YouTube</a> vid to my <a href="http://www.andyjarrett.co.uk/andy/blog/index.cfm?mode=entry&entry=2E42AA50-3048-28EB-0E7F391E508D322A">last post</a> caused a little bit of any issue. Mainly the &lt;embed> and &lt;object> tags were replaced with &lt;InvalidTag>. Thinking that Ray had turned into an evil Jedi master and prevented users using these tags I did a quick global find through the <a href="http://www.blogcfc.com/">BlogCFC</a> code. That left me scratching my head as I couldn't find any reference to it at all so I did what we all do....I went straight to Google. It turns out the cause is a CF Admin setting that specifies whether to protect variables from cross-site scripting attacks. Not to worry though, this can be turned off via the &lt;cfapplication> tag by adding the attribute scriptProtect="none" - <a href="http://livedocs.macromedia.com/coldfusion/7/htmldocs/wwhelp/wwhimpl/common/html/wwhelp.htm?context=ColdFusion_Documentation&file=00000217.htm">Livedocs description</a>Ray, sorry for doubting your Jedi master status :o)<br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@ Adding the <a href="http://youtube.com/">YouTube</a> vid to my <a href="http://w
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

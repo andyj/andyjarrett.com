@@ -78,6 +78,26 @@
 Recently for work I have had to convert quite a few word docs to the FlashPaper format.Realising how long this would take I looked into an undocumented feature of the FlashPrinter.exe of callingit from the command line and passing the required arguments.You can easily take my code and get any language like Java or even Ant to do the following. The command you need to run is:<code>FlashPrinter.exe {PATH TO DOCUMENT} -o {OUTPUT PATH & FILE with SWF extention}</code>All the CF code below does is filter on the directory query looking for word documents.If you have any changes or suggestions <a href="http://andyjarrett.co.uk/andy/blog/page.cfm/Contact-Me">contace me here</a><code> <!--- Path to Flash Paper exe --->  <cfset flashPrinter = "C:\\Program Files\\Macromedia\\FlashPaper 2\\FlashPrinter.exe">  <!--- Path to documents --->  <cfset originalPath = expandPath(".") />  <!--- Can be either doc|pdf --->  <cfset filter = "doc">    <!--- Path to the exported swf's' --->  <cfset outputPath = expandPath(".") />    <!--- get a query list of all the fiels --->  <cfdirectory action="list" name="qry" directory="#originalPath#" filter="*.#filter#" />     <cfoutput>    <cfloop query="qry">      <cfset fileLoc = qry.directory&"\\"&qry.name />     <cfset outputFile = outputPath & "\\" & replace(qry.name, ".#filter#", ".swf")>           <!--- Set the arguments to be passed to CFEXECUTE --->      <cfset args = '"#flashPrinter#" "#fileLoc#" -o "#outputFile#"' />           <!--- Output the args to the screen to see what got passed --->       #args#      <hr/>     <!--- Use the command line to execute the function --->     <cfexecute name = "#flashPrinter#"         arguments = "#args#">      </cfexecute>          </cfloop> </cfoutput></code><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@ Recently for work I have had to convert quite a few word docs to the FlashPaper 
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

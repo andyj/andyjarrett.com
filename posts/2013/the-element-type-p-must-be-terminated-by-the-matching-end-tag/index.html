@@ -78,6 +78,26 @@
 I had a weird issuse tonight when making a simple connection to web service (ASP.net). The CFML was simple:\n\n<script src="https://gist.github.com/andyj/5651084.js"></script>\n\nThe error returned\n\n<blockquote>Error: Fatal Error: URI=www.someurl.co.uk/RegService.asmx Line=110: The element type "p" must be terminated by the matching end-tag "\n</blockquote>\n\nThe problem in my case is that CFML wasn't getting the WSDL file it needs. Simply add <b>?wsdl</b> to the url and try again\n\n<script src="https://gist.github.com/andyj/5651102.js"></script><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@ I had a weird issuse tonight when making a simple connection to web service (ASP
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

@@ -78,6 +78,26 @@
 <b>Update: This project is now hosted on <a href="http://github.com/andyj/isValidRSS-CFC">GitHub @ http://github.com/andyj/isValidRSS-CFC</a></b>I was mucking around last night after finding out my feed wasnt valid, and created a validation CFC.The code is simple, but its just an idea if anyone wants to play around with it. It returns a boolean result,so i was thinking if it returns TRUE, then display "valid rss image" else "invalid, please email webmaster"?Here's the code for it, or if you want you can download it<br/><br/><div class="code"><FONT COLOR=MAROON>&lt;cfcomponent displayname=<FONT COLOR=BLUE>"Check if valid RSS feed"</FONT> hint=<FONT COLOR=BLUE>"I take a URL and check it against ATOM to see if it is valid"</FONT>&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cffunction name=<FONT COLOR=BLUE>"isValidRss"</FONT> access=<FONT COLOR=BLUE>"public"</FONT> returntype=<FONT COLOR=BLUE>"string"</FONT> displayname=<FONT COLOR=BLUE>"isValidRss"</FONT> hint=<FONT COLOR=BLUE>"I check an RSS Feed to see if its valid"</FONT>&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset var validationResult = FALSE&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfargument name=<FONT COLOR=BLUE>"rssUrl"</FONT> type=<FONT COLOR=BLUE>"string"</FONT> required=<FONT COLOR=BLUE>"true"</FONT>&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=GRAY><I>&lt;!--- Go of and validate the feed ---&gt;</I></FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfhttp<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;method=<FONT COLOR=BLUE>"get"</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;url=<FONT COLOR=BLUE>"<A TARGET="_blank" HREF="http://feedvalidator.org/check?url=#rssUrl#">http://feedvalidator.org/check?url=#rssUrl#</A>"</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;resolveurl=<FONT COLOR=BLUE>"yes"</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throwonerror=<FONT COLOR=BLUE>"yes"</FONT>&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfif findNoCase(<FONT COLOR=BLUE>"Congratulations!"</FONT>, cfhttp.FileContent)&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset validationResult = TRUE&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;/cfif&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfreturn validationResult&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;/cffunction&gt;</FONT><br><FONT COLOR=MAROON>&lt;/cfcomponent&gt;</FONT></div><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

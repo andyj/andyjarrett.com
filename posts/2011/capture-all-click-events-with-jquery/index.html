@@ -78,6 +78,26 @@
 <p>A friend was after capturing any click event on a page and then checking the tag it was on/over. The great thing with <a href="http://jquery.com/" title="jQuery: The Write Less, Do More, JavaScript Library">jQuery</a> is that you can get to this information with little effort. Below is a snippet of code which will dump the tag (in UPPERCASE) to the <a href="http://getfirebug.com/logging" title="Firebug and Logging : Firebug">console.log</a>.</p><code> $(document).bind('click', function(e) {   console.log( e.toElement.tagName; ) });</code><p>If you want to know what else you can tap in to then change line 2 to <b>console.log(e)</b> and have a good explor around.</p><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

@@ -78,6 +78,26 @@
 After scratching my head for a while wondering why the below code;<code><cfquery datasource="myDSN" name="qry">#preservesinglequotes(myArray[1])#</cfquery></code>was returning the error. <strong> Invalid CFML construct found on line 8 at column 26.<br/>ColdFusion was looking at the following text:<br/>[</strong>I was sure that the array held a query then have just found out that <a href="http://livedocs.macromedia.com/coldfusion/7/htmldocs/wwhelp/wwhimpl/common/html/wwhelp.htm?context=ColdFusion_Documentation&file=part_cfm.htm">preserveSingleQuotes</a> only excepts simple values. So the above code should look more like<code><cfset sqlQry = myArray[1] /><cfquery datasource="myDSN" name="qry">#preservesinglequotes(sqlQry)#</cfquery></code>You would think that surely this could be error trapped by the CF server to inform you that you can only pass in simple values?<br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@ After scratching my head for a while wondering why the below code;<code><cfquery
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

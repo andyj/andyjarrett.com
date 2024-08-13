@@ -78,6 +78,26 @@
 <p>There are 2 snippets of code which should work for other CFML engines but I've only tested on Railo as I am trying to get to the bottom of a Jar issue.</p><p>To see whats on your classpath you get check the following system property</p><code><cfset sys = CreateObject("java", "java.lang.System")><cfloop list="#sys.getProperty("java.class.path")#" index="i" delimiters=":">  <cfoutput>#i#</cfoutput><br/></cfloop></code><p>If you want to know even more about your system then its worth looking at the following dumping all the properties via:</p><code><cfdump var="#sys.getProperties()#"></code><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

@@ -78,6 +78,26 @@
 <p>Been having an odd issue where a site of mine (on a different domain) was pulled up in a iFrame was not working. The framed site used its own session vars for some references but after a page load (within the frame) all would be lost. Of course this was IE only, Chrome, Firefox and Safari had no issues.</p>\n\n<p>The fix was adding a header to <i>every</i> page you serve within the frame. This can be done at the server Web Server level view .htaccess or something similar, or you can do it, like I did, via CFHEADER</p>\n\n<script src="https://gist.github.com/andyj/5663178.js"></script><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

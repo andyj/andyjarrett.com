@@ -78,6 +78,26 @@
 I've seen some code out there for this, but I've not managed to Google anything I like. My version uses HTML's <a href="http://www.w3.org/TR/html401/struct/lists.html">Definition Lists. &lt;DL>, &lt;DT> and &lt;DD></a>. Click on one of the questions below to see it in action.N.B. Thanks to Peter Boughton's comment. Though I try using next() and it wasn't working for me, hence the ID hack I did have. Anyway, thanks Pete.<script src="/jquery/jquery-1.2.6.min.js" type="text/javascript"></script><script type="text/javascript"> $(document).ready(function(){   $("dt").click(function () {     $('dd:visible').slideUp('fast');      $(this).next('dd').slideDown('fast');   }); });</script><style>dd{display:none;}</style><dl>    <dt class="q1">Question 1</dt>    <dd id="q1">FAQ Answer 1: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam malesuada urna      non ipsum. Integer quis pede. Nulla tincidunt. Sed venenatis semper justo.</dd>   <dt class="q2">Question 2</dt>    <dd id="q2">FAQ Answer 2: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam malesuada urna      non ipsum. Integer quis pede. Nulla tincidunt. Sed venenatis semper justo.</dd>   <dt class="q3">Question 3</dt>    <dd id="q3">FAQ Answer 3: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam malesuada urna      non ipsum. Integer quis pede. Nulla tincidunt. Sed venenatis semper justo.</dd>   <dt class="q4">Question 4</dt>    <dd id="q4">FAQ Answer 4: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam malesuada urna      non ipsum. Integer quis pede. Nulla tincidunt. Sed venenatis semper justo.</dd>   <dt class="q5">Question 5</dt>    <dd id="q5">FAQ Answer 5: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam malesuada urna      non ipsum. Integer quis pede. Nulla tincidunt. Sed venenatis semper justo.</dd> </dl>Here's the code. I've put remarks in the comments on how it works<code><script src="/jquery/jquery-1.2.6.min.js" type="text/javascript"></script><script type="text/javascript"> $(document).ready(function(){   $("dt").click(function () {     $('dd:visible').slideUp('fast');      $(this).next('dd').slideDown('fast');   }); });</script><style> /* Hide all DD's at the start*/  dd{display:none;}</style><!-- Some FAQ Questions --><cfoutput><dl>  <cfloop from="1" to="5" index="i">    <dt class="q#i#">Question #i#</dt>    <dd id="q#i#">FAQ Answer #i#: Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Nam malesuada urna      non ipsum. Integer quis pede. Nulla tincidunt. Sed venenatis semper justo.</dd> </cfloop></dl></cfoutput></code><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@ I've seen some code out there for this, but I've not managed to Google anything 
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

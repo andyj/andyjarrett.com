@@ -78,6 +78,26 @@
 <p>For loggin purposes I wanted to store off a simple structure so I could capture a couple of value at a point in time. Luckily with Java  powering CFML this was relativiely easy as you have access to the <a href=""http://download.oracle.com/javase/6/docs/api/java/lang/String.html>string object</a></p><code>aStc = {name1 = "val 1",name2 = "val 2",name3 = "val 3"};writeDump(aStc.toString());</code><p>You can actually do this arrays and even json structures too:</p><code>aAry = ['val 1',' val 2','val 3'];writeDump(aAry.toString() );// Below is Railo only I think aJson = {name1:"val 1",name2:"val 2"};writeDump(aJson.toString() );   </code></p><p>You can even use the strings to compare structures easily:</p><code>aStc2 = {name1 = "val 1",name2 = "val 2",name3 = "val 3"};  aStc3 = {name3 = "val 3",name1 = "val 1",name2 = "val 2"};writeDump( compare(aStc2.toString(),aStc3.toString()) ); // should return 0 for no differences    </code><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

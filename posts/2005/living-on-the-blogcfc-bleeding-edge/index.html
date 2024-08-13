@@ -78,6 +78,26 @@
 Well i couldnt resist the upgrade so this is my first post using the <a href="http://ray.camdenfamily.com/index.cfm/2005/6/BlogCFC-Beta-Released">Beta BlogCFC</a> and though the upgrade was not a smooth ride the bumps were small. So heres a few tips for moving along the bleeding edge without getting too badly cut.1. First off remember the probably most golden rule of SES - relative URL's our and absolute URL's in this is because the backslash screw up the directory location. Its not nice and as i learnt last night and this morning its very very frustrating.2. To update all your entries to SES URL's you can use the following MySQL script (i don't know if this will work on MSSQL etc if someone could let me know that would be great)<br/><strong>UPDATE: This code won't work, as it won't replace special characters. There is a method called MakeTitle in the blogCFC to do this - thanks Ray.</strong><br/><div class="code" style="text-decoration:line-through">UPDATE `tblblogentries` <br>&nbsp;&nbsp;&nbsp;SET alias = REPLACE(title,' ', '-')</div><strong>Update: Changed from SQL to CF to do the update utilising one of Rays methods already in place. Because of this you have to run this from withing the BlogCFC folder - or make the necessary changes</strong><div class="code"><FONT COLOR=MAROON>&lt;cftry&gt;</FONT><br>\n<FONT COLOR=GRAY><I>&lt;!--- Get the titles ---&gt;</I></FONT><br>\n<FONT COLOR=MAROON>&lt;cfquery datasource=<FONT COLOR=BLUE>"#application.blog.getProperty('dsn')#"</FONT> name=<FONT COLOR=BLUE>"t"</FONT>&gt;</FONT><br>\n&nbsp;&nbsp;&nbsp;SELECT id, title FROM tblblogentries t<br>\n<FONT COLOR=MAROON>&lt;/cfquery&gt;</FONT><br> <br>\n<FONT COLOR=GRAY><I>&lt;!--- Update the alias's ---&gt;</I></FONT><br>\n<FONT COLOR=MAROON>&lt;cfloop query=<FONT COLOR=BLUE>"t"</FONT>&gt;</FONT><br>\n&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfquery datasource=<FONT COLOR=BLUE>"#application.blog.getProperty('dsn')#"</FONT>&gt;</FONT><br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;UPDATE `tblblogentries`<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;SET alias = <FONT COLOR=MAROON>&lt;cfqueryparam cfsqltype=<FONT COLOR=BLUE>"cf_sql_varchar"</FONT> value=<FONT COLOR=BLUE>"#application.blog.MakeTitle(trim(t.title))#"</FONT> /&gt;</FONT><br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;WHERE id = <FONT COLOR=MAROON>&lt;cfqueryparam cfsqltype=<FONT COLOR=BLUE>"cf_sql_varchar"</FONT> value=<FONT COLOR=BLUE>"#t.id#"</FONT> /&gt;</FONT><br>\n&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;/cfquery&gt;</FONT><br>\n<FONT COLOR=MAROON>&lt;/cfloop&gt;</FONT><br> <br>\n<FONT COLOR=MAROON>&lt;cfcatch&gt;</FONT><FONT COLOR=MAROON>&lt;cfdump var=<FONT COLOR=BLUE>"#cfcatch#"</FONT>&gt;</FONT><FONT COLOR=MAROON>&lt;cfabort&gt;</FONT><FONT COLOR=MAROON>&lt;/cfcatch&gt;</FONT><br>\n<FONT COLOR=MAROON>&lt;/cftry&gt;</FONT></div>This will also replace all your old alias's. Soif you don't want the script to  do that you will need to add a WHERE to that SQL call.Thats it really. I had a little bit of trouble with the skin mainly because my index.cfm is a little different to that in the BlogCFC code so i always need to do a <a href="http://www.scootersoftware.com/">compare</a> and check everything new is added, but apart from that it went well.<br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@ Well i couldnt resist the upgrade so this is my first post using the <a href="ht
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

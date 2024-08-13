@@ -78,6 +78,26 @@
 <p>If you have used <a href="http://wiki.github.com/seancorfield/fw1/" title="Framework One">FW/1</a> you'll probably know that it takes over all .cfm requests. So for example if you add the file "rss.cfm" to your web root before the template is called FW/1 will run and the .cfm template will never actually be processed. </p> <p>This is the problem I ran in to last night but a quick <a href="http://groups.google.com/group/framework-one/browse_thread/thread/9a78d6bf36013869">post to the group</a> and <a href="http://twitter.com/seancorfield">Sean</a> was pointing to me the setting "<b>unhandledPaths</b>". This setting allows you to list a set of file &amp; directory paths that are not to be handled by FW/1. For example:</p><code>unhandledPaths = "/rss.cfm,/flex2gateway"</code><p>The reason I missed this was down to me using the skeleton app and assuming that commented out were <b>all</b> the settings instead of RTFM at <a href="http://wiki.github.com/seancorfield/fw1/developing-applications-manual">http://wiki.github.com/seancorfield/fw1/developing-applications-manual</a>. Lesson learnt.</p><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

@@ -78,6 +78,26 @@
 Since moving over to the Mac I haven't had a "Now Playing" on the blog due to licensing issues with the software I was using (new OS = new license). Luckily <a href="http://last.fm">last.fm</a> offer a free feed of your last ten tracks (plus other stuff). You can see the pod in action if you look left now! Below is the pod code for <a href="http://www.blogcfc.com/">BlogCFC</a>, of course you can just rip the code out and use it for any other CF blog/site. For people that want to rip the code to their own blogs i have add the variable applicaiton._lastFM.feed['feedConsumed'] Using your application scope it will store the feed. For BlogCFC users this is not the case and will get a new copy of the feed EVERY HIT. At the moment I don't know how to do application scope caching per pod. (I think I most of had a full brain lobotomy or something). If anyone knows how then leave a comment and I'll have a dot release<code><cfsetting enablecfoutputonly=true><cfprocessingdirective pageencoding="utf-8"><!--- Name         : lastfm.cfm Author       : Andy Jarrett Created      : January 01, 2007 Last Updated : January 03, 2007 History      :  Purpose      : Display your last 10 tracks from www.Last.fm   README! (yes you do!)   Also for this to be real time in your index.cfm you need to set the scopecache disabled=true.   Scopecache(around line 28) should look like this: <cfmodule template="tags/scopecache.cfm" cachename="#application.applicationname#" scope="application" disabled="true" timeout="#application.timeout#">     Your feed should be something list  http://ws.audioscrobbler.com/1.0/user/[YOUR USERNAME HERE]/recenttracks.rss   For people that want to rip the code to their own blogs i have add the variable applicaiton._lastFM.feed['feedConsumed']  Using your application scope it will store the feed. For BlogCFC users this is not the case and will get a new copy of the feed EVERY HIT.  At the moment I don't know how to do application scope caching per pod. (I think I most of had a full brain lobotomy or something).    Anyone know then leave a comment and I'll have a dot release   ---><cfset lastFMFeed = "http://ws.audioscrobbler.com/1.0/user/AndyJarrett/recenttracks.rss" /><!--- First we check that the feed has not already been grabbed. Then we check when it was pulled last, the default is 3 minutes. ---><cfif NOT isDefined('applicaiton._lastFM.feed')      OR (applicaiton._lastFM.feed['feedConsumed'] LT now())> <!--- Lets get the feed --->  <cfhttp method="get" url="#lastFMFeed#">    <!---   Really should be doing some error checking here but that's what dot(.) releases are for  --->    <cfset applicaiton._lastFM.feed = structNew() />    <!--- Put the feed in the application variable so its easy to get to ---> <cfset applicaiton._lastFM.feed['rsscontent'] = cfhttp.filecontent />   <!--- This tells us to get the feed every 3 minutes. You can change this as to your needs.  Anything over 1 request per second and the last.fm guys need to know what you are doing! ---> <cfset applicaiton._lastFM.feed['feedConsumed'] = dateAdd('n', 3, now()) /> </cfif><cfset feed = xmlParse(applicaiton._lastFM.feed['rsscontent'])><!--- Get the songs out of there.---><cfset songs = feed.rss.channel.xmlchildren /><!---  The first 10 array elements are details about you and the feed. Because of this we start looping at position 10. There's probably  a better way to figure this out but again thats what dot releases are for :o)---><cfmodule template="../../tags/podlayout.cfm" title="My recent tracks"><!--- <a href='#feed.rss.channel['link'].xmltext#'> --->  <cfoutput>#applicaiton._lastFM.feed['feedConsumed']# #now()#</cfoutput> <cfoutput>    <cfloop from="10" to="#arrayLen(songs)#" index="songidx">   <cfset song = songs[songidx] />   <a href="#song['link'].xmltext#">#song['title'].xmltext#</a><br/>   </cfloop>   <hr />    <a href='#feed.rss.channel['link'].xmltext#'>My last.fm profile</a><br/>    <a href="http://www.last.fm/group/Coldfusion">CFMX @ last.fm</a>  </cfoutput>   </cfmodule><cfsetting enablecfoutputonly=false></code>Oh, and if you are on Last.fm and a CF developer WHY! haven't you joined <a href="http://www.last.fm/group/Coldfusion">the ColdFusion Group!</a><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@ Since moving over to the Mac I haven't had a "Now Playing" on the blog due to li
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

@@ -78,6 +78,26 @@
 Well with a new machine in the works for my company i've been thinking about running Apahce (on windows) for our server. Anyway what with mappings etc i really wanted to give this a bash at home first. At first i thought this was gonna mean me, notepad and a bunch of text files had to get friendly. Actually its couldn't of been easier thanks to CF.<ul><li><a href="http://www.apahce.org">Download</a> and install Apache. I needed to change the port to 81 so it didnt interfere with IIS which meant i changed the "Listen" port to 81 in the httpd.conf file </li><li>Edit C:\\CFusionMX\\bin\\connectors\\Apache_connector.bat to look at "apache2" folder instead of "Apache". Then run the bat file.</li><li>Restart Apache and all is well, easy.</li></ul><br>Do remember though that they are using the same CF engine. If you have the enterprise version you could most likely set up a different instance for each web server, but i dont so i can't ;o(<br/><br/><strong>Afterthought:</strong>If you want to administer CF from Apache then you will need to add the following to the ScriptAlias section of httpd.cong<br/><div class="code">Alias /CFIDE <FONT COLOR=BLUE>"%cfroot%/CFIDE/"</FONT><br> Alias /cfide <FONT COLOR=BLUE>"%cfroot%/CFIDE/"</FONT></div><br/>Replacing "%cfroot%" for the director path to CFIDE folder i.e. c:/coldfusionmx/wwroot/<br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@ Well with a new machine in the works for my company i've been thinking about run
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

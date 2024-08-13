@@ -78,6 +78,26 @@
 Unlike <a href="http://www.fusebox.org">Fusebox</a> there is not a global init variable setting file With <a href="http://www.model-glue.com/">MG</a>. If you do need to set up some global vars the way i'm doing this (and seems to be the norm nearly) is:<ol><li>Set up a cfc called /config/beans/global.cfc</li><li>Create an xml file at /config/beans/global.xml - (for my current site this covered about 5-8 smallstructures/arrays/values that is used through out the site)</li><li>In the controller add the following line -<br/> <span style="color:maroon">&lt;cfset variables.global = GetModelGlue().GetConfigBean("global.xml") /></span></li><li>and on request start - <br/><span style="color:maroon">&lt;cfset arguments.event.setValue("global", variables.global) /></span></li></ol><br/>Now on any page to get the variable you want you can use<code><cfset customerTitles = viewState.getValue('global').getTitles() /></code><br/>I've seen no documentation on this, but have posted to the Topica List. <a href="http://corfield.org/blog/index.cfm?">Sean Corfield</a> has another method using a new controller you can find it on the <a href="http://lists.topica.com/lists/modelglue/read/message.html?mid=1719702090&sort=d&start=1479">Topica lists</a> also see the GGCC examples (7/8/9) in his frameworks Pod.<br/><br/><br/>For more information on Config beans in MG see :<br/><a href="http://www.model-glue.com/index.cfm?mode=entry&entry=1EA76969-E081-2BAC-695D63CAE46CD2A6">Eat Your Beans: ConfigBeans in Model-Glue</a><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@ Unlike <a href="http://www.fusebox.org">Fusebox</a> there is not a global init v
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

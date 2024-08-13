@@ -78,6 +78,26 @@
 <p>There was a post on the MG lists about setting up Model Glue and the fact you need mappings. I had this lying around from some internal writings and thought it might be useful. It details setting up MG with no mappings. <strong>Example 1 - Root setup</strong><br><strong>URL :</strong> www.mysite.com <br><more/><p>On the root of your site you have the MG folder along with the others e.g./modelglue/<br>/controller/<br>/views/<br>/model/<br>/config/</p><p>To call the welcome page the URL would be www.mysite.com/index.cfm?event=welcome</p>In the modelglue.xml the config looks like this:<code><config> <setting name="beanMappings" value="/config/beans/" />  <setting name="viewMappings" value="/views" />  <setting name="reload" value="true" />  <setting name="defaultEvent" value="Home" />  <setting name="debug" value="true" /></config><controllers> <controller name="myController" type="controller.Controller">   <message-listener message="OnRequestStart" function="OnRequestStart" />   <message-listener message="OnRequestEnd" function="OnRequestEnd" /> </controller></controllers></code><br/><br/><strong>Example 2 - Folder setup</strong><br><strong>URL :</strong>www.anothersite.com/myapp/<br><p>From the root the set up looks like this/modelglue/<br>/myapp/controller/<br>/myapp/views/<br>/myapp/model/<br>/myapp/config/</p>The welcome page the URL would be www.anothersite.com/myapp/index.cfm?event=welcomeIn my modelglue.xml the config looks like this:<code><config> <setting name="beanMappings" value="/myapp/config/beans/" />  <setting name="viewMappings" value="/myapp/views" />  <setting name="reload" value="true" />  <setting name="defaultEvent" value="Home" />  <setting name="debug" value="true" /></config><controllers> <controller name="myController" type="myapp.controller.Controller">   <message-listener message="OnRequestStart" function="OnRequestStart" />   <message-listener message="OnRequestEnd" function="OnRequestEnd" /> </controller></controllers></code><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

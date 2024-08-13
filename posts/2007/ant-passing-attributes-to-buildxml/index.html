@@ -78,6 +78,26 @@
 <a href="http://single-dads.us/">Critter</a> on a <a href="http://www.andyjarrett.co.uk/andy/blog/index.cfm/2007/6/27/Installing-ANT-on-Windows-and-or-Mac-OS-X#c76F0DC32-3048-28EB-0EA23F2E5BEDBF9C">previous post asked</a> "if you can pass in attributes to the build.xml file?" From the Terminal this is as easy as adding another argument "-D". -D&lt;property>=&lt;value><br/>This will update a property in you build.xml file with the value you passed inFor example you would use something similar to<code>ant -buildfile ~/desktop/build.xml -DechoMsg=NewEchoMessage</code>Putting this into practice here is a sample build.xml which I am going to save to my Desktop<code><?xml version="1.0" encoding="UTF-8"?><project name="myProject" default="runEcho" basedir=".">  <property name="echoMsg" value="I am the original message" />  <target name="runEcho"><!-- Simply echo's a message to the screen -->    <echo message="${echoMsg}"/>  </target></project></code>From the Terminal no run<code>ant -buildfile ~/desktop/build.xml -DechoMsg='I overwrite the echo message'</code>In your terminal window you should see something like<code>Buildfile: [PATH TO BUILD FILE]build.xmlrunEcho:[echo] I overwrite the echo messageBUILD SUCCESSFULTotal time: 0 seconds</code><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

@@ -78,6 +78,26 @@
 This morning when I went to start up WinXp on Parallels and I got a scary message: "Virtual Machine Windows XP cannot be opened since it is already used in another Parallels Desktop window"Oh no its not I thought, I'm sure of that. Luckily after a little while of looking around (googling bascialyl!) I found a solution. Apparently Parallels creates a .lock file when you open a VM and sometimes (mainly after abnormal shutdowns) this file isn't removed - causing Parallels to think its in use. The fix is simple(ish) though it would be easier if it wasn't a hidden file. <ol><li>Exit Parallels</li><li>Launch the Terminal application (in the Utilities folder inside the Applications folder on your hard drive)</li><li>Inside a Teminal command window, type: "cd ~/Library/Parallels"</li><li>Type "ls" (to confirm you're in the right place; you should see a listing of .pvs and .hdd files)</li><li>Type "ls -asl"</li><li>Look for a file whose name begins with a dot (".") and ends in ".lock</li><li>Remove that file by typing "rm -i <that file name>" (e.g., "rm -i .winxp.1.pvs.lock") The "-i" tells the remove command to prompt you before deleting the file)</li><li>Type "ls -asl" to confirm that it's gone</li><li>Exit the terminal window (command-Q or type "exit" then command-Q)</li><li></li></ol>Hat tip to the <a href="http://forums.parallels.com/thread6264.html">Parallels Forum for this answer</a><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@ This morning when I went to start up WinXp on Parallels and I got a scary messag
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

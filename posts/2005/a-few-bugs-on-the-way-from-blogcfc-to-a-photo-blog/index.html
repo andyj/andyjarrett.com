@@ -78,6 +78,26 @@
 So now that i've been playing around with the enclosures i've noticed a few bugs, or so i think anyway?When you upload an enclosure at the moment the complete directory in which it is saved on the server is placed into the DB i.e. "d:\\wwwroot\\blog\\enclosue\\imagename.gif". This wouldn't be an issue but in the code to get the file you call <strong>getFileFromPath()</strong>, which is ok until you view the post on its own. Then because of the SES URL's your <strong>getFileFromPath()</strong> gets confused and you end up with something similar to:<br/>http://ipicture.it/mike/index.cfm/2005/9/19/enclosures/policeat%2Dthe%2Dcastel%2Ejpg<br/> as the image URL.So what im changing and playing around with at the moment is the following:<ol> <li>In editor.cfm around line 177 im only capturing the file name as we are always uploading to the "Enclosure" folder</li> <li>In the Index.cfm i am removing reference to #urlEncodedFormat(getFileFromPath(enclosure)# and replacing them with simply #enclosure#</li></ol>If you are using my code from my <a href="http://andyjarrett.co.uk/andy/blog/index.cfm/2005/9/19/Turn-BlogCFC-into-a-photo-blog"> previous entry</a> then i've also updated that as well to<div class="code"><FONT COLOR=MAROON>&lt;cfif len(enclosure) AND reFind(<FONT COLOR=BLUE>"gif|jpg"</FONT>, listLast(enclosure, <FONT COLOR=BLUE>"."</FONT>))&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=NAVY>&lt;p&gt;</FONT><FONT COLOR=NAVY><FONT COLOR=PURPLE>&lt;img src=<FONT COLOR=BLUE>"enclosures/#enclosure#"</FONT> /&gt;</FONT></FONT><FONT COLOR=NAVY>&lt;/p&gt;</FONT><br><FONT COLOR=MAROON>&lt;/cfif&gt;</FONT></div><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@ So now that i've been playing around with the enclosures i've noticed a few bugs
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

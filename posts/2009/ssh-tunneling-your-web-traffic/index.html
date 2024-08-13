@@ -78,6 +78,26 @@
 <p>Recentlty I wanted to bypass a network for a little bit of extra privacy, one of the best ways of doing this is SSH tunneling. If you don't know what this I'll give you the 100,000 ft view. Lets say your are on a restricted network with a firewall that prevents you reading technical blogs as they are classed as "social media" and seen as BAD. With tunneling via SSH you can connect to, say your home computer and use that connection.</p><p>You don't have to do this from the terminal, there are tool out there for the Mac like <a href="http://tynsoe.org">SSH Tunnel Manager</a> but as you'll see this is just quicker and easier. With SSH installed on your machine go to the terminal/command prompt with the following script</p><code> ssh -ND {proxy port} {username}@{ip address of your remote machine}</code><p>Small, but powerfull. So if your remote/home machine that has the internet connection you want to use has the IP address of "79.1.2.3" and your account on that machine had the username "bofh" your connection script would be:</p><code>e.g. ssh -ND 9999 bofh@79.1.2.3</code><p>The 9999 can be any port number you want. You just need to note it down for the next part, web browsing. For this I'm going to show you how to setup Firefox as its a setting you can do quickly and the same across OS's</p><ol> <li>Every time you open a tunnel you'll need to set the "Manual proxy configuration" which you can copy from the following screen shot<br/><img src="/blog/wp-content/ssh_setting.png" alt="Firefox settings for " /><br/>The '9999' value is what ever port you set in the terminal script.</li>  <li>The next bit you'll only need to do once. In your Firefox address bar go to <b>about:config</b> and set <b>network.proxy.socks_remote_dns = <i>true</i></b></li> </ol>   <p>Thats it!</p><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

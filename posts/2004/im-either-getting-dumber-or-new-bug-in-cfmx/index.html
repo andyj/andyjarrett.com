@@ -78,6 +78,26 @@
 Ok so this is a odd one, <span style="text-decoration: line-through;">i'm obviously missing something,</span> i've obviously gone dumb and can't think why i'm getting the following error:-<br/><br/><table border="1" cellpadding="3" bordercolor="#000808" bgcolor="#e7e7e7"><tr><td><table cellpadding="0" cellspacing="0" border="0"><tr><td id="tableProps2" align="left" valign="middle"><h1 id="textSection1" style="COLOR: black; FONT: 13pt/15pt verdana">Form entries incomplete or invalid.</h1></td></tr><tr><td id="tablePropsWidth" colspan="2"><font style="COLOR: black; FONT: 8pt/11pt verdana"><ul><li>TRUE</ul> Please go <a href="javascript:history.back()">back</a> and correct the problem.</font></td></tr></table></td></tr></table><br/>From this bit of code:<br/><div class="code"><FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;form action=<FONT COLOR=BLUE>"<FONT COLOR=MAROON>&lt;cfoutput&gt;</FONT></FONT></FONT>#cgi.script_name#<FONT COLOR=MAROON>&lt;/cfoutput&gt;</FONT>"</FONT> method=<FONT COLOR=BLUE>"post"</FONT>&gt;<br><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;select name=<FONT COLOR=BLUE>"dd_deposit_required"</FONT>&gt;</FONT></FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;option value=<FONT COLOR=BLUE>"TRUE"</FONT> &gt;</FONT></FONT>True<FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;/option&gt;</FONT></FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;option value=<FONT COLOR=BLUE>"FALSE"</FONT> &gt;</FONT></FONT>False<FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;/option&gt;</FONT></FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;/select&gt;</FONT></FONT><br><br><FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;input type=<FONT COLOR=BLUE>"Submit"</FONT> value=<FONT COLOR=BLUE>"submit"</FONT> /&gt;</FONT></FONT><br><FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;/form&gt;</FONT></FONT></div><br/>If you want to see it in action goto <a href="http://andyjarrett.co.uk/test.cfm">http://andyjarrett.co.uk/test.cfm</a>. Now what makes this odder is that if i change the name of the &lt;select&gt; tag everything goes back to normal. Actually the only way to recreate this error is to keep the name the same (so far).<br/><br/>Basically the question is bug, or my big error???<br/><br/><strong>A.</strong> My big error, i totally forgot that "_required" invokes CF server validation. DOH! If you, like me have forgotten about them or don't know about "<a href="http://livedocs.macromedia.com/coldfusion/6/Developing_ColdFusion_MX_Applications_with_CFML/formatData8.htm">Validating form field data types</a>" then check out the <a href="http://livedocs.macromedia.com/coldfusion/6/Developing_ColdFusion_MX_Applications_with_CFML/formatData8.htm">LiveDocs</a><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@ Ok so this is a odd one, <span style="text-decoration: line-through;">i'm obviou
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">

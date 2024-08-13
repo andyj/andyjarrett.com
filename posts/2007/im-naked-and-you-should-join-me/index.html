@@ -78,6 +78,26 @@
 <img src="http://www.andyjarrett.co.uk/andy/blog/img/blogimg/naked-day-07.png" alt="Naked CSS 07" align="right"/>First of, for anyone who knows me that has probably scared the something right out of them :o) Of course I don't mean I'm naked, my site is. Today is <a href="http://naked.dustindiaz.com/">CSS Naked Day '07</a><blockquote><p><b>Where did my Design go?</b></p><p>The idea behind this event is to promote Web Standards. Plain and simple. This includes proper use of (x)html, semantic markup, a good hierarchy structure, and of course, a good 'ol play on words. It's time to show off your &lt;body>.</p></blockquote>There are two ways to disable the CSS. <ol><li>Just comment out the style sheet reference</li><li>Via code. Below is a sample CF function to test for CSS Naked Day</li></ol><code style="text-decoration: line-through;"><cffunction name="isNakedDay"> <cfset var startDate = createDateTime(2007,04,05,00,00,00) /> <cfset var endDate = createDateTime(2007,04,05,23,59,59) /> <cfif now() GTE startDate AND now() LTE endDate>    <cfreturn true /> <cfelse>    <cfreturn false />  </cfif></cffunction></code><a href="http://rahulnarula.blogspot.com/">Rahul Narula</a> has kindly pointed in pointed out my comments a more efficient function to check for Naked Day<code><cffunction name="isNakedDay"><cfreturn day(now()) eq 5 and month(now()) eq 4></cffunction></code>And I suppose that why a he's computer scientist at web team@Adobe :o)<p>If you go nude don't forget to add your self to the site via the form at the bottom of <a href="http://naked.dustindiaz.com/">http://naked.dustindiaz.com/</a></p><br>
     </main>
 
+    <div class="row">
+      <div class="col">
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+      </div>
+    </div>
+
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -143,6 +163,9 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
+
+
+
 
 
 <!-- <div class="card m-2" style="width: 15rem;">
