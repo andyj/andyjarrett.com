@@ -7,13 +7,13 @@
 <meta name="keywords" content="Andy Jarrett, andyjarrett, mytag">
 <meta name="author" content="Andy Jarrett">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>unpacker error when pushing Git</title>
+<title>Unpacker error when pushing Git</title>
 <link rel="canonical" href="https://andyjarrett.com">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="unpacker error when pushing Git">
+<meta name="twitter:title" content="Unpacker error when pushing Git">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
 <meta name="twitter:creator" content="@andyj" />
-<meta property="og:title" content="unpacker error when pushing Git">
+<meta property="og:title" content="Unpacker error when pushing Git">
 <meta property="og:description" content="Go to AndyJarrett.com for more">
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
 <meta property="og:image:width" content="1200">
@@ -72,21 +72,30 @@
 
 
   <div class="container">
-    <h1 class="mt-5 mb-5"><b>unpacker error when pushing Git</b></h1>
+    <h1 class="mt-5 mb-5"><b>Unpacker error when pushing Git</b></h1>
     <main class="mw fw-lighter fs-5">
       
 <p>Im using <a href="http://git-scm.com/">GIT</a> more and more on my own personal projects but as a single developer commiting I don't get many issues. </p>
 
 Then I get a weird <strong>unpacker error</strong>
 
-<pre><code>
-  $ git push origin masterCounting objects: 38, done.Delta compression using up to 2 threads.Compressing objects: 100% (20/20), done.Writing objects: 100% (20/20), 5.96 KiB, done.Total 20 (delta 15), reused 0 (delta 0) error: unpack-objects died of signalerror: unpack failed: unpack-objects abnormal exitTo /*******/*********/*******/***********.git ! [remote rejected] master -&gt; master (n/a (unpacker error))
+<pre><code class="language-bash">$ git push origin main
+Counting objects: 38, done.
+Delta compression using up to 2 threads
+Compressing objects: 100% (20/20), done.
+Writing objects: 100% (20/20), 5.96 KiB, done.
+Total 20 (delta 15), reused 0 (delta 0)
+
+error: unpack-objects died of signal
+error: unpack failed: unpack-objects abnormal exit
+To /*******/*********/*******/***********.git
+ ! [remote rejected] main -> main (n/a (unpacker error))
 </code></pre>
 
 
 <p>The fix is simple. </p>
 
-<pre><code>$git repack remote/origin/master</code></pre>
+<pre><code class="language-bash">$git repack remote/origin/main</code></pre>
 
 <p><a href="http://www.kernel.org/pub/software/scm/git/docs/git-repack.html">Find out more at the docs</a><br></p>
     </main>
