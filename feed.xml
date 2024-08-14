@@ -7,39 +7,6 @@
     <language>en</language>
     <atom:link href="https://andyjarrett.com/feed.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Shortcut Differences When Moving Between Sublime Text And VScode on Macos</title>
-      <link>https://andyjarrett.com/posts/2024/shortcut-differences-when-moving-between-macos-sublime-text-and-vscode/</link>
-      <description><![CDATA[
-&lt;div class=&quot;image-container my-2&quot;&gt;
-  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/florian-olivo-4hbJ-eymZ1o-unsplash.jpg&quot; alt=&quot;Man running towards mountains&quot; class=&quot;img-fluid&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;text-end&quot;&gt;
-  &lt;sup&gt;
-    &lt;cite&gt;
-      Photo by &lt;a href=&quot;https://unsplash.com/@florianolv?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Florian Olivo&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/lines-of-html-codes-4hbJ-eymZ1o?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;
-    &lt;/cite&gt;
-  &lt;/sup&gt;
-&lt;/div&gt;
-
-&lt;p&gt;
-  &lt;strong&gt;TL;DR:&lt;/strong&gt;
-  the GIST here: &lt;a href=&quot;https://gist.github.com/andyj/bf4082bb6fcf8a432c5aa3526df686b2&quot; target=&quot;_blank&quot;&gt;gist.github.com/andyj/bf4082bb6fcf8a432c5aa3526df686b2&lt;/a&gt;
-&lt;/p&gt;
-&lt;p&gt;As I transition between &lt;a href=&quot;https://www.sublimetext.com/&quot; target=&quot;_blank&quot;&gt;Sublime Text&lt;/a&gt;, my preferred editor for its speed, and &lt;a href=&quot;https://code.visualstudio.com/&quot; target=&quot;_blank&quot;&gt;VSCode&lt;/a&gt;, which I appreciate for its functionality despite some layout and design choices, the biggest challenge has been adjusting to the new shortcuts. Here is a list of the different shortcuts between the two editors that I have compiled to ease this transition:&lt;/p&gt;
-
-&lt;p&gt;I&#39;ve made this into a &lt;a href=&quot;https://gist.github.com/andyj/bf4082bb6fcf8a432c5aa3526df686b2&quot; target=&quot;_blank&quot;&gt;GIST&lt;/a&gt; so it can be edited and updated, as there are probably many I have still missed.&lt;/p&gt;
-
-&lt;script src=&quot;https://gist.github.com/andyj/bf4082bb6fcf8a432c5aa3526df686b2.js&quot;&gt;&lt;/script&gt;
-
-]]></description>
-      <pubDate>Tue, 18 Jun 2024 10:30:00 +0000</pubDate>
-      <dc:creator>Andy Jarrett</dc:creator>
-      <guid>https://andyjarrett.com/posts/2024/shortcut-differences-when-moving-between-macos-sublime-text-and-vscode/</guid>
-      <enclosure url="https://andyjarrett.com/public/blogimage/florian-olivo-4hbJ-eymZ1o-unsplash.jpg" type="image/jpeg" />
-      <category>posts, shortcuts, code, sublime</category>
-      <author>Andy Jarrett &lt;email@example.com&gt;</author>
-    </item>
-    <item>
       <title>Demystifying DMARC</title>
       <link>https://andyjarrett.com/posts/2024/Demystifying-DMARC/</link>
       <description><![CDATA[
@@ -932,11 +899,48 @@ Process Count: 1&lt;/code&gt;&lt;/pre&gt;
   &lt;/div&gt;
 &lt;/div&gt;
 ]]></description>
-      <pubDate>Thu, 15 Aug 2024 19:02:00 +0000</pubDate>
+      <pubDate>Tue, 13 Aug 2024 19:02:00 +0000</pubDate>
       <dc:creator>Andy Jarrett</dc:creator>
       <guid>https://andyjarrett.com/posts/2024/utility-console-methods-for-debugging-workflow/</guid>
       <enclosure url="https://andyjarrett.com/public/blogimage/altumcode-PNbDkQ2DDgM-unsplash.jpg" type="image/jpeg" />
       <category>posts, javascript, console, debug, utility</category>
+      <author>Andy Jarrett &lt;email@example.com&gt;</author>
+    </item>
+    <item>
+      <title>Comments Via Giscus Now Live My Blog</title>
+      <link>https://andyjarrett.com/posts/2024/comments-via-giscus-now-live-on-my-blog/</link>
+      <description><![CDATA[
+&lt;div class=&quot;image-container my-2&quot;&gt;
+  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/matt-botsford-ncmg3-bQzvQ-unsplash.jpg&quot; alt=&quot;Man running towards mountains&quot; class=&quot;img-fluid&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;text-end&quot;&gt;
+  &lt;sup&gt;
+    &lt;cite&gt;
+      Photo by &lt;a href=&quot;https://unsplash.com/@mattbotsford?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Matt Botsford&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/green-steel-box-with-fine-printed-sticker-ncmg3-bQzvQ?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;
+    &lt;/cite&gt;
+  &lt;/sup&gt;
+&lt;/div&gt;
+
+
+&lt;p&gt;Comments via &lt;a href=&quot;https://giscus.app/&quot;&gt;Giscus&lt;/a&gt; are now live on my blog!&lt;/p&gt;
+
+&lt;p&gt;Seriously, I don&#39;t know who even comes across my blog nowadays, are people still using RSS Readers? Either way I’ve been meaning to add a comment system to the blog for a while and was looking at options like &lt;a href=&quot;https://utteranc.es/&quot; target=&quot;_blank&quot;&gt;Utterances&lt;/a&gt; when I came across Giscus.&lt;/p&gt;
+
+&lt;p&gt;After some consideration, I chose &lt;a href=&quot;https://giscus.app/&quot;&gt;Giscus&lt;/a&gt; for a few key reasons:&lt;/p&gt;
+
+&lt;ul class=&quot;mt-3&quot;&gt;
+  &lt;li&gt;&lt;strong&gt;Integration with GitHub Discussions:&lt;/strong&gt; This ensures that comments are secure and benefits from GitHub’s platform.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Enhanced Moderation:&lt;/strong&gt; Giscus provides better tools for managing and moderating comments.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Seamless User Experience:&lt;/strong&gt; It’s easy for you to leave comments and engage in discussions without needing to sign up for another service.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Happy commenting to the few people that find this place!&lt;/p&gt;
+]]></description>
+      <pubDate>Wed, 14 Aug 2024 21:00:00 +0000</pubDate>
+      <dc:creator>Andy Jarrett</dc:creator>
+      <guid>https://andyjarrett.com/posts/2024/comments-via-giscus-now-live-on-my-blog/</guid>
+      <enclosure url="https://andyjarrett.com/public/blogimage/matt-botsford-ncmg3-bQzvQ-unsplash.jpg" type="image/jpeg" />
+      <category>posts, BLOG, COMMENTS, GISCUS</category>
       <author>Andy Jarrett &lt;email@example.com&gt;</author>
     </item>
     <image>
