@@ -1,0 +1,320 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="description" content="Andy Jarrett online pressence">
+<meta name="keywords" content="Andy Jarrett, andyjarrett, mytag">
+<meta name="author" content="Andy Jarrett">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creating an Alpine.js RSS Reader with my Bluesky Profile feed</title>
+<link rel="canonical" href="https://andyjarrett.com">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Creating an Alpine.js RSS Reader with my Bluesky Profile feed">
+<meta name="twitter:description" content="Creating an Alpine.js RSS Reader and using my Bluesky Profile: Leveraging AllOrigins for Smooth Feed Integration">
+<meta name="twitter:creator" content="@andyj" />
+<meta property="og:title" content="Creating an Alpine.js RSS Reader with my Bluesky Profile feed">
+<meta property="og:description" content="Creating an Alpine.js RSS Reader and using my Bluesky Profile: Leveraging AllOrigins for Smooth Feed Integration">
+<meta property="og:image" content="https://www.andyjarrett.com/public/blogimage/alex-david-ile-n02CzpY8ZSA-unsplash.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="/public/css/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
+<link rel="stylesheet" href="/public/prismjs/prism.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L0V74G0Q65"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-L0V74G0Q65');
+</script>
+
+</head>
+<body>
+  <div class="container border-bottom pb-2">
+  <header class="d-flex flex-wrap justify-content-center">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+      <span class="fs-2">Andy Jarrett // <span class="lead">Code. Develop. Create.</span></span>
+    </a>
+    <ul class="nav nav-pills">
+      <li class="nav-item  p-2">
+        <a href="/" class="btn btn-outline-primary rounded-circle p-3 lh-1">
+          <i class="bi bi-house fs-5"></i>
+          <span class="visually-hidden">Dismiss</span>
+        </a>
+      </li>
+      <li class="nav-item  p-2">
+        <a href="/feed.xml" class="btn btn-outline-primary rounded-circle p-3 lh-1">
+          <i class="bi bi-rss fs-5"></i>
+        </a>
+      </li>
+      <li class="nav-item  p-2">
+        <a href="/linktree" class="btn btn-outline-primary rounded-circle p-3 lh-1" title="Linktree for Andy Jarrett">
+          <i class="bi bi-tree fs-5"></i>
+        </a>
+      </li>
+      <li class="nav-item  p-2">
+        <a href="https://buymeacoffee.com/mailgw" class="btn btn-outline-primary rounded-circle p-3 lh-1">
+          <i class="bi bi-cup-hot-fill fs-5"></i>
+        </a>
+      </li>
+    </ul>
+  </header>
+</div>  
+
+
+  <div class="container">
+    <div class="my-1 text-center text-info" role="alert">You can now comment! Read about it <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/">here</a> or leave a <a href="#comment">comment below</a>.</div>
+    <h1 class="mt-5 mb-5"><b>Creating an Alpine.js RSS Reader with my Bluesky Profile feed</b></h1>
+    <main class="mw fw-lighter fs-5">
+      
+<div class="image-container my-2">
+  <img src="/public/blogimage/alex-david-ile-n02CzpY8ZSA-unsplash.jpg" alt="Developer debugging" class="img-fluid">
+</div>
+<div class="text-end">
+  <sup>
+    <cite>
+      Photo by <a href="https://unsplash.com/@alexdaveid?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Alex-David Ile</a> on <a href="https://unsplash.com/photos/a-group-of-stones-sitting-on-top-of-a-white-table-n02CzpY8ZSA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+    </cite>
+  </sup>
+</div>
+
+
+<div class="row">
+  <div class="col">
+    <p>
+      Unlike Twitter, <a href="https://bsky.app">Bluesky </a> allows you to get a RSS feed of your <a href="https://bsky.app/profile/andyjarrett.com/rss">profile</a>. Which is pretty cool as RSS is a great way to play to pulling in data from an external source when you are learning any code. Sure its no JSON but we can handle that another day.
+    </p>
+    <p>
+      In this post, I am creating a simple single-page application (SPA) using <a href="https://alpinejs.dev/">Alpine.js</a> that pulls in an RSS feed from my Bluesky profile. With the growing interest in decentralised social networks like Bluesky, especially as Twitter reinstates previously banned accounts, this approach offers a fresh alternative for staying connected.
+    </p>
+    <p>
+      I'll also cover why I'm using the free proxy service  <a href="https://allorigins.win/">AllOrigins</a>, which I find helpful for fetching these feeds.
+    </p>
+  </div>
+</div>
+
+
+
+<p><b>Here is the HTML which is straight forward, and commented for reference:</b></p>
+<pre><code class="language-html">&lt;div class="container">
+
+  &lt;!-- Initialise the Alpine.js component with data from rssFeed() function -->
+  &lt;!-- Automatically fetch the feed when the component is initialised -->
+  &lt;div x-data="rssFeed()" x-init="fetchFeed()">
+
+    &lt;!-- Header for the RSS reader application -->
+    &lt;h1>Alpine.js RSS Reader Parsing Bluesky User Feed&lt;/h1>
+
+    &lt;!-- Display a loading message while the feed is being fetched -->
+    &lt;div x-show="loading">Loading...&lt;/div>
+
+    &lt;!-- Display an error message if fetching the feed fails -->
+    &lt;div x-show="!loading && error" class="error">
+      &lt;p>Error loading feed: &lt;span x-text="error">&lt;/span>&lt;/p>
+    &lt;/div>
+    &lt;div class="row justify-content-center">
+      &lt;div class="col-md-6 col-sm-12">
+
+        &lt;!-- Display the feed items once loading is complete and no errors occurred -->
+        &lt;div x-show="!loading && !error">
+
+          &lt;!-- Loop through each item in the feedItems array and create a card for each -->
+          &lt;template x-for="item in feedItems" :key="item.link">
+            &lt;div class="card border-primary mb-3">
+
+              &lt;!-- Display the description of the current feed item -->
+              &lt;div class="card-body">
+                &lt;p class="card-text" x-text="item.description">&lt;/p>
+              &lt;/div>
+
+              &lt;!-- Display the publication date and link to the original post -->
+              &lt;div class="card-footer text-body-secondary">
+                Posted: &lt;a :href="item.link" target="_blank" x-text="formatDate(item.pubDate)">&lt;/a>
+              &lt;/div>
+            &lt;/div>
+          &lt;/template>
+        &lt;/div>
+      &lt;/div>
+    &lt;/div>
+  &lt;/div>
+&lt;/div>
+</code></pre>
+
+<p><b>There alpine.js script is straight forward as well.</b></p>
+
+<pre><code class="language-javascript">&lt;script>
+  // Function to manage RSS feed data and logic
+  function rssFeed() {
+    return {
+      feedItems: [], // Array to store the parsed RSS feed items
+      loading: true, // Boolean to track the loading state
+      error: null, // Variable to store any error messages
+
+      // Async function to fetch and process the RSS feed
+      async fetchFeed() {
+        // URL for the RSS feed, fetched via AllOrigins proxy to bypass CORS issues
+        const feedUrl = `https://api.allorigins.win/get?url=${encodeURIComponent('https://bsky.app/profile/did:plc:bd3g6lum2orsqnolbu4urvxj/rss')}`;
+        try {
+          // Fetch the RSS feed using the AllOrigins API
+          const response = await fetch(feedUrl);
+          // Parse the response as JSON
+          const data = await response.json();
+          // Use DOMParser to convert the RSS feed from XML to a DOM object
+          const parser = new DOMParser();
+          const xml = parser.parseFromString(data.contents, 'text/xml');
+          // Select all <item> elements from the RSS feed
+          const items = xml.querySelectorAll('item');
+          // Map over each item to extract the relevant data (link, publication date, description)
+          this.feedItems = Array.from(items).map(item => ({
+            link: item.querySelector('link').textContent, // Extract the link to the full post
+            pubDate: item.querySelector('pubDate').textContent, // Extract the publication date
+            description: item.querySelector('description').textContent // Extract the description
+          }));
+        } catch (error) {
+          // Handle errors by setting the error message and logging the error
+          this.error = 'Failed to load the feed. Please try again later.';
+          console.error(error.message);
+        } finally {
+          // Set loading to false once the fetch operation is complete, whether successful or not
+          this.loading = false;
+        }
+      },
+
+      // A quick function to format the publication date in a readable format
+      formatDate(dateString) {
+        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZoneName: 'short' };
+        const date = new Date(dateString);
+        return date.toLocaleDateString(undefined, options);
+      }
+    };
+  }
+&lt;/script></code></pre>
+
+
+<div class="row">
+  <div class="col">
+    <h3>The Role of AllOrigins as a Proxy in the above code</h3>
+    <p>
+      When trying to fetch RSS feeds directly from a different domain (in my case, Bluesky), you might encounter cross-origin resource sharing (CORS) issues. This is where AllOrigins comes in handy to know/use. It acts as a proxy that fetches the content for you, bypassing CORS restrictions and delivering the data without errors.
+    </p>
+
+    <p>Thats it. By combining Alpine.js, Bluesky's RSS feeds, and AllOrigins, you can build a simple yet effective SPA that displays the latest content from any Bluesky profile.</p>
+
+    <p>Come and find me on <a href="https://bsky.app/profile/andyjarrett.com">BlueSky at bsky.app/profile/andyjarrett.com</a></p>
+
+    <p>You can find this code on <a href="https://github.com/andyj/alpine.js-rss-reader">Github</a>, without all the comments, with my plan to add <a href="https://htmx.org/">HTMX</a> as well to load in the "tweets" </p>
+  </div>
+</div>
+    </main>
+
+    <div class="row">
+      <div class="col">
+
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+        <a name="comment"></a>
+      </div>
+    </div>
+
+    <div class="row mt-5 ">
+      <div class="col-6">
+        <strong>Recent Posts</strong>
+        <ul>
+        
+          <li ><a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed</a></li>
+        
+          <li ><a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog</a></li>
+        
+          <li ><a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow</a></li>
+        
+          <li ><a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Off</a></li>
+        
+        </ul>
+      </div>
+      <div class="col-6 pt-3 text-end">
+        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+      </div>
+    </div>
+  </div>
+  <footer class="container mt-5 border-top pt-2">
+  <div class="row justify-content-md-center">
+    <div class="col">
+      ©AndyJarrett
+      <a href="/linktree" title="Linktree for AndyJarrett" target="_blank"><i class="bi bi-tree"></i></a>
+      <a href="/sitemap.xml" title="Site map for AndyJarrett.com" target="_blank"><i class="bi bi-map"></i></a>
+      <!-- Home Link -->
+      <a href="https://andyjarrett.com" class=""><i class="bi bi-globe me-2"></i></a>
+      <!-- linkedin Link -->
+      <a href="https://www.linkedin.com/in/andyjarrett/" title="inkedIn" target="_blank"><i class="bi bi-linkedin me-2"></i></a>
+      <!-- Twitter Link -->
+      <a href="https://twitter.com/andyj" title="Twitter" target="_blank"><i class="bi bi-twitter me-2"></i></a>
+      <!-- GitHub Link -->
+      <a href="https://github.com/andyj" title="GitHub" target="_blank"><i class="bi bi-github me-2"></i></a>
+      <!-- Stack Overflow Link -->
+      <a href="https://stackoverflow.com/users/371761/andy-jarrett" title="Stack overflow" target="_blank"><i class="bi bi-stack-overflow me-2"></i></a>
+      <!-- BlueSky Link -->
+      <a href="https://bsky.app/profile/andyjarrett.com" title="BlueSky" target="_blank"><i class="bi bi-cloud me-2"></i></a>
+      <!-- Instagram Link -->
+      <a href="https://instagram.com/andyjarrett" title="Instragram" target="_blank"><i class="bi bi-instagram me-2"></i></a>
+      <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee" target="_blank"><i class="bi bi-cup-hot-fill fs-5"></i></a>
+    </div>
+    <div class="col">
+      <div class="text-end">
+        <div class="btn-group">
+          <a href="#" class="btn btn-secondary btn-sm" id="lightThemeButton" data-bs-theme-value="light">
+            <i class="bi bi-sun"></i>
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" id="darkThemeButton" data-bs-theme-value="dark">
+            <i class="bi bi-moon-stars-fill"></i>
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" id="autoThemeButton" data-bs-theme-value="auto">
+            <i class="bi bi-circle-half"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script src="/public/js/toggle.js" type="text/javascript"></script>
+<script src="/public/prismjs/prism.js"></script>
+</body>
+</html>
+
+
+
+
+
+<!-- <div class="card m-2" style="width: 15rem;">
+            <div class="card-body">
+              <h5 class="card-title">
+
+              </h5>
+            </div>
+            <div class="card-footer text-end">
+              <a href="" class="card-link link-underline-light"></a>
+            </div>
+          </div> -->

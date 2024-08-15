@@ -7,43 +7,6 @@
     <language>en</language>
     <atom:link href="https://andyjarrett.com/feed.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Demystifying DMARC</title>
-      <link>https://andyjarrett.com/posts/2024/Demystifying-DMARC/</link>
-      <description><![CDATA[
-&lt;p&gt;One of the recent items I&#39;ve been overseeing internally is ensuring that every email sent from our domain genuinely belongs to us. This is paramount nowadays, especially with the increasing sophistication of email scams. DMARC is a guardian for your email&#39;s reputation. It&#39;s important to note that DMARC is just one part of a trio, with the other two being Sender Policy Framework (SPF) and DomainKeys Identified Mail (DKIM).&lt;/p&gt;
-
-&lt;p&gt;Implementing DMARC is one thing but explaining in simple terms can often be challenging. With this in mind, I created this post to help others (and me when I come back to this) understand and implement DMARC effectively. Hopefully, this makes it more accessible and understandable for everyone to see the crucial role DMARC plays in protecting your email domain.&lt;/p&gt;
-
-&lt;h6&gt;A DMARC report, presented in XML format, is like a detailed note from your mailbox. It tells you a few important things:&lt;/h6&gt;
-
-&lt;ul class=&quot;mt-3&quot;&gt;
-  &lt;li&gt;&lt;strong&gt;Who&#39;s Sending Letters in Your Name:&lt;/strong&gt; It shows which emails have been sent from your domain (like example.com).&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Checking the Signature:&lt;/strong&gt; It checks if these emails have a special signature (called DKIM) that proves they&#39;re really from you. A correct signature is akin to a secret handshake that only you and your friends know.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Where the Letters are Posted From:&lt;/strong&gt; It examines where the emails are being sent from (SPF). If an email claims to be from you but is sent from an unfamiliar location, the mailbox gets suspicious.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;What Happens to Odd Letters:&lt;/strong&gt; If an email looks odd (fails DKIM or SPF checks), the mailbox decides what to do based on the rules you&#39;ve set. Maybe it puts them in a special &#39;maybe dodgy&#39; part of the mailbox (quarantine), or perhaps it discards them outright.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Telling You the Story:&lt;/strong&gt; After all this, the smart mailbox compiles a report about what emails it received, their origins, whether they had the correct secret handshake, and what it did with the odd ones.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;In essence, a DMARC report acts as your personal auditor, meticulously tracking the authenticity of each email associated with your domain. It&#39;s a tool that not only identifies imposters but also aids in making informed decisions to strengthen your email security. By providing a transparent overview of your email&#39;s health, DMARC ensures that your digital correspondence remains trusted and secure.&lt;/p&gt;
-
-&lt;p&gt;I won&#39;t delve into the details in this post (perhaps in a future one), but essentially DMARC is a TXT record published in the DNS for a specific domain, outlining the policy for email authentication, reporting, and conformance. Here&#39;s an example DMARC record for the domain example.com:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;v=DMARC1; p=none; rua=mailto:dmarc-reports@example.com; ruf=mailto:dmarc-failures@example.com; fo=1; &lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;In short, a DMARC report helps you keep an eye on your &#39;email mailbox&#39;, ensuring that no one is pretending to be you and that your friends (people you email) can trust the letters they receive in your name. It&#39;s an effective way to stop tricksters and maintain your email reputation.&lt;/p&gt;
-
-&lt;p&gt;Jumping on the DMARC bandwagon is more than just a techie step; it&#39;s about keeping your email chats as real and as secure as the talks we have over coffee. In our fast-moving digital world, getting DMARC on your side isn&#39;t just smart; it&#39;s a must for anyone who wants to keep their email game safe and sound.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://mxtoolbox.com/dmarc.aspx&quot; target=&quot;_blank&quot;&gt;Check your DMARC/DKIM/SPF records now&lt;/a&gt;&lt;/p&gt;
-]]></description>
-      <pubDate>Tue, 18 Jun 2024 15:30:00 +0000</pubDate>
-      <dc:creator>Andy Jarrett</dc:creator>
-      <guid>https://andyjarrett.com/posts/2024/Demystifying-DMARC/</guid>
-      <enclosure url="https://andyjarrett.com/undefined" type="image/jpeg" />
-      <category>posts, EMAIL, DMARC</category>
-      <author>Andy Jarrett &lt;email@example.com&gt;</author>
-    </item>
-    <item>
       <title>How to Set Up Automatic Updates on Ubuntu 22.04.4 LTS</title>
       <link>https://andyjarrett.com/posts/2024/how-to-set-up-automatic-updates-on-ubuntu-22-lts/</link>
       <description><![CDATA[
@@ -941,6 +904,155 @@ Process Count: 1&lt;/code&gt;&lt;/pre&gt;
       <guid>https://andyjarrett.com/posts/2024/comments-via-giscus-now-live-on-my-blog/</guid>
       <enclosure url="https://andyjarrett.com/public/blogimage/matt-botsford-ncmg3-bQzvQ-unsplash.jpg" type="image/jpeg" />
       <category>posts, BLOG, COMMENTS, GISCUS</category>
+      <author>Andy Jarrett &lt;email@example.com&gt;</author>
+    </item>
+    <item>
+      <title>Creating an Alpine.js RSS Reader with my Bluesky Profile feed</title>
+      <link>https://andyjarrett.com/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/</link>
+      <description><![CDATA[
+&lt;div class=&quot;image-container my-2&quot;&gt;
+  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/alex-david-ile-n02CzpY8ZSA-unsplash.jpg&quot; alt=&quot;Developer debugging&quot; class=&quot;img-fluid&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;text-end&quot;&gt;
+  &lt;sup&gt;
+    &lt;cite&gt;
+      Photo by &lt;a href=&quot;https://unsplash.com/@alexdaveid?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Alex-David Ile&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/a-group-of-stones-sitting-on-top-of-a-white-table-n02CzpY8ZSA?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;
+    &lt;/cite&gt;
+  &lt;/sup&gt;
+&lt;/div&gt;
+
+
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;
+    &lt;p&gt;
+      Unlike Twitter, &lt;a href=&quot;https://bsky.app/&quot;&gt;Bluesky &lt;/a&gt; allows you to get a RSS feed of your &lt;a href=&quot;https://bsky.app/profile/andyjarrett.com/rss&quot;&gt;profile&lt;/a&gt;. Which is pretty cool as RSS is a great way to play to pulling in data from an external source when you are learning any code. Sure its no JSON but we can handle that another day.
+    &lt;/p&gt;
+    &lt;p&gt;
+      In this post, I am creating a simple single-page application (SPA) using &lt;a href=&quot;https://alpinejs.dev/&quot;&gt;Alpine.js&lt;/a&gt; that pulls in an RSS feed from my Bluesky profile. With the growing interest in decentralised social networks like Bluesky, especially as Twitter reinstates previously banned accounts, this approach offers a fresh alternative for staying connected.
+    &lt;/p&gt;
+    &lt;p&gt;
+      I&#39;ll also cover why I&#39;m using the free proxy service  &lt;a href=&quot;https://allorigins.win/&quot;&gt;AllOrigins&lt;/a&gt;, which I find helpful for fetching these feeds.
+    &lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+
+&lt;p&gt;&lt;b&gt;Here is the HTML which is straight forward, and commented for reference:&lt;/b&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;div class=&quot;container&quot;&gt;
+
+  &amp;lt;!-- Initialise the Alpine.js component with data from rssFeed() function --&gt;
+  &amp;lt;!-- Automatically fetch the feed when the component is initialised --&gt;
+  &amp;lt;div x-data=&quot;rssFeed()&quot; x-init=&quot;fetchFeed()&quot;&gt;
+
+    &amp;lt;!-- Header for the RSS reader application --&gt;
+    &amp;lt;h1&gt;Alpine.js RSS Reader Parsing Bluesky User Feed&amp;lt;/h1&gt;
+
+    &amp;lt;!-- Display a loading message while the feed is being fetched --&gt;
+    &amp;lt;div x-show=&quot;loading&quot;&gt;Loading...&amp;lt;/div&gt;
+
+    &amp;lt;!-- Display an error message if fetching the feed fails --&gt;
+    &amp;lt;div x-show=&quot;!loading &amp;&amp; error&quot; class=&quot;error&quot;&gt;
+      &amp;lt;p&gt;Error loading feed: &amp;lt;span x-text=&quot;error&quot;&gt;&amp;lt;/span&gt;&amp;lt;/p&gt;
+    &amp;lt;/div&gt;
+    &amp;lt;div class=&quot;row justify-content-center&quot;&gt;
+      &amp;lt;div class=&quot;col-md-6 col-sm-12&quot;&gt;
+
+        &amp;lt;!-- Display the feed items once loading is complete and no errors occurred --&gt;
+        &amp;lt;div x-show=&quot;!loading &amp;&amp; !error&quot;&gt;
+
+          &amp;lt;!-- Loop through each item in the feedItems array and create a card for each --&gt;
+          &amp;lt;template x-for=&quot;item in feedItems&quot; :key=&quot;item.link&quot;&gt;
+            &amp;lt;div class=&quot;card border-primary mb-3&quot;&gt;
+
+              &amp;lt;!-- Display the description of the current feed item --&gt;
+              &amp;lt;div class=&quot;card-body&quot;&gt;
+                &amp;lt;p class=&quot;card-text&quot; x-text=&quot;item.description&quot;&gt;&amp;lt;/p&gt;
+              &amp;lt;/div&gt;
+
+              &amp;lt;!-- Display the publication date and link to the original post --&gt;
+              &amp;lt;div class=&quot;card-footer text-body-secondary&quot;&gt;
+                Posted: &amp;lt;a :href=&quot;item.link&quot; target=&quot;_blank&quot; x-text=&quot;formatDate(item.pubDate)&quot;&gt;&amp;lt;/a&gt;
+              &amp;lt;/div&gt;
+            &amp;lt;/div&gt;
+          &amp;lt;/template&gt;
+        &amp;lt;/div&gt;
+      &amp;lt;/div&gt;
+    &amp;lt;/div&gt;
+  &amp;lt;/div&gt;
+&amp;lt;/div&gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;b&gt;There alpine.js script is straight forward as well.&lt;/b&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;&amp;lt;script&gt;
+  // Function to manage RSS feed data and logic
+  function rssFeed() {
+    return {
+      feedItems: [], // Array to store the parsed RSS feed items
+      loading: true, // Boolean to track the loading state
+      error: null, // Variable to store any error messages
+
+      // Async function to fetch and process the RSS feed
+      async fetchFeed() {
+        // URL for the RSS feed, fetched via AllOrigins proxy to bypass CORS issues
+        const feedUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(&#39;https://bsky.app/profile/did:plc:bd3g6lum2orsqnolbu4urvxj/rss&#39;)}`;
+        try {
+          // Fetch the RSS feed using the AllOrigins API
+          const response = await fetch(feedUrl);
+          // Parse the response as JSON
+          const data = await response.json();
+          // Use DOMParser to convert the RSS feed from XML to a DOM object
+          const parser = new DOMParser();
+          const xml = parser.parseFromString(data.contents, &#39;text/xml&#39;);
+          // Select all &lt;item&gt; elements from the RSS feed
+          const items = xml.querySelectorAll(&#39;item&#39;);
+          // Map over each item to extract the relevant data (link, publication date, description)
+          this.feedItems = Array.from(items).map(item =&gt; ({
+            link: item.querySelector(&#39;link&#39;).textContent, // Extract the link to the full post
+            pubDate: item.querySelector(&#39;pubDate&#39;).textContent, // Extract the publication date
+            description: item.querySelector(&#39;description&#39;).textContent // Extract the description
+          }));
+        } catch (error) {
+          // Handle errors by setting the error message and logging the error
+          this.error = &#39;Failed to load the feed. Please try again later.&#39;;
+          console.error(error.message);
+        } finally {
+          // Set loading to false once the fetch operation is complete, whether successful or not
+          this.loading = false;
+        }
+      },
+
+      // A quick function to format the publication date in a readable format
+      formatDate(dateString) {
+        const options = { year: &#39;numeric&#39;, month: &#39;long&#39;, day: &#39;numeric&#39;, hour: &#39;numeric&#39;, minute: &#39;numeric&#39;, second: &#39;numeric&#39;, timeZoneName: &#39;short&#39; };
+        const date = new Date(dateString);
+        return date.toLocaleDateString(undefined, options);
+      }
+    };
+  }
+&amp;lt;/script&gt;&lt;/item&gt;&lt;/code&gt;&lt;/pre&gt;
+
+
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col&quot;&gt;
+    &lt;h3&gt;The Role of AllOrigins as a Proxy in the above code&lt;/h3&gt;
+    &lt;p&gt;
+      When trying to fetch RSS feeds directly from a different domain (in my case, Bluesky), you might encounter cross-origin resource sharing (CORS) issues. This is where AllOrigins comes in handy to know/use. It acts as a proxy that fetches the content for you, bypassing CORS restrictions and delivering the data without errors.
+    &lt;/p&gt;
+
+    &lt;p&gt;Thats it. By combining Alpine.js, Bluesky&#39;s RSS feeds, and AllOrigins, you can build a simple yet effective SPA that displays the latest content from any Bluesky profile.&lt;/p&gt;
+
+    &lt;p&gt;Come and find me on &lt;a href=&quot;https://bsky.app/profile/andyjarrett.com&quot;&gt;BlueSky at bsky.app/profile/andyjarrett.com&lt;/a&gt;&lt;/p&gt;
+
+    &lt;p&gt;You can find this code on &lt;a href=&quot;https://github.com/andyj/alpine.js-rss-reader&quot;&gt;Github&lt;/a&gt;, without all the comments, with my plan to add &lt;a href=&quot;https://htmx.org/&quot;&gt;HTMX&lt;/a&gt; as well to load in the &quot;tweets&quot; &lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;]]></description>
+      <pubDate>Thu, 15 Aug 2024 19:02:00 +0000</pubDate>
+      <dc:creator>Andy Jarrett</dc:creator>
+      <guid>https://andyjarrett.com/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/</guid>
+      <enclosure url="https://andyjarrett.com/public/blogimage/alex-david-ile-n02CzpY8ZSA-unsplash.jpg" type="image/jpeg" />
+      <category>posts, javascript, console, debug</category>
       <author>Andy Jarrett &lt;email@example.com&gt;</author>
     </item>
     <image>
