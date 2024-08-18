@@ -1,0 +1,302 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="description" content="Andy Jarrett online pressence">
+<meta name="keywords" content="Andy Jarrett, andyjarrett, mytag">
+<meta name="author" content="Andy Jarrett">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adding localStorage to the Alpine.js RSS Reader</title>
+<link rel="canonical" href="https://andyjarrett.com">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Adding localStorage to the Alpine.js RSS Reader">
+<meta name="twitter:description" content="Adding localStorage for Faster Development to the Alpine.js RSS Reader">
+<meta name="twitter:creator" content="@andyj" />
+<meta property="og:title" content="Adding localStorage to the Alpine.js RSS Reader">
+<meta property="og:description" content="Adding localStorage for Faster Development to the Alpine.js RSS Reader">
+<meta property="og:image" content="https://www.andyjarrett.com/public/blogimage/nathalia-segato-auQGug8wkLM-unsplash.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="/public/css/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
+<link rel="stylesheet" href="/public/prismjs/prism.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L0V74G0Q65"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-L0V74G0Q65');
+</script>
+
+</head>
+<body>
+  <div class="container border-bottom pb-2">
+  <header class="d-flex flex-wrap justify-content-center">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+      <span class="fs-2">Andy Jarrett // <span class="lead">Code. Develop. Create.</span></span>
+    </a>
+    <ul class="nav nav-pills">
+      <li class="nav-item  p-2">
+        <a href="/" class="btn btn-outline-primary rounded-circle p-3 lh-1">
+          <i class="bi bi-house fs-5"></i>
+          <span class="visually-hidden">Dismiss</span>
+        </a>
+      </li>
+      <li class="nav-item  p-2">
+        <a href="/feed.xml" class="btn btn-outline-primary rounded-circle p-3 lh-1">
+          <i class="bi bi-rss fs-5"></i>
+        </a>
+      </li>
+      <li class="nav-item  p-2">
+        <a href="/linktree" class="btn btn-outline-primary rounded-circle p-3 lh-1" title="Linktree for Andy Jarrett">
+          <i class="bi bi-tree fs-5"></i>
+        </a>
+      </li>
+      <li class="nav-item  p-2">
+        <a href="https://buymeacoffee.com/mailgw" class="btn btn-outline-primary rounded-circle p-3 lh-1">
+          <i class="bi bi-cup-hot-fill fs-5"></i>
+        </a>
+      </li>
+    </ul>
+  </header>
+</div>  
+
+
+  <div class="container">
+    <div class="my-1 text-center text-info" role="alert">You can now comment! Read about it <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/">here</a> or leave a <a href="#comment">comment below</a>.</div>
+    <h1 class="mt-5 mb-5"><b>Adding localStorage to the Alpine.js RSS Reader</b></h1>
+    <main class="mw fw-lighter fs-5">
+      
+<div class="image-container my-2">
+  <img src="/public/blogimage/nathalia-segato-auQGug8wkLM-unsplash.jpg" alt="Developer debugging" class="img-fluid">
+</div>
+<div class="text-end">
+  <sup>
+    <cite>
+      Photo by <a href="https://unsplash.com/@trintaycinco?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Nathalia Segato</a> on <a href="https://unsplash.com/photos/a-store-front-at-night-with-a-person-walking-in-the-doorway-auQGug8wkLM?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+    </cite>
+  </sup>
+</div>
+
+<p>The purpose of the blog post is to explain why I am adding <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage">localStorage</a> to my simple app at <a href="https://github.com/andyj/alpine.js-rss-reader" target="_blank">github.com/andyj/alpine.js-rss-reader</a>. If you haven't see it already, this is carrying on from my <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/">previous post</a></p>
+
+<h4>Why Use Local Storage?</h4>
+<p><strong>Faster Development:</strong> Highlight that local storage helps reduce the need to constantly fetch data from the server, which speeds up the development process since the results are instantly available from the cache.</p>
+
+<p><strong>Reduced Server Load:</strong> Explain that using local storage reduces the number of requests made to the server, which can be particularly important if there are API rate limits or if the server is slow.</p>
+
+<p>There isn't many changes, so its a quick walk through of the key parts of the code where we add local storage functionality:</p>
+
+<h3 class="mt-4">1. Introducing Cache Keys</h3>
+<pre><code class="language-javascript">const cacheKey = 'rssFeedCache';
+const cacheExpiryKey = 'rssFeedCacheExpiry';</code></pre>
+<p>These keys will store the fetched RSS feed and its expiry time in local storage.</p>
+
+<h3 class="mt-4">2. Checking for Cached Data</h3>
+<pre><code class="language-javascript">const cachedData = localStorage.getItem(cacheKey);
+const cacheExpiry = localStorage.getItem(cacheExpiryKey);
+const now = new Date().getTime();</code></pre>
+<p>Before making a new request, the code checks if there’s valid cached data to use.</p>
+
+<h3 class="mt-4">3. Using Cached Data if Valid</h3>
+<pre><code class="language-javascript">if (cachedData && cacheExpiry && now < cacheExpiry) {
+  this.feedItems = JSON.parse(cachedData);
+  this.loading = false;
+  console.info("Results from cache");
+}</code></pre>
+<p>If the cache is still valid, the feed is loaded from local storage, saving the need for a server request.</p>
+
+<h3 class="mt-4">4. Fetching and Caching New Data</h3>
+<pre><code class="language-javascript">const response = await fetch(feedUrl);
+const data = await response.json();
+const parser = new DOMParser();
+const xml = parser.parseFromString(data.contents, 'text/xml');
+const items = xml.querySelectorAll('item');
+this.feedItems = Array.from(items).map(item => ({
+  link: item.querySelector('link').textContent,
+  pubDate: item.querySelector('pubDate').textContent,
+  description: item.querySelector('description').textContent
+}));
+
+localStorage.setItem(cacheKey, JSON.stringify(this.feedItems));
+localStorage.setItem(cacheExpiryKey, now + 5 * 60 * 1000); // Cache expiry set to 5 minutes
+console.info("New results stored in cache");</code></pre>
+<p>If there’s no valid cache, the code fetches new data, updates the feed items, and caches the results for future use.</p>
+
+<h2 class="mt-5">Putting it all together</h2>
+<pre><code class="language-javascript">function rssFeed() {
+return {
+  feedItems: [],
+  loading: true,
+  error: null,
+
+  async fetchFeed() {
+    const feedUrl = `https://api.allorigins.win/get?url=${encodeURIComponent('https://bsky.app/profile/did:plc:bd3g6lum2orsqnolbu4urvxj/rss')}`;
+    const cacheKey = 'rssFeedCache';
+    const cacheExpiryKey = 'rssFeedCacheExpiry';
+
+    // Check if cached data is available and valid
+    const cachedData = localStorage.getItem(cacheKey);
+    const cacheExpiry = localStorage.getItem(cacheExpiryKey);
+    const now = new Date().getTime();
+
+    if (cachedData && cacheExpiry && now < cacheExpiry) {
+      // Use cached data
+      this.feedItems = JSON.parse(cachedData);
+      this.loading = false;
+      console.info("Results from cache");
+    } else {
+      try {
+        const response = await fetch(feedUrl);
+        const data = await response.json();
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(data.contents, 'text/xml');
+        const items = xml.querySelectorAll('item');
+        this.feedItems = Array.from(items).map(item => ({
+          link: item.querySelector('link').textContent,
+          pubDate: item.querySelector('pubDate').textContent,
+          description: item.querySelector('description').textContent
+        }));
+
+        // Store the new data in local storage
+        localStorage.setItem(cacheKey, JSON.stringify(this.feedItems));
+        localStorage.setItem(cacheExpiryKey, now + 5 * 60 * 1000); // Set cache expiry to 5 minutes from now
+        console.info("New results stored in cache");
+      } catch (error) {
+        this.error = 'Failed to load the feed. Please try again later.';
+        console.error(error.message);
+      } finally {
+        this.loading = false;
+      }
+    }
+  },
+
+  formatDate(dateString) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZoneName: 'short' };
+    const date = new Date(dateString);
+    return date.toLocaleDateString(undefined, options);
+  }
+};
+}</code></pre>
+
+
+<ul>
+  <li><strong>Clearing Cache:</strong> You can manually clear the cache using <code>localStorage.removeItem('rssFeedCache')</code> if the cached data becomes stale or corrupted.</li>
+  <li><strong>Optimising Cache Duration:</strong> You may want to experiment with the cache duration (<code>now + 5 * 60 * 1000</code>) depending on how frequently the RSS feed updates. </li>
+</ul>
+
+
+
+    </main>
+
+    <div class="row">
+      <div class="col">
+
+        <script src="https://giscus.app/client.js"
+                data-repo="andyj/andyjarrett.com"
+                data-repo-id="R_kgDOMjCDkQ"
+                data-category="Announcements"
+                data-category-id="DIC_kwDOMjCDkc4ChlfU"
+                data-mapping="pathname"
+                data-strict="0"
+                data-reactions-enabled="1"
+                data-emit-metadata="0"
+                data-input-position="top"
+                data-theme="preferred_color_scheme"
+                data-lang="en"
+                crossorigin="anonymous"
+                async>
+        </script>
+        <a name="comment"></a>
+      </div>
+    </div>
+
+    <div class="row mt-5 ">
+      <div class="col-6">
+        <strong>Recent Posts</strong>
+        <ul>
+        
+          <li ><a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader</a></li>
+        
+          <li ><a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed</a></li>
+        
+          <li ><a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog</a></li>
+        
+          <li ><a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow</a></li>
+        
+        </ul>
+      </div>
+      <div class="col-6 pt-3 text-end">
+        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+      </div>
+    </div>
+  </div>
+  <footer class="container mt-5 border-top pt-2">
+  <div class="row justify-content-md-center">
+    <div class="col">
+      ©AndyJarrett
+      <a href="/linktree" title="Linktree for AndyJarrett" target="_blank"><i class="bi bi-tree"></i></a>
+      <a href="/sitemap.xml" title="Site map for AndyJarrett.com" target="_blank"><i class="bi bi-map"></i></a>
+      <!-- Home Link -->
+      <a href="https://andyjarrett.com" class=""><i class="bi bi-globe me-2"></i></a>
+      <!-- linkedin Link -->
+      <a href="https://www.linkedin.com/in/andyjarrett/" title="inkedIn" target="_blank"><i class="bi bi-linkedin me-2"></i></a>
+      <!-- Twitter Link -->
+      <a href="https://twitter.com/andyj" title="Twitter" target="_blank"><i class="bi bi-twitter me-2"></i></a>
+      <!-- GitHub Link -->
+      <a href="https://github.com/andyj" title="GitHub" target="_blank"><i class="bi bi-github me-2"></i></a>
+      <!-- Stack Overflow Link -->
+      <a href="https://stackoverflow.com/users/371761/andy-jarrett" title="Stack overflow" target="_blank"><i class="bi bi-stack-overflow me-2"></i></a>
+      <!-- BlueSky Link -->
+      <a href="https://bsky.app/profile/andyjarrett.com" title="BlueSky" target="_blank"><i class="bi bi-cloud me-2"></i></a>
+      <!-- Instagram Link -->
+      <a href="https://instagram.com/andyjarrett" title="Instragram" target="_blank"><i class="bi bi-instagram me-2"></i></a>
+      <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee" target="_blank"><i class="bi bi-cup-hot-fill fs-5"></i></a>
+    </div>
+    <div class="col">
+      <div class="text-end">
+        <div class="btn-group">
+          <a href="#" class="btn btn-secondary btn-sm" id="lightThemeButton" data-bs-theme-value="light">
+            <i class="bi bi-sun"></i>
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" id="darkThemeButton" data-bs-theme-value="dark">
+            <i class="bi bi-moon-stars-fill"></i>
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" id="autoThemeButton" data-bs-theme-value="auto">
+            <i class="bi bi-circle-half"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script src="/public/js/toggle.js" type="text/javascript"></script>
+<script src="/public/prismjs/prism.js"></script>
+</body>
+</html>
+
+
+
+
+
+<!-- <div class="card m-2" style="width: 15rem;">
+            <div class="card-body">
+              <h5 class="card-title">
+
+              </h5>
+            </div>
+            <div class="card-footer text-end">
+              <a href="" class="card-link link-underline-light"></a>
+            </div>
+          </div> -->
