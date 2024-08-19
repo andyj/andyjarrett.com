@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +7,6 @@
 <meta name="author" content="Andy Jarrett">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Change Link Color Via Javascript</title>
-<link rel="canonical" href="https://www.andyjarrett.com/posts/2006/change-link-color-via-javascript/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Change Link Color Via Javascript">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
@@ -18,6 +16,7 @@
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<link rel="canonical" href="https://www.andyjarrett.com/posts/2006/change-link-color-via-javascript/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
@@ -77,29 +76,26 @@
       
 <p>Im playing around with a pure HTML site recently (no server side tech at all) and OMG how akward is the simple stuff. To make my life a little more easier I have been using Dreamweaver's templates which make managing layouts easier especially when you have forgotten a navigation link.</p><p>One thing I have been trying to do is change the colour of a selected navigation link. i.e. The navigation links are all blue except for the link to the section you are currently in which is white. I was about to do this with DWMX templates conditional statements, which can get a little messy, and awkard when putting them inline to change the href class atrribute. Doing this with CFMX or PHP is simple and thats what I wanted.</p> <p>So I took a dynamic(ish) approach to the problem and decided to use Js. Reading in the page name from the window.location.pathname string I change the colour of the text. Incase anyone is interested below is the code I used, you'll note that to do this without a switch or if statement I have used the ID attribute, and made it the same as the html page.</p><code><html><head><InvalidTag>function linkHighlight(){  var urlPath = window.location.pathname; var thisPage = urlPath.substring(urlPath.lastIndexOf('/') + 1); var pageName = thisPage.split('.');   document.getElementById(pageName[0]).style.color = '#FFFFFF';}</script></head><body><a href="index.htm" id="index">Home</a><a href="products.htm" id="products">Products</a><a href="projects.htm" id="projects">Projects</a><a href="about_us" id="about_us">About Us</a><a href="contact_us.htm" id="contact_us">Contact Us</a></body></html></code><br>
     </main>
-
     <div class="row">
       <div class="col">
-
-        <script src="https://giscus.app/client.js"
-                data-repo="andyj/andyjarrett.com"
-                data-repo-id="R_kgDOMjCDkQ"
-                data-category="Announcements"
-                data-category-id="DIC_kwDOMjCDkc4ChlfU"
-                data-mapping="pathname"
-                data-strict="0"
-                data-reactions-enabled="1"
-                data-emit-metadata="0"
-                data-input-position="top"
-                data-theme="preferred_color_scheme"
-                data-lang="en"
-                crossorigin="anonymous"
-                async>
-        </script>
+        <script
+          src="https://giscus.app/client.js"
+          data-repo="andyj/andyjarrett.com"
+          data-repo-id="R_kgDOMjCDkQ"
+          data-category="Announcements"
+          data-category-id="DIC_kwDOMjCDkc4ChlfU"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-theme="preferred_color_scheme"
+          data-lang="en"
+          crossorigin="anonymous"
+          async></script>
         <a name="comment"></a>
       </div>
     </div>
-
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -165,18 +161,3 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
-
-
-
-
-
-<!-- <div class="card m-2" style="width: 15rem;">
-            <div class="card-body">
-              <h5 class="card-title">
-
-              </h5>
-            </div>
-            <div class="card-footer text-end">
-              <a href="" class="card-link link-underline-light"></a>
-            </div>
-          </div> -->

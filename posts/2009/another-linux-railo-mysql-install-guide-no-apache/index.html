@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +7,6 @@
 <meta name="author" content="Andy Jarrett">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Another Linux Railo MySQL install guide (no Apache)</title>
-<link rel="canonical" href="https://www.andyjarrett.com/posts/2009/another-linux-railo-mysql-install-guide-no-apache/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Another Linux Railo MySQL install guide (no Apache)">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
@@ -18,6 +16,7 @@
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<link rel="canonical" href="https://www.andyjarrett.com/posts/2009/another-linux-railo-mysql-install-guide-no-apache/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
@@ -77,29 +76,26 @@
       
 <p>This was meant to be a guide about setting up your server with Linux, Railo, Apache, and MySQL but I've dropped Apache. Why? Well its an overhead I don't need. Resin functions perfectly well as a HTTP server and it does all I need. Why add another bit of software to fail? .... simplify :) In the long run I might change but for now I'd rather save the resources.</p><p>So ... where did this guide come from considering there are quite a few guides for this setup? Well for one reason or another I just didn't get on with them and by the end something went wrong which was mainly because I am Mac boy more than a Linux guy and sometimes I just missed the points here and there. The aim of my guide is to be clear and simple. So with a fresh Ubuntu install i'm planning on gettingt Railo running via Resin so I can call http://www.mysite.com/index.cfm</p><p>I won't lie, to make this post I have "borrowed" from other sources out there which I will try and link to at the end.</p><p>Im running Ubuntu 8.10 (Intrepid) without a graphical interface. </p><p><b>Note:</b> If you are doing this on a clean, new server then before you even read on check out Slicehost.com documentation about setting up a Ubuntu server. These guides are the best and clearest I've seen online to date and cover everything you need!!!!</p><ol><li><a href="http://articles.slicehost.com/2008/11/28/ubuntu-intrepid-setup-page-1">http://articles.slicehost.com/2008/11/28/ubuntu-intrepid-setup-page-1</a></li><li><a href="http://articles.slicehost.com/2008/11/28/ubuntu-intrepid-setup-page-2">http://articles.slicehost.com/2008/11/28/ubuntu-intrepid-setup-page-2</a></li></ol><p>On to Railo</p> <ol> <li>On your ubuntu server, open the Terminal and run:<br/><code>  $ sudo apt-get install build-essential apache2 sun-java6-jdk</code>   This will install all the pieces you need for Java and compiling. If there are any problems installing Java then check out <a href="http://www.javadesign.info/SystemsHardware/OS/Ubuntu/install-java-on-ubuntu">http://www.javadesign.info/SystemsHardware/OS/Ubuntu/install-java-on-ubuntu</a></li> <li>    We are going to install Railo into the <b>/opt/</b> folder. So next we are going to move in to the <b>/opt/</b> folder and download Railo;<code>$ cd /opt</code>      </li> <li>Go to <a href="http://www.getrailo.org/">Get Railo.org</a> and the Download section. Find the links under <b>Railo Server</b> and copy the link for the <b>ALL OS</b>, tar.gz, and without JRE version. Currently this is <a href="http://www.getrailo.org/down.cfm?item=/railo/remote/download/3.1.0.012/server/all/railo-3.1.0.012-resin-3.1.2-without-jre.tar.gz">http://www.getrailo.org/down.cfm?item=/railo/remote/download/3.1.0.012/server/all/railo-3.1.0.012-resin-3.1.2-without-jre.tar.gz</a></li>  <li>With this link copied go back to the terminal and type <i>$ wget {paste the URL link here with out the brackets}</i>. So with the current URL your terminal syntax will be <code> $ wget http://www.getrailo.org/down.cfm?item=/railo/remote/download/3.1.0.012/server/all/railo-3.1.0.012-resin-3.1.2-without-jre.tar.gz</code>          </li> <li>We now have the downloaded Railo server in <b>/opt/</b> and we're gonna unpack this with the following command<code> $ sudo tar -xf railo-3.1.0.012-resin-3.1.2-without-jre.tar.gz</code>  This command will unpack the Railo file you downloaded in to a folder called "railo-3.1.0.012-resin-3.1.2-without-jre". </li> <li>Don't worry about the long folder name for now as we will create a symbolic link in the next step to make referencing it easier. <code>  $ sudo ln -s railo-3.1.0.012-resin-3.1.2-without-jre railo  $ sudo chown -R {your username} railo</code>    </li> <li>A quick recap; at this point we have Java, Railo, and Resin installed and we are ready check we've done it right by firing up Railo<code>  $ /opt/railo/bin/httpd.sh</code>      now go to http://localhost:8600/ and Railo should be running and a link to the administrator. At the moment the only way to stop this service is with <b>ctrl-c</b>. Later on will start this in the background by adding an argument but before we continue <b>ctrl-c</b> in the terminal to stop Railo/Resin.</li>  <li>This is all well and good, but its not running off port 80 which is what most people, if like me, want. We're going to edit the Resin.conf file now and change the port from 8600 to port 80</b> </li> <li>    Open the Resin.conf file    <code>$ sudo nano /opt/railo/conf/resin.conf</code>   look for the line <b>&lt;http address="*" port="8600"/></b>, we're going to change the port to 80    <code><!-- The http port --><http address="*" port="80"/></code>  </li> <li>For each site you need edit the Resin configuration file again. Im going to add my sites to the directory <b>/var/www/</b>. So lets create our first site<code>$ mkdir /var/www/mysite</code></li>  <li> Now edit our Resin.conf file at <b>/opt/railo/conf/resin.conf</b><code>$ sudo nano /opt/railo/conf/resin.conf</code>Then around line 250, just before the following comment <b>&lt;!-- configures the default host, matching any host name --></b> add a host and <b>host-alias</b>'s if you use them:<code><host id="mysite.com" root-directory="/var/www/mysite"> <web-app id="/" root-directory=""/> <host-alias>www.mysite.com</host-alias>   <host-alias>www.mysite.co.uk</host-alias>   </host></code>You can find out more about this <a href="http://nlc.nlc.go.cn/resin-doc/config/resin.xtp#host">here</a>. Its even possible to use RegEx in there as well.</li><li> Now restart the server    <code>      $ sudo /opt/railo/bin/httpd.sh start    </code>   This time we have passed "start" to the Resin command, this will load it as a service in the background. Then go to http://mysite.com and check it all work.  </li></ol> <p>References:</p><ul><li><a href="http://www.ubuntu.com/">Ubuntu</a></li><li><a href="http://www.getrailo.org/">Get Railo</a></li><li><a href="http://www.caucho.com/">Caucho Resin</a></li><li><a href="http://www.mysql.com/">MySQL</a></li><li>A BIG THANKS to <a href="http://www.compoundtheory.com/?action=displayPost&ID=393">Mark Mandel and his blog post</a> which this is taken from and expanded.</li></ul><br>
     </main>
-
     <div class="row">
       <div class="col">
-
-        <script src="https://giscus.app/client.js"
-                data-repo="andyj/andyjarrett.com"
-                data-repo-id="R_kgDOMjCDkQ"
-                data-category="Announcements"
-                data-category-id="DIC_kwDOMjCDkc4ChlfU"
-                data-mapping="pathname"
-                data-strict="0"
-                data-reactions-enabled="1"
-                data-emit-metadata="0"
-                data-input-position="top"
-                data-theme="preferred_color_scheme"
-                data-lang="en"
-                crossorigin="anonymous"
-                async>
-        </script>
+        <script
+          src="https://giscus.app/client.js"
+          data-repo="andyj/andyjarrett.com"
+          data-repo-id="R_kgDOMjCDkQ"
+          data-category="Announcements"
+          data-category-id="DIC_kwDOMjCDkc4ChlfU"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-theme="preferred_color_scheme"
+          data-lang="en"
+          crossorigin="anonymous"
+          async></script>
         <a name="comment"></a>
       </div>
     </div>
-
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -165,18 +161,3 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
-
-
-
-
-
-<!-- <div class="card m-2" style="width: 15rem;">
-            <div class="card-body">
-              <h5 class="card-title">
-
-              </h5>
-            </div>
-            <div class="card-footer text-end">
-              <a href="" class="card-link link-underline-light"></a>
-            </div>
-          </div> -->

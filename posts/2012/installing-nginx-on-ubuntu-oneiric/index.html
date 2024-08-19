@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +7,6 @@
 <meta name="author" content="Andy Jarrett">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Installing NGINX on Ubuntu Oneiric</title>
-<link rel="canonical" href="https://www.andyjarrett.com/posts/2012/installing-nginx-on-ubuntu-oneiric/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Installing NGINX on Ubuntu Oneiric">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
@@ -18,6 +16,7 @@
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<link rel="canonical" href="https://www.andyjarrett.com/posts/2012/installing-nginx-on-ubuntu-oneiric/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
@@ -77,29 +76,26 @@
       
 <p>It's a short and sweet guide to getting <a href="http://www.nginx.org/">nginx</a> up and running on Ubuntu using the CL but hopefully it will help someone else out.</p><p>Append the appropriate stanza to /etc/apt/sources.list.</p><b>  deb http://nginx.org/packages/ubuntu/ oneiric nginx<br/>  deb-src http://nginx.org/packages/ubuntu/ oneiric nginx</b><p>Install NGINX</p><b>  sudo -s<br/>  apt-get update <br/>  apt-get install nginx <br/></b><p>Check it has worked</p><b>w3m 127.0.01</b><p>This should return something like " Welcome to nginx!". If you are lookg for the .CONF file its at <b>/etc/nginx/nginx.conf</b></p><p>For your next steps to see how NGINX processes a request read <a href="http://nginx.org/en/docs/http/request_processing.html" title="How nginx processes a request">nginx.org/en/docs/http/request_processing.html</a> then check out <a href="http://wiki.nginx.org/Main" title="Main">wiki.nginx.org/Main</a></p><br>
     </main>
-
     <div class="row">
       <div class="col">
-
-        <script src="https://giscus.app/client.js"
-                data-repo="andyj/andyjarrett.com"
-                data-repo-id="R_kgDOMjCDkQ"
-                data-category="Announcements"
-                data-category-id="DIC_kwDOMjCDkc4ChlfU"
-                data-mapping="pathname"
-                data-strict="0"
-                data-reactions-enabled="1"
-                data-emit-metadata="0"
-                data-input-position="top"
-                data-theme="preferred_color_scheme"
-                data-lang="en"
-                crossorigin="anonymous"
-                async>
-        </script>
+        <script
+          src="https://giscus.app/client.js"
+          data-repo="andyj/andyjarrett.com"
+          data-repo-id="R_kgDOMjCDkQ"
+          data-category="Announcements"
+          data-category-id="DIC_kwDOMjCDkc4ChlfU"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-theme="preferred_color_scheme"
+          data-lang="en"
+          crossorigin="anonymous"
+          async></script>
         <a name="comment"></a>
       </div>
     </div>
-
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -165,18 +161,3 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
-
-
-
-
-
-<!-- <div class="card m-2" style="width: 15rem;">
-            <div class="card-body">
-              <h5 class="card-title">
-
-              </h5>
-            </div>
-            <div class="card-footer text-end">
-              <a href="" class="card-link link-underline-light"></a>
-            </div>
-          </div> -->

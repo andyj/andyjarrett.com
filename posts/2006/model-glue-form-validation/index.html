@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +7,6 @@
 <meta name="author" content="Andy Jarrett">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Model Glue Form Validation</title>
-<link rel="canonical" href="https://www.andyjarrett.com/posts/2006/model-glue-form-validation/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Model Glue Form Validation">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
@@ -18,6 +16,7 @@
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<link rel="canonical" href="https://www.andyjarrett.com/posts/2006/model-glue-form-validation/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
@@ -77,29 +76,26 @@
       
 I've been working on a app with a couple of forms and wanted to break the validation rules into different group of rules e.g.<br><br>1. Rules for address<br>2. Rules for personal information<br>3. Rules specific per form.<br><br>What this allows me to do is is per validation call in the controller just use the validators i need.<br><br>How I am doing it:<br><br>1. Create a controller called validator.cfc<br>2. Create you validation.cfc's i.e.<br><ol> <li>validator_Personal.cfc</li> <li>validator_address.cfc</li>  <li>validator_other.cfc</li></ol>Your validation cfc's should look like this:<code><cfcomponent> <cffunction name="validate" returnType="ModelGlue.Util.ValidationErrorCollection">    <cfargument name="formFields">    <cfset var val = createObject("component", "ModelGlue.Util.ValidationErrorCollection").init() />    <cfif structKeyExists(formFields, "address1") AND not len(trim(formFields.address1))>     <cfset val.addError("address1", "Please enter the first line of your address.") />    </cfif> </cffunction></cfcomponent></code> <br/><br/>3. In validator controller create a listener which has calls the validator objects e.g.<br/><br/><code><cffunction name="validateDetails" access="Public" returnType="ModelGlue.Core.Event" output="false" hint="I am an event handler.">  <cfargument name="event" type="ModelGlue.Core.Event" required="true">     <!--- These are added here for clarity. Usually they should go in the init() ---> <cfset variables.validatePersonal = createObject("component", "model.validator_Personal") > <cfset variables.validateAddress = createObject("component", "model.validator_address")>    <!--- Validate the values --->  <cfset valReq = variables.validatePersonal.validate(arguments.event.getAllValues()) />  <cfset valAddress = variables.validateAddress.validate(arguments.event.getAllValues()) />       <!--- here we bring to the sets of rules together into on value---> <cfset valReq.merge(valAddress) />    <!--- Now we set the result --->  <cfif valReq.hasErrors()>   <cfset arguments.event.addResult("inValid") />      <cfset arguments.event.setValue("validation", valReq.getErrors()) />  <cfelse>    <cfset arguments.event.addResult("valid") />  </cfif>  <cfreturn arguments.event /></cffunction></code><br/><br/>4. To finish it off, in your form you need the usual viewState calls<br/><br/><code><!--- Gets any validation errors ---><cfset val = viewState.getValue("validation", structNew()) /></code><br>
     </main>
-
     <div class="row">
       <div class="col">
-
-        <script src="https://giscus.app/client.js"
-                data-repo="andyj/andyjarrett.com"
-                data-repo-id="R_kgDOMjCDkQ"
-                data-category="Announcements"
-                data-category-id="DIC_kwDOMjCDkc4ChlfU"
-                data-mapping="pathname"
-                data-strict="0"
-                data-reactions-enabled="1"
-                data-emit-metadata="0"
-                data-input-position="top"
-                data-theme="preferred_color_scheme"
-                data-lang="en"
-                crossorigin="anonymous"
-                async>
-        </script>
+        <script
+          src="https://giscus.app/client.js"
+          data-repo="andyj/andyjarrett.com"
+          data-repo-id="R_kgDOMjCDkQ"
+          data-category="Announcements"
+          data-category-id="DIC_kwDOMjCDkc4ChlfU"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-theme="preferred_color_scheme"
+          data-lang="en"
+          crossorigin="anonymous"
+          async></script>
         <a name="comment"></a>
       </div>
     </div>
-
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -165,18 +161,3 @@ I've been working on a app with a couple of forms and wanted to break the valida
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
-
-
-
-
-
-<!-- <div class="card m-2" style="width: 15rem;">
-            <div class="card-body">
-              <h5 class="card-title">
-
-              </h5>
-            </div>
-            <div class="card-footer text-end">
-              <a href="" class="card-link link-underline-light"></a>
-            </div>
-          </div> -->

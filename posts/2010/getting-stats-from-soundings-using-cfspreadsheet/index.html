@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +7,6 @@
 <meta name="author" content="Andy Jarrett">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Getting stats from Soundings using cfspreadsheet</title>
-<link rel="canonical" href="https://www.andyjarrett.com/posts/2010/getting-stats-from-soundings-using-cfspreadsheet/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Getting stats from Soundings using cfspreadsheet">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
@@ -18,6 +16,7 @@
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<link rel="canonical" href="https://www.andyjarrett.com/posts/2010/getting-stats-from-soundings-using-cfspreadsheet/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
@@ -77,29 +76,26 @@
       
 <p>I'm hoping to post this over on <a href="http://soundings.riaforge.org/">soundings.riaforge.org</a> later but I am having trouble with the site. Plus also thought good to throw out here.</p><p>Below I have hacked at the Sounding app by Ray (ColdFusion Jedi) Camdon to use cfspreadsheet to create the Excel stat sheet. All this code I have put in the IF block stating "form.format is 'excel'". It requires the query "getSurveyTakers" which should be just before it.</p><code><!--- cfspreadsheet works off a query so that is what we are going to create ---><!--- Query cols ---><cfset colList = ['Survey_Taker_ID', 'Survey_Taken' ]/><cfloop query="questions">  <cfset colName = reReplace( question, "[^A-Za-z0-9 _]", "", "all" ) />  <cfset colName = reReplace( colName, "(amp)| ", "_", "all" ) />       <cfset arrayAppend(colList, colName ) /></cfloop><cfset reportQry = queryNew( arrayToList(colList) )/><cfset QueryAddRow(reportQry, getSurveyTakers.recordCount +1)> <!--- Create the header row in the query as cdSpreadsheet doesn't do this ---><cfset QuerySetCell(reportQry, colList[1], "Survey Taker ID", 1)> <cfset QuerySetCell(reportQry, colList[2], "Survey Taken", 1 )><cfloop query="questions"> <cfset thisRow = questions.currentRow+2 />  <cfset QuerySetCell(reportQry, colList[thisRow], questions.question, 1)> </cfloop>  <!--- Start adding the data to our new query ---><cfloop query="getSurveyTakers"> <cfset answerRow = getSurveyTakers.currentRow + 1>  <cfset oid = ownerid>     <cfset QuerySetCell(reportQry, colList[1], ownerid, answerRow)>   <cfset QuerySetCell(reportQry, colList[2], "#dateFormat(completed,"mm/dd/yy")# #timeFormat(completed,"h:mm tt")#", answerRow )>   <cfloop query="questions">    <cfset i = questions.currentRow+2 />    <cfset QuerySetCell(reportQry, colList[i], htmlEditFormat(application.survey.getAnswerResult(id,oid)), answerRow )>   </cfloop>     </cfloop> <cfscript>  //Use an absolute path for the files. --->  theFile = expandPath( "report.xls" );   //Create empty ColdFusion spreadsheet objects. --->   theSheet = SpreadsheetNew("CourseData");    //Populate  object with a query. --->   SpreadsheetAddRows(theSheet,reportQry); </cfscript>         <!--- Write the file to the disk ---><cfspreadsheet action="write" filename="#theFile#" name="theSheet" sheetname="courses" overwrite=true> <!--- Throw it at the user (and hope it sticks) ---><cfheader name="content-disposition" value="attachment;filename=report.xls"><cfcontent type="application/msexcel" file="#theFile#" deletefile="true" reset="true">      <cfabort></code><p>There might be more efficient (read: quicker) ways of doing the above so always happy for feedback!</p><br>
     </main>
-
     <div class="row">
       <div class="col">
-
-        <script src="https://giscus.app/client.js"
-                data-repo="andyj/andyjarrett.com"
-                data-repo-id="R_kgDOMjCDkQ"
-                data-category="Announcements"
-                data-category-id="DIC_kwDOMjCDkc4ChlfU"
-                data-mapping="pathname"
-                data-strict="0"
-                data-reactions-enabled="1"
-                data-emit-metadata="0"
-                data-input-position="top"
-                data-theme="preferred_color_scheme"
-                data-lang="en"
-                crossorigin="anonymous"
-                async>
-        </script>
+        <script
+          src="https://giscus.app/client.js"
+          data-repo="andyj/andyjarrett.com"
+          data-repo-id="R_kgDOMjCDkQ"
+          data-category="Announcements"
+          data-category-id="DIC_kwDOMjCDkc4ChlfU"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-theme="preferred_color_scheme"
+          data-lang="en"
+          crossorigin="anonymous"
+          async></script>
         <a name="comment"></a>
       </div>
     </div>
-
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -165,18 +161,3 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
-
-
-
-
-
-<!-- <div class="card m-2" style="width: 15rem;">
-            <div class="card-body">
-              <h5 class="card-title">
-
-              </h5>
-            </div>
-            <div class="card-footer text-end">
-              <a href="" class="card-link link-underline-light"></a>
-            </div>
-          </div> -->

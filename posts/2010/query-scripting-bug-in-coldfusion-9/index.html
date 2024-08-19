@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +7,6 @@
 <meta name="author" content="Andy Jarrett">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Query scripting bug in Coldfusion 9</title>
-<link rel="canonical" href="https://www.andyjarrett.com/posts/2010/query-scripting-bug-in-coldfusion-9/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Query scripting bug in Coldfusion 9">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
@@ -18,6 +16,7 @@
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<link rel="canonical" href="https://www.andyjarrett.com/posts/2010/query-scripting-bug-in-coldfusion-9/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
@@ -77,29 +76,26 @@
       
 I had a weird error this morning.<p>Named Sql parameter 'state ORDER' used in the query not found in the queryparams</p><p>Below is the code I had and it look fine to me:</p><code><cfscript>queryService = new query();<br>queryService.setDatasource("cfdocexamples");<br>queryService.setName("GetParks");<br>queryService.addParam(name="state",value="MD",cfsqltype="VARCHAR");<br>queryService.setSQL(<br>"SELECT PARKNAME, REGION, STATE<br>FROM Parks WHERE STATE = :state<br>ORDER BY ParkName, State ");<br>result = queryService.execute();<br>writeDump( result.getResult() );<br></cfscript></code>After staring at my code for a while and realising that doing that wouldn't fix anything I<span style="text-decoration:line-through;">butchered</span> played around with the syntax and found that after the WHERE clause you need to keep your SQL on one line. Makingthe following change to setSQL() fixed the problem:<code>queryService.setSQL("SELECT PARKNAME, REGION, STATEFROM Parks WHERE STATE = :state ORDER BY ParkName, State ");</code><p>I can't seem to find a reference as to how your SQL should be formatted but it seems the new line plays aroundwith the deliminators and the way the named params are found.</p><p>I'm posting this now but will hopefully later find time to look in on <b>query.cfc</b> in the <b></b>com/adobe/coldfusion</b> folder under customtags to find the actual reason</p><br>
     </main>
-
     <div class="row">
       <div class="col">
-
-        <script src="https://giscus.app/client.js"
-                data-repo="andyj/andyjarrett.com"
-                data-repo-id="R_kgDOMjCDkQ"
-                data-category="Announcements"
-                data-category-id="DIC_kwDOMjCDkc4ChlfU"
-                data-mapping="pathname"
-                data-strict="0"
-                data-reactions-enabled="1"
-                data-emit-metadata="0"
-                data-input-position="top"
-                data-theme="preferred_color_scheme"
-                data-lang="en"
-                crossorigin="anonymous"
-                async>
-        </script>
+        <script
+          src="https://giscus.app/client.js"
+          data-repo="andyj/andyjarrett.com"
+          data-repo-id="R_kgDOMjCDkQ"
+          data-category="Announcements"
+          data-category-id="DIC_kwDOMjCDkc4ChlfU"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-theme="preferred_color_scheme"
+          data-lang="en"
+          crossorigin="anonymous"
+          async></script>
         <a name="comment"></a>
       </div>
     </div>
-
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -165,18 +161,3 @@ I had a weird error this morning.<p>Named Sql parameter 'state ORDER' used in th
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
-
-
-
-
-
-<!-- <div class="card m-2" style="width: 15rem;">
-            <div class="card-body">
-              <h5 class="card-title">
-
-              </h5>
-            </div>
-            <div class="card-footer text-end">
-              <a href="" class="card-link link-underline-light"></a>
-            </div>
-          </div> -->

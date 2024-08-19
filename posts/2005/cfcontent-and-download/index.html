@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +7,6 @@
 <meta name="author" content="Andy Jarrett">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>cfcontent and download</title>
-<link rel="canonical" href="https://www.andyjarrett.com/posts/2005/cfcontent-and-download/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="cfcontent and download">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
@@ -18,6 +16,7 @@
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<link rel="canonical" href="https://www.andyjarrett.com/posts/2005/cfcontent-and-download/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
@@ -77,29 +76,26 @@
       
 I havent used cfcontent in years and forgot that if you don't want the name of the file to be a .cfm then use cfheader to push the desired file name e.g. so your create .csv Coldfusion page would look something like<div class="code"><FONT COLOR=MAROON>&lt;cfset fPath = expandPath('_view/') & <FONT COLOR=BLUE>"newFileName.csv"</FONT> /&gt;</FONT><br><br><FONT COLOR=MAROON>&lt;cffile action=<FONT COLOR=BLUE>"write"</FONT> file=<FONT COLOR=BLUE>"#fPath#"</FONT> output=<FONT COLOR=BLUE>"#csvData#"</FONT> /&gt;</FONT><br><FONT COLOR=MAROON>&lt;cfheader name=<FONT COLOR=BLUE>"Content-Disposition"</FONT> value=<FONT COLOR=BLUE>"filename=newFileName.csv"</FONT> /&gt;</FONT><br><FONT COLOR=MAROON>&lt;cfcontent file=<FONT COLOR=BLUE>"#fPath#"</FONT> deletefile=<FONT COLOR=BLUE>"true"</FONT> type=<FONT COLOR=BLUE>"application/csv"</FONT>  /&gt;</FONT></div><br>
     </main>
-
     <div class="row">
       <div class="col">
-
-        <script src="https://giscus.app/client.js"
-                data-repo="andyj/andyjarrett.com"
-                data-repo-id="R_kgDOMjCDkQ"
-                data-category="Announcements"
-                data-category-id="DIC_kwDOMjCDkc4ChlfU"
-                data-mapping="pathname"
-                data-strict="0"
-                data-reactions-enabled="1"
-                data-emit-metadata="0"
-                data-input-position="top"
-                data-theme="preferred_color_scheme"
-                data-lang="en"
-                crossorigin="anonymous"
-                async>
-        </script>
+        <script
+          src="https://giscus.app/client.js"
+          data-repo="andyj/andyjarrett.com"
+          data-repo-id="R_kgDOMjCDkQ"
+          data-category="Announcements"
+          data-category-id="DIC_kwDOMjCDkc4ChlfU"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-theme="preferred_color_scheme"
+          data-lang="en"
+          crossorigin="anonymous"
+          async></script>
         <a name="comment"></a>
       </div>
     </div>
-
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -165,18 +161,3 @@ I havent used cfcontent in years and forgot that if you don't want the name of t
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
-
-
-
-
-
-<!-- <div class="card m-2" style="width: 15rem;">
-            <div class="card-body">
-              <h5 class="card-title">
-
-              </h5>
-            </div>
-            <div class="card-footer text-end">
-              <a href="" class="card-link link-underline-light"></a>
-            </div>
-          </div> -->

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +7,6 @@
 <meta name="author" content="Andy Jarrett">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Google sitemap creator for Model-Glue apps</title>
-<link rel="canonical" href="https://www.andyjarrett.com/posts/2008/google-sitemap-creator-for-modelglue-apps/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Google sitemap creator for Model-Glue apps">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
@@ -18,6 +16,7 @@
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<link rel="canonical" href="https://www.andyjarrett.com/posts/2008/google-sitemap-creator-for-modelglue-apps/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
@@ -77,29 +76,26 @@
       
 <p>I have a new project hosted at <a href="http://mgsitemaptool.riaforge.org/">RIA Forge</a>. It's a small idea which I just want to put out there for now, basically a <a href="http://mgsitemaptool.riaforge.org/">Google Sitemap tool for Model Glue</a>. The idea is simple, using your <a href="http://www.model-glue.com/">ModelGlue</a>.xml file (and any includes) the application looks through all your public &lt;event-handler> to create a simple Google Sitemap.</p><p>All you need to do is drop the folder into the root of your MG app and from within there is an "index.cfm" file with the following small bit of code in it.</p><code><cfscript> sitemaptool = createObject('component', 'sitemaptool'); theXml1 = siteMapTool.getSiteMap("/config/coldSpring.xml", "siteMap.xml");  writeOutput(HTMLCodeFormat(theXml1)); </cfscript></code>The component first looks into your ColdSpring.xml config file for the "modelGlueConfiguration" bean. From there it picks up your values like "eventvalue" and "defaulttemplate". Using the "configurationPath" it reads your ModelGlue.xml including any &lt;includes> you use to find all the &lt;event-handler>'sThe variable "theXml1" holds the sitemap and from there you can do what you want with it. Also check out "index_documented.cfm" in the zip file its where I have put in some details of other ways of calling the component. Obviously all the work is done within the <b>sitemaptool.cfc</b> component so dig into there and have a look too.Get it from <a href="http://mgsitemaptool.riaforge.org/">http://mgsitemaptool.riaforge.org/</a> where you can add issues etc<br>
     </main>
-
     <div class="row">
       <div class="col">
-
-        <script src="https://giscus.app/client.js"
-                data-repo="andyj/andyjarrett.com"
-                data-repo-id="R_kgDOMjCDkQ"
-                data-category="Announcements"
-                data-category-id="DIC_kwDOMjCDkc4ChlfU"
-                data-mapping="pathname"
-                data-strict="0"
-                data-reactions-enabled="1"
-                data-emit-metadata="0"
-                data-input-position="top"
-                data-theme="preferred_color_scheme"
-                data-lang="en"
-                crossorigin="anonymous"
-                async>
-        </script>
+        <script
+          src="https://giscus.app/client.js"
+          data-repo="andyj/andyjarrett.com"
+          data-repo-id="R_kgDOMjCDkQ"
+          data-category="Announcements"
+          data-category-id="DIC_kwDOMjCDkc4ChlfU"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-theme="preferred_color_scheme"
+          data-lang="en"
+          crossorigin="anonymous"
+          async></script>
         <a name="comment"></a>
       </div>
     </div>
-
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -165,18 +161,3 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
-
-
-
-
-
-<!-- <div class="card m-2" style="width: 15rem;">
-            <div class="card-body">
-              <h5 class="card-title">
-
-              </h5>
-            </div>
-            <div class="card-footer text-end">
-              <a href="" class="card-link link-underline-light"></a>
-            </div>
-          </div> -->

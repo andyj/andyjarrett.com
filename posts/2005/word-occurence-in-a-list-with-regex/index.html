@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +7,6 @@
 <meta name="author" content="Andy Jarrett">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Word Occurence in a list with RegEx</title>
-<link rel="canonical" href="https://www.andyjarrett.com/posts/2005/word-occurence-in-a-list-with-regex/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Word Occurence in a list with RegEx">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
@@ -18,6 +16,7 @@
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<link rel="canonical" href="https://www.andyjarrett.com/posts/2005/word-occurence-in-a-list-with-regex/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
@@ -77,29 +76,26 @@
       
 I've been using a bastardised version of <a href="http://www.cflib.org/udf.cfm?ID=146">WordInstance from Cflib.org</a> that uses arrays instead of lists (<a href="http://andyjarrett.co.uk/andy/blog/index.cfm/2004/9/new-udf-listReverse-part-2">for permormance reasons</a>).Going over the code today i realised that occurances gets returned in the Sub Expression of <a href="http://livedocs.macromedia.com/coldfusion/7/htmldocs/wwhelp/wwhimpl/common/html/wwhelp.htm?context=ColdFusion_Documentation&file=00000606.htm#135102">REfind</a>. So with some help from <a href="http://www.houseoffusion.com/cf_lists/message.cfm/messageid:899/forumid:21">Tony Hicks  on the CF-RegEx list</a> i was able to re-write the function and got it down to the 4 lines below.<div class="code">function wordOccurence(word,inList){<br>&nbsp;&nbsp;&nbsp;var occurence = 0;<br>&nbsp;&nbsp;&nbsp;occurence = reFind(<FONT COLOR=BLUE>",?\\b"</FONT>&word&<FONT COLOR=BLUE>"\\b,?"</FONT>,inList,<FONT COLOR=BLUE>1</FONT>,<FONT COLOR=BLUE>1</FONT>);<br>&nbsp;&nbsp;&nbsp;return occurence['len'][1];<br>}</div><br>
     </main>
-
     <div class="row">
       <div class="col">
-
-        <script src="https://giscus.app/client.js"
-                data-repo="andyj/andyjarrett.com"
-                data-repo-id="R_kgDOMjCDkQ"
-                data-category="Announcements"
-                data-category-id="DIC_kwDOMjCDkc4ChlfU"
-                data-mapping="pathname"
-                data-strict="0"
-                data-reactions-enabled="1"
-                data-emit-metadata="0"
-                data-input-position="top"
-                data-theme="preferred_color_scheme"
-                data-lang="en"
-                crossorigin="anonymous"
-                async>
-        </script>
+        <script
+          src="https://giscus.app/client.js"
+          data-repo="andyj/andyjarrett.com"
+          data-repo-id="R_kgDOMjCDkQ"
+          data-category="Announcements"
+          data-category-id="DIC_kwDOMjCDkc4ChlfU"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-theme="preferred_color_scheme"
+          data-lang="en"
+          crossorigin="anonymous"
+          async></script>
         <a name="comment"></a>
       </div>
     </div>
-
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -165,18 +161,3 @@ I've been using a bastardised version of <a href="http://www.cflib.org/udf.cfm?I
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
-
-
-
-
-
-<!-- <div class="card m-2" style="width: 15rem;">
-            <div class="card-body">
-              <h5 class="card-title">
-
-              </h5>
-            </div>
-            <div class="card-footer text-end">
-              <a href="" class="card-link link-underline-light"></a>
-            </div>
-          </div> -->

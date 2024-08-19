@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +7,6 @@
 <meta name="author" content="Andy Jarrett">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>CFXML and CF tags gotcha</title>
-<link rel="canonical" href="https://www.andyjarrett.com/posts/2006/cfxml-and-cf-tags-gotcha/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="CFXML and CF tags gotcha">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
@@ -18,6 +16,7 @@
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<link rel="canonical" href="https://www.andyjarrett.com/posts/2006/cfxml-and-cf-tags-gotcha/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
@@ -77,29 +76,26 @@
       
 <p>As i'm preparing to type this post what I'm about to says is so obvious its annoying.   When you are using the &lt;cfxml> tag you cannot have xml tags that begin with "cf" as Coldfusion tries to parse them. For example:</p><code><cfxml variable="xml1">  <myXml>   <cftest>my data</cftest>  </myXml></cfxml></code><p>Would fail with something like <em>"A tag starting with 'CF' has been detected. This tag is not supported by this version of ColdFusion. Please verify your typo and try again.Unknown tag: cftest. "</em></p>The workaround: Modify the tag from &lt;cftest>  to &lt;ctest><code><cfxml variable="xml2"><myXml>  <ctest>my data</ctest></myXml></cfxml></code>The afterwards get regex to make the changes.<code><cfset xml2 = reReplace(xml2, "<(.*?)c", "<\\1cf" , "all") /></code>To explain the regex. <ul><li>Attribute 1, is the string your are modifying.</li><li>Attribute 2, is the regex here. Here I am using creating a back reference (think of it as a variable) to catch the closing tag backslash.</li><li>Attribute 3, is the same as att. 2 but we remove the brackers and call the back reference via "\\1". </li><li>Tells us to capturing all occurances.</li></ul><br>
     </main>
-
     <div class="row">
       <div class="col">
-
-        <script src="https://giscus.app/client.js"
-                data-repo="andyj/andyjarrett.com"
-                data-repo-id="R_kgDOMjCDkQ"
-                data-category="Announcements"
-                data-category-id="DIC_kwDOMjCDkc4ChlfU"
-                data-mapping="pathname"
-                data-strict="0"
-                data-reactions-enabled="1"
-                data-emit-metadata="0"
-                data-input-position="top"
-                data-theme="preferred_color_scheme"
-                data-lang="en"
-                crossorigin="anonymous"
-                async>
-        </script>
+        <script
+          src="https://giscus.app/client.js"
+          data-repo="andyj/andyjarrett.com"
+          data-repo-id="R_kgDOMjCDkQ"
+          data-category="Announcements"
+          data-category-id="DIC_kwDOMjCDkc4ChlfU"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-theme="preferred_color_scheme"
+          data-lang="en"
+          crossorigin="anonymous"
+          async></script>
         <a name="comment"></a>
       </div>
     </div>
-
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -165,18 +161,3 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
-
-
-
-
-
-<!-- <div class="card m-2" style="width: 15rem;">
-            <div class="card-body">
-              <h5 class="card-title">
-
-              </h5>
-            </div>
-            <div class="card-footer text-end">
-              <a href="" class="card-link link-underline-light"></a>
-            </div>
-          </div> -->

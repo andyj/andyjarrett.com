@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +7,6 @@
 <meta name="author" content="Andy Jarrett">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Generate CFML code to create a query from a query</title>
-<link rel="canonical" href="https://www.andyjarrett.com/posts/2007/generate-cfml-code-to-create-a-query-from-a-query/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Generate CFML code to create a query from a query">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
@@ -18,6 +16,7 @@
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<link rel="canonical" href="https://www.andyjarrett.com/posts/2007/generate-cfml-code-to-create-a-query-from-a-query/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
@@ -77,29 +76,26 @@
       
 I've just realised I am terrible at writing good, descriptive subjects for my blog posts so here is a (bit of a) better description of what I mean.Last week I needed to use a query from a live DB to do some work on offline. Usually I use MySQL so I take a backup from the night before and run it locally so I am nearly up-to-date on my dev machine but this DB was MSSQL and I haven't gotten around to getting that setup on Parallels. Also there was no need to download 'X' amount of tables and stored procedures as all I wanted to actually use was one query output.So what I've created is a function which generates the CFML for a queryNew() statement needed to re-create the query you want to work on.<code><cffunction name="createQuery" access="public" output="false" returntype="struct" hint="I take a query and return the code to regenerate it."><!--- * Parses a query and generates the CFML to re-create the query using the queryNew() function * * @param   inQry           To query to be parsed (Required) * @param   fileNameAndLoc  File name and location for the file to be saved to * @param   withDump        Includes a <cfdump> at the end of the code block * @return  Returns a structure. * @author  Andy Jarrett (http://www.andyjarrett.co.uk)---> <cfargument name="inQry" required="true" type="query" />  <cfargument name="fileNameAndLoc" default="" type="string" /> <cfargument name="withDump" default="false" type="boolean" /> <!--- Local variables --->  <cfset var qry = arguments.inQry /> <!--- Loop Indexes ---> <cfset var i = 0 /> <cfset var cols = "" /> <!--- Return Structure ---> <cfset var textQuery = structNew() /> <cfset var saveFile = "" /> <cfset var ltc = chr(60) /> <!--- < character  ---> <cfif len(trim(arguments.fileNameAndLoc))>    <cfset saveFile = arguments.fileNameAndLoc /> </cfif> <cfset textQuery.hasErrors = 0/>  <cftry><!--- Terrible indenting of code below but thats to keep the text tidy for when you export --->  <cfsavecontent variable="textQuery.code"><cfoutput>#ltc#!--- First we create the query --->#chr(13)##ltc#cfset newQry = queryNew('#qry.columnList#') />#ltc#!--- Now start populating the query --->#chr(13)#<cfloop from="1" to="#qry.recordCount#" index="i">#ltc#cfset queryAddRow(newQry) />#chr(13)#<cfloop list="#qry.columnList#" index="cols">  #ltc#cfset querySetCell(newQry, '#cols#', '#qry[cols][i]#') />#chr(13)#</cfloop></cfloop> <cfif arguments.withDump>   #ltc#!--- Dump the query --->#chr(13)##ltc#cfdump var="##newQry##" label="Query Dump" />  </cfif></cfoutput>  </cfsavecontent>  <!--- If a file name & location have been supplied then out the string to the file ---> <cfif len(saveFile)>    <cffile action="write" file="#saveFile#" output="#textQuery.code#" attributes="normal" mode="777" />  </cfif> <cfcatch type="any">    <cfset textQuery.hasErrors = 1/>    <cfset textQuery.error = cfcatch.ErrorCode &" "& cfcatch.Message /> </cfcatch>  </cftry>  <cfreturn textQuery /></cffunction></code> So in action we would have the following which would create a new .cfm page called "test.cfm" as well as outputting the results to the screen<code>  <!--- This query returns 2 rows   id | sex | name   1 | Andy | Male   2 | Helen | Female  --->    <cfquery datasource="test" name="qryTest">  SELECT id,sex,name  FROM test</cfquery><cfset myVar = createQuery(qryTest, expandPath('test.cfm'), true)><cfif NOT myVar.hasErrors> <cfoutput><xmp>#myVar.code#</xmp></cfoutput></cfif></code>In the generated test.cfm you would see<code><!--- First we create the query ---><cfset newQry = queryNew('ID,NAME,SEX') /><!--- Now start populating the query ---><cfset queryAddRow(newQry) /><cfset querySetCell(newQry, 'ID', '1') /><cfset querySetCell(newQry, 'NAME', 'Andy') /><cfset querySetCell(newQry, 'SEX', 'male') /><cfset queryAddRow(newQry) /><cfset querySetCell(newQry, 'ID', '2') /><cfset querySetCell(newQry, 'NAME', 'Helen') /><cfset querySetCell(newQry, 'SEX', 'Female') /><!--- Dump the query ---><cfdump var="#newQry#" label="Query Dump" /></code><br>
     </main>
-
     <div class="row">
       <div class="col">
-
-        <script src="https://giscus.app/client.js"
-                data-repo="andyj/andyjarrett.com"
-                data-repo-id="R_kgDOMjCDkQ"
-                data-category="Announcements"
-                data-category-id="DIC_kwDOMjCDkc4ChlfU"
-                data-mapping="pathname"
-                data-strict="0"
-                data-reactions-enabled="1"
-                data-emit-metadata="0"
-                data-input-position="top"
-                data-theme="preferred_color_scheme"
-                data-lang="en"
-                crossorigin="anonymous"
-                async>
-        </script>
+        <script
+          src="https://giscus.app/client.js"
+          data-repo="andyj/andyjarrett.com"
+          data-repo-id="R_kgDOMjCDkQ"
+          data-category="Announcements"
+          data-category-id="DIC_kwDOMjCDkc4ChlfU"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-theme="preferred_color_scheme"
+          data-lang="en"
+          crossorigin="anonymous"
+          async></script>
         <a name="comment"></a>
       </div>
     </div>
-
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -165,18 +161,3 @@ I've just realised I am terrible at writing good, descriptive subjects for my bl
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
-
-
-
-
-
-<!-- <div class="card m-2" style="width: 15rem;">
-            <div class="card-body">
-              <h5 class="card-title">
-
-              </h5>
-            </div>
-            <div class="card-footer text-end">
-              <a href="" class="card-link link-underline-light"></a>
-            </div>
-          </div> -->

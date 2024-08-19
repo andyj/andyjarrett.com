@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +7,6 @@
 <meta name="author" content="Andy Jarrett">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>htaccess for moving domain names</title>
-<link rel="canonical" href="https://www.andyjarrett.com/posts/2010/htaccess-for-moving-domain-names/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="htaccess for moving domain names">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
@@ -18,6 +16,7 @@
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<link rel="canonical" href="https://www.andyjarrett.com/posts/2010/htaccess-for-moving-domain-names/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
@@ -77,29 +76,26 @@
       
 <p>Apache uses .htaccess files as a way to make configuration changes on a per-directory (and subdirectories) basis. They are a powerful tool when it comes to moving folders of changed files or in my case domain name rewriting. </p><p>Currently I am using a short domain name (<a href="http://www.prsos.co.uk">prsos.co.uk</a>) as a redirect to a specific page on the full domain name <a href="http://www.petrescuesos.co.uk">petrescuesos.co.uk</a>. In the past I've even used ColdFusion to do by putting something along the lines in my Application.cfm.</p><code><cfif findNoCase('prsos', cgi.server_name)><cfheader statustext="Moved permanently" statuscode="301" /><cfheader value="http://www.petrescuesos.co.uk" name="Location"></cfif></code><p>This still gives the browser/spider the correct http header but why waste cpu styles on even doing this when the web-server can handle it natively. Below is the Apache .htaccess I've just put in place.</p><code>#Turn rewrite onRewriteEngine on#Look at the HTTP_HOST and regex search for old domain namerewritecond %{http_host} ^(.*)prsos.co.uk [nc]# The rule. Change the http_host to the new domain location. NC means NoCaserewriterule ^(.*)$ http://www.petrescuesos.co.uk/index.cfm?action=pets.found [r=301,nc]</code><br>
     </main>
-
     <div class="row">
       <div class="col">
-
-        <script src="https://giscus.app/client.js"
-                data-repo="andyj/andyjarrett.com"
-                data-repo-id="R_kgDOMjCDkQ"
-                data-category="Announcements"
-                data-category-id="DIC_kwDOMjCDkc4ChlfU"
-                data-mapping="pathname"
-                data-strict="0"
-                data-reactions-enabled="1"
-                data-emit-metadata="0"
-                data-input-position="top"
-                data-theme="preferred_color_scheme"
-                data-lang="en"
-                crossorigin="anonymous"
-                async>
-        </script>
+        <script
+          src="https://giscus.app/client.js"
+          data-repo="andyj/andyjarrett.com"
+          data-repo-id="R_kgDOMjCDkQ"
+          data-category="Announcements"
+          data-category-id="DIC_kwDOMjCDkc4ChlfU"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-theme="preferred_color_scheme"
+          data-lang="en"
+          crossorigin="anonymous"
+          async></script>
         <a name="comment"></a>
       </div>
     </div>
-
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -165,18 +161,3 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
-
-
-
-
-
-<!-- <div class="card m-2" style="width: 15rem;">
-            <div class="card-body">
-              <h5 class="card-title">
-
-              </h5>
-            </div>
-            <div class="card-footer text-end">
-              <a href="" class="card-link link-underline-light"></a>
-            </div>
-          </div> -->

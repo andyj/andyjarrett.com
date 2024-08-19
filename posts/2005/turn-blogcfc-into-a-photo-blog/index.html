@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +7,6 @@
 <meta name="author" content="Andy Jarrett">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Turn BlogCFC into a photo blog</title>
-<link rel="canonical" href="https://www.andyjarrett.com/posts/2005/turn-blogcfc-into-a-photo-blog/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Turn BlogCFC into a photo blog">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
@@ -18,6 +16,7 @@
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<link rel="canonical" href="https://www.andyjarrett.com/posts/2005/turn-blogcfc-into-a-photo-blog/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
@@ -77,29 +76,26 @@
       
 If you are looking for a free coldfusion <a href="http://www.ipicture.it/mike/">photo blog for someone</a> you can create one quite easily with <a href="http://ray.camdenfamily.com/blog.zip">Rays BlogCFC</a> now that enclosures have been added (thanks Ray). If you're expecting some wow coding here stop reading :o)Around line 140 (of the latest release), or basically at the top of the div='body' add the following<div style="text-decoration:line-through"><div class="code"><FONT COLOR=MAROON>&lt;cfif len(enclosure) AND reFind(<FONT COLOR=BLUE>"gif|jpg"</FONT>, listLast(getFileFromPath(enclosure)))&gt;</FONT><br><FONT COLOR=NAVY>&lt;p&gt;</FONT><FONT COLOR=NAVY><FONT COLOR=PURPLE>&lt;img src=<FONT COLOR=BLUE>"enclosures/#urlEncodedFormat(getFileFromPath(enclosure))#"</FONT> /&gt;</FONT></FONT><FONT COLOR=NAVY>&lt;/p&gt;</FONT><br><FONT COLOR=MAROON>&lt;/cfif&gt;</FONT></div></div><br/><em>This has been updated to the following. I've updated the listLast function to use the "." as a deliminator</em><div class="code"><FONT COLOR=MAROON>&lt;cfif len(enclosure) AND reFind(<FONT COLOR=BLUE>"gif|jpg"</FONT>, listLast(getFileFromPath(enclosure), <FONT COLOR=BLUE>"."</FONT>))&gt;</FONT><br>\n  <FONT COLOR=NAVY>&lt;p&gt;</FONT><FONT COLOR=NAVY><FONT COLOR=PURPLE>&lt;img src=<FONT COLOR=BLUE>"enclosures/#urlEncodedFormat(getFileFromPath(enclosure))#"</FONT> /&gt;</FONT></FONT><FONT COLOR=NAVY>&lt;/p&gt;</FONT><br>\n<FONT COLOR=MAROON>&lt;/cfif&gt;</FONT></div>This checks the enclosures extention and if a .gif or .jpg then displays it. Thats it. You can see it in action for a blog i'm in the middle of updating for a friend at <a href="http://www.ipicture.it/mike/">iPicture.it/mike</a>.Obviously there are some other bits you might want to do:<ul><li>On the upload resize the image</li><li>Create thumbnails</li></ul>Enjoy<br>
     </main>
-
     <div class="row">
       <div class="col">
-
-        <script src="https://giscus.app/client.js"
-                data-repo="andyj/andyjarrett.com"
-                data-repo-id="R_kgDOMjCDkQ"
-                data-category="Announcements"
-                data-category-id="DIC_kwDOMjCDkc4ChlfU"
-                data-mapping="pathname"
-                data-strict="0"
-                data-reactions-enabled="1"
-                data-emit-metadata="0"
-                data-input-position="top"
-                data-theme="preferred_color_scheme"
-                data-lang="en"
-                crossorigin="anonymous"
-                async>
-        </script>
+        <script
+          src="https://giscus.app/client.js"
+          data-repo="andyj/andyjarrett.com"
+          data-repo-id="R_kgDOMjCDkQ"
+          data-category="Announcements"
+          data-category-id="DIC_kwDOMjCDkc4ChlfU"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-theme="preferred_color_scheme"
+          data-lang="en"
+          crossorigin="anonymous"
+          async></script>
         <a name="comment"></a>
       </div>
     </div>
-
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -165,18 +161,3 @@ If you are looking for a free coldfusion <a href="http://www.ipicture.it/mike/">
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
-
-
-
-
-
-<!-- <div class="card m-2" style="width: 15rem;">
-            <div class="card-body">
-              <h5 class="card-title">
-
-              </h5>
-            </div>
-            <div class="card-footer text-end">
-              <a href="" class="card-link link-underline-light"></a>
-            </div>
-          </div> -->

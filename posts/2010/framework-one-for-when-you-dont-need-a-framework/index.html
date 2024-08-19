@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +7,6 @@
 <meta name="author" content="Andy Jarrett">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Framework One for when you don't need a framework</title>
-<link rel="canonical" href="https://www.andyjarrett.com/posts/2010/framework-one-for-when-you-dont-need-a-framework/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Framework One for when you don't need a framework">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
@@ -18,6 +16,7 @@
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<link rel="canonical" href="https://www.andyjarrett.com/posts/2010/framework-one-for-when-you-dont-need-a-framework/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
@@ -77,29 +76,26 @@
       
 <p>I've just deleted about 2 hours worth of writes and re-writes to simplify what this blog post is all about. Originally I was going to waffle about frameworks and how they can be bad for a project and how they can get in the way but they're not all-round "bad" for every project yada yada. In reallity this blog post is about 1 thing, <a href="http://github.com/seancorfield/fw1">Framework One</a>, and how its so flexible I'm even using it for basic brouchware sites.</p><p> Sure for your big MVC/OO apps you can use FW/1 with your dumb Controllers passing data to the Service layer to request other data from the model to pass back to the view. Which is great, but what I've also enjoyed is that on the otherside it doesn't stop you from very quickly creating a 3 page brouchware site for your family member that doesn't require more core files for features you don't need i.e. dependency injection, than there are application files. Its actually because of all the corse files that in the past I would not of advocated a framework by any means for a 3 page site and it is all down to the overhead of the required CFC's. That stance has now changed and I am going to show you why you should even use Framework One for when you don't need a framework.</p> <p>As with most code related samples it best to build something; so what the site spec? We are going to build a three page brochureware site (with little or no style) for our family member, Marvin Acme. Marvin wants a simple site that he will hardly be updating but is out there so he has an internet presence. He doesn't care about how we build it or anything techy like MVC and just wants the three following pages:<ol><li>Home page: Something short and sweet about ACME gadgets to capture and kill rodents to grab the user.</li><li>About the company page: Giving background history on the company for it Wile E. Coyote kind of customers to read.</li><li>A contact us page: with an address, telelphone number, and maybe even an inline Google map.</li></ol></p><p>Probably not the best spec in the world (at the same time probably better than a lot of other specs we've all seen) but lets get going.</p><p>All of this is seems easy so lets clear something up now, without frameworks I'd go off and create a <b>/tags/</b> folder which holds <b>layout.cfm</b> and for each of the 3 pages I'd use <b>cfmodule</b> wrapped around the contents. I might even have a <b>Application.(cfm|cfc)</b> for holding some site details. There is nothing wrong with that by any means and is just fine for a site this size. What I want to demonstrate to you is that you can do this just as easily with Framework one whilst:<ol style="list-style-type:lower-alpha;"><li>not thinking about or worrying about MVC/OO,</li><li>by editing no more files than you would of if you had done this<span style="text-decoration:line-through;">with spaghetti code</span> without a framework,</li><li>and while keeping the support of structed code just incase youever need to add a feature later.</li></ol></p><p>Begin by downloading FW/1 from <a href="http://github.com/seancorfield/fw1/downloads">github.com/seancorfield/fw1/downloads</a><ol><li>Create a new folder on your webroot called <b>/acme/</b> and in there from the Framework One download copy<b>/org/corfield/framework.cfc</b> (directorys as well)</li><li>In the FW/1 examples copy the contents of <b>hello1</b> in to the <b>/acme/</b> folder</li><li>Your <b>/acme/</b> folder should look something like the following<br/><img src="http://www.andyjarrett.co.uk/blog/images/no_framework_needed.png" alt="Folder setup"></li></ol></p><p>You should now be able to go to <a href="http://localhost/acme">localhost/acme</a> and see the following:<br/><img src="http://www.andyjarrett.co.uk/blog/images/test_acme_folder.png" alt="Test acme setup" /></p><p>This first post is all about the setup and how we have the bare bones already created and we haven't touched a line of code yet. In the second post we are going to create our simple app for Marvin Acme and we'll build it without editing anymore than 4 files (no different than the cfmodule route) or even think about a bloated XML configuration file.</p></p><p>Found out more about Framework One via:<ul><li><a href="http://fw1.riaforge.org/" title="FW/1 - Framework One">Project home page</a></li><li><a href="http://corfield.org/blog/archives.cfm/category/fw1" title="Blog">The blog</a></li><li><a href="http://wiki.github.com/seancorfield/fw1/" title="Home - fw1 - GitHub">The wiki</a></li></ul></p><br>
     </main>
-
     <div class="row">
       <div class="col">
-
-        <script src="https://giscus.app/client.js"
-                data-repo="andyj/andyjarrett.com"
-                data-repo-id="R_kgDOMjCDkQ"
-                data-category="Announcements"
-                data-category-id="DIC_kwDOMjCDkc4ChlfU"
-                data-mapping="pathname"
-                data-strict="0"
-                data-reactions-enabled="1"
-                data-emit-metadata="0"
-                data-input-position="top"
-                data-theme="preferred_color_scheme"
-                data-lang="en"
-                crossorigin="anonymous"
-                async>
-        </script>
+        <script
+          src="https://giscus.app/client.js"
+          data-repo="andyj/andyjarrett.com"
+          data-repo-id="R_kgDOMjCDkQ"
+          data-category="Announcements"
+          data-category-id="DIC_kwDOMjCDkc4ChlfU"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-theme="preferred_color_scheme"
+          data-lang="en"
+          crossorigin="anonymous"
+          async></script>
         <a name="comment"></a>
       </div>
     </div>
-
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -165,18 +161,3 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
-
-
-
-
-
-<!-- <div class="card m-2" style="width: 15rem;">
-            <div class="card-body">
-              <h5 class="card-title">
-
-              </h5>
-            </div>
-            <div class="card-footer text-end">
-              <a href="" class="card-link link-underline-light"></a>
-            </div>
-          </div> -->

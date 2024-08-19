@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +7,6 @@
 <meta name="author" content="Andy Jarrett">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Multi-lingual site with Model-Glue and Coldspring</title>
-<link rel="canonical" href="https://www.andyjarrett.com/posts/2006/multilingual-site-with-modelglue-and-coldspring/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Multi-lingual site with Model-Glue and Coldspring">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
@@ -18,6 +16,7 @@
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<link rel="canonical" href="https://www.andyjarrett.com/posts/2006/multilingual-site-with-modelglue-and-coldspring/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
@@ -77,29 +76,26 @@
       
 Now and then through my work I get asked to create a site with multi-lingual support. In the past I have usually just created a custom tag or UDF. This time, now that I am on A href="http://model-glue.com/">Model Glue: Unity</a> I wanted something that was a little more integrated so I decided to use Ray Camden modified ResourceBundle.cfc. This cfc was actually created by Paul Hastings and you can find more information <a href="http://www.sustainablegis.com/unicode/resourceBundle/rb.cfm">here</a>.There are two reasons I am posting this mini guide, first to share and the second is that knowing me I am probably doing something inefficient and by letting the community see it hopefully someone will point out any errors or an easier way to do things :o) I've zipped up Pauls/Rays <a href="http://www.andyjarrett.co.uk/downloads/resourcebundle.cfc.zip">ResourceBundle.cfc</a> that comes with <a href="http://www.blogcfc.com">BlogCFC</a> and you can download it by clicking <a href="http://www.andyjarrett.co.uk/downloads/resourcebundle.cfc.zip">here</a>. Lets's begin:<ol> <li>Download the file and put it in your projects model directory, so the url to this CFC would be http://yourlocalproject/model/resourcebundle.cfc.</li> <li>Also in your model directory create new folder called "locale_data" and in there add a file called en_US.properties.</li> <li>Open up <a href="http://www.andyjarrett.co.uk/downloads/resourcebundle.cfc.zip">resourceBundle.cfc</a> and change the method(function) "loadResourceBundle" to "init". The reason for this is that we are going to get <a href="http://www.coldspringframework.org">ColdSpring</a> to inject our required variables into the resource bundle.</li>  <li>Then around line 53 look for the following bit of code<code><cfset thisRBfile=arguments.rbFile&".properties"></code>and change it to<code><cfset thisRBfile = expandPath(arguments.rbFile&".properties")></code>  </li> <li>Next open up your ColdSpring.xml file and add the following:<code><bean id="resourcebundle" class="model.resourcebundle"> <constructor-arg name="rbFile"><value>/model/locale_data/en_US</value></constructor-arg>  <constructor-arg name="rbLocale"><value>en_US</value></constructor-arg></bean></code> What we are doing here is initiated the resourcebundle.cfc and passing two arguments to the init method. These arguments consist of the:<br>  <b>rbFile:</b> This must be the path + filename UP to but NOT including the locale. We auto-add .properties to the end. This location is the file we created in point 2.<br>  <b>rbLocale:</b> The locale.  </li> <li>Then we are going to <a href="http://www.andyjarrett.co.uk/andy/blog/index.cfm/2006/11/23/ColdSpring-and-Dependency-Injection-for-the-beginner-part-1">inject this into our controller</a> and to do this add the following code snippet to your ColdSpring.xml File:<code><bean id="controller" class="controller.controller"> <property name="resourcebundle">    <ref bean="resourcebundle" /> </property>   </bean> </code>   and in your Model Glue controller add<code><cffunction name="setResourcebundle" returntype="void" access="public" output="false">  <cfargument name="Resourcebundle" required="true" type="any" />   <cfset variables.Resourcebundle = arguments.Resourcebundle /></cffunction><cffunction name="getResourcebundle" returntype="any" access="public" output="false">   <cfreturn variables.Resourcebundle /></cffunction></code>    </li>   <li>At this point a lot of the hard work is done. Point 1-3 were just about setting up our environment and 4-6 were about some modification  to get everything to play together nicely.</li>    <li>We'll carry on with the controller. Because we have injected the resourcebundle.cfc in the Controller we can access it via the variable "variables.resourcebundle" and assign it to the viewState with the following code in the onRequestStart function:<code>  <cfset arguments.event.setValue('rb', variables.Resourcebundle) /></code> By doing this we have the bundle in the application scope and ready. For our view files we'll just need to accees the viewState variable but before we do that.....</li>   <li>Lets populate the en_US.properties file with the following before we go any further:<code>name=Namedob=Date Of birthelevator=elevatorcigarette=cigarettesidewalk=sidewalk</code>If you haven't used blogCFC or the resoucebundle then you probably should know that the for each language/region you need to create a new .properties file with the relevant prefix(from the CFMX's locales) and values. So for France the prefix would be fr_FR and UK(English) file would be called en_GB.properties, and the content would be something like:<code>name=Namedob=Date Of birthelevator=liftcigarette=fagsidewalk=pavement</code></li>   <li>      All we need to do now is get the variable we set earlier in OnRequestStart at point xxxxxxxxxxx. Anyone familiar with MG should know this already<code> <cfset rb = viewState.getValue('rb') /> </code>   </li>   <li>      Now that the resourcebundle is referenced to the "rb" variable we use the method "getResource" to access our .properties file and retrieve the translations. So in your view file the final code to display the users name and dob will then look something like<code><cfset rb = viewState.getValue('rb') /> <cfoutput>  #rg.getResource('name')#: #users_name#<br/> #rg.getResource('dob')#: #dateFormat(dob, 'dd-mm-yyyy')#<br/> </cfoutput></code>          </li></ol>Thats pretty much covered the basics of setting this up. You'll notice in my last code snippet I use the UK date format style, this won't do if you are creating a multilingual site but there is a utilities package that goes with the resource bundle for this and I hope to cover that in another post. At the moment I just wait feedback/comment with this approach before I continue.<br>
     </main>
-
     <div class="row">
       <div class="col">
-
-        <script src="https://giscus.app/client.js"
-                data-repo="andyj/andyjarrett.com"
-                data-repo-id="R_kgDOMjCDkQ"
-                data-category="Announcements"
-                data-category-id="DIC_kwDOMjCDkc4ChlfU"
-                data-mapping="pathname"
-                data-strict="0"
-                data-reactions-enabled="1"
-                data-emit-metadata="0"
-                data-input-position="top"
-                data-theme="preferred_color_scheme"
-                data-lang="en"
-                crossorigin="anonymous"
-                async>
-        </script>
+        <script
+          src="https://giscus.app/client.js"
+          data-repo="andyj/andyjarrett.com"
+          data-repo-id="R_kgDOMjCDkQ"
+          data-category="Announcements"
+          data-category-id="DIC_kwDOMjCDkc4ChlfU"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-theme="preferred_color_scheme"
+          data-lang="en"
+          crossorigin="anonymous"
+          async></script>
         <a name="comment"></a>
       </div>
     </div>
-
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -165,18 +161,3 @@ Now and then through my work I get asked to create a site with multi-lingual sup
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
-
-
-
-
-
-<!-- <div class="card m-2" style="width: 15rem;">
-            <div class="card-body">
-              <h5 class="card-title">
-
-              </h5>
-            </div>
-            <div class="card-footer text-end">
-              <a href="" class="card-link link-underline-light"></a>
-            </div>
-          </div> -->

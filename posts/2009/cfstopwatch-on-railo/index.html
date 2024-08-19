@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +7,6 @@
 <meta name="author" content="Andy Jarrett">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>cfStopWatch on Railo</title>
-<link rel="canonical" href="https://www.andyjarrett.com/posts/2009/cfstopwatch-on-railo/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="cfStopWatch on Railo">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
@@ -18,6 +16,7 @@
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<link rel="canonical" href="https://www.andyjarrett.com/posts/2009/cfstopwatch-on-railo/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
@@ -77,29 +76,26 @@
       
 <p>After I found <a href="http://www.andyjarrett.com/blog/?p=1289">the Ternary Operator on Railo</a> I've decided to have a look over the <a href="http://wiki.getrailo.org/space/3-1-Tags">Tags documentation</a>, and <a href="http://wiki.getrailo.org/space/3-1-Functions">Functions documentation</a> viewer on <a href="http://wiki.getrailo.org/space">Railo Wiki</a>.</p><p>Then I came across <a href="http://wiki.getrailo.org/wiki/3-1-Tags:CFStopwatch">CFStopWatch</a>. It works like <a href="http://wiki.getrailo.org/wiki/3-1-Tags:cfTimer">CFTimer</a> in that its used to determine how long it takes for a block of code to execute. The difference is that CFStopWatch stores the time to execute in a variable so you can reference it later. It works by wrapping the tags around the code block you want to execute and setting the time to a variable:</p>[sourcecode language="plain"]&lt;cfstopwatch label=&quot;myLabel&quot; variable=&quot;var&quot; &gt;  CFML logic goes here  &lt;!--- pause for 1 second ---&gt; &lt;cfsleep time=&quot;1000&quot;/&gt;&lt;/cfstopwatch&gt;&lt;cfoutput&gt;&lt;p&gt;Your code took #var# milliseconds to run&lt;/p&gt;&lt;/cfoutput&gt;[/sourcecode]Running the above code will output<blockquote>CFML logic goes hereYour code took 1000 milliseconds to run  </blockquote><p>I can see me using this when running code blocks which I know might take ages, you could write of the time to a log or even send an email.</p><br>
     </main>
-
     <div class="row">
       <div class="col">
-
-        <script src="https://giscus.app/client.js"
-                data-repo="andyj/andyjarrett.com"
-                data-repo-id="R_kgDOMjCDkQ"
-                data-category="Announcements"
-                data-category-id="DIC_kwDOMjCDkc4ChlfU"
-                data-mapping="pathname"
-                data-strict="0"
-                data-reactions-enabled="1"
-                data-emit-metadata="0"
-                data-input-position="top"
-                data-theme="preferred_color_scheme"
-                data-lang="en"
-                crossorigin="anonymous"
-                async>
-        </script>
+        <script
+          src="https://giscus.app/client.js"
+          data-repo="andyj/andyjarrett.com"
+          data-repo-id="R_kgDOMjCDkQ"
+          data-category="Announcements"
+          data-category-id="DIC_kwDOMjCDkc4ChlfU"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-theme="preferred_color_scheme"
+          data-lang="en"
+          crossorigin="anonymous"
+          async></script>
         <a name="comment"></a>
       </div>
     </div>
-
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -165,18 +161,3 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
-
-
-
-
-
-<!-- <div class="card m-2" style="width: 15rem;">
-            <div class="card-body">
-              <h5 class="card-title">
-
-              </h5>
-            </div>
-            <div class="card-footer text-end">
-              <a href="" class="card-link link-underline-light"></a>
-            </div>
-          </div> -->

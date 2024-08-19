@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +7,6 @@
 <meta name="author" content="Andy Jarrett">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ColdSpring and Dependency Injection for the beginner part 2- Constructor Injection.</title>
-<link rel="canonical" href="https://www.andyjarrett.com/posts/2006/coldspring-and-dependency-injection-for-the-beginner-part-2-constructor-injection/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="ColdSpring and Dependency Injection for the beginner part 2- Constructor Injection.">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
@@ -18,6 +16,7 @@
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<link rel="canonical" href="https://www.andyjarrett.com/posts/2006/coldspring-and-dependency-injection-for-the-beginner-part-2-constructor-injection/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
 <link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
@@ -77,29 +76,26 @@
       
 <p>Time to code! woohoo! I am going to carry on with the components from the last post which are userService and userDAO in a "model" directory on the root. For this post we'll assume that my DAO only has basic CRUD methods; Create, Read, Update, and Delete</p><p>I am going to demonstrate the Constructor Injection method of dependency injection which was summarised quickly in my <a href="http://www.andyjarrett.co.uk/andy/blog/index.cfm/2006/11/23/ColdSpring-and-Dependency-Injection-for-the-beginner-part-1">last post</a>. I think a recap is need here:</p><p><span>&lt;constructor-arg name="argumentName"/&gt;</span><br>This tag will cause Coldspring to supply your bean with a value or object reference when it is instantiated (during a CFC's init() method), passed as an argument named via the name attribute.</p><p>What the above statement means in basic terms is that the userService must have an init() method which accepts the userDAO object as an argument and sets it to a variable. e.g.</p> <code><cffunction name="init" returntype="any" output="false" hint="constructor"> <cfargument name="userDAO" type="any" required="true" hint="Dependency DAO"/> <cfset varaibles.userDAO = arguments.userDAO /></cffunction></code><em>n.b. For the argument type you can put the path to your DAO. In my example it would look like type="model.userDAO". I am not going to though just so I can keep things simple here.</em><p>At the moment don't worry how the init() method gets the userDAO object. Just know that it does (via ColdSpring) and when it does it sets it to a local variable. So with the userDAO initiated and assigned to access it and call a method(function) is as easy as </p><code><cffunction name="somFunction" access="public" output="false" returntype="any">  <cfargument name="userid" required="true" />  <cfset var userDao = variables.getuserDAO() />  <cfset var user = userDAO.read(arguments.userid) />   <cfreturn user /></cffunction></code>Putting this all together your userService should look like this<code><cffunction name="init" returntype="any" output="false" hint="constructor">  <cfargument name="userDAO" type="any" required="true" hint="Dependency DAO"/> <cfset varaibles.userDAO = arguments.userDAO /></cffunction><cffunction name="somFunction" access="public" output="false" returntype="any"> <cfargument name="userid" required="true" />  <cfset var userDao = variables.getuserDAO() />  <cfset var user = userDAO.read(arguments.userid) />   <cfreturn user /></cffunction></code><p>Now comes the part I told you not to worry about. This is the injection. This is how we tell Coldspring to do this. First off we need to let CS know about userDAO which is one line of xml</p><code><bean id="userDAO" class="model.userDAO" /></code><p>Its nothing fancy. In a nutshell it just saying to Coldspring "Do me a favour and register model.userDAO and assign it a friendly name of userDAO for reference later". That was simple.</p><p>Now we do the same for the userService</p><code><bean id="userService" class="model.userService" /></code><p>At this point we have two beans registered with ColdSpring, but our userService has no knowledge of the userDAO and vice versa. To make the userService aware is still simple, we just add the &lt;constructor-arg> tag to the bean and reference the userDAO</p><code><bean id="userService" class="model.userService">  <constructor-arg name="userDAO">    <ref bean="userDAO" />  </constructor-arg></bean> </code><p>And there you have it, that's it. I'm not going to go into much more details on this one as I only wanted to explain the basics to get people up and running.</p><p>If you want to inject more beans then all you need to do is add the arguments to the userService.cfc. e.g.<code>  <cffunction name="init" returntype="any" output="false" hint="constructor">   <cfargument name="userDAO" type="any" required="true" hint="Dependency DAO"/>   <cfargument name="addressDAO" type="any" required="true" hint="Dependency DAO"/>    <cfset varaibles.userDAO = arguments.userDAO />   <cfset varaibles.addressDAO = arguments.userDAO />  </cffunction> </code>and add the extra details to the ColdSpring.xml file. e.g.<code><bean id="addressDAO" class="model.addressDAO" />  <bean id="userService" class="model.userService">  <constructor-arg name="userDAO">    <ref bean="userDAO" />  </constructor-arg>  <constructor-arg name="addressDAO">    <ref bean="addressDAO" />  </constructor-arg></bean></code><p>Tha....tha..tha...that's all folks for this part. Next part (next week now) will be on setter injection</p><p>Don't forget for more information check out</p><a href="http://www.coldspringframework.or/">coldspringframework.org</a>, or the mailing lists<p>To subscribe, send an email:</p><p><strong>To:</strong> <em><a href="mailto:MDaemon@coldspringframework.org?SUBSCRIBE coldspring-dev@coldspringframework.org">MDaemon@coldspringframework.org</a></em></p><p><strong>Subject:</strong> <em>SUBSCRIBE coldspring-dev@coldspringframework.org</em></p></p><br>
     </main>
-
     <div class="row">
       <div class="col">
-
-        <script src="https://giscus.app/client.js"
-                data-repo="andyj/andyjarrett.com"
-                data-repo-id="R_kgDOMjCDkQ"
-                data-category="Announcements"
-                data-category-id="DIC_kwDOMjCDkc4ChlfU"
-                data-mapping="pathname"
-                data-strict="0"
-                data-reactions-enabled="1"
-                data-emit-metadata="0"
-                data-input-position="top"
-                data-theme="preferred_color_scheme"
-                data-lang="en"
-                crossorigin="anonymous"
-                async>
-        </script>
+        <script
+          src="https://giscus.app/client.js"
+          data-repo="andyj/andyjarrett.com"
+          data-repo-id="R_kgDOMjCDkQ"
+          data-category="Announcements"
+          data-category-id="DIC_kwDOMjCDkc4ChlfU"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-theme="preferred_color_scheme"
+          data-lang="en"
+          crossorigin="anonymous"
+          async></script>
         <a name="comment"></a>
       </div>
     </div>
-
     <div class="row mt-5 ">
       <div class="col-6">
         <strong>Recent Posts</strong>
@@ -165,18 +161,3 @@
 <script src="/public/prismjs/prism.js"></script>
 </body>
 </html>
-
-
-
-
-
-<!-- <div class="card m-2" style="width: 15rem;">
-            <div class="card-body">
-              <h5 class="card-title">
-
-              </h5>
-            </div>
-            <div class="card-footer text-end">
-              <a href="" class="card-link link-underline-light"></a>
-            </div>
-          </div> -->
