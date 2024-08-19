@@ -81,7 +81,7 @@
     I also want to mention that I am running all my Ant tasks via <a href="http://www.eclipse.org">Eclipse</a> and not the command line. If there is a demand to know how to install Ant and run it from the command line I'll do that post separately. At this point I'm assuming you've got Eclipse and you know your way around it enough? Before we do begin you will need to ensure that you can see the Console 'View', you can get to this by going to:
 </p>
 <p>
-    <pre><code> Window >> Show View >> Other >> General >> Console</code></pre>
+    <code > Window >> Show View >> Other >> General >> Console</code>
 </p>
 <p>
     Before we jump in, if you are on Unix then know that the file permissions are not retained when files are copied; they end up with the default UMASK permissions instead. This is down to the current Java runtimes and the inability to set the permissions. You can get around this by using ANT to call Copy Path view the terminal i.e. <exec executable="cp" ... > instead. If you are on Windows and you copy a file to a directory where that file already exists, but with different casing, the copied file takes on the case of the original. The workaround is to delete the file in the destination directory before you copy it.
@@ -106,25 +106,22 @@
 <p>
     The idea of the next task is to copy index.cfm from the test folder to the live one. I'm also going to introduce properties, think of them as variables.
 </p>
-<pre><code>
-    &lt;?xml version="1.0" encoding="UTF-8"?>
-    &lt;project name="myFirstBuildFile" default="" basedir=".">
-        &lt;description> A description of what this build file does &lt;/description>
-        &lt;!-- Relative location of test folder -->
-        &lt;property name="test" value="folder_test/" />
-        &lt;!-- Relative location of live folder -->
-        &lt;property name="live" value="folder_live/" />
-        &lt;!-- copy file -->
-        &lt;copy file="${test}index.cfm" todir="${live}" />
-        &lt;echo message="The index.cfm file has been copied" />
-    &lt;/project>
+<pre><code class="langauge-xml">&lt;?xml version="1.0" encoding="UTF-8"?>
+&lt;project name="myFirstBuildFile" default="" basedir=".">
+    &lt;description> A description of what this build file does &lt;/description>
+    &lt;!-- Relative location of test folder -->
+    &lt;property name="test" value="folder_test/" />
+    &lt;!-- Relative location of live folder -->
+    &lt;property name="live" value="folder_live/" />
+    &lt;!-- copy file -->
+    &lt;copy file="${test}index.cfm" todir="${live}" />
+    &lt;echo message="The index.cfm file has been copied" />
+&lt;/project>
 </code></pre>
 <p>
     Now while still in the editor right-click anywhere on your build.xml file and choose the following:
 </p>
-<pre><code>
-    Run As >> Ant Build
-</code></pre>
+<p><code> Run As >> Ant Build </code></p>
 <p>
     If all has gone well you should have just copied your index.cfm file from test to live. That's all good and well but I doubt you ever have to copy just one file, my guess is that you have a host of folders and files. In the directory 'folder_test' add two other directories called 'images' and 'css' and copy 'index.cfm' back as well. Your new directory structure should look like this: (feel free to stick some more files into the newly created folders)
 </p>
@@ -144,103 +141,94 @@
 <p>
     The plan now is to copy the complete directory of 'folder_test' to 'folder_live':
 </p>
-<pre><code>
-    &lt;?xml version="1.0" encoding="UTF-8"?>
-    &lt;project name="myFirstBuildFile" default="" basedir=".">
-        &lt;description> A description of what this build file does &lt;/description>
-        &lt;!-- Relative location of test folder -->
-        &lt;property name="test" value="folder_test/" />
-        &lt;!-- Relative location of live folder -->
-        &lt;property name="live" value="folder_live/" />
-        &lt;!-- copy directories and files -->
-        &lt;!-- From Ant 1.6.3 you can write the following as: -->
-        &lt;!-- &lt;copy file="${test}" tofile="${live}" /> -->
-        &lt;copy todir="${live}">
-            &lt;fileset dir="${test}" />
-        &lt;/copy>
-        &lt;echo message="The contents of folder_test have been copied" />
-    &lt;/project>
+<pre><code class="langauge-xml">&lt;?xml version="1.0" encoding="UTF-8"?>
+  &lt;project name="myFirstBuildFile" default="" basedir=".">
+    &lt;description> A description of what this build file does &lt;/description>
+    &lt;!-- Relative location of test folder -->
+    &lt;property name="test" value="folder_test/" />
+    &lt;!-- Relative location of live folder -->
+    &lt;property name="live" value="folder_live/" />
+    &lt;!-- copy directories and files -->
+    &lt;!-- From Ant 1.6.3 you can write the following as: -->
+    &lt;!-- &lt;copy file="${test}" tofile="${live}" /> -->
+    &lt;copy todir="${live}">
+      &lt;fileset dir="${test}" />
+    &lt;/copy>
+    &lt;echo message="The contents of folder_test have been copied" />
+  &lt;/project>
 </code></pre>
 <p>
     Again while in the editor right-click anywhere on your build.xml file and choose the following:
 </p>
-<pre><code>
-    Run As >> Ant Build
-</code></pre>
+<p><code class="langauge-xml"> Run As >> Ant Build </code></p>
 <p>
     Of course, there is more you can do. Rather than going through a full set of examples here, or some of the other features:
 </p>
 <p>
     Copy a set of files to a directory
 </p>
-<pre><code>
-    &lt;copy todir="${live}">
-        &lt;fileset dir="${test}">
-            &lt;exclude name="**/*.cfm" />
-        &lt;/fileset>
-    &lt;/copy>
-    &lt;copy todir="${live}">
-        &lt;fileset dir="${test}" excludes="**/*.cfm" />
-    &lt;/copy>
+<pre><code class="langauge-xml"> &lt;copy todir="${live}">
+  &lt;fileset dir="${test}">
+    &lt;exclude name="**/*.cfm" />
+  &lt;/fileset>
+&lt;/copy>
+&lt;copy todir="${live}">
+  &lt;fileset dir="${test}" excludes="**/*.cfm" />
+&lt;/copy>
 </code></pre>
 <p>
     Copy a set of files to a directory, appending .bak to the file name on the fly
 </p>
-<pre><code>
-    &lt;copy todir="${live}">
-        &lt;fileset dir="${test}" />
-        &lt;globmapper from="*" to="*.bak" />
-    &lt;/copy>
+<pre><code class="langauge-xml">&lt;copy todir="${live}">
+  &lt;fileset dir="${test}" />
+  &lt;globmapper from="*" to="*.bak" />
+&lt;/copy>
 </code></pre>
 <p>
     Copy a set of files to a directory, replacing @TITLE@ with Foo Bar in all files.
 </p>
-<pre><code>
-    &lt;copy todir="${live}">
-        &lt;fileset dir="${test}" />
-        &lt;filterset>
-            &lt;filter token="TITLE" value="Foo Bar" />
-        &lt;/filterset>
-    &lt;/copy>
+<pre><code class="langauge-xml">&lt;copy todir="${live}">
+  &lt;fileset dir="${test}" />
+  &lt;filterset>
+    &lt;filter token="TITLE" value="Foo Bar" />
+  &lt;/filterset>
+&lt;/copy>
 </code></pre>
 <p>
     Collect all items from the current CLASSPATH setting into a destination directory, flattening the directory structure.
 </p>
-<pre><code>
-    &lt;copy todir="${live}" flatten="true">
-        &lt;path>
-            &lt;pathelement path="${test}" />
-        &lt;/path>
-    &lt;/copy>
+<pre><code class="langauge-xml">&lt;copy todir="${live}" flatten="true">
+  &lt;path>
+    &lt;pathelement path="${test}" />
+  &lt;/path>
+&lt;/copy>
 </code></pre>
 <p>
     Copies some resources to a given directory.
 </p>
-<pre><code>
-    &lt;copy todir="${live}" flatten="true">
-        &lt;resources>
-            &lt;file file="${test}/index.cfm" />
-            <url url="http://www.andyjarrett.co.uk/andy/blog/index.cfm" />
-        &lt;/resources>
-    &lt;/copy>
+<pre><code class="langauge-xml"> &lt;copy todir="${live}" flatten="true">
+  &lt;resources>
+    &lt;file file="${test}/index.cfm" />
+      &lt;url url="http://www.andyjarrett.co.uk/andy/blog/index.cfm" />
+     &lt;/resources>
+ &lt;/copy>
 </code></pre>
 <p>
     Copies the two newest resources into a destination directory.
 </p>
-<pre><code>
-    &lt;copy todir="${live}" flatten="true">
-        &lt;first count="2">
-            &lt;sort>
-                <date xmlns="antlib:org.apache.tools.ant.types.resources.comparators" />
-                &lt;resources>
-                    &lt;file file="${test}/file1.txt" />
-                    &lt;file file="${test}/file2.txt" />
-                    &lt;file file="${test}/file3.txt" />
-                    <url url="http://ant.apache.org/index.html" />
-                &lt;/resources>
-            &lt;/sort>
-        &lt;/first>
-    &lt;/copy>
+<pre><code class="langauge-xml"> &lt;copy todir="${live}" flatten="true">
+  &lt;first count="2">
+    &lt;sort>
+      &lt;date xmlns="antlib:org.apache.tools.ant.types.resources.comparators" />
+      &lt;resources>
+          &lt;file file="${test}/file1.txt" />
+          &lt;file file="${test}/file2.txt" />
+          &lt;file file="${test}/file3.txt" />
+          &lt;url url="http://ant.apache.org/index.html" />
+      &lt;/resources>
+    &lt;/sort>
+  &lt;/first>
+&lt;/copy>
 </code></pre>
 <p>
     More resources:
