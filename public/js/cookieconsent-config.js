@@ -4,7 +4,6 @@ import 'https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookiecon
 document.documentElement.classList.add('cc--darkmode');
 
 function loadGoogleAnalytics() {
-  // Check if Google Analytics script is already loaded
   if (!window.gaInitialized) {
     var script = document.createElement('script');
     script.src = "https://www.googletagmanager.com/gtag/js?id=G-L0V74G0Q65";
@@ -23,13 +22,28 @@ function loadGoogleAnalytics() {
 }
 
 function disableGoogleAnalytics() {
-  // Clear the dataLayer
   if (window.dataLayer) {
     window.dataLayer = [];
   }
-  // Optionally, you can also disable analytics cookies if they were already set
   document.cookie = "_ga=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
   document.cookie = "_gid=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+}
+
+function loadClarity() {
+  if (!window.clarityInitialized) {
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "nqaz84w4hd");
+    window.clarityInitialized = true;
+  }
+}
+
+function disableClarity() {
+  // Clarity doesn't provide a straightforward way to disable it once initialized.
+  // You can, however, prevent further interactions by not sending any events or possibly reloading the page.
+  // Alternatively, you could inform users about Clarity in the preferences and leave the script loaded by default.
 }
 
 const cc = CookieConsent.run({
@@ -96,14 +110,17 @@ const cc = CookieConsent.run({
   onAccept: (cookie) => {
     if (cookie.categories.analytics) {
       loadGoogleAnalytics();
+      loadClarity();
     }
   },
   onChange: (cookie, changedPreferences) => {
     if (changedPreferences.includes('analytics')) {
       if (cookie.categories.analytics) {
         loadGoogleAnalytics();
+        loadClarity();
       } else {
         disableGoogleAnalytics();
+        disableClarity();
       }
     }
   }
@@ -114,6 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const userPreferences = CookieConsent.getUserPreferences();
     if (userPreferences && userPreferences.categories && userPreferences.categories.analytics) {
       loadGoogleAnalytics();
+      loadClarity();
     }
   }
 });
