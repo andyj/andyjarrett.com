@@ -7,91 +7,6 @@
     <language>en</language>
     <atom:link href="https://andyjarrett.com/feed.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Exploring Timestamps and Millisecond Precision with MariaDB</title>
-      <link>https://andyjarrett.com/posts/2023/exploring-millisecond-precision-in-mariadb-timestamps/</link>
-      <description><![CDATA[
-&lt;div class=&quot;image-container my-2&quot;&gt;
-  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/peter-yost-I9jJXmNkXR4-unsplash.jpg&quot; alt=&quot;Stopwatch on desk&quot; class=&quot;img-fluid&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;text-end&quot;&gt;
-  &lt;sup&gt;
-    &lt;cite&gt;
-      Photo by &lt;a href=&quot;https://unsplash.com/@odysseus_?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Peter Yost&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/silver-and-white-round-analog-watch-I9jJXmNkXR4?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;
-    &lt;/cite&gt;
-  &lt;/sup&gt;
-&lt;/div&gt;
-
-
-
-
-  &lt;div class=&quot;container my-5&quot;&gt;
-
-    &lt;section&gt;
-      &lt;h2&gt;Understanding Timestamps&lt;/h2&gt;
-      &lt;p&gt;
-        In MariaDB, the timestamp data type can be defined with an optional fractional seconds part.
-        You can specify fractional seconds support using the syntax timestamp(N), where N represents
-        the number of digits in the fractional seconds part, ranging from 1 to 6. This is needed when
-        you&#39;re dealing with time-sensitive applications and is easy to do with MariaDB and &lt;code&gt;now(N)&lt;/code&gt;.
-      &lt;/p&gt;
-      &lt;p&gt;Example:&lt;/p&gt;
-    &lt;/section&gt;
-
-    &lt;section&gt;
-      &lt;h2&gt;The Table Schema&lt;/h2&gt;
-      &lt;pre class=&quot;bg-light p-4 rounded&quot;&gt;&lt;code class=&quot;language-sql&quot;&gt;CREATE TABLE `_timetest` (
-  `n_ct` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `n` timestamp NULL DEFAULT NULL,
-  `n_1` timestamp(1) NULL DEFAULT NULL,
-  `n_2` timestamp(2) NULL DEFAULT NULL,
-  `n_3` timestamp(3) NULL DEFAULT NULL,
-  `n_4` timestamp(4) NULL DEFAULT NULL,
-  `n_5` timestamp(5) NULL DEFAULT NULL,
-  `n_6` timestamp(6) NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;&lt;/code&gt;
-      &lt;/pre&gt;
-    &lt;/section&gt;
-
-
-    &lt;section&gt;
-      &lt;h2 class=&quot;mt-5&quot;&gt;Example Input&lt;/h2&gt;
-      &lt;p&gt;While you can insert timestamps manually, MariaDB provides the &lt;code&gt;now()&lt;/code&gt; function for inserting the current timestamp, which can also be used with fractional seconds.&lt;/p&gt;
-      &lt;pre class=&quot;bg-light p-4 rounded&quot;&gt;&lt;code class=&quot;language-sql&quot;&gt;INSERT INTO _timetest (n, n_1, n_2, n_3, n_4, n_5, n_6)
-VALUES (
-  now(),
-  now(1),
-  now(2),
-  now(3),
-  now(4),
-  now(5),
-  now(6)
-);&lt;/code&gt;&lt;/pre&gt;
-    &lt;/section&gt;
-
-    &lt;section&gt;
-      &lt;h2 class=&quot;mt-5&quot;&gt;Example Output&lt;/h2&gt;
-      &lt;p&gt;The &lt;code class=&quot;language-sql&quot;&gt;SELECT&lt;/code&gt; statement:&lt;/p&gt;
-      &lt;pre class=&quot;bg-light p-4 rounded&quot;&gt; &lt;code class=&quot;language-sql&quot;&gt; SELECT * FROM _timetest; &lt;/code&gt; &lt;/pre&gt;
-      &lt;p&gt;The output&lt;/p&gt;
-      &lt;pre class=&quot;bg-light p-4 rounded&quot;&gt;&lt;code&gt;
-+---------------------+---------------------+---------------------+---------------------+-------------------------+--------------------------+---------------------------+----------------------------+
-| n_ct                | n                   | n_1                 | n_2                 | n_3                     | n_4                      | n_5                       | n_6                        |
-+---------------------+---------------------+---------------------+---------------------+-------------------------+--------------------------+---------------------------+----------------------------+
-| 2023-09-10 12:34:56 | 2023-09-10 12:34:56 | 2023-09-10 12:34:56 | 2023-09-10 12:34:56 | 2023-09-10 12:34:56.123 | 2023-09-10 12:34:56.1234 | 2023-09-10 12:34:56.12345 | 2023-09-10 12:34:56.123456 |
-+---------------------+---------------------+---------------------+---------------------+-------------------------+--------------------------+---------------------------+----------------------------+
-&lt;/code&gt; &lt;/pre&gt;
-    &lt;/section&gt;
-
-  &lt;/div&gt;
-]]></description>
-      <pubDate>Tue, 09 Jul 2024 23:16:00 +0000</pubDate>
-      <dc:creator>Andy Jarrett</dc:creator>
-      <guid>https://andyjarrett.com/posts/2023/exploring-millisecond-precision-in-mariadb-timestamps/</guid>
-      <enclosure url="https://andyjarrett.com/public/blogimage/peter-yost-I9jJXmNkXR4-unsplash.jpg" type="image/jpeg" />
-      <category>posts</category>
-      <author>Andy Jarrett &lt;email@example.com&gt;</author>
-    </item>
-    <item>
       <title>Exploring JS array methods, including push, pop, shift, unshift, map, filter, reduce, and others</title>
       <link>https://andyjarrett.com/posts/2024/exploring-array-methods-including-push-pop-shift-unshift-map-filter-reduce-and-others/</link>
       <description><![CDATA[&lt;style&gt;pre div {margin-bottom: 20px; }&lt;/style&gt;
@@ -693,9 +608,7 @@ Count label: 1&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div class=&quot;text-end&quot;&gt;
   &lt;sup&gt;
-    &lt;cite&gt;
-      Photo by &lt;a href=&quot;https://unsplash.com/@altumcode?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;AltumCode&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/macbook-pro-on-black-wooden-table-PNbDkQ2DDgM?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;
-    &lt;/cite&gt;
+    &lt;cite&gt;Photo by &lt;a href=&quot;https://unsplash.com/@altumcode?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;AltumCode&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/macbook-pro-on-black-wooden-table-PNbDkQ2DDgM?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt; &lt;/cite&gt;
   &lt;/sup&gt;
 &lt;/div&gt;
 
@@ -982,9 +895,7 @@ Process Count: 1&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div class=&quot;text-end&quot;&gt;
   &lt;sup&gt;
-    &lt;cite&gt;
-      Photo by &lt;a href=&quot;https://unsplash.com/@trintaycinco?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Nathalia Segato&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/a-store-front-at-night-with-a-person-walking-in-the-doorway-auQGug8wkLM?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;
-    &lt;/cite&gt;
+    &lt;cite&gt;Photo by &lt;a href=&quot;https://unsplash.com/@trintaycinco?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Nathalia Segato&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/a-store-front-at-night-with-a-person-walking-in-the-doorway-auQGug8wkLM?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;&lt;/cite&gt;
   &lt;/sup&gt;
 &lt;/div&gt;
 
@@ -1102,6 +1013,67 @@ return {
       <guid>https://andyjarrett.com/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/</guid>
       <enclosure url="https://andyjarrett.com/public/blogimage/nathalia-segato-auQGug8wkLM-unsplash.jpg" type="image/jpeg" />
       <category>posts, javascript, alpinejs, rss, rss reader</category>
+      <author>Andy Jarrett &lt;email@example.com&gt;</author>
+    </item>
+    <item>
+      <title>NGINX redirect loops with SSL and CloudFlare</title>
+      <link>https://andyjarrett.com/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/</link>
+      <description><![CDATA[
+&lt;div class=&quot;image-container my-2&quot;&gt;
+  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/chuttersnap-9AqIdzEc9pY-unsplash.jpg&quot; alt=&quot;Clouds&quot; class=&quot;img-fluid&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;text-end&quot;&gt;
+  &lt;sup&gt;
+    &lt;cite&gt;Photo by &lt;a href=&quot;https://unsplash.com/@chuttersnap?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;CHUTTERSNAP&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/blue-clouds-under-white-sky-9AqIdzEc9pY?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;&lt;/cite&gt;
+  &lt;/sup&gt;
+&lt;/div&gt;
+
+I&#39;ve been having trouble with my andyjarrett.com domain (though not my .co.uk one?) and redirection issues. Sometimes it would affect the browser, sometimes it wouldn&#39;t. Well last night was the last time its happening. So this is there I was
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;curl https://www.andyjarrett.com
+&amp;lt;html&gt;
+&amp;lt;head&gt;&amp;lt;title&gt;307 Temporary Redirect&amp;lt;/title&gt;&amp;lt;/head&gt;
+&amp;lt;body&gt;
+&amp;lt;center&gt;&amp;lt;h1&gt;307 Temporary Redirect&amp;lt;/h1&gt;&amp;lt;/center&gt;
+&amp;lt;hr&gt;&amp;lt;center&gt;nginx/1.18.0 (Ubuntu)&amp;lt;/center&gt;
+&amp;lt;/body&gt;
+&amp;lt;/html&gt; &lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;When I dived deeper in to it with &lt;code&gt;curl -L https://www.andyjarrett.com&lt;/code&gt; I got this&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;curl: (47) Maximum (50) redirects followed&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Didn&#39;t really help, so next on to the logs &lt;code&gt;sudo tail -f /var/log/nginx/error.log&lt;/code&gt; which didn&#39;t tell me much but did highlight headers like &lt;code&gt;CF-RAY&lt;/code&gt;, &lt;code&gt;CF-Visitor&lt;/code&gt;, and &lt;code&gt;CDN-Loop&lt;/code&gt;. Now I&#39;m thinking Cloudflare might be the cause of the redirection loop, especially if there&#39;s a mismatch between how Cloudflare is configured to handle SSL and how my server is handling it. Finally I got to CloudFlare &gt; Domain (andyjarrett.com) &gt; SSL/TLS &gt; Overview and &quot;SSL/TLS encryption&quot;. &lt;/p&gt;
+
+&lt;div class=&quot;alert alert-success&quot;&gt;
+&lt;strong&gt;Solution: Ensure that Cloudflare is set to &quot;Full&quot; or &quot;Full (Strict)&quot; mode for SSL.&lt;/strong&gt;
+&lt;/div&gt;
+
+&lt;p class=&quot;text-center&quot;&gt;
+  &lt;img src=&quot;https://andyjarrett.com/public/img/nginx-redirect-loops-with-ssl-and-cloudflare.png&quot; /&gt;
+&lt;/p&gt;
+&lt;p&gt;
+  &lt;strong&gt;Why?&lt;/strong&gt; Mine was originall set as &quot;Flexible,&quot; causing Cloudflare to make a HTTP requests to my server and causing the loop.
+  From what I&#39;ve learnt
+&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;My Nginx server is configured to redirect all HTTP requests to HTTPS (i.e., redirect port 80 traffic to port 443).&lt;/li&gt;
+  &lt;li&gt;When Cloudflare operates in Flexible mode, it connects to my server via HTTP (port 80), because it assumes the server doesn&#39;t support HTTPS.&lt;/li&gt;
+  &lt;li&gt;When my server sees this incoming HTTP request, it triggers the redirection to HTTPS.&lt;/li&gt;
+  &lt;li&gt;Cloudflare receives the redirect response and tries to establish an HTTPS connection with my server again, but still over HTTP due to &quot;Flexible&quot; mode.&lt;/li&gt;
+  &lt;li&gt;This creates a loop: Cloudflare keeps making HTTP requests to my server, and your server keeps redirecting them to HTTPS.&lt;/li&gt;
+&lt;/ol&gt;
+
+
+
+
+]]></description>
+      <pubDate>Wed, 21 Aug 2024 10:30:00 +0000</pubDate>
+      <dc:creator>Andy Jarrett</dc:creator>
+      <guid>https://andyjarrett.com/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/</guid>
+      <enclosure url="https://andyjarrett.com/public/blogimage/chuttersnap-9AqIdzEc9pY-unsplash.jpg" type="image/jpeg" />
+      <category>posts, nginx, cloudflare, loop, redirect, ssl</category>
       <author>Andy Jarrett &lt;email@example.com&gt;</author>
     </item>
     <image>

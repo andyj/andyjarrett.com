@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="description" content="My Cloudflare backed site was stuck in redirect loop and Nginx conf changes wasn't fixing it">
+<meta name="author" content="Andy Jarrett">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NGINX redirect loops with SSL and CloudFlare</title>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="NGINX redirect loops with SSL and CloudFlare">
+<meta name="twitter:description" content="My Cloudflare backed site was stuck in redirect loop and Nginx conf changes wasn't fixing it">
+<meta name="twitter:creator" content="@andyj" />
+<meta property="og:title" content="NGINX redirect loops with SSL and CloudFlare">
+<meta property="og:description" content="My Cloudflare backed site was stuck in redirect loop and Nginx conf changes wasn't fixing it">
+<meta property="og:image" content="https://www.andyjarrett.com/public/blogimage/chuttersnap-9AqIdzEc9pY-unsplash.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="canonical" href="https://www.andyjarrett.com/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/">
+<link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="/public/css/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
+<link rel="stylesheet" href="/public/prismjs/prism.css">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-L0V74G0Q65"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-L0V74G0Q65');
+</script>
+</head>
+<body>
+  <div class="container border-bottom pb-2">
+  <header class="d-flex flex-wrap justify-content-center">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+      <span class="fs-2">Andy Jarrett // <span class="lead">Code. Develop. Create.</span></span>
+    </a>
+    <ul class="nav nav-pills">
+      <li class="nav-item  p-2">
+        <a href="/" class="btn btn-outline-primary rounded-circle p-3 lh-1">
+          <i class="bi bi-house fs-5"></i>
+          <span class="visually-hidden">Dismiss</span>
+        </a>
+      </li>
+      <li class="nav-item  p-2">
+        <a href="/feed.xml" class="btn btn-outline-primary rounded-circle p-3 lh-1">
+          <i class="bi bi-rss fs-5"></i>
+        </a>
+      </li>
+      <li class="nav-item  p-2">
+        <a href="/linktree" class="btn btn-outline-primary rounded-circle p-3 lh-1" title="Linktree for Andy Jarrett">
+          <i class="bi bi-tree fs-5"></i>
+        </a>
+      </li>
+      <li class="nav-item  p-2">
+        <a href="https://buymeacoffee.com/mailgw" class="btn btn-outline-primary rounded-circle p-3 lh-1">
+          <i class="bi bi-cup-hot-fill fs-5"></i>
+        </a>
+      </li>
+    </ul>
+  </header>
+</div>  
+
+
+  <div class="container">
+    <div class="my-1 text-center text-info" role="alert">You can now comment! Read about it <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/">here</a> or leave a <a href="#comment">comment below</a>.</div>
+    <h1 class="mt-5 mb-5"><b>NGINX redirect loops with SSL and CloudFlare</b></h1>
+    <main class="mw fw-lighter fs-5">
+      
+<div class="image-container my-2">
+  <img src="/public/blogimage/chuttersnap-9AqIdzEc9pY-unsplash.jpg" alt="Clouds" class="img-fluid">
+</div>
+<div class="text-end">
+  <sup>
+    <cite>Photo by <a href="https://unsplash.com/@chuttersnap?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">CHUTTERSNAP</a> on <a href="https://unsplash.com/photos/blue-clouds-under-white-sky-9AqIdzEc9pY?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a></cite>
+  </sup>
+</div>
+
+I've been having trouble with my andyjarrett.com domain (though not my .co.uk one?) and redirection issues. Sometimes it would affect the browser, sometimes it wouldn't. Well last night was the last time its happening. So this is there I was
+
+<pre><code class="language-bash">curl https://www.andyjarrett.com
+&lt;html>
+&lt;head>&lt;title>307 Temporary Redirect&lt;/title>&lt;/head>
+&lt;body>
+&lt;center>&lt;h1>307 Temporary Redirect&lt;/h1>&lt;/center>
+&lt;hr>&lt;center>nginx/1.18.0 (Ubuntu)&lt;/center>
+&lt;/body>
+&lt;/html> </code></pre>
+
+<p>When I dived deeper in to it with <code>curl -L https://www.andyjarrett.com</code> I got this</p>
+
+<pre><code class="language-bash">curl: (47) Maximum (50) redirects followed</code></pre>
+
+<p>Didn't really help, so next on to the logs <code>sudo tail -f /var/log/nginx/error.log</code> which didn't tell me much but did highlight headers like <code>CF-RAY</code>, <code>CF-Visitor</code>, and <code>CDN-Loop</code>. Now I'm thinking Cloudflare might be the cause of the redirection loop, especially if there's a mismatch between how Cloudflare is configured to handle SSL and how my server is handling it. Finally I got to CloudFlare > Domain (andyjarrett.com) > SSL/TLS > Overview and "SSL/TLS encryption". </p>
+
+<div class="alert alert-success">
+<strong>Solution: Ensure that Cloudflare is set to "Full" or "Full (Strict)" mode for SSL.</strong>
+</div>
+
+<p class="text-center">
+  <img src="/public/img/nginx-redirect-loops-with-ssl-and-cloudflare.png">
+</p>
+<p>
+  <strong>Why?</strong> Mine was originall set as "Flexible," causing Cloudflare to make a HTTP requests to my server and causing the loop.
+  From what I've learnt
+</p>
+
+<ol>
+  <li>My Nginx server is configured to redirect all HTTP requests to HTTPS (i.e., redirect port 80 traffic to port 443).</li>
+  <li>When Cloudflare operates in Flexible mode, it connects to my server via HTTP (port 80), because it assumes the server doesn't support HTTPS.</li>
+  <li>When my server sees this incoming HTTP request, it triggers the redirection to HTTPS.</li>
+  <li>Cloudflare receives the redirect response and tries to establish an HTTPS connection with my server again, but still over HTTP due to "Flexible" mode.</li>
+  <li>This creates a loop: Cloudflare keeps making HTTP requests to my server, and your server keeps redirecting them to HTTPS.</li>
+</ol>
+
+
+
+
+
+    </main>
+    <div class="row">
+      <div class="col">
+        <script
+          src="https://giscus.app/client.js"
+          data-repo="andyj/andyjarrett.com"
+          data-repo-id="R_kgDOMjCDkQ"
+          data-category="Announcements"
+          data-category-id="DIC_kwDOMjCDkc4ChlfU"
+          data-mapping="pathname"
+          data-strict="0"
+          data-reactions-enabled="1"
+          data-emit-metadata="0"
+          data-input-position="top"
+          data-theme="preferred_color_scheme"
+          data-lang="en"
+          crossorigin="anonymous"
+          async></script>
+        <a name="comment"></a>
+      </div>
+    </div>
+    <div class="row mt-5 ">
+      <div class="col-6">
+        <strong>Recent Posts</strong>
+        <ul>
+        
+          <li ><a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare</a></li>
+        
+          <li ><a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader</a></li>
+        
+          <li ><a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed</a></li>
+        
+          <li ><a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog</a></li>
+        
+        </ul>
+      </div>
+      <div class="col-6 pt-3 text-end">
+        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+      </div>
+    </div>
+  </div>
+  <footer class="container mt-5 border-top pt-2">
+  <div class="row justify-content-md-center">
+    <div class="col">
+      ©AndyJarrett
+      <a href="/linktree" title="Linktree for AndyJarrett" target="_blank"><i class="bi bi-tree"></i></a>
+      <a href="/sitemap.xml" title="Site map for AndyJarrett.com" target="_blank"><i class="bi bi-map"></i></a>
+      <!-- Home Link -->
+      <a href="https://andyjarrett.com" class=""><i class="bi bi-globe me-2"></i></a>
+      <!-- linkedin Link -->
+      <a href="https://www.linkedin.com/in/andyjarrett/" title="inkedIn" target="_blank"><i class="bi bi-linkedin me-2"></i></a>
+      <!-- Twitter Link -->
+      <a href="https://twitter.com/andyj" title="Twitter" target="_blank"><i class="bi bi-twitter me-2"></i></a>
+      <!-- GitHub Link -->
+      <a href="https://github.com/andyj" title="GitHub" target="_blank"><i class="bi bi-github me-2"></i></a>
+      <!-- Stack Overflow Link -->
+      <a href="https://stackoverflow.com/users/371761/andy-jarrett" title="Stack overflow" target="_blank"><i class="bi bi-stack-overflow me-2"></i></a>
+      <!-- BlueSky Link -->
+      <a href="https://bsky.app/profile/andyjarrett.com" title="BlueSky" target="_blank"><i class="bi bi-cloud me-2"></i></a>
+      <!-- Instagram Link -->
+      <a href="https://instagram.com/andyjarrett" title="Instragram" target="_blank"><i class="bi bi-instagram me-2"></i></a>
+      <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee" target="_blank"><i class="bi bi-cup-hot-fill fs-5"></i></a>
+    </div>
+    <div class="col">
+      <div class="text-end">
+        <div class="btn-group">
+          <a href="#" class="btn btn-secondary btn-sm" id="lightThemeButton" data-bs-theme-value="light">
+            <i class="bi bi-sun"></i>
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" id="darkThemeButton" data-bs-theme-value="dark">
+            <i class="bi bi-moon-stars-fill"></i>
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" id="autoThemeButton" data-bs-theme-value="auto">
+            <i class="bi bi-circle-half"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script src="/public/js/toggle.js" type="text/javascript"></script>
+<script src="/public/prismjs/prism.js"></script>
+</body>
+</html>
