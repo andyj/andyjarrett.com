@@ -115,7 +115,7 @@ I've been having trouble with my andyjarrett.com domain (though not my .co.uk on
   <li>When Cloudflare operates in Flexible mode, it connects to my server via HTTP (port 80), because it assumes the server doesn't support HTTPS.</li>
   <li>When my server sees this incoming HTTP request, it triggers the redirection to HTTPS.</li>
   <li>Cloudflare receives the redirect response and tries to establish an HTTPS connection with my server again, but still over HTTP due to "Flexible" mode.</li>
-  <li>This creates a loop: Cloudflare keeps making HTTP requests to my server, and your server keeps redirecting them to HTTPS.</li>
+  <li>This creates a loop: Cloudflare keeps making HTTP requests to my server, and my server keeps redirecting them to HTTPS.</li>
 </ol>
 
 
