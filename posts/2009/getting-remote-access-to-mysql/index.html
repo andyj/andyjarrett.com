@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-<meta name="description" content="Andy Jarrett // Code. Develop. Create.">
+<meta name="description" content="Enable remote access to MySQL with this step-by-step guide. Learn how to configure MySQL for remote connections securely.">
 <meta name="author" content="Andy Jarrett">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Getting remote access to MySQL</title>
+<title>Getting Remote Access to MySQL</title>
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Getting remote access to MySQL">
-<meta name="twitter:description" content="Go to AndyJarrett.com for more">
+<meta name="twitter:title" content="Getting Remote Access to MySQL">
+<meta name="twitter:description" content="Enable remote access to MySQL with this step-by-step guide. Learn how to configure MySQL for remote connections securely.">
 <meta name="twitter:creator" content="@andyj" />
-<meta property="og:title" content="Getting remote access to MySQL">
-<meta property="og:description" content="Go to AndyJarrett.com for more">
+<meta property="og:title" content="Getting Remote Access to MySQL">
+<meta property="og:description" content="Enable remote access to MySQL with this step-by-step guide. Learn how to configure MySQL for remote connections securely.">
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -61,10 +61,52 @@
 
   <div class="container">
     <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
-    <h1 class="mt-5 mb-5"><b>Getting remote access to MySQL</b></h1>
+    <h1 class="mt-5 mb-5"><b>Getting Remote Access to MySQL</b></h1>
     <main class="mw fw-lighter fs-5">
       
-After setting up my server yesterday I had issue with getting remote access to <a href="http://www.mysql.com/">MySQL</a> it was like it wasn't even running. After some digging around and annoying a linux user (always make sure you know a *nix admin guy, and buy him a <a href="http://www.scotch-on-the-rocks.co.uk/">scotch or two to say thanks</a>) I found out is was running and it just wasn't bound to the machine's IP address but instead to localhost. For security reasons remote access disabled, but sometimes you need it for one reason or another. <ol><li>Login via SSH</li><li>Edit the my.cnf. On Ubuntu you can do this <code>$ sudo nano /etc/my.cnf</code></li><li>Once file open look for <b>bind-address=127.0.0.1</b> and change it for your host machine IP address. So if you host machine is 10.0.1.1 your configuration file would look like:<code># Instead of skip-networking the default is now to listen only on# localhost which is more compatible and is not less secure.bind-address = 10.0.1.1</code></li><li>Save, close and restart your mysql service to take change in effect<code>$ /etc/init.d/mysql restart</code></li></ol><br>
+
+<p>After setting up my server yesterday, I encountered an issue with getting remote access to
+  <a href="http://www.mysql.com/" target="_blank" rel="noopener noreferrer">MySQL</a>. It felt as if MySQL wasn't even running.</p>
+
+<p>After some digging around and pestering a Linux user (pro tip: always have a <i>nix</i> admin friend, and be sure to buy him a scotch or two as a thank-you),
+  I discovered that MySQL was indeed running. The problem was that it wasn’t bound to the machine’s IP address but instead to <code>localhost</code>.</p>
+
+<p>By default, remote access is disabled for security reasons, but there are times when you need to enable it for one reason or another.
+  Here's how you can enable remote access:</p>
+
+<h2 class="mt-4">Steps to Enable Remote Access to MySQL</h2>
+
+<ol class="mt-3">
+  <li><strong>Login via SSH</strong>
+    <p>Start by logging into your server using SSH.</p>
+  </li>
+
+  <li><strong>Edit the MySQL Configuration File (<code>my.cnf</code>)</strong>
+    <p>On Ubuntu, you can edit the MySQL configuration file by running:</p>
+    <pre><code>$ sudo nano /etc/mysql/my.cnf</code></pre>
+    <p>Depending on your distribution, the path might vary. For instance, it could be <code>/etc/mysql/mysql.conf.d/mysqld.cnf</code> on newer versions of Ubuntu.</p>
+  </li>
+
+  <li><strong>Modify the <code>bind-address</code> Setting</strong>
+    <p>Once the file is open, look for the line:</p>
+    <pre><code>bind-address = 127.0.0.1</code></pre>
+    <p>Change this to your server's IP address. For example, if your server's IP is <code>10.0.1.1</code>, update the configuration as follows:</p>
+    <pre><code># Instead of skip-networking the default is now to listen only on
+# localhost which is more compatible and is not less secure.
+bind-address = 10.0.1.1</code></pre>
+    <p>This change tells MySQL to listen on the specified IP address, allowing remote access from that IP.</p>
+  </li>
+
+  <li><strong>Restart MySQL Service</strong>
+    <p>After making the changes, save the file and close the editor. Then, restart the MySQL service to apply the changes:</p>
+    <pre><code>$ sudo /etc/init.d/mysql restart</code></pre>
+    <p>Alternatively, on systems using <code>systemd</code>, you might use:</p>
+    <pre><code>$ sudo systemctl restart mysql</code></pre>
+  </li>
+</ol>
+
+<p>By following these steps, you should now have remote access enabled on your MySQL server. Always ensure that your MySQL server is secured with strong passwords and, if possible, restrict access by IP to prevent unauthorized access.</p>
+
     </main>
     <div class="row">
       <div class="col">
