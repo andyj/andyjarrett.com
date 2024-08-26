@@ -7,140 +7,6 @@
     <language>en</language>
     <atom:link href="https://andyjarrett.com/feed.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Exploring JS array methods, including push, pop, shift, unshift, map, filter, reduce, and others</title>
-      <link>https://andyjarrett.com/posts/2024/exploring-array-methods-including-push-pop-shift-unshift-map-filter-reduce-and-others/</link>
-      <description><![CDATA[&lt;style&gt;pre div {margin-bottom: 20px; }&lt;/style&gt;
-&lt;div class=&quot;image-container my-2&quot;&gt;
-  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/gabriel-heinzer-g5jpH62pwes-unsplash.jpg&quot; alt=&quot;Man running towards mountains&quot; class=&quot;img-fluid&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;text-end&quot;&gt;
-  &lt;sup&gt;
-    &lt;cite&gt;
-      Photo by &lt;a href=&quot;https://unsplash.com/@6heinz3r?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Gabriel Heinzer&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/text-g5jpH62pwes?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;
-    &lt;/cite&gt;
-  &lt;/sup&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;row&quot;&gt;
-  &lt;div class=&quot;col&quot;&gt;
-    &lt;h3&gt;Classification:&lt;/h3&gt;
-    &lt;p&gt;
-      Arrays are a fundamental most languages including JavaScript. Allowing us developers to store and manipulate collections of data with ease.
-      &lt;s&gt;Mastering&lt;/s&gt; Just rembering array methods is a good start for writing clean and reusable code.
-    &lt;/p&gt;
-    &lt;p&gt;
-      In this post, like some of my others, I&#39;ve explored some various array methods, such as push, pop, shift, unshift, map, filter, reduce, and many others. I&#39;ve also tried to visually display them too.
-    &lt;/p&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;row g-4 mb-4&quot;&gt;
-  &lt;div class=&quot;col-lg-3 col-md-6 col-sm-1&quot;&gt;
-    &lt;div class=&quot;card border-primary  h-100&quot;&gt;
-      &lt;div class=&quot;card-header text-primary&quot;&gt;&lt;b&gt;Mutating Methods:&lt;/b&gt;&lt;/div&gt;
-      &lt;div class=&quot;card-body&quot;&gt;
-        &lt;p class=&quot;card-text&quot;&gt; Methods that change the original array (e.g., push, pop, shift, unshift).&lt;/p&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;col-lg-3 col-md-6 col-sm-1 row-cols-xs-2&quot;&gt;
-    &lt;div class=&quot;card border-primary  h-100&quot;&gt;
-      &lt;div class=&quot;card-header text-primary&quot;&gt;&lt;b&gt;Iterative Methods:&lt;/b&gt;&lt;/div&gt;
-      &lt;div class=&quot;card-body&quot;&gt;
-        &lt;p class=&quot;card-text&quot;&gt; Methods that iterate over each element of the array to produce a result (e.g., map, filter, reduce, some, every, find, findIndex).&lt;/p&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;col-lg-3 col-md-6 col-sm-1 row-cols-xs-2&quot;&gt;
-    &lt;div class=&quot;card border-primary  h-100&quot;&gt;
-      &lt;div class=&quot;card-header text-primary&quot;&gt;&lt;b&gt;Accessor Methods:&lt;/b&gt;&lt;/div&gt;
-      &lt;div class=&quot;card-body&quot;&gt;
-        &lt;p class=&quot;card-text&quot;&gt; Methods that return a modified copy of the array or a specific element (e.g., reverse, at, slice, concat, includes, indexOf, join).&lt;/p&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class=&quot;col-lg-3 col-md-6 col-sm-1 row-cols-xs-2&quot;&gt;
-    &lt;div class=&quot;card border-primary  h-100&quot;&gt;
-      &lt;div class=&quot;card-header text-primary&quot;&gt;&lt;b&gt;Flattening Methods:&lt;/b&gt;&lt;/div&gt;
-      &lt;div class=&quot;card-body&quot;&gt;
-        &lt;p class=&quot;card-text&quot;&gt; Methods that flatten arrays (e.g., flat, flatMap).&lt;/p&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-
-&lt;/div&gt;
-
-
-    &lt;h3&gt;Examples:&lt;/h3&gt;
-
-
-&lt;pre&gt;&lt;/pre&gt;
-
-&lt;script&gt;
-const preElement = document.querySelector(&#39;pre&#39;);
-
-// Example arrays
-const myArray1 = [&#39;🥶&#39;, &#39;🥶&#39;, &#39;🥶&#39;, &#39;🥶&#39;];
-const myArray2 = [&#39;😎&#39;, &#39;🥵&#39;, &#39;🥶&#39;,&#39;🤢&#39;];
-const numberArray = [1, 2, 3];
-
-// MUTATING METHODS
-const pushExample = `${JSON.stringify(myArray1)}.push(&#39;🥵&#39;) = ${JSON.stringify([...myArray1, &#39;🥵&#39;])}`;
-const popExample = `${JSON.stringify(myArray2)}.pop() = ${JSON.stringify(myArray2.slice(0, -1))}`;
-const shiftExample = `${JSON.stringify(myArray2)}.shift() = ${JSON.stringify(myArray2.slice(1))}`;
-const unshiftExample = `${JSON.stringify(myArray2)}.unshift(&#39;💩&#39;) = ${JSON.stringify([&#39;💩&#39;, ...myArray2])}`;
-
-// ITERATIVE METHODS
-const mapExample = `${JSON.stringify(myArray2)}.map(item =&gt; item + &#39;!&#39;) = ${JSON.stringify(myArray2.map(item =&gt; item + &#39;!&#39;))}`;
-const filterExample = `${JSON.stringify(myArray2)}.filter(item =&gt; item === &#39;🥶&#39;) = ${JSON.stringify(myArray2.filter(item =&gt; item === &#39;🥶&#39;))}`;
-const reduceExample = `${JSON.stringify(numberArray)}.reduce((acc, val) =&gt; acc + val, 0) = ${numberArray.reduce((acc, val) =&gt; acc + val, 0)}`;
-const someExample = `${JSON.stringify(numberArray)}.some(val =&gt; val &gt; 2) = ${numberArray.some(val =&gt; val &gt; 2)}`;
-const everyExample = `${JSON.stringify(numberArray)}.every(val =&gt; val &gt; 0) = ${numberArray.every(val =&gt; val &gt; 0)}`;
-const findExample = `${JSON.stringify(numberArray)}.find(val =&gt; val &gt; 2) = ${numberArray.find(val =&gt; val &gt; 2)}`;
-const findIndexExample = `${JSON.stringify(numberArray)}.findIndex(val =&gt; val &gt; 2) = ${numberArray.findIndex(val =&gt; val &gt; 2)}`;
-
-// ACCESSOR METHODS
-const reverseExample = `${JSON.stringify(myArray2)}.reverse() = ${JSON.stringify([...myArray2].reverse())}`;
-const atExample = `${JSON.stringify(myArray2)}.at(1) = ${myArray2.at(1)}`;
-const sliceExample = `${JSON.stringify(myArray2)}.slice(1, 2) = ${JSON.stringify(myArray2.slice(1, 2))}`;
-const concatExample = `${JSON.stringify([&#39;🥶&#39;])}.concat([&#39;🥵&#39;]) = ${JSON.stringify([&#39;🥶&#39;].concat([&#39;🥵&#39;]))}`;
-const includesExample = `${JSON.stringify(myArray2)}.includes(&#39;🥵&#39;) = ${myArray2.includes(&#39;🥵&#39;)}`;
-const indexOfExample = `${JSON.stringify(myArray2)}.indexOf(&#39;🥵&#39;) = ${myArray2.indexOf(&#39;🥵&#39;)}`;
-const joinExample = `${JSON.stringify(myArray2)}.join(&#39; &#39;) = &quot;${myArray2.join(&#39; &#39;)}&quot;`;
-
-// FLATTENING METHODS
-const nestedArray = [1, [2, 3], [4, 5]];
-const flatExample = `${JSON.stringify(nestedArray)}.flat() = ${JSON.stringify(nestedArray.flat())}`;
-const flatMapExample = `${JSON.stringify(numberArray)}.flatMap(val =&gt; [val, val * 2]) = ${JSON.stringify(numberArray.flatMap(val =&gt; [val, val * 2]))}`;
-
-// Array of examples
-const examples = [
-  pushExample, popExample, shiftExample, unshiftExample, mapExample, filterExample, reduceExample,
-  someExample, everyExample, findExample, findIndexExample, reverseExample, atExample, sliceExample,
-  concatExample, includesExample, indexOfExample, joinExample, flatExample, flatMapExample
-];
-
-// Create and append &lt;div&gt; elements within &lt;pre&gt;
-examples.forEach(example =&gt; {
-  const codeElement = document.createElement(&#39;code&#39;);
-  codeElement.classList.add(&#39;language-javascript&#39;);
-  codeElement.textContent = example;
-
-  const divElement = document.createElement(&#39;div&#39;);
-  divElement.appendChild(codeElement);
-
-  preElement.appendChild(divElement);
-});
-
-&lt;/script&gt;]]></description>
-      <pubDate>Mon, 15 Jul 2024 10:30:00 +0000</pubDate>
-      <dc:creator>Andy Jarrett</dc:creator>
-      <guid>https://andyjarrett.com/posts/2024/exploring-array-methods-including-push-pop-shift-unshift-map-filter-reduce-and-others/</guid>
-      <enclosure url="https://andyjarrett.com/public/blogimage/gabriel-heinzer-g5jpH62pwes-unsplash.jpg" type="image/jpeg" />
-      <category>posts, javascript, arrays, examples</category>
-      <author>Andy Jarrett &lt;email@example.com&gt;</author>
-    </item>
-    <item>
       <title>Outputting Git Branches to a CSV</title>
       <link>https://andyjarrett.com/posts/2024/outputting-git-branches-in-a-csv-format/</link>
       <description><![CDATA[
@@ -151,9 +17,7 @@ examples.forEach(example =&gt; {
 &lt;/div&gt;
 &lt;div class=&quot;text-end&quot;&gt;
   &lt;sup&gt;
-    &lt;cite&gt;
-      Photo by &lt;a href=&quot;https://unsplash.com/@8moments?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Simon Berger&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/orange-leaf-near-body-of-water-and-mountains-during-daytime-Qa2tSHWgh84?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;
-    &lt;/cite&gt;
+    &lt;cite&gt;Photo by &lt;a href=&quot;https://unsplash.com/@8moments?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Simon Berger&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/orange-leaf-near-body-of-water-and-mountains-during-daytime-Qa2tSHWgh84?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt; &lt;/cite&gt;
   &lt;/sup&gt;
 &lt;/div&gt;
 
@@ -1073,6 +937,128 @@ I&#39;ve been having trouble with my andyjarrett.com domain (though not my .co.u
       <guid>https://andyjarrett.com/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/</guid>
       <enclosure url="https://andyjarrett.com/public/blogimage/chuttersnap-9AqIdzEc9pY-unsplash.jpg" type="image/jpeg" />
       <category>posts, nginx, cloudflare, loop, redirect, ssl</category>
+      <author>Andy Jarrett &lt;email@example.com&gt;</author>
+    </item>
+    <item>
+      <title>How to Instantly Index Your Website with IndexNow Using a Bash Script</title>
+      <link>https://andyjarrett.com/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/</link>
+      <description><![CDATA[
+
+
+&lt;div class=&quot;image-container my-2&quot;&gt;
+  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/gabriel-heinzer-4Mw7nkQDByk-unsplash.jpg&quot; alt=&quot;Developer debugging&quot; class=&quot;img-fluid&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;text-end&quot;&gt;
+  &lt;sup&gt;
+    &lt;cite&gt;Photo by &lt;a href=&quot;https://unsplash.com/@6heinz3r?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Gabriel Heinzer&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/text-4Mw7nkQDByk?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;&lt;/cite&gt;
+  &lt;/sup&gt;
+&lt;/div&gt;
+
+&lt;p&gt;If you’re looking to ensure that your website’s content is indexed by search engines as quickly as possible, &lt;a href=&quot;https://www.bing.com/indexnow&quot; target=&quot;_blank&quot;&gt;IndexNow&lt;/a&gt; is another tool to add to your toolbelt. Below, is my bash script helped me get started quickly with IndexNow. Afterwards, I’ll break down what each part of the script does and what it does, along with how to create and execute the script.&lt;/p&gt;
+
+&lt;h2&gt;The Script&lt;/h2&gt;
+
+&lt;p&gt;Let’s start with the script that automates the process of submitting a URL to be indexed via the IndexNow protocol.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;# Constants for example.com
+HOST=&quot;example.com&quot;
+KEY=&quot;your_unique_key_here&quot;
+KEY_LOCATION=&quot;https://example.com/your_unique_key_here.txt&quot;
+
+# Check if the URL path is passed as an argument
+if [ -z &quot;$1&quot; ]; then
+  echo &quot;Usage: $0 &lt;url_path&gt;&quot;
+  exit 1
+fi
+
+# Assign the first argument to a variable
+URL_PATH=&quot;$1&quot;
+
+# Submit URL list for example.com
+curl -X POST &quot;https://api.indexnow.org/indexnow&quot; &#92;
+  -H &quot;Content-Type: application/json; charset=utf-8&quot; &#92;
+  -d &quot;{
+    &#92;&quot;host&#92;&quot;: &#92;&quot;$HOST&#92;&quot;,
+    &#92;&quot;key&#92;&quot;: &#92;&quot;$KEY&#92;&quot;,
+    &#92;&quot;keyLocation&#92;&quot;: &#92;&quot;$KEY_LOCATION&#92;&quot;,
+    &#92;&quot;urlList&#92;&quot;: [
+      &#92;&quot;https://$HOST$URL_PATH&#92;&quot;
+    ]
+  }&quot;&lt;/url_path&gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;How to Create and Execute the Script&lt;/h2&gt;
+
+&lt;h3&gt;Step 1: Create the Script&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Open your text editor:&lt;/strong&gt; You can use any text editor like Nano, Vim, or even Visual Studio Code.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Copy the script:&lt;/strong&gt; Copy the bash script provided above.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Save the script:&lt;/strong&gt; Save the file with a &lt;code&gt;.sh&lt;/code&gt; extension, for example, &lt;code&gt;indexnow_submit.sh&lt;/code&gt;.&lt;/li&gt;
+  &lt;pre&gt;&lt;code&gt;nano indexnow_submit.sh&lt;/code&gt;&lt;/pre&gt;
+  &lt;li&gt;&lt;strong&gt;Make the script executable:&lt;/strong&gt; Before you can run the script, you need to give it execute permissions.&lt;/li&gt;
+  &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;chmod +x indexnow_submit.sh&lt;/code&gt;&lt;/pre&gt;
+&lt;/ol&gt;
+
+&lt;h3&gt;Step 2: Execute the Script&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Run the script:&lt;/strong&gt; To use the script, open your terminal, navigate to the directory where your script is saved, and execute it by providing the path to the URL you want to index.&lt;/li&gt;
+  &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;./indexnow_submit.sh /path-to-your-page&lt;/code&gt;&lt;/pre&gt;
+  &lt;li&gt;&lt;strong&gt;Example command:&lt;/strong&gt; If you want to index a page located at &lt;code&gt;https://example.com/blog/my-latest-post&lt;/code&gt;, you would run:&lt;/li&gt;
+  &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;./indexnow_submit.sh /blog/my-latest-post&lt;/code&gt;&lt;/pre&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This will prompt the IndexNow API to index the specified URL immediately.&lt;/p&gt;
+
+&lt;h2&gt;Breaking Down the Script&lt;/h2&gt;
+
+&lt;p&gt;Now that you’ve seen the script and know how to run it, let’s dive into what each part does and why it’s important.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Setting Up Constants:&lt;/strong&gt; At the top of the script, we define some constants. These include the domain of your website (&lt;code&gt;HOST&lt;/code&gt;), the IndexNow key (&lt;code&gt;KEY&lt;/code&gt;), and the location where this key is hosted (&lt;code&gt;KEY_LOCATION&lt;/code&gt;). These are essential for the search engines to verify your site and the URLs you submit.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Checking for a URL Path:&lt;/strong&gt; The script checks if you’ve provided a URL path as an argument when running the script. If you forget to include a URL path, the script will prompt you and exit. This step is crucial for ensuring that you don’t accidentally run the script without specifying which URL you want to index.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Submitting the URL:&lt;/strong&gt; The heart of the script is the &lt;code&gt;curl&lt;/code&gt; command, which sends a POST request to the IndexNow API. This command submits a JSON payload that includes your site’s details and the URL you want indexed. The search engines will then use this information to quickly index the specified URL.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2&gt;What is IndexNow?&lt;/h2&gt;
+
+&lt;p&gt;Having seen the script in action, it’s helpful to understand a bit more about what IndexNow is and why you might want to use it.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;IndexNow&lt;/strong&gt; is a protocol that allows website owners to notify search engines immediately when content on their site is updated. Instead of waiting for search engines to crawl your site periodically, IndexNow lets you proactively inform them about changes, ensuring that your content is indexed much faster.&lt;/p&gt;
+
+&lt;h2&gt;Why Use IndexNow?&lt;/h2&gt;
+
+&lt;p&gt;There are several benefits to using IndexNow:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Speed:&lt;/strong&gt; Instant indexing of new or updated content can be critical, especially for news or time-sensitive posts.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Efficiency:&lt;/strong&gt; It reduces unnecessary server load by cutting down on the frequency of search engine crawls.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;SEO Advantage:&lt;/strong&gt; Faster indexing can lead to quicker visibility in search results, potentially driving more traffic to your site.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Setting Up Your IndexNow Key&lt;/h2&gt;
+
+&lt;p&gt;To use IndexNow, you’ll need to generate and host a key that validates your submissions.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Generate Your Key:&lt;/strong&gt; Visit the &lt;a href=&quot;https://www.indexnow.org/&quot;&gt;IndexNow Key Generation page&lt;/a&gt; and create your unique key.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Host the Key:&lt;/strong&gt; Save the key as a text file and upload it to the root directory of your website. For example:&lt;/li&gt;
+  &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;https://example.com/your_unique_key_here.txt&lt;/code&gt;&lt;/pre&gt;
+  &lt;li&gt;&lt;strong&gt;Verify:&lt;/strong&gt; Ensure the key file is accessible via the URL.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Starting with a practical script and then delving into the details can make it easier for you to implement IndexNow on your site. By using this simple bash script, you can ensure that your content gets indexed promptly, giving you a potential edge in search engine visibility.&lt;/p&gt;
+
+&lt;p&gt;If you want to make sure your content is seen as soon as it’s published, IndexNow is a great tool to have in your SEO toolkit.&lt;/p&gt;
+
+]]></description>
+      <pubDate>Wed, 21 Aug 2024 22:30:00 +0000</pubDate>
+      <dc:creator>Andy Jarrett</dc:creator>
+      <guid>https://andyjarrett.com/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/</guid>
+      <enclosure url="https://andyjarrett.com/public/blogimage/gabriel-heinzer-4Mw7nkQDByk-unsplash.jpg" type="image/jpeg" />
+      <category>posts, seo, indexnow, bash, script</category>
       <author>Andy Jarrett &lt;email@example.com&gt;</author>
     </item>
     <image>
