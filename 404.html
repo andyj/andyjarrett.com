@@ -82,9 +82,23 @@
     '/posts/$1/$2'
   ).toLocaleLowerCase();
 
-  const el = document.getElementById('suggestedLink')
-  // Redirect to the modified URL
-  el.innerHTML = `You might be looking for <a href="${modifiedUrl}">${modifiedUrl}</a>`
+  const el = document.getElementById('suggestedLink');
+
+  // Fetch the modified URL to check if it exists
+  fetch(modifiedUrl, { method: 'HEAD' })
+    .then(response => {
+      if (response.ok) {
+        // If the status is 200, redirect to the modified URL
+        window.location.href = modifiedUrl;
+      } else {
+        // If the status is not 200, display the suggested link
+        el.innerHTML = `You might be looking for <a href="${modifiedUrl}">${modifiedUrl}</a>`;
+      }
+    })
+    .catch(error => {
+      // If there's an error (e.g., network issues), display the suggested link
+      el.innerHTML = `You might be looking for <a href="${modifiedUrl}">${modifiedUrl}</a>`;
+    });
 </script>
 
 <div class="row">
