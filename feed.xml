@@ -7,105 +7,6 @@
     <language>en</language>
     <atom:link href="https://andyjarrett.com/feed.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Outputting Git Branches to a CSV</title>
-      <link>https://andyjarrett.com/posts/2024/outputting-git-branches-in-a-csv-format/</link>
-      <description><![CDATA[
-
-
-&lt;div class=&quot;image-container my-2&quot;&gt;
-  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/simon-berger-Qa2tSHWgh84-unsplash.jpg&quot; alt=&quot;A branch ... like Git Branch ... get it?&quot; class=&quot;img-fluid&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;text-end&quot;&gt;
-  &lt;sup&gt;
-    &lt;cite&gt;Photo by &lt;a href=&quot;https://unsplash.com/@8moments?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Simon Berger&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/orange-leaf-near-body-of-water-and-mountains-during-daytime-Qa2tSHWgh84?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt; &lt;/cite&gt;
-  &lt;/sup&gt;
-&lt;/div&gt;
-
-&lt;p&gt;This solution isn&#39;t perfect, especially if you have commas in your commit messages, but it gets the job done. Initially, I planned to write a quick bash script, but in true developer style, it turned into a 50-line beast. The concept seemed straightforward, like &lt;code&gt;git branch -av &gt;&gt; ~/Downloads/branches.txt&lt;/code&gt;, but I wanted something I could easily import into Excel.&lt;/p&gt;
-
-&lt;p&gt;That approach didn&#39;t work as well as I hoped, so I thought I&#39;d tweak that one-liner... it&#39;s now a lot bigger.&lt;/p&gt;
-
-&lt;ol class=&quot;list&quot;&gt;
-  &lt;li&gt;Run &lt;code&gt;$ touch export_branches.sh&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Run &lt;code&gt;$ chmod +x export_branches.sh&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;$ nano export_branches.sh&lt;/code&gt; and add the following:&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;#!/bin/bash
-
-# Initialise repo_path and output_csv as empty strings.
-repo_path=&quot;&quot;
-output_csv=&quot;&quot;
-
-# Use the getopts command to parse command-line arguments:
-# -p for the Git repository path.
-# -o for the output CSV file path.
-while getopts &quot;p:o:&quot; opt; do
-  case ${opt} in
-    p )
-      repo_path=$OPTARG
-      ;;
-    o )
-      output_csv=$OPTARG
-      ;;
-    &#92;? )
-      echo &quot;Usage: cmd [-p] &lt;repo_path&gt; [-o] &lt;output_csv&gt;&quot;
-      exit 1
-      ;;
-  esac
-done
-
-# The script checks if both repo_path and output_csv are provided. If not, it displays an error message and usage information, then exits.
-if [[ -z &quot;$repo_path&quot; ]] || [[ -z &quot;$output_csv&quot; ]]; then
-  echo &quot;Error: Both repository path and output CSV file must be specified.&quot;
-  echo &quot;Usage: $0 -p &lt;repo_path&gt; -o &lt;output_csv&gt;&quot;
-  exit 1
-fi
-
-# The script checks if the specified path is a valid directory and contains a .git folder to confirm it&#39;s a Git repository.
-if [ -d &quot;$repo_path&quot; ] &amp;&amp; [ -d &quot;$repo_path/.git&quot; ]; then
-  # Navigate to the directory
-  cd &quot;$repo_path&quot; || exit
-
-  # Captures the output of git branch -av, processes it, and writes the results to the specified CSV file.
-  git branch -av &gt; branches.txt
-
-  # Process the output and write to the specified CSV file.
-  echo &quot;Branch,Commit,Message&quot; &gt; &quot;$output_csv&quot;
-  while IFS= read -r line; do
-    branch=$(echo &quot;$line&quot; | awk &#39;{print $1}&#39;)
-    commit=$(echo &quot;$line&quot; | awk &#39;{print $2}&#39;)
-    message=$(echo &quot;$line&quot; | cut -d&#39; &#39; -f 3-)
-    echo &quot;$branch,$commit,$message&quot; &gt;&gt; &quot;$output_csv&quot;
-  done &lt; branches.txt
-
-  # The script removes the temporary branches.txt file.
-  rm branches.txt
-
-  # Success output
-  echo &quot;Branches have been exported to $output_csv&quot;
-else
-  # Something went wrong output
-  echo &quot;The specified directory does not exist or is not a Git repository.&quot;
-  exit 1
-fi
-  &lt;/output_csv&gt;&lt;/repo_path&gt;&lt;/output_csv&gt;&lt;/repo_path&gt;&lt;/code&gt;
-&lt;/pre&gt;
-
-&lt;p&gt;To run, simply call:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;./export_branches.sh -p /path/to/git/repository -o /path/to/output/branches.csv&lt;/code&gt;&lt;/pre&gt;
-
-
-]]></description>
-      <pubDate>Wed, 24 Jul 2024 22:30:00 +0000</pubDate>
-      <dc:creator>Andy Jarrett</dc:creator>
-      <guid>https://andyjarrett.com/posts/2024/outputting-git-branches-in-a-csv-format/</guid>
-      <enclosure url="https://andyjarrett.com/public/blogimage/simon-berger-Qa2tSHWgh84-unsplash.jpg" type="image/jpeg" />
-      <category>posts, git, csv, script, bash</category>
-      <author>Andy Jarrett &lt;email@example.com&gt;</author>
-    </item>
-    <item>
       <title>Reduce clutter and confusion by finally deleting those old branches, local and remote.</title>
       <link>https://andyjarrett.com/posts/2024/reduce-clutter-and-confusion-by-finally-deleting-those-old-branches-local-and-remote/</link>
       <description><![CDATA[
@@ -1059,6 +960,49 @@ curl -X POST &quot;https://api.indexnow.org/indexnow&quot; &#92;
       <guid>https://andyjarrett.com/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/</guid>
       <enclosure url="https://andyjarrett.com/public/blogimage/gabriel-heinzer-4Mw7nkQDByk-unsplash.jpg" type="image/jpeg" />
       <category>posts, seo, indexnow, bash, script</category>
+      <author>Andy Jarrett &lt;email@example.com&gt;</author>
+    </item>
+    <item>
+      <title>Reclaiming Space on macOS from Docker by Pruning Docker.raw</title>
+      <link>https://andyjarrett.com/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/</link>
+      <description><![CDATA[
+&lt;div class=&quot;image-container my-2&quot;&gt;
+  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/nathan-cima-2JNNpq4nGls-unsplash.jpg&quot; alt=&quot;Developer debugging&quot; class=&quot;img-fluid&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;text-end&quot;&gt;
+  &lt;sup&gt;
+    &lt;cite&gt;Photo by &lt;a href=&quot;https://unsplash.com/@nathan_cima?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Nathan Cima&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/a-large-ship-in-the-water-2JNNpq4nGls?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;&lt;/cite&gt;
+  &lt;/sup&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Docker on macOS stores its container data in a virtual disk file called &lt;code&gt;Docker.raw&lt;/code&gt;. This file is used by Docker&#39;s internal virtual machine (VM) and can grow dynamically as more containers and images are created. Over time, even when containers are deleted, &lt;code&gt;Docker.raw&lt;/code&gt; can take up substantial disk space.&lt;/p&gt;
+
+&lt;p&gt;I recently encountered this issue, where my &lt;code&gt;Docker.raw&lt;/code&gt; file showed a size of 60G:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;$ ls -lh ~/Library/Containers/com.docker.docker/Data/vms/0/data/Docker.raw&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;However, the actual disk usage was 31G:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;$ du -sh ~/Library/Containers/com.docker.docker/Data/vms/0/data/Docker.raw&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The discrepancy occurs because &lt;code&gt;Docker.raw&lt;/code&gt; is a sparse file. While it can potentially use 60G, it only occupies 31G of actual disk space.&lt;/p&gt;
+
+&lt;p&gt;To reclaim space, you can clean up unused data with:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;$ docker system prune&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Note: Space is only freed when images are deleted. Space inside running containers is not automatically reclaimed. To trigger space reclamation, run:&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;$ docker run --privileged --pid=host docker/desktop-reclaim-space&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For more details, refer to the official Docker documentation: &lt;a href=&quot;https://docs.docker.com/desktop/faqs/macfaqs/&quot;&gt;Docker Desktop FAQs for macOS&lt;/a&gt;.&lt;/p&gt;]]></description>
+      <pubDate>Thu, 29 Aug 2024 23:02:00 +0000</pubDate>
+      <dc:creator>Andy Jarrett</dc:creator>
+      <guid>https://andyjarrett.com/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/</guid>
+      <enclosure url="https://andyjarrett.com/public/blogimage/nathan-cima-2JNNpq4nGls-unsplash.jpg" type="image/jpeg" />
+      <category>posts, docker, macos, disk space, docker.raw, system maintenance</category>
       <author>Andy Jarrett &lt;email@example.com&gt;</author>
     </item>
     <image>
