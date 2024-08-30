@@ -22,7 +22,7 @@ function loadGoogleAnalytics() {
       // Initialize Universal Analytics with cross-domain tracking
       gtag('config', 'UA-XXXXXX-X', {
         'linker': {
-          'domains': ['andyjarrett.com', 'andyjarrett.co.uk']
+          'domains': ['andyjarrett.com', 'www.andyjarrett.com', 'andyjarrett.co.uk', 'www.andyjarrett.co.uk']
         }
       });
 
