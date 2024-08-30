@@ -15,7 +15,17 @@ function loadGoogleAnalytics() {
       function gtag(){dataLayer.push(arguments);}
       window.gtag = gtag;
       gtag('js', new Date());
+
+      // Initialize Google Analytics 4
       gtag('config', 'G-L0V74G0Q65');
+
+      // Initialize Universal Analytics with cross-domain tracking
+      gtag('config', 'UA-XXXXXX-X', {
+        'linker': {
+          'domains': ['andyjarrett.com', 'andyjarrett.co.uk']
+        }
+      });
+
       window.gaInitialized = true;
     };
   }
@@ -42,8 +52,7 @@ function loadClarity() {
 
 function disableClarity() {
   // Clarity doesn't provide a straightforward way to disable it once initialized.
-  // You can, however, prevent further interactions by not sending any events or possibly reloading the page.
-  // Alternatively, you could inform users about Clarity in the preferences and leave the script loaded by default.
+  // One way to prevent further interactions could be reloading the page or not sending any events.
 }
 
 const cc = CookieConsent.run({
@@ -74,7 +83,7 @@ const cc = CookieConsent.run({
       en: {
         consentModal: {
           title: "Hello traveller, it's cookie time!",
-          description: "I use cookies to enhance your browsing experience, analyse site traffic. By continuing to use my site, you consent to the use of cookies.",
+          description: "I use cookies to enhance your browsing experience and analyse site traffic. By continuing to use my site, you consent to the use of cookies.",
           acceptAllBtn: "Accept all",
           acceptNecessaryBtn: "Reject all",
           showPreferencesBtn: "Manage preferences",
