@@ -60,63 +60,99 @@
 
 
   <div class="container">
-    <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
-    <h1 class="mt-5 mb-5"><b>SQL for upgrading to Blog CFC v5</b></h1>
-    <div class="row">
-      <div class="col-md-9 col-12">
-        <main class="mw fw-lighter fs-5">
-          
-I am in the middle of very slowy upgrading my blog to <a href="http://ray.camdenfamily.com/projects/blogcfc/">Rays version 5</a>, and as usual there has been a few DB changes. Below is the SQL (for MySQL, though easily adapted) update script I'm using for the updgrade, with Rays comments about the changes included. You have to be running v4+ of BlogCFC for this to work! Before running the SQL please read through it! Along with the new table and fields there are two <b>UPDATE</b> statements which affects your data. Just make sure you understand what you are doing before you run it as this code comes as is, if you run the script and your computer turn into a <a href="http://en.wikipedia.org/wiki/C64">Commodore 64</a> because of it, its not my fault!<code>#tblUsers:#name(nvarchar/50) added - You should add your name here, or your code name. Or whatever you go by.ALTER TABLE `andyjarrett`.`tblusers`  ADD COLUMN `name` varchar(50) NULL DEFAULT NULL;UPDATE `tblusers` SET `name`=!!PUT YOU NAME/CODE NAME HERE!! WHERE `username`=!!USERNAME HERE!! AND `password`=!!PASSWORD HERE!!;#tblBlogEntriesRelated: (New table)# entryid (nvarchar/35)#  relatedid (nvarchar/35)CREATE TABLE `tblblogentriesrelated` (  `entryid` varchar(35) NOT NULL DEFAULT '',  `relatedid` varchar(35) NULL DEFAULT NULL,  PRIMARY KEY (`entryid`)) ENGINE=MyISAM;#tblBlogEntries:# views(int) added - You must set all old views to 0# released(bit) added - You must set your old data to released=1 with a quick query#  mailed(bit) added - You can set the old ones to true, but you don't need to)ALTER TABLE `tblblogentries`  ADD COLUMN `views` int(11) NOT NULL DEFAULT 0;ALTER TABLE `tblblogentries`  ADD COLUMN `released` tinyint(3) NOT NULL DEFAULT 0;ALTER TABLE `tblblogentries`  ADD COLUMN `mailed` tinyint(3) NOT NULL DEFAULT 1;  # :::::::::::::::::::::::::::::::::: START: DATA UPDATE STATMENT :::::::::::::::::::::::::::::::::::::::::#UPDATE `tblblogentries` SET `released`=1;# :::::::::::::::::::::::::::::::::: END: DATA UPDATE STATMENT :::::::::::::::::::::::::::::::::::::::::##tblBlogCategories:#  categoryalias(nvarchar/50) addedALTER TABLE `tblblogcategories`  ADD COLUMN `categoryalias` varchar(50) NOT NULL;    #DB CHANGE: New table, tblblogtextblocks. Columns:#  id, nvarchar 35, primary key# label, nvarchar 255,# body, ntext,# blog, nvarchar 50  CREATE TABLE `tblblogtextblocks` (  `id` varchar(35) NOT NULL DEFAULT '',  `label` varchar(255) NULL DEFAULT NULL,  `body` text NULL,  `blog` varchar(50) NULL DEFAULT NULL,  PRIMARY KEY (`id`)) ENGINE=MyISAM;  #DB CHANGE: New table, tblblogpages. Columns:# id, nvarchar 35, primary key# title, nvarchar 255#  alias, nvarchar 100#  body, ntext,# blog, nvarchar 50CREATE TABLE `tblblogpages` (  `id` varchar(35) NOT NULL DEFAULT '',  `title` varchar(255) NULL DEFAULT NULL,  `alias` varchar(100) NULL DEFAULT NULL,  `body` text NULL,  `blog` varchar(50) NULL DEFAULT NULL,  PRIMARY KEY (`id`)) ENGINE=MyISAM;#DB CHANGE: Add verified as a bit to the tblblogsubscribers table. #You should write a quick script to update your current subscribers with verified=1. If you do not, they will not get email.ALTER TABLE `tblblogsubscribers`  ADD COLUMN `verified` tinyint(3) NULL DEFAULT 0;# :::::::::::::::::::::::::::::::::: START: DATA UPDATE STATMENT :::::::::::::::::::::::::::::::::::::::::#UPDATE `tblblogsubscribers`SET `verified`=1# :::::::::::::::::::::::::::::::::: END: DATA UPDATE STATMENT :::::::::::::::::::::::::::::::::::::::::#</code><br>
-        </main>
-        <script
-          src="https://giscus.app/client.js"
-          data-repo="andyj/andyjarrett.com"
-          data-repo-id="R_kgDOMjCDkQ"
-          data-category="Announcements"
-          data-category-id="DIC_kwDOMjCDkc4ChlfU"
-          data-mapping="pathname"
-          data-strict="0"
-          data-reactions-enabled="1"
-          data-emit-metadata="0"
-          data-input-position="top"
-          data-theme="preferred_color_scheme"
-          data-lang="en"
-          crossorigin="anonymous"
-          async></script>
-        <a name="comment"></a>
-        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
-
-      </div>
-      <div class="col-md-3 col-12">
-        <!-- Side Content -->
-        <h4>Recent Posts</h4>
-        
-          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-      </div>
+    <div class="my-1 text-center text-primary" role="alert">
+      <a class="text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">
+        Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky
+      </a>
     </div>
+
+    <main>
+      <article>
+        <header>
+          <h1 class="mt-5 mb-5"><b>SQL for upgrading to Blog CFC v5</b></h1>
+        </header>
+
+        <section class="row">
+          <div class="col-md-9 col-12">
+            <section class="mw fw-lighter fs-5">
+              
+I am in the middle of very slowy upgrading my blog to <a href="http://ray.camdenfamily.com/projects/blogcfc/">Rays version 5</a>, and as usual there has been a few DB changes. Below is the SQL (for MySQL, though easily adapted) update script I'm using for the updgrade, with Rays comments about the changes included. You have to be running v4+ of BlogCFC for this to work! Before running the SQL please read through it! Along with the new table and fields there are two <b>UPDATE</b> statements which affects your data. Just make sure you understand what you are doing before you run it as this code comes as is, if you run the script and your computer turn into a <a href="http://en.wikipedia.org/wiki/C64">Commodore 64</a> because of it, its not my fault!<code>#tblUsers:#name(nvarchar/50) added - You should add your name here, or your code name. Or whatever you go by.ALTER TABLE `andyjarrett`.`tblusers`  ADD COLUMN `name` varchar(50) NULL DEFAULT NULL;UPDATE `tblusers` SET `name`=!!PUT YOU NAME/CODE NAME HERE!! WHERE `username`=!!USERNAME HERE!! AND `password`=!!PASSWORD HERE!!;#tblBlogEntriesRelated: (New table)# entryid (nvarchar/35)#  relatedid (nvarchar/35)CREATE TABLE `tblblogentriesrelated` (  `entryid` varchar(35) NOT NULL DEFAULT '',  `relatedid` varchar(35) NULL DEFAULT NULL,  PRIMARY KEY (`entryid`)) ENGINE=MyISAM;#tblBlogEntries:# views(int) added - You must set all old views to 0# released(bit) added - You must set your old data to released=1 with a quick query#  mailed(bit) added - You can set the old ones to true, but you don't need to)ALTER TABLE `tblblogentries`  ADD COLUMN `views` int(11) NOT NULL DEFAULT 0;ALTER TABLE `tblblogentries`  ADD COLUMN `released` tinyint(3) NOT NULL DEFAULT 0;ALTER TABLE `tblblogentries`  ADD COLUMN `mailed` tinyint(3) NOT NULL DEFAULT 1;  # :::::::::::::::::::::::::::::::::: START: DATA UPDATE STATMENT :::::::::::::::::::::::::::::::::::::::::#UPDATE `tblblogentries` SET `released`=1;# :::::::::::::::::::::::::::::::::: END: DATA UPDATE STATMENT :::::::::::::::::::::::::::::::::::::::::##tblBlogCategories:#  categoryalias(nvarchar/50) addedALTER TABLE `tblblogcategories`  ADD COLUMN `categoryalias` varchar(50) NOT NULL;    #DB CHANGE: New table, tblblogtextblocks. Columns:#  id, nvarchar 35, primary key# label, nvarchar 255,# body, ntext,# blog, nvarchar 50  CREATE TABLE `tblblogtextblocks` (  `id` varchar(35) NOT NULL DEFAULT '',  `label` varchar(255) NULL DEFAULT NULL,  `body` text NULL,  `blog` varchar(50) NULL DEFAULT NULL,  PRIMARY KEY (`id`)) ENGINE=MyISAM;  #DB CHANGE: New table, tblblogpages. Columns:# id, nvarchar 35, primary key# title, nvarchar 255#  alias, nvarchar 100#  body, ntext,# blog, nvarchar 50CREATE TABLE `tblblogpages` (  `id` varchar(35) NOT NULL DEFAULT '',  `title` varchar(255) NULL DEFAULT NULL,  `alias` varchar(100) NULL DEFAULT NULL,  `body` text NULL,  `blog` varchar(50) NULL DEFAULT NULL,  PRIMARY KEY (`id`)) ENGINE=MyISAM;#DB CHANGE: Add verified as a bit to the tblblogsubscribers table. #You should write a quick script to update your current subscribers with verified=1. If you do not, they will not get email.ALTER TABLE `tblblogsubscribers`  ADD COLUMN `verified` tinyint(3) NULL DEFAULT 0;# :::::::::::::::::::::::::::::::::: START: DATA UPDATE STATMENT :::::::::::::::::::::::::::::::::::::::::#UPDATE `tblblogsubscribers`SET `verified`=1# :::::::::::::::::::::::::::::::::: END: DATA UPDATE STATMENT :::::::::::::::::::::::::::::::::::::::::#</code><br>
+            </section>
+
+            <footer>
+              <p>
+                <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider
+                  <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>.
+                  Your support keeps this site running and the coffee brewing! ☕️
+                </em>
+              </p>
+            </footer>
+
+            <script
+              src="https://giscus.app/client.js"
+              data-repo="andyj/andyjarrett.com"
+              data-repo-id="R_kgDOMjCDkQ"
+              data-category="Announcements"
+              data-category-id="DIC_kwDOMjCDkc4ChlfU"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="preferred_color_scheme"
+              data-lang="en"
+              crossorigin="anonymous"
+              async></script>
+            <a name="comment"></a>
+          </div>
+
+          <aside class="col-md-3 col-12">
+            <h4>Recent Posts</h4>
+            
+              <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">
+                Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">
+                How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">
+                NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">
+                Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">
+                Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">
+                Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">
+                Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">
+                Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+          </aside>
+        </section>
+      </article>
+    </main>
   </div>
 
   <footer class="container mt-5 border-top pt-2">
@@ -128,18 +164,18 @@ I am in the middle of very slowy upgrading my blog to <a href="http://ray.camden
       <!-- Home Link -->
       <a href="https://andyjarrett.com" class=""><i class="bi bi-globe me-2"></i></a>
       <!-- linkedin Link -->
-      <a href="https://www.linkedin.com/in/andyjarrett/" title="inkedIn" target="_blank"><i class="bi bi-linkedin me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://www.linkedin.com/in/andyjarrett/" title="inkedIn" target="_blank"><i class="bi bi-linkedin me-2"></i></a>
       <!-- Twitter Link -->
-      <a href="https://twitter.com/andyj" title="Twitter" target="_blank"><i class="bi bi-twitter me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://twitter.com/andyj" title="Twitter" target="_blank"><i class="bi bi-twitter me-2"></i></a>
       <!-- GitHub Link -->
-      <a href="https://github.com/andyj" title="GitHub" target="_blank"><i class="bi bi-github me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://github.com/andyj" title="GitHub" target="_blank"><i class="bi bi-github me-2"></i></a>
       <!-- Stack Overflow Link -->
-      <a href="https://stackoverflow.com/users/371761/andy-jarrett" title="Stack overflow" target="_blank"><i class="bi bi-stack-overflow me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://stackoverflow.com/users/371761/andy-jarrett" title="Stack overflow" target="_blank"><i class="bi bi-stack-overflow me-2"></i></a>
       <!-- BlueSky Link -->
-      <a href="https://bsky.app/profile/andyjarrett.com" title="BlueSky" target="_blank"><i class="bi bi-cloud me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://bsky.app/profile/andyjarrett.com" title="BlueSky" target="_blank"><i class="bi bi-cloud me-2"></i></a>
       <!-- Instagram Link -->
-      <a href="https://instagram.com/andyjarrett" title="Instragram" target="_blank"><i class="bi bi-instagram me-2"></i></a>
-      <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee" target="_blank"><i class="bi bi-cup-hot-fill fs-5"></i></a>
+      <a rel="noopener noreferrer" href="https://instagram.com/andyjarrett" title="Instragram" target="_blank"><i class="bi bi-instagram me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://buymeacoffee.com/mailgw" title="Buy me a coffee" target="_blank"><i class="bi bi-cup-hot-fill fs-5"></i></a>
     </div>
     <div class="col">
       <div class="text-end">

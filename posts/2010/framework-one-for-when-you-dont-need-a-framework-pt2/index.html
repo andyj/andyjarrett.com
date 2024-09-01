@@ -60,63 +60,99 @@
 
 
   <div class="container">
-    <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
-    <h1 class="mt-5 mb-5"><b>Framework One for when you don't need a framework pt2</b></h1>
-    <div class="row">
-      <div class="col-md-9 col-12">
-        <main class="mw fw-lighter fs-5">
-          
-<p>This post follows on from my <a href="http://www.andyjarrett.com/blog/index.cfm/2010/6/7/Framework-One-for-when-you-dont-need-a-framework">first part</a> and is all about using a framework for even the most simplest sites.</p><p>So our family member, Marvin Acme, has come back with the layout for his ACME gadgets to capture and kill rodents site. <br/><img src="http://www.andyjarrett.co.uk/blog/images/layout.png" alt="Site layout" style="width:400px;height:250px;" /></p><p>Being a family member means we're getting paid most likely with canned beer and with that in mind they are notgetting me working on stylesheets!</p> <p><ol><li>Create a new folder called <b>layouts</b> in the root of <b>/acme/</b> and add a file called default.cfm. Inthere place the following snippet:<br/><code><cfparam name="rc.pagetitle" default="A.C.M.E">&lt;html><head>&lt;title><cfoutput>#rc.pagetitle#</cfoutput></title>&lt;style>*{font-family:"Comic Sans MS";text-align:center;}</style></head><body><cfoutput><div id="wrap"><h1>A.C.M.E - Outlandish and downright dangerous products</h1><div id="nav"><a href="#buildURL(framework.home)#">Home Page</a> |<a href="#buildURL('main.about-us')#">About Acme</a> |<a href="#buildURL('main.contact-us')#">Contact Us</a></div>#body#<div id="footer">A.C.M.E &copy #year(now())#</div></div></cfoutput></body></html></code>There are 3 elements in here that relate to the framework<ol><li>#rc.pagetitle#: the "rc" refers to the <b>R</b>equest <b>C</b>ontext and contains all theURL and form variables from the browser which are also made available to the view directly. We canalso update this variable from within a view for the <b>default.cfm</b> to read, in this case to updatethe page title</li><li><b>buildURL</b> simply creates the <b>index.cfm?action=</b> strings for us. You reference the folder name within the<b>views/</b> folder (in this instance we called it <b>main</b>) and the file name (without the .cfm extention)</li><li><b>#body#</b> is where our view file will be populated in to. There is a lot more to the layouts than I needto go in to here so make sure you check out <a href="http://wiki.github.com/seancorfield/fw1/developing-applications-manual" title="Developing Applications Manual - fw1 - GitHub">manual</a>to see what else you can do.</li></ol></li><li>In <b>views/main/</b> add <b>about-us.cfm</b>. In there put the following code:<br/><code><cfset rc.pageTitle = "About A.C.M.E" /><p>About us text coming soon</p></code></li><li>In <b>views/main/</b> add <b>countact-us.cfm</b>. In there put the following code:<br/><code><cfset rc.pageTitle = "Contact A.C.M.E" /><p>Contact us text coming soon</p></code></li><li>In <b>views/main/default.cfm</b> replace the currect code with the following:<br/><code><p>New site coming soon</p></code></li></ol></p><p>You should now be able to go to <a href="http://localhost/acme">localhost/acme</a> and see the following:<br/><img src="http://www.andyjarrett.co.uk/blog/images/comic-sans.png" alt="The site" /></p><p>You're done - obviously minus the content but your 3 page brouchware is setup. No XML config files, setting up debug mode, and thinking about your event names ahead of time head of time.</p><p>What is so great about this then?<ul><li>The speed! Yes we could of used no framework and <b>cfmodule</b> on <b>default.cfm</b>, <b>contact-us.cfm</b>, and <b>about-us.cfm</b>but thats a lot of edits to do if the location of cfmodule changed or you wanted to add a required attribute. Look at what has beenachieved and we spent no time setting the site up and got all the benefits of having a framework!</li><li>If Marvin came back and wanted a form or some kind of data displayed we have the benfit of the framework and its abiltiy in handlingand passing data around.</li><li>And again speed! All you've done is created/edited 4 files! No more than if you would of done this without a framework!</li></ul></p><p>Hopefully you've seen that there is no reason not to use a framework even in the smallest of projects. We've managed to create a site and nothave to think about MVC or OO (or even XML config files) but at the same time whilst still having the power of these methodologies in the background in case we need them. Don't see this as I am against MVC or OO its just for some apps you don't need to think about these principles and <a href="http://github.com/seancorfield/fw1/downloads" title="Downloads for seancorfield's fw1 - GitHub">convention over configuration</a> has made this possible.</p><p>In keeping with the series I have some more posts as Marvin already has some idea posting and retrieving data and I'll look at how to grow the site.</p><p>Found out more about Framework One via:<ul><li><a href="http://fw1.riaforge.org/" title="FW/1 - Framework One">Project home page</a></li><li><a href="http://corfield.org/blog/archives.cfm/category/fw1" title="Blog">The blog</a></li><li><a href="http://wiki.github.com/seancorfield/fw1/" title="Home - fw1 - GitHub">The wiki</a></li></ul></p><br>
-        </main>
-        <script
-          src="https://giscus.app/client.js"
-          data-repo="andyj/andyjarrett.com"
-          data-repo-id="R_kgDOMjCDkQ"
-          data-category="Announcements"
-          data-category-id="DIC_kwDOMjCDkc4ChlfU"
-          data-mapping="pathname"
-          data-strict="0"
-          data-reactions-enabled="1"
-          data-emit-metadata="0"
-          data-input-position="top"
-          data-theme="preferred_color_scheme"
-          data-lang="en"
-          crossorigin="anonymous"
-          async></script>
-        <a name="comment"></a>
-        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
-
-      </div>
-      <div class="col-md-3 col-12">
-        <!-- Side Content -->
-        <h4>Recent Posts</h4>
-        
-          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-      </div>
+    <div class="my-1 text-center text-primary" role="alert">
+      <a class="text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">
+        Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky
+      </a>
     </div>
+
+    <main>
+      <article>
+        <header>
+          <h1 class="mt-5 mb-5"><b>Framework One for when you don't need a framework pt2</b></h1>
+        </header>
+
+        <section class="row">
+          <div class="col-md-9 col-12">
+            <section class="mw fw-lighter fs-5">
+              
+<p>This post follows on from my <a href="http://www.andyjarrett.com/blog/index.cfm/2010/6/7/Framework-One-for-when-you-dont-need-a-framework">first part</a> and is all about using a framework for even the most simplest sites.</p><p>So our family member, Marvin Acme, has come back with the layout for his ACME gadgets to capture and kill rodents site. <br/><img src="http://www.andyjarrett.co.uk/blog/images/layout.png" alt="Site layout" style="width:400px;height:250px;" /></p><p>Being a family member means we're getting paid most likely with canned beer and with that in mind they are notgetting me working on stylesheets!</p> <p><ol><li>Create a new folder called <b>layouts</b> in the root of <b>/acme/</b> and add a file called default.cfm. Inthere place the following snippet:<br/><code><cfparam name="rc.pagetitle" default="A.C.M.E">&lt;html><head>&lt;title><cfoutput>#rc.pagetitle#</cfoutput></title>&lt;style>*{font-family:"Comic Sans MS";text-align:center;}</style></head><body><cfoutput><div id="wrap"><h1>A.C.M.E - Outlandish and downright dangerous products</h1><div id="nav"><a href="#buildURL(framework.home)#">Home Page</a> |<a href="#buildURL('main.about-us')#">About Acme</a> |<a href="#buildURL('main.contact-us')#">Contact Us</a></div>#body#<div id="footer">A.C.M.E &copy #year(now())#</div></div></cfoutput></body></html></code>There are 3 elements in here that relate to the framework<ol><li>#rc.pagetitle#: the "rc" refers to the <b>R</b>equest <b>C</b>ontext and contains all theURL and form variables from the browser which are also made available to the view directly. We canalso update this variable from within a view for the <b>default.cfm</b> to read, in this case to updatethe page title</li><li><b>buildURL</b> simply creates the <b>index.cfm?action=</b> strings for us. You reference the folder name within the<b>views/</b> folder (in this instance we called it <b>main</b>) and the file name (without the .cfm extention)</li><li><b>#body#</b> is where our view file will be populated in to. There is a lot more to the layouts than I needto go in to here so make sure you check out <a href="http://wiki.github.com/seancorfield/fw1/developing-applications-manual" title="Developing Applications Manual - fw1 - GitHub">manual</a>to see what else you can do.</li></ol></li><li>In <b>views/main/</b> add <b>about-us.cfm</b>. In there put the following code:<br/><code><cfset rc.pageTitle = "About A.C.M.E" /><p>About us text coming soon</p></code></li><li>In <b>views/main/</b> add <b>countact-us.cfm</b>. In there put the following code:<br/><code><cfset rc.pageTitle = "Contact A.C.M.E" /><p>Contact us text coming soon</p></code></li><li>In <b>views/main/default.cfm</b> replace the currect code with the following:<br/><code><p>New site coming soon</p></code></li></ol></p><p>You should now be able to go to <a href="http://localhost/acme">localhost/acme</a> and see the following:<br/><img src="http://www.andyjarrett.co.uk/blog/images/comic-sans.png" alt="The site" /></p><p>You're done - obviously minus the content but your 3 page brouchware is setup. No XML config files, setting up debug mode, and thinking about your event names ahead of time head of time.</p><p>What is so great about this then?<ul><li>The speed! Yes we could of used no framework and <b>cfmodule</b> on <b>default.cfm</b>, <b>contact-us.cfm</b>, and <b>about-us.cfm</b>but thats a lot of edits to do if the location of cfmodule changed or you wanted to add a required attribute. Look at what has beenachieved and we spent no time setting the site up and got all the benefits of having a framework!</li><li>If Marvin came back and wanted a form or some kind of data displayed we have the benfit of the framework and its abiltiy in handlingand passing data around.</li><li>And again speed! All you've done is created/edited 4 files! No more than if you would of done this without a framework!</li></ul></p><p>Hopefully you've seen that there is no reason not to use a framework even in the smallest of projects. We've managed to create a site and nothave to think about MVC or OO (or even XML config files) but at the same time whilst still having the power of these methodologies in the background in case we need them. Don't see this as I am against MVC or OO its just for some apps you don't need to think about these principles and <a href="http://github.com/seancorfield/fw1/downloads" title="Downloads for seancorfield's fw1 - GitHub">convention over configuration</a> has made this possible.</p><p>In keeping with the series I have some more posts as Marvin already has some idea posting and retrieving data and I'll look at how to grow the site.</p><p>Found out more about Framework One via:<ul><li><a href="http://fw1.riaforge.org/" title="FW/1 - Framework One">Project home page</a></li><li><a href="http://corfield.org/blog/archives.cfm/category/fw1" title="Blog">The blog</a></li><li><a href="http://wiki.github.com/seancorfield/fw1/" title="Home - fw1 - GitHub">The wiki</a></li></ul></p><br>
+            </section>
+
+            <footer>
+              <p>
+                <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider
+                  <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>.
+                  Your support keeps this site running and the coffee brewing! ☕️
+                </em>
+              </p>
+            </footer>
+
+            <script
+              src="https://giscus.app/client.js"
+              data-repo="andyj/andyjarrett.com"
+              data-repo-id="R_kgDOMjCDkQ"
+              data-category="Announcements"
+              data-category-id="DIC_kwDOMjCDkc4ChlfU"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="preferred_color_scheme"
+              data-lang="en"
+              crossorigin="anonymous"
+              async></script>
+            <a name="comment"></a>
+          </div>
+
+          <aside class="col-md-3 col-12">
+            <h4>Recent Posts</h4>
+            
+              <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">
+                Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">
+                How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">
+                NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">
+                Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">
+                Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">
+                Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">
+                Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">
+                Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+          </aside>
+        </section>
+      </article>
+    </main>
   </div>
 
   <footer class="container mt-5 border-top pt-2">
@@ -128,18 +164,18 @@
       <!-- Home Link -->
       <a href="https://andyjarrett.com" class=""><i class="bi bi-globe me-2"></i></a>
       <!-- linkedin Link -->
-      <a href="https://www.linkedin.com/in/andyjarrett/" title="inkedIn" target="_blank"><i class="bi bi-linkedin me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://www.linkedin.com/in/andyjarrett/" title="inkedIn" target="_blank"><i class="bi bi-linkedin me-2"></i></a>
       <!-- Twitter Link -->
-      <a href="https://twitter.com/andyj" title="Twitter" target="_blank"><i class="bi bi-twitter me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://twitter.com/andyj" title="Twitter" target="_blank"><i class="bi bi-twitter me-2"></i></a>
       <!-- GitHub Link -->
-      <a href="https://github.com/andyj" title="GitHub" target="_blank"><i class="bi bi-github me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://github.com/andyj" title="GitHub" target="_blank"><i class="bi bi-github me-2"></i></a>
       <!-- Stack Overflow Link -->
-      <a href="https://stackoverflow.com/users/371761/andy-jarrett" title="Stack overflow" target="_blank"><i class="bi bi-stack-overflow me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://stackoverflow.com/users/371761/andy-jarrett" title="Stack overflow" target="_blank"><i class="bi bi-stack-overflow me-2"></i></a>
       <!-- BlueSky Link -->
-      <a href="https://bsky.app/profile/andyjarrett.com" title="BlueSky" target="_blank"><i class="bi bi-cloud me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://bsky.app/profile/andyjarrett.com" title="BlueSky" target="_blank"><i class="bi bi-cloud me-2"></i></a>
       <!-- Instagram Link -->
-      <a href="https://instagram.com/andyjarrett" title="Instragram" target="_blank"><i class="bi bi-instagram me-2"></i></a>
-      <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee" target="_blank"><i class="bi bi-cup-hot-fill fs-5"></i></a>
+      <a rel="noopener noreferrer" href="https://instagram.com/andyjarrett" title="Instragram" target="_blank"><i class="bi bi-instagram me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://buymeacoffee.com/mailgw" title="Buy me a coffee" target="_blank"><i class="bi bi-cup-hot-fill fs-5"></i></a>
     </div>
     <div class="col">
       <div class="text-end">

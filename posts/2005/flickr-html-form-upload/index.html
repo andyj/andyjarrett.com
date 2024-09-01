@@ -60,63 +60,99 @@
 
 
   <div class="container">
-    <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
-    <h1 class="mt-5 mb-5"><b>Flickr HTML form upload</b></h1>
-    <div class="row">
-      <div class="col-md-9 col-12">
-        <main class="mw fw-lighter fs-5">
-          
-Below is a Flickr upload script i've been playing around with. You'll notice that im using &lt;CFHTTP&gt; to post the data. This is so that you can insert the fields into another form, otherwise if you want you can post the form fields direct to <a href="http://www.flickr.com/tools/uploader_go.gne">http://www.flickr.com/tools/uploader_go.gne</a>.For more information on <a href="http://flickr.com/services/api/upload.api.html"> the Flickr Upload Api click here.</a><div class="code"><FONT COLOR=MAROON>&lt;cfset flickrEmail = <FONT COLOR=BLUE>""</FONT> /&gt;</FONT><br><FONT COLOR=MAROON>&lt;cfset flickrPassword = <FONT COLOR=BLUE>""</FONT> /&gt;</FONT><br><br><br><FONT COLOR=MAROON>&lt;cfif NOT isDefined(<FONT COLOR=BLUE>"form.photo"</FONT>)&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;form action=<FONT COLOR=BLUE>"flickr.cfm"</FONT> method=<FONT COLOR=BLUE>"post"</FONT> enctype=<FONT COLOR=BLUE>"multipart/form-data"</FONT>&gt;</FONT></FONT><br>&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=TEAL>&lt;table border=<FONT COLOR=BLUE>"1"</FONT>&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=TEAL>&lt;tr&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT>photo:<FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT><FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;input type=<FONT COLOR=BLUE>"file"</FONT> name=<FONT COLOR=BLUE>"photo"</FONT>&gt;</FONT></FONT><FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;/tr&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=TEAL>&lt;tr&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT>title:<FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT><FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;input type=<FONT COLOR=BLUE>"text"</FONT> name=<FONT COLOR=BLUE>"title"</FONT>&gt;</FONT></FONT> (optional)<FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;/tr&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=TEAL>&lt;tr&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT>description:<FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT><FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;input type=<FONT COLOR=BLUE>"text"</FONT> name=<FONT COLOR=BLUE>"description"</FONT>&gt;</FONT></FONT> (optional)<FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;/tr&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=TEAL>&lt;tr&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT>tags:<FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT><FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;input type=<FONT COLOR=BLUE>"text"</FONT> name=<FONT COLOR=BLUE>"tags"</FONT>&gt;</FONT></FONT> (optional)<FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;/tr&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=TEAL>&lt;tr&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT>is_public:<FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT><FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;input type=<FONT COLOR=BLUE>"text"</FONT> name=<FONT COLOR=BLUE>"is_public"</FONT>&gt;</FONT></FONT> (optional 1 or 0)<FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;/tr&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=TEAL>&lt;tr&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT>is_friend:<FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT><FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;input type=<FONT COLOR=BLUE>"text"</FONT> name=<FONT COLOR=BLUE>"is_friend"</FONT>&gt;</FONT></FONT> (optional 1 or 0)<FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;/tr&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=TEAL>&lt;tr&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT>is_family:<FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT><FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;input type=<FONT COLOR=BLUE>"text"</FONT> name=<FONT COLOR=BLUE>"is_family"</FONT>&gt;</FONT></FONT> (optional 1 or 0)<FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;/tr&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=TEAL>&lt;tr&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT><B><I>&amp;nbsp;</I></B><FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT><FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;input type=<FONT COLOR=BLUE>"checkbox"</FONT> name=<FONT COLOR=BLUE>"async"</FONT> value=<FONT COLOR=BLUE>"1"</FONT>&gt;</FONT></FONT> Async Mode<FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;/tr&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=TEAL>&lt;tr&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT><B><I>&amp;nbsp;</I></B><FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT><FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;input type=<FONT COLOR=BLUE>"submit"</FONT> value=<FONT COLOR=BLUE>"post it"</FONT>&gt;</FONT></FONT><FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;/tr&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=TEAL>&lt;/table&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;<FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;/form&gt;</FONT></FONT><br><FONT COLOR=MAROON>&lt;cfelse&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cftry&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfhttp url=<FONT COLOR=BLUE>"<A TARGET="_blank" HREF="http://www.flickr.com/tools/uploader_go.gne">http://www.flickr.com/tools/uploader_go.gne</A>"</FONT> method=<FONT COLOR=BLUE>"post"</FONT>&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfhttpparam name=<FONT COLOR=BLUE>"email"</FONT> value=<FONT COLOR=BLUE>"#flickrEmail#"</FONT> type=<FONT COLOR=BLUE>"formfield"</FONT>  /&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfhttpparam name=<FONT COLOR=BLUE>"password"</FONT> value=<FONT COLOR=BLUE>"#flickrPassword"</FONT> type=<FONT COLOR=BLUE>"formfield"</FONT> /&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfhttpparam name=<FONT COLOR=BLUE>"photo"</FONT> file=<FONT COLOR=BLUE>"#form.photo#"</FONT> type=<FONT COLOR=BLUE>"file"</FONT>   /&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfhttpparam name=<FONT COLOR=BLUE>"title"</FONT> value=<FONT COLOR=BLUE>"#form.title#"</FONT> type=<FONT COLOR=BLUE>"formfield"</FONT> /&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfhttpparam name=<FONT COLOR=BLUE>"description"</FONT> value=<FONT COLOR=BLUE>"description"</FONT> type=<FONT COLOR=BLUE>"formfield"</FONT> /&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfhttpparam name=<FONT COLOR=BLUE>"tags"</FONT> value=<FONT COLOR=BLUE>"#form.tags#"</FONT> type=<FONT COLOR=BLUE>"formfield"</FONT> /&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfhttpparam name=<FONT COLOR=BLUE>"is_public"</FONT> value=<FONT COLOR=BLUE>"#form.is_public#"</FONT> type=<FONT COLOR=BLUE>"formfield"</FONT> /&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfhttpparam name=<FONT COLOR=BLUE>"is_friend"</FONT> value=<FONT COLOR=BLUE>"#form.is_friend#"</FONT> type=<FONT COLOR=BLUE>"formfield"</FONT> /&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfhttpparam name=<FONT COLOR=BLUE>"is_family"</FONT> value=<FONT COLOR=BLUE>"#is_family#"</FONT> type=<FONT COLOR=BLUE>"formfield"</FONT> /&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;/cfhttp&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=GRAY><I>&lt;!--- The returned XML ---&gt;</I></FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfdump var=<FONT COLOR=BLUE>"#xmlParse(cfhttp.FileContent)#"</FONT> /&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfcatch&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=GRAY><I>&lt;!--- If there was a problem ---&gt;</I></FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfdump var=<FONT COLOR=BLUE>"#cfcatch#"</FONT> /&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;/cfcatch&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;/cftry&gt;</FONT><br><FONT COLOR=MAROON>&lt;/cfif&gt;</FONT></div><br>
-        </main>
-        <script
-          src="https://giscus.app/client.js"
-          data-repo="andyj/andyjarrett.com"
-          data-repo-id="R_kgDOMjCDkQ"
-          data-category="Announcements"
-          data-category-id="DIC_kwDOMjCDkc4ChlfU"
-          data-mapping="pathname"
-          data-strict="0"
-          data-reactions-enabled="1"
-          data-emit-metadata="0"
-          data-input-position="top"
-          data-theme="preferred_color_scheme"
-          data-lang="en"
-          crossorigin="anonymous"
-          async></script>
-        <a name="comment"></a>
-        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
-
-      </div>
-      <div class="col-md-3 col-12">
-        <!-- Side Content -->
-        <h4>Recent Posts</h4>
-        
-          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-      </div>
+    <div class="my-1 text-center text-primary" role="alert">
+      <a class="text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">
+        Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky
+      </a>
     </div>
+
+    <main>
+      <article>
+        <header>
+          <h1 class="mt-5 mb-5"><b>Flickr HTML form upload</b></h1>
+        </header>
+
+        <section class="row">
+          <div class="col-md-9 col-12">
+            <section class="mw fw-lighter fs-5">
+              
+Below is a Flickr upload script i've been playing around with. You'll notice that im using &lt;CFHTTP&gt; to post the data. This is so that you can insert the fields into another form, otherwise if you want you can post the form fields direct to <a href="http://www.flickr.com/tools/uploader_go.gne">http://www.flickr.com/tools/uploader_go.gne</a>.For more information on <a href="http://flickr.com/services/api/upload.api.html"> the Flickr Upload Api click here.</a><div class="code"><FONT COLOR=MAROON>&lt;cfset flickrEmail = <FONT COLOR=BLUE>""</FONT> /&gt;</FONT><br><FONT COLOR=MAROON>&lt;cfset flickrPassword = <FONT COLOR=BLUE>""</FONT> /&gt;</FONT><br><br><br><FONT COLOR=MAROON>&lt;cfif NOT isDefined(<FONT COLOR=BLUE>"form.photo"</FONT>)&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;form action=<FONT COLOR=BLUE>"flickr.cfm"</FONT> method=<FONT COLOR=BLUE>"post"</FONT> enctype=<FONT COLOR=BLUE>"multipart/form-data"</FONT>&gt;</FONT></FONT><br>&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=TEAL>&lt;table border=<FONT COLOR=BLUE>"1"</FONT>&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=TEAL>&lt;tr&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT>photo:<FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT><FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;input type=<FONT COLOR=BLUE>"file"</FONT> name=<FONT COLOR=BLUE>"photo"</FONT>&gt;</FONT></FONT><FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;/tr&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=TEAL>&lt;tr&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT>title:<FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT><FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;input type=<FONT COLOR=BLUE>"text"</FONT> name=<FONT COLOR=BLUE>"title"</FONT>&gt;</FONT></FONT> (optional)<FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;/tr&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=TEAL>&lt;tr&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT>description:<FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT><FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;input type=<FONT COLOR=BLUE>"text"</FONT> name=<FONT COLOR=BLUE>"description"</FONT>&gt;</FONT></FONT> (optional)<FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;/tr&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=TEAL>&lt;tr&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT>tags:<FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT><FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;input type=<FONT COLOR=BLUE>"text"</FONT> name=<FONT COLOR=BLUE>"tags"</FONT>&gt;</FONT></FONT> (optional)<FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;/tr&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=TEAL>&lt;tr&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT>is_public:<FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT><FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;input type=<FONT COLOR=BLUE>"text"</FONT> name=<FONT COLOR=BLUE>"is_public"</FONT>&gt;</FONT></FONT> (optional 1 or 0)<FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;/tr&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=TEAL>&lt;tr&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT>is_friend:<FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT><FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;input type=<FONT COLOR=BLUE>"text"</FONT> name=<FONT COLOR=BLUE>"is_friend"</FONT>&gt;</FONT></FONT> (optional 1 or 0)<FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;/tr&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=TEAL>&lt;tr&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT>is_family:<FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT><FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;input type=<FONT COLOR=BLUE>"text"</FONT> name=<FONT COLOR=BLUE>"is_family"</FONT>&gt;</FONT></FONT> (optional 1 or 0)<FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;/tr&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=TEAL>&lt;tr&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT><B><I>&amp;nbsp;</I></B><FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT><FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;input type=<FONT COLOR=BLUE>"checkbox"</FONT> name=<FONT COLOR=BLUE>"async"</FONT> value=<FONT COLOR=BLUE>"1"</FONT>&gt;</FONT></FONT> Async Mode<FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;/tr&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=TEAL>&lt;tr&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT><B><I>&amp;nbsp;</I></B><FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;td&gt;</FONT><FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;input type=<FONT COLOR=BLUE>"submit"</FONT> value=<FONT COLOR=BLUE>"post it"</FONT>&gt;</FONT></FONT><FONT COLOR=TEAL>&lt;/td&gt;</FONT><FONT COLOR=TEAL>&lt;/tr&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=TEAL>&lt;/table&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;<FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;/form&gt;</FONT></FONT><br><FONT COLOR=MAROON>&lt;cfelse&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cftry&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfhttp url=<FONT COLOR=BLUE>"<A TARGET="_blank" HREF="http://www.flickr.com/tools/uploader_go.gne">http://www.flickr.com/tools/uploader_go.gne</A>"</FONT> method=<FONT COLOR=BLUE>"post"</FONT>&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfhttpparam name=<FONT COLOR=BLUE>"email"</FONT> value=<FONT COLOR=BLUE>"#flickrEmail#"</FONT> type=<FONT COLOR=BLUE>"formfield"</FONT>  /&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfhttpparam name=<FONT COLOR=BLUE>"password"</FONT> value=<FONT COLOR=BLUE>"#flickrPassword"</FONT> type=<FONT COLOR=BLUE>"formfield"</FONT> /&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfhttpparam name=<FONT COLOR=BLUE>"photo"</FONT> file=<FONT COLOR=BLUE>"#form.photo#"</FONT> type=<FONT COLOR=BLUE>"file"</FONT>   /&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfhttpparam name=<FONT COLOR=BLUE>"title"</FONT> value=<FONT COLOR=BLUE>"#form.title#"</FONT> type=<FONT COLOR=BLUE>"formfield"</FONT> /&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfhttpparam name=<FONT COLOR=BLUE>"description"</FONT> value=<FONT COLOR=BLUE>"description"</FONT> type=<FONT COLOR=BLUE>"formfield"</FONT> /&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfhttpparam name=<FONT COLOR=BLUE>"tags"</FONT> value=<FONT COLOR=BLUE>"#form.tags#"</FONT> type=<FONT COLOR=BLUE>"formfield"</FONT> /&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfhttpparam name=<FONT COLOR=BLUE>"is_public"</FONT> value=<FONT COLOR=BLUE>"#form.is_public#"</FONT> type=<FONT COLOR=BLUE>"formfield"</FONT> /&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfhttpparam name=<FONT COLOR=BLUE>"is_friend"</FONT> value=<FONT COLOR=BLUE>"#form.is_friend#"</FONT> type=<FONT COLOR=BLUE>"formfield"</FONT> /&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfhttpparam name=<FONT COLOR=BLUE>"is_family"</FONT> value=<FONT COLOR=BLUE>"#is_family#"</FONT> type=<FONT COLOR=BLUE>"formfield"</FONT> /&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;/cfhttp&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=GRAY><I>&lt;!--- The returned XML ---&gt;</I></FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfdump var=<FONT COLOR=BLUE>"#xmlParse(cfhttp.FileContent)#"</FONT> /&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfcatch&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=GRAY><I>&lt;!--- If there was a problem ---&gt;</I></FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfdump var=<FONT COLOR=BLUE>"#cfcatch#"</FONT> /&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;/cfcatch&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;/cftry&gt;</FONT><br><FONT COLOR=MAROON>&lt;/cfif&gt;</FONT></div><br>
+            </section>
+
+            <footer>
+              <p>
+                <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider
+                  <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>.
+                  Your support keeps this site running and the coffee brewing! ☕️
+                </em>
+              </p>
+            </footer>
+
+            <script
+              src="https://giscus.app/client.js"
+              data-repo="andyj/andyjarrett.com"
+              data-repo-id="R_kgDOMjCDkQ"
+              data-category="Announcements"
+              data-category-id="DIC_kwDOMjCDkc4ChlfU"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="preferred_color_scheme"
+              data-lang="en"
+              crossorigin="anonymous"
+              async></script>
+            <a name="comment"></a>
+          </div>
+
+          <aside class="col-md-3 col-12">
+            <h4>Recent Posts</h4>
+            
+              <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">
+                Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">
+                How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">
+                NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">
+                Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">
+                Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">
+                Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">
+                Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">
+                Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+          </aside>
+        </section>
+      </article>
+    </main>
   </div>
 
   <footer class="container mt-5 border-top pt-2">
@@ -128,18 +164,18 @@ Below is a Flickr upload script i've been playing around with. You'll notice tha
       <!-- Home Link -->
       <a href="https://andyjarrett.com" class=""><i class="bi bi-globe me-2"></i></a>
       <!-- linkedin Link -->
-      <a href="https://www.linkedin.com/in/andyjarrett/" title="inkedIn" target="_blank"><i class="bi bi-linkedin me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://www.linkedin.com/in/andyjarrett/" title="inkedIn" target="_blank"><i class="bi bi-linkedin me-2"></i></a>
       <!-- Twitter Link -->
-      <a href="https://twitter.com/andyj" title="Twitter" target="_blank"><i class="bi bi-twitter me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://twitter.com/andyj" title="Twitter" target="_blank"><i class="bi bi-twitter me-2"></i></a>
       <!-- GitHub Link -->
-      <a href="https://github.com/andyj" title="GitHub" target="_blank"><i class="bi bi-github me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://github.com/andyj" title="GitHub" target="_blank"><i class="bi bi-github me-2"></i></a>
       <!-- Stack Overflow Link -->
-      <a href="https://stackoverflow.com/users/371761/andy-jarrett" title="Stack overflow" target="_blank"><i class="bi bi-stack-overflow me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://stackoverflow.com/users/371761/andy-jarrett" title="Stack overflow" target="_blank"><i class="bi bi-stack-overflow me-2"></i></a>
       <!-- BlueSky Link -->
-      <a href="https://bsky.app/profile/andyjarrett.com" title="BlueSky" target="_blank"><i class="bi bi-cloud me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://bsky.app/profile/andyjarrett.com" title="BlueSky" target="_blank"><i class="bi bi-cloud me-2"></i></a>
       <!-- Instagram Link -->
-      <a href="https://instagram.com/andyjarrett" title="Instragram" target="_blank"><i class="bi bi-instagram me-2"></i></a>
-      <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee" target="_blank"><i class="bi bi-cup-hot-fill fs-5"></i></a>
+      <a rel="noopener noreferrer" href="https://instagram.com/andyjarrett" title="Instragram" target="_blank"><i class="bi bi-instagram me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://buymeacoffee.com/mailgw" title="Buy me a coffee" target="_blank"><i class="bi bi-cup-hot-fill fs-5"></i></a>
     </div>
     <div class="col">
       <div class="text-end">

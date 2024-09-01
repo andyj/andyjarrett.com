@@ -60,63 +60,99 @@
 
 
   <div class="container">
-    <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
-    <h1 class="mt-5 mb-5"><b>Ant- Moving files and directories</b></h1>
-    <div class="row">
-      <div class="col-md-9 col-12">
-        <main class="mw fw-lighter fs-5">
-          
-<p>First off I wanna say that I'm running all my Ant task via <a href="http://www.eclipse.org">Eclipse</a> and not the command line. If there is a demand to know how to install Ant and run it from the command line I'll do that post separately.</p><p>So, what is Ant? Well to steal a quote from Mark Drew, think of Ant as .bat files on steroids. You use XML to describe a set of commands to run a whole range of tasks to do anything from SVN/CVS checkouts, unit tests, FTP, emails, sql, moving/copying folders/files generally just name it!</p><p>In this guide I want to cover creating a build.xml file and moving files/folders. I'm assuming you've got Eclipse and you know you way around it enough. Before we do begin you will need to ensure that you can see the Console View. </p> <code> Window >> Show View >> Other >> General >> Console</code> </p><p>Lets begin!</p><p>Create a new project in your Eclipse workspace. The type of project doesn't matter, though I'm creating a <a href="http://www.cfeclipse.org">CFEclipse</a> one as I want to move .cfm pages around. From within the project create a new file called Build.xml<code> right-click on the project folder >> new >> file >> file name (build.xml)</code>  In your build.xml add the following and save:<code> <?xml version="1.0" encoding="UTF-8"?>  <project name="myFirstBuildFile" default="" basedir=".">    <description>     A description of what this build file does    </description>    <!-- Simply echo's a message to the screen -->   <echo message="Hello foo, I am the build.xml" />  </project></code></p><p>  Now while still in the editor right-click anywhere on your build.xml file and choose the following: <code>    Run As >> Ant Build </code> In the console window you should see something like <blockquote>    Buildfile: /[your eclipse work space root]/Ant/build.xml<br/>   [echo] Hello foo, I am the build.xml<br/>   BUILD SUCCESSFUL<br/>   Total time: 136 milliseconds<br/> </blockquote></p><p>You've ran your first build.xml file excellent. Now lets move a file. Create two more folders in your Ant project called 'folder_test' and 'folder_live' and in the first folder put a file called 'index.cfm'. Your project should now look like this<ul> <li>build.xml</li>      <ul>      <li>[folder_live]</li>      <li>[folder_test]       <ul>          <li>index.cfm</li>        </ul>             </li>         </ul></ul>The idea of the next task to copy index.cfm from the test folder to the live one, i'm also going to introduce properties, think of them as variables.<code>  <?xml version="1.0" encoding="UTF-8"?>  <project name="myFirstBuildFile" default="" basedir=".">    <description>     A description of what this build file does    </description>      <!-- Relative lo  cation of test folder -->   <property name="test" value="folder_test/" />   <!-- Relative location of live folder -->   <property name="live" value="folder_live/" />     <!-- move file -->    <move file="${test}index.cfm" todir="${live}" />      <echo message="The index.cfm file has been moved" />  </project></code>Now while still in the editor right-click anywhere on your build.xml file and choose the following:<code>  Run As >> Ant Build</code>If all has gone well you should of just moved your index.cfm file from test to live. Thats all good and well but I doubt you ever have to move just one file my guess is that you have a host of folders and files. In the directory 'folder_test' add two other directories called 'images' and 'css' and move 'index.cfm' back as well. You new directory structure should look like this:<ul>  <li>build.xml</li>      <ul>      <li>[folder_live]</li>      <li>[folder_test]       <ul>          <li>[css]</li>          <li>[images]</li>         <li>index.cfm</li>        </ul>             </li>         </ul></ul></p><p>The plan now is move the complete directory of 'folder_test' to 'folder_live':<code><?xml version="1.0" encoding="UTF-8"?><project name="myFirstBuildFile" default="" basedir="."> <description>   A description of what this build file does  </description>    <!-- Relative lo  cation of test folder --> <property name="test" value="folder_test/" /> <!-- Relative location of live folder --> <property name="live" value="folder_live/" /> <!--    move directories and files    From Ant 1.6.3 you can write the following as:    <move file="${test}" tofile="${live}" />  --> <move todir="${live}">    <fileset dir="${test}"/>  </move>       <echo message="The contest of folder_test have been moved" /> <!--    You'll notice that when moving the directories Ant deletes the   original folder. Because of this we are going to use <mkdir>    to re-create the original folder  -->   <mkdir dir="${test}" /> <echo message="We have recreated the the folder_test directory" /></project>  </code> Again while in the editor right-click anywhere on your build.xml file and choose the following:<code> Run As >> Ant Build</code></p><p>Of course there is more you can do, rather than going through full set examples here or some of the other features:</p><p>Move a set of files to a new directory</p><code><!-- move all .cfm files and leave the scribble file in test --><move todir="${live}">  <fileset dir="${test}">    <include name="*.cfm"/>    <exclude name="scribble.cfm"/>  </fileset></move></code><p>Move a list of files to a new directory</p><code><move todir="${live}">  <filelist dir="${test}">    <file name="index.cfm"/>    <file name="fridays_joke.cfm"/>  </filelist></move></code><p>Append ".bak" to the names of all files in a directory.</p><code><!--- Notice the new parameter here, includeemptydirs --><move todir="${live}" includeemptydirs="false">  <fileset dir="${test}">    <exclude name="**/*.bak"/>  </fileset>  <mapper type="glob" from="*" to="*.bak"/></move></code><p>More resources:<ul> <li><a href="http://ant.apache.org/">Apache Ant</a></li>  <li><a href="http://ant.apache.org/manual/coretasklist.html">Ant Core Tasks</a></li>  <li><a href="http://ant.apache.org/manual/CoreTasks/move.html">Ant Core Tasks, Move</a></li>  <li><a href="http://ant.apache.org/manual/CoreTasks/copy.html">Ant Core Tasks, Copy</a></li></ul></p><br>
-        </main>
-        <script
-          src="https://giscus.app/client.js"
-          data-repo="andyj/andyjarrett.com"
-          data-repo-id="R_kgDOMjCDkQ"
-          data-category="Announcements"
-          data-category-id="DIC_kwDOMjCDkc4ChlfU"
-          data-mapping="pathname"
-          data-strict="0"
-          data-reactions-enabled="1"
-          data-emit-metadata="0"
-          data-input-position="top"
-          data-theme="preferred_color_scheme"
-          data-lang="en"
-          crossorigin="anonymous"
-          async></script>
-        <a name="comment"></a>
-        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
-
-      </div>
-      <div class="col-md-3 col-12">
-        <!-- Side Content -->
-        <h4>Recent Posts</h4>
-        
-          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-      </div>
+    <div class="my-1 text-center text-primary" role="alert">
+      <a class="text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">
+        Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky
+      </a>
     </div>
+
+    <main>
+      <article>
+        <header>
+          <h1 class="mt-5 mb-5"><b>Ant- Moving files and directories</b></h1>
+        </header>
+
+        <section class="row">
+          <div class="col-md-9 col-12">
+            <section class="mw fw-lighter fs-5">
+              
+<p>First off I wanna say that I'm running all my Ant task via <a href="http://www.eclipse.org">Eclipse</a> and not the command line. If there is a demand to know how to install Ant and run it from the command line I'll do that post separately.</p><p>So, what is Ant? Well to steal a quote from Mark Drew, think of Ant as .bat files on steroids. You use XML to describe a set of commands to run a whole range of tasks to do anything from SVN/CVS checkouts, unit tests, FTP, emails, sql, moving/copying folders/files generally just name it!</p><p>In this guide I want to cover creating a build.xml file and moving files/folders. I'm assuming you've got Eclipse and you know you way around it enough. Before we do begin you will need to ensure that you can see the Console View. </p> <code> Window >> Show View >> Other >> General >> Console</code> </p><p>Lets begin!</p><p>Create a new project in your Eclipse workspace. The type of project doesn't matter, though I'm creating a <a href="http://www.cfeclipse.org">CFEclipse</a> one as I want to move .cfm pages around. From within the project create a new file called Build.xml<code> right-click on the project folder >> new >> file >> file name (build.xml)</code>  In your build.xml add the following and save:<code> <?xml version="1.0" encoding="UTF-8"?>  <project name="myFirstBuildFile" default="" basedir=".">    <description>     A description of what this build file does    </description>    <!-- Simply echo's a message to the screen -->   <echo message="Hello foo, I am the build.xml" />  </project></code></p><p>  Now while still in the editor right-click anywhere on your build.xml file and choose the following: <code>    Run As >> Ant Build </code> In the console window you should see something like <blockquote>    Buildfile: /[your eclipse work space root]/Ant/build.xml<br/>   [echo] Hello foo, I am the build.xml<br/>   BUILD SUCCESSFUL<br/>   Total time: 136 milliseconds<br/> </blockquote></p><p>You've ran your first build.xml file excellent. Now lets move a file. Create two more folders in your Ant project called 'folder_test' and 'folder_live' and in the first folder put a file called 'index.cfm'. Your project should now look like this<ul> <li>build.xml</li>      <ul>      <li>[folder_live]</li>      <li>[folder_test]       <ul>          <li>index.cfm</li>        </ul>             </li>         </ul></ul>The idea of the next task to copy index.cfm from the test folder to the live one, i'm also going to introduce properties, think of them as variables.<code>  <?xml version="1.0" encoding="UTF-8"?>  <project name="myFirstBuildFile" default="" basedir=".">    <description>     A description of what this build file does    </description>      <!-- Relative lo  cation of test folder -->   <property name="test" value="folder_test/" />   <!-- Relative location of live folder -->   <property name="live" value="folder_live/" />     <!-- move file -->    <move file="${test}index.cfm" todir="${live}" />      <echo message="The index.cfm file has been moved" />  </project></code>Now while still in the editor right-click anywhere on your build.xml file and choose the following:<code>  Run As >> Ant Build</code>If all has gone well you should of just moved your index.cfm file from test to live. Thats all good and well but I doubt you ever have to move just one file my guess is that you have a host of folders and files. In the directory 'folder_test' add two other directories called 'images' and 'css' and move 'index.cfm' back as well. You new directory structure should look like this:<ul>  <li>build.xml</li>      <ul>      <li>[folder_live]</li>      <li>[folder_test]       <ul>          <li>[css]</li>          <li>[images]</li>         <li>index.cfm</li>        </ul>             </li>         </ul></ul></p><p>The plan now is move the complete directory of 'folder_test' to 'folder_live':<code><?xml version="1.0" encoding="UTF-8"?><project name="myFirstBuildFile" default="" basedir="."> <description>   A description of what this build file does  </description>    <!-- Relative lo  cation of test folder --> <property name="test" value="folder_test/" /> <!-- Relative location of live folder --> <property name="live" value="folder_live/" /> <!--    move directories and files    From Ant 1.6.3 you can write the following as:    <move file="${test}" tofile="${live}" />  --> <move todir="${live}">    <fileset dir="${test}"/>  </move>       <echo message="The contest of folder_test have been moved" /> <!--    You'll notice that when moving the directories Ant deletes the   original folder. Because of this we are going to use <mkdir>    to re-create the original folder  -->   <mkdir dir="${test}" /> <echo message="We have recreated the the folder_test directory" /></project>  </code> Again while in the editor right-click anywhere on your build.xml file and choose the following:<code> Run As >> Ant Build</code></p><p>Of course there is more you can do, rather than going through full set examples here or some of the other features:</p><p>Move a set of files to a new directory</p><code><!-- move all .cfm files and leave the scribble file in test --><move todir="${live}">  <fileset dir="${test}">    <include name="*.cfm"/>    <exclude name="scribble.cfm"/>  </fileset></move></code><p>Move a list of files to a new directory</p><code><move todir="${live}">  <filelist dir="${test}">    <file name="index.cfm"/>    <file name="fridays_joke.cfm"/>  </filelist></move></code><p>Append ".bak" to the names of all files in a directory.</p><code><!--- Notice the new parameter here, includeemptydirs --><move todir="${live}" includeemptydirs="false">  <fileset dir="${test}">    <exclude name="**/*.bak"/>  </fileset>  <mapper type="glob" from="*" to="*.bak"/></move></code><p>More resources:<ul> <li><a href="http://ant.apache.org/">Apache Ant</a></li>  <li><a href="http://ant.apache.org/manual/coretasklist.html">Ant Core Tasks</a></li>  <li><a href="http://ant.apache.org/manual/CoreTasks/move.html">Ant Core Tasks, Move</a></li>  <li><a href="http://ant.apache.org/manual/CoreTasks/copy.html">Ant Core Tasks, Copy</a></li></ul></p><br>
+            </section>
+
+            <footer>
+              <p>
+                <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider
+                  <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>.
+                  Your support keeps this site running and the coffee brewing! ☕️
+                </em>
+              </p>
+            </footer>
+
+            <script
+              src="https://giscus.app/client.js"
+              data-repo="andyj/andyjarrett.com"
+              data-repo-id="R_kgDOMjCDkQ"
+              data-category="Announcements"
+              data-category-id="DIC_kwDOMjCDkc4ChlfU"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="preferred_color_scheme"
+              data-lang="en"
+              crossorigin="anonymous"
+              async></script>
+            <a name="comment"></a>
+          </div>
+
+          <aside class="col-md-3 col-12">
+            <h4>Recent Posts</h4>
+            
+              <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">
+                Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">
+                How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">
+                NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">
+                Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">
+                Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">
+                Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">
+                Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">
+                Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+          </aside>
+        </section>
+      </article>
+    </main>
   </div>
 
   <footer class="container mt-5 border-top pt-2">
@@ -128,18 +164,18 @@
       <!-- Home Link -->
       <a href="https://andyjarrett.com" class=""><i class="bi bi-globe me-2"></i></a>
       <!-- linkedin Link -->
-      <a href="https://www.linkedin.com/in/andyjarrett/" title="inkedIn" target="_blank"><i class="bi bi-linkedin me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://www.linkedin.com/in/andyjarrett/" title="inkedIn" target="_blank"><i class="bi bi-linkedin me-2"></i></a>
       <!-- Twitter Link -->
-      <a href="https://twitter.com/andyj" title="Twitter" target="_blank"><i class="bi bi-twitter me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://twitter.com/andyj" title="Twitter" target="_blank"><i class="bi bi-twitter me-2"></i></a>
       <!-- GitHub Link -->
-      <a href="https://github.com/andyj" title="GitHub" target="_blank"><i class="bi bi-github me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://github.com/andyj" title="GitHub" target="_blank"><i class="bi bi-github me-2"></i></a>
       <!-- Stack Overflow Link -->
-      <a href="https://stackoverflow.com/users/371761/andy-jarrett" title="Stack overflow" target="_blank"><i class="bi bi-stack-overflow me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://stackoverflow.com/users/371761/andy-jarrett" title="Stack overflow" target="_blank"><i class="bi bi-stack-overflow me-2"></i></a>
       <!-- BlueSky Link -->
-      <a href="https://bsky.app/profile/andyjarrett.com" title="BlueSky" target="_blank"><i class="bi bi-cloud me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://bsky.app/profile/andyjarrett.com" title="BlueSky" target="_blank"><i class="bi bi-cloud me-2"></i></a>
       <!-- Instagram Link -->
-      <a href="https://instagram.com/andyjarrett" title="Instragram" target="_blank"><i class="bi bi-instagram me-2"></i></a>
-      <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee" target="_blank"><i class="bi bi-cup-hot-fill fs-5"></i></a>
+      <a rel="noopener noreferrer" href="https://instagram.com/andyjarrett" title="Instragram" target="_blank"><i class="bi bi-instagram me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://buymeacoffee.com/mailgw" title="Buy me a coffee" target="_blank"><i class="bi bi-cup-hot-fill fs-5"></i></a>
     </div>
     <div class="col">
       <div class="text-end">

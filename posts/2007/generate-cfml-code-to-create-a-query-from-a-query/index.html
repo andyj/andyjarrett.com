@@ -60,63 +60,99 @@
 
 
   <div class="container">
-    <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
-    <h1 class="mt-5 mb-5"><b>Generate CFML code to create a query from a query</b></h1>
-    <div class="row">
-      <div class="col-md-9 col-12">
-        <main class="mw fw-lighter fs-5">
-          
-I've just realised I am terrible at writing good, descriptive subjects for my blog posts so here is a (bit of a) better description of what I mean.Last week I needed to use a query from a live DB to do some work on offline. Usually I use MySQL so I take a backup from the night before and run it locally so I am nearly up-to-date on my dev machine but this DB was MSSQL and I haven't gotten around to getting that setup on Parallels. Also there was no need to download 'X' amount of tables and stored procedures as all I wanted to actually use was one query output.So what I've created is a function which generates the CFML for a queryNew() statement needed to re-create the query you want to work on.<code><cffunction name="createQuery" access="public" output="false" returntype="struct" hint="I take a query and return the code to regenerate it."><!--- * Parses a query and generates the CFML to re-create the query using the queryNew() function * * @param   inQry           To query to be parsed (Required) * @param   fileNameAndLoc  File name and location for the file to be saved to * @param   withDump        Includes a <cfdump> at the end of the code block * @return  Returns a structure. * @author  Andy Jarrett (http://www.andyjarrett.co.uk)---> <cfargument name="inQry" required="true" type="query" />  <cfargument name="fileNameAndLoc" default="" type="string" /> <cfargument name="withDump" default="false" type="boolean" /> <!--- Local variables --->  <cfset var qry = arguments.inQry /> <!--- Loop Indexes ---> <cfset var i = 0 /> <cfset var cols = "" /> <!--- Return Structure ---> <cfset var textQuery = structNew() /> <cfset var saveFile = "" /> <cfset var ltc = chr(60) /> <!--- < character  ---> <cfif len(trim(arguments.fileNameAndLoc))>    <cfset saveFile = arguments.fileNameAndLoc /> </cfif> <cfset textQuery.hasErrors = 0/>  <cftry><!--- Terrible indenting of code below but thats to keep the text tidy for when you export --->  <cfsavecontent variable="textQuery.code"><cfoutput>#ltc#!--- First we create the query --->#chr(13)##ltc#cfset newQry = queryNew('#qry.columnList#') />#ltc#!--- Now start populating the query --->#chr(13)#<cfloop from="1" to="#qry.recordCount#" index="i">#ltc#cfset queryAddRow(newQry) />#chr(13)#<cfloop list="#qry.columnList#" index="cols">  #ltc#cfset querySetCell(newQry, '#cols#', '#qry[cols][i]#') />#chr(13)#</cfloop></cfloop> <cfif arguments.withDump>   #ltc#!--- Dump the query --->#chr(13)##ltc#cfdump var="##newQry##" label="Query Dump" />  </cfif></cfoutput>  </cfsavecontent>  <!--- If a file name & location have been supplied then out the string to the file ---> <cfif len(saveFile)>    <cffile action="write" file="#saveFile#" output="#textQuery.code#" attributes="normal" mode="777" />  </cfif> <cfcatch type="any">    <cfset textQuery.hasErrors = 1/>    <cfset textQuery.error = cfcatch.ErrorCode &" "& cfcatch.Message /> </cfcatch>  </cftry>  <cfreturn textQuery /></cffunction></code> So in action we would have the following which would create a new .cfm page called "test.cfm" as well as outputting the results to the screen<code>  <!--- This query returns 2 rows   id | sex | name   1 | Andy | Male   2 | Helen | Female  --->    <cfquery datasource="test" name="qryTest">  SELECT id,sex,name  FROM test</cfquery><cfset myVar = createQuery(qryTest, expandPath('test.cfm'), true)><cfif NOT myVar.hasErrors> <cfoutput><xmp>#myVar.code#</xmp></cfoutput></cfif></code>In the generated test.cfm you would see<code><!--- First we create the query ---><cfset newQry = queryNew('ID,NAME,SEX') /><!--- Now start populating the query ---><cfset queryAddRow(newQry) /><cfset querySetCell(newQry, 'ID', '1') /><cfset querySetCell(newQry, 'NAME', 'Andy') /><cfset querySetCell(newQry, 'SEX', 'male') /><cfset queryAddRow(newQry) /><cfset querySetCell(newQry, 'ID', '2') /><cfset querySetCell(newQry, 'NAME', 'Helen') /><cfset querySetCell(newQry, 'SEX', 'Female') /><!--- Dump the query ---><cfdump var="#newQry#" label="Query Dump" /></code><br>
-        </main>
-        <script
-          src="https://giscus.app/client.js"
-          data-repo="andyj/andyjarrett.com"
-          data-repo-id="R_kgDOMjCDkQ"
-          data-category="Announcements"
-          data-category-id="DIC_kwDOMjCDkc4ChlfU"
-          data-mapping="pathname"
-          data-strict="0"
-          data-reactions-enabled="1"
-          data-emit-metadata="0"
-          data-input-position="top"
-          data-theme="preferred_color_scheme"
-          data-lang="en"
-          crossorigin="anonymous"
-          async></script>
-        <a name="comment"></a>
-        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
-
-      </div>
-      <div class="col-md-3 col-12">
-        <!-- Side Content -->
-        <h4>Recent Posts</h4>
-        
-          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-      </div>
+    <div class="my-1 text-center text-primary" role="alert">
+      <a class="text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">
+        Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky
+      </a>
     </div>
+
+    <main>
+      <article>
+        <header>
+          <h1 class="mt-5 mb-5"><b>Generate CFML code to create a query from a query</b></h1>
+        </header>
+
+        <section class="row">
+          <div class="col-md-9 col-12">
+            <section class="mw fw-lighter fs-5">
+              
+I've just realised I am terrible at writing good, descriptive subjects for my blog posts so here is a (bit of a) better description of what I mean.Last week I needed to use a query from a live DB to do some work on offline. Usually I use MySQL so I take a backup from the night before and run it locally so I am nearly up-to-date on my dev machine but this DB was MSSQL and I haven't gotten around to getting that setup on Parallels. Also there was no need to download 'X' amount of tables and stored procedures as all I wanted to actually use was one query output.So what I've created is a function which generates the CFML for a queryNew() statement needed to re-create the query you want to work on.<code><cffunction name="createQuery" access="public" output="false" returntype="struct" hint="I take a query and return the code to regenerate it."><!--- * Parses a query and generates the CFML to re-create the query using the queryNew() function * * @param   inQry           To query to be parsed (Required) * @param   fileNameAndLoc  File name and location for the file to be saved to * @param   withDump        Includes a <cfdump> at the end of the code block * @return  Returns a structure. * @author  Andy Jarrett (http://www.andyjarrett.co.uk)---> <cfargument name="inQry" required="true" type="query" />  <cfargument name="fileNameAndLoc" default="" type="string" /> <cfargument name="withDump" default="false" type="boolean" /> <!--- Local variables --->  <cfset var qry = arguments.inQry /> <!--- Loop Indexes ---> <cfset var i = 0 /> <cfset var cols = "" /> <!--- Return Structure ---> <cfset var textQuery = structNew() /> <cfset var saveFile = "" /> <cfset var ltc = chr(60) /> <!--- < character  ---> <cfif len(trim(arguments.fileNameAndLoc))>    <cfset saveFile = arguments.fileNameAndLoc /> </cfif> <cfset textQuery.hasErrors = 0/>  <cftry><!--- Terrible indenting of code below but thats to keep the text tidy for when you export --->  <cfsavecontent variable="textQuery.code"><cfoutput>#ltc#!--- First we create the query --->#chr(13)##ltc#cfset newQry = queryNew('#qry.columnList#') />#ltc#!--- Now start populating the query --->#chr(13)#<cfloop from="1" to="#qry.recordCount#" index="i">#ltc#cfset queryAddRow(newQry) />#chr(13)#<cfloop list="#qry.columnList#" index="cols">  #ltc#cfset querySetCell(newQry, '#cols#', '#qry[cols][i]#') />#chr(13)#</cfloop></cfloop> <cfif arguments.withDump>   #ltc#!--- Dump the query --->#chr(13)##ltc#cfdump var="##newQry##" label="Query Dump" />  </cfif></cfoutput>  </cfsavecontent>  <!--- If a file name & location have been supplied then out the string to the file ---> <cfif len(saveFile)>    <cffile action="write" file="#saveFile#" output="#textQuery.code#" attributes="normal" mode="777" />  </cfif> <cfcatch type="any">    <cfset textQuery.hasErrors = 1/>    <cfset textQuery.error = cfcatch.ErrorCode &" "& cfcatch.Message /> </cfcatch>  </cftry>  <cfreturn textQuery /></cffunction></code> So in action we would have the following which would create a new .cfm page called "test.cfm" as well as outputting the results to the screen<code>  <!--- This query returns 2 rows   id | sex | name   1 | Andy | Male   2 | Helen | Female  --->    <cfquery datasource="test" name="qryTest">  SELECT id,sex,name  FROM test</cfquery><cfset myVar = createQuery(qryTest, expandPath('test.cfm'), true)><cfif NOT myVar.hasErrors> <cfoutput><xmp>#myVar.code#</xmp></cfoutput></cfif></code>In the generated test.cfm you would see<code><!--- First we create the query ---><cfset newQry = queryNew('ID,NAME,SEX') /><!--- Now start populating the query ---><cfset queryAddRow(newQry) /><cfset querySetCell(newQry, 'ID', '1') /><cfset querySetCell(newQry, 'NAME', 'Andy') /><cfset querySetCell(newQry, 'SEX', 'male') /><cfset queryAddRow(newQry) /><cfset querySetCell(newQry, 'ID', '2') /><cfset querySetCell(newQry, 'NAME', 'Helen') /><cfset querySetCell(newQry, 'SEX', 'Female') /><!--- Dump the query ---><cfdump var="#newQry#" label="Query Dump" /></code><br>
+            </section>
+
+            <footer>
+              <p>
+                <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider
+                  <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>.
+                  Your support keeps this site running and the coffee brewing! ☕️
+                </em>
+              </p>
+            </footer>
+
+            <script
+              src="https://giscus.app/client.js"
+              data-repo="andyj/andyjarrett.com"
+              data-repo-id="R_kgDOMjCDkQ"
+              data-category="Announcements"
+              data-category-id="DIC_kwDOMjCDkc4ChlfU"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="preferred_color_scheme"
+              data-lang="en"
+              crossorigin="anonymous"
+              async></script>
+            <a name="comment"></a>
+          </div>
+
+          <aside class="col-md-3 col-12">
+            <h4>Recent Posts</h4>
+            
+              <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">
+                Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">
+                How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">
+                NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">
+                Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">
+                Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">
+                Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">
+                Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">
+                Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+          </aside>
+        </section>
+      </article>
+    </main>
   </div>
 
   <footer class="container mt-5 border-top pt-2">
@@ -128,18 +164,18 @@ I've just realised I am terrible at writing good, descriptive subjects for my bl
       <!-- Home Link -->
       <a href="https://andyjarrett.com" class=""><i class="bi bi-globe me-2"></i></a>
       <!-- linkedin Link -->
-      <a href="https://www.linkedin.com/in/andyjarrett/" title="inkedIn" target="_blank"><i class="bi bi-linkedin me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://www.linkedin.com/in/andyjarrett/" title="inkedIn" target="_blank"><i class="bi bi-linkedin me-2"></i></a>
       <!-- Twitter Link -->
-      <a href="https://twitter.com/andyj" title="Twitter" target="_blank"><i class="bi bi-twitter me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://twitter.com/andyj" title="Twitter" target="_blank"><i class="bi bi-twitter me-2"></i></a>
       <!-- GitHub Link -->
-      <a href="https://github.com/andyj" title="GitHub" target="_blank"><i class="bi bi-github me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://github.com/andyj" title="GitHub" target="_blank"><i class="bi bi-github me-2"></i></a>
       <!-- Stack Overflow Link -->
-      <a href="https://stackoverflow.com/users/371761/andy-jarrett" title="Stack overflow" target="_blank"><i class="bi bi-stack-overflow me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://stackoverflow.com/users/371761/andy-jarrett" title="Stack overflow" target="_blank"><i class="bi bi-stack-overflow me-2"></i></a>
       <!-- BlueSky Link -->
-      <a href="https://bsky.app/profile/andyjarrett.com" title="BlueSky" target="_blank"><i class="bi bi-cloud me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://bsky.app/profile/andyjarrett.com" title="BlueSky" target="_blank"><i class="bi bi-cloud me-2"></i></a>
       <!-- Instagram Link -->
-      <a href="https://instagram.com/andyjarrett" title="Instragram" target="_blank"><i class="bi bi-instagram me-2"></i></a>
-      <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee" target="_blank"><i class="bi bi-cup-hot-fill fs-5"></i></a>
+      <a rel="noopener noreferrer" href="https://instagram.com/andyjarrett" title="Instragram" target="_blank"><i class="bi bi-instagram me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://buymeacoffee.com/mailgw" title="Buy me a coffee" target="_blank"><i class="bi bi-cup-hot-fill fs-5"></i></a>
     </div>
     <div class="col">
       <div class="text-end">

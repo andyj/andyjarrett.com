@@ -60,63 +60,99 @@
 
 
   <div class="container">
-    <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
-    <h1 class="mt-5 mb-5"><b>Populating related cfselects via Flash Remoting</b></h1>
-    <div class="row">
-      <div class="col-md-9 col-12">
-        <main class="mw fw-lighter fs-5">
-          
-<p>First of let me say that as much as I would love this to be my code it mainly comes out of two posts [<a href="http://www.asfusion.com/blog/entry/how-to-populate-a-cfselect-with-flash" title="How to populate a cfselect with Flash Remoting">1</a>,<a href="http://www.asfusion.com/blog/entry/how-to-populate-a-cfselect-with-flash" title="How to populate a cfselect with Flash Remoting">2</a>] on <a href="http://www.asfusion.com/">ASFusion.com</a>.</p> <p>To sidetrack for a moment, I must point out now is that even if you don't find answers in the Asfusion posts always check the comments out! They get up to 50+ comments on some posts with hints and tips there as well.</p><p>Back to the form. I had a project which started life as a 5 page HTML form with the need to make it a little user friendly to the eyes and more organised. Any form over 2 pages I hate in general and I seem to be the only person in the world who thinks one long page is better than X amount of multiple pages this is whether i'm filling them in or creating them. </p><p>In moving my HTML form over to &lt;cfform format="flash"> I ran into the problem of having to duplicate some Ajax where one select is populated from a DB then another select is populated from there. It didn't take too much digging around and I thought i'd share in case it helps anyone else out. My Flash/As knowledge isn't 100% so if you see an easier way drop me a line in the comments.</p>First of the CFC <p><strong>flashRemotingResponder.cfc</strong></p><code><cfcomponent name="flashRemotingResponder" access="public" description="Responds to Flash remoting requests"><cffunction name="getBrands" output="false" access="remote" returntype="query">            <cfset var qry = ""/> <cfset var brandQry = queryNew("brand_code,brand_name") />  <cfscript>    queryAddRow(brandQry);      querySetCell(brandQry,'brand_code','dell');     querySetCell(brandQry,'brand_name','Dell');   queryAddRow(brandQry);      querySetCell(brandQry,'brand_code','apple');      querySetCell(brandQry,'brand_name','Apple Inc.');   queryAddRow(brandQry);      querySetCell(brandQry,'brand_code','microsoft');      querySetCell(brandQry,'brand_name','Microsoft Corp.');              </cfscript>           <cfquery dbtype="query" name="qry">   SELECT     brand_code, brand_name   FROM brandQry </cfquery>  <cfreturn qry /></cffunction><!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: ---><cffunction name="getModels" access="remote" output="false" returntype="query"> <cfargument name="brand" type="string" />   <cfset var qry = ""/> <cfset var modelQry = queryNew("model_number,model_description,brand_code") />  <cfset var brand_code = arguments.brand />  <cfscript>    queryAddRow(modelQry);      querySetCell(modelQry,'model_number','123-qwe');      querySetCell(modelQry,'model_description','Apple Mac Book Pro 15.4"');     querySetCell(modelQry,'brand_code','apple');    queryAddRow(modelQry);      querySetCell(modelQry,'model_number','987123-123');     querySetCell(modelQry,'model_description','Apple Mac Book Pro 17"');     querySetCell(modelQry,'brand_code','apple');    queryAddRow(modelQry);      querySetCell(modelQry,'model_number','asdpo-1232');     querySetCell(modelQry,'model_description','Apple 72" Monitor');      querySetCell(modelQry,'brand_code','apple');    queryAddRow(modelQry);      querySetCell(modelQry,'model_number','d123');     querySetCell(modelQry,'model_description','XPS Mobile Gaming Laptop');      querySetCell(modelQry,'brand_code','dell');   queryAddRow(modelQry);      querySetCell(modelQry,'model_number','d6534');      querySetCell(modelQry,'model_description','64" Monitor');      querySetCell(modelQry,'brand_code','dell');   queryAddRow(modelQry);      querySetCell(modelQry,'model_number','123-mqwe');     querySetCell(modelQry,'model_description','DRM removal tool');      querySetCell(modelQry,'brand_code','microsoft');    queryAddRow(modelQry);      querySetCell(modelQry,'model_number','123-serr');     querySetCell(modelQry,'model_description','Windows Vista inc. SP4');      querySetCell(modelQry,'brand_code','microsoft');        </cfscript> <cfquery dbtype="query" name="qry">   SELECT      model_number,     model_description   FROM      modelQry    WHERE     brand_code = <cfqueryparam cfsqltype="cf_sql_varchar" value="#brand_code#" /> </cfquery>    <cfreturn qry/></cffunction></cfcomponent></code><p>Second the action &lt;cfform></p><p><strong>flashRemoting.cfm</strong></p><code><!--- These queries are copied from you flashRemotingResponder.cfc ---><cfset brandQry = queryNew("brand_code,brand_name") /><cfset modelQry = queryNew("model_number,model_description,brand_code") /><cfsavecontent variable="getBrands"> <cfoutput>    //create connection   var connection:mx.remoting.Connection = mx.remoting.NetServices.createGatewayConnection("http://#cgi.HTTP_HOST#/flashservices/gateway/");   //declare service   var myService:mx.remoting.NetServiceProxy;  </cfoutput> var responseHandler = {}; //put the controls in scope to avoid calling _root  var brand = brand;    responseHandler.onResult = function( results: Object ):Void {   //when results are back, populate the cfselect    brand.labelField = "brand_name";    brand.dataProvider = results; }     responseHandler.onStatus  = function( stat: Object ):Void {   //if there is any error, show an alert    alert("Error while calling cfc:" + stat.description); }   //get service myService = connection.getService("flashRemotingResponder", responseHandler );  //make call myService.getBrands();</cfsavecontent><cfsavecontent variable="getModel"> <cfoutput>    //create connection   var connection:mx.remoting.Connection = mx.remoting.NetServices.createGatewayConnection("http://#cgi.HTTP_HOST#/flashservices/gateway/");   //declare service   var myService:mx.remoting.NetServiceProxy;  </cfoutput> var responseHandler = {}; //put the controls in scope to avoid calling _root  var model = model;    responseHandler.onResult = function( results: Object ):Void {   //when results are back, populate the cfselect    model.labelField = "model_description";   model.dataProvider = results; }     responseHandler.onStatus  = function( stat: Object ):Void {   //if there is any error, show an alert    alert(stat.description);  }   //get service myService = connection.getService("flashRemotingResponder", responseHandler );  //make call myService.getModels(brand.selectedItem.brand_code);</cfsavecontent><cfform format="flash" name="myform" onload="#getBrands#" width="500" height="400">  <cfformgroup type="panel" label="Example of flash remoting and dynamically populating cfselect">    <cfselect name="brand" id="brand" query="brandQry" display="brand_name"     value="brand_code" onchange="#getModel#" label="What is the brand name"></cfselect>     <cfselect name="model" id="model" query="modelQry" display="model_description"      value="model_number" label="What Model Number"></cfselect>  </cfformgroup></cfform></code><p>You can download the source at: <a href="http://www.andyjarrett.co.uk/flash_remoting_populate_select.zip" title="Populating related cfselects via Flash Remoting">http://www.andyjarrett.co.uk/flash_remoting_populate_select.zip</a></p><br>
-        </main>
-        <script
-          src="https://giscus.app/client.js"
-          data-repo="andyj/andyjarrett.com"
-          data-repo-id="R_kgDOMjCDkQ"
-          data-category="Announcements"
-          data-category-id="DIC_kwDOMjCDkc4ChlfU"
-          data-mapping="pathname"
-          data-strict="0"
-          data-reactions-enabled="1"
-          data-emit-metadata="0"
-          data-input-position="top"
-          data-theme="preferred_color_scheme"
-          data-lang="en"
-          crossorigin="anonymous"
-          async></script>
-        <a name="comment"></a>
-        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
-
-      </div>
-      <div class="col-md-3 col-12">
-        <!-- Side Content -->
-        <h4>Recent Posts</h4>
-        
-          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-      </div>
+    <div class="my-1 text-center text-primary" role="alert">
+      <a class="text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">
+        Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky
+      </a>
     </div>
+
+    <main>
+      <article>
+        <header>
+          <h1 class="mt-5 mb-5"><b>Populating related cfselects via Flash Remoting</b></h1>
+        </header>
+
+        <section class="row">
+          <div class="col-md-9 col-12">
+            <section class="mw fw-lighter fs-5">
+              
+<p>First of let me say that as much as I would love this to be my code it mainly comes out of two posts [<a href="http://www.asfusion.com/blog/entry/how-to-populate-a-cfselect-with-flash" title="How to populate a cfselect with Flash Remoting">1</a>,<a href="http://www.asfusion.com/blog/entry/how-to-populate-a-cfselect-with-flash" title="How to populate a cfselect with Flash Remoting">2</a>] on <a href="http://www.asfusion.com/">ASFusion.com</a>.</p> <p>To sidetrack for a moment, I must point out now is that even if you don't find answers in the Asfusion posts always check the comments out! They get up to 50+ comments on some posts with hints and tips there as well.</p><p>Back to the form. I had a project which started life as a 5 page HTML form with the need to make it a little user friendly to the eyes and more organised. Any form over 2 pages I hate in general and I seem to be the only person in the world who thinks one long page is better than X amount of multiple pages this is whether i'm filling them in or creating them. </p><p>In moving my HTML form over to &lt;cfform format="flash"> I ran into the problem of having to duplicate some Ajax where one select is populated from a DB then another select is populated from there. It didn't take too much digging around and I thought i'd share in case it helps anyone else out. My Flash/As knowledge isn't 100% so if you see an easier way drop me a line in the comments.</p>First of the CFC <p><strong>flashRemotingResponder.cfc</strong></p><code><cfcomponent name="flashRemotingResponder" access="public" description="Responds to Flash remoting requests"><cffunction name="getBrands" output="false" access="remote" returntype="query">            <cfset var qry = ""/> <cfset var brandQry = queryNew("brand_code,brand_name") />  <cfscript>    queryAddRow(brandQry);      querySetCell(brandQry,'brand_code','dell');     querySetCell(brandQry,'brand_name','Dell');   queryAddRow(brandQry);      querySetCell(brandQry,'brand_code','apple');      querySetCell(brandQry,'brand_name','Apple Inc.');   queryAddRow(brandQry);      querySetCell(brandQry,'brand_code','microsoft');      querySetCell(brandQry,'brand_name','Microsoft Corp.');              </cfscript>           <cfquery dbtype="query" name="qry">   SELECT     brand_code, brand_name   FROM brandQry </cfquery>  <cfreturn qry /></cffunction><!--- :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: ---><cffunction name="getModels" access="remote" output="false" returntype="query"> <cfargument name="brand" type="string" />   <cfset var qry = ""/> <cfset var modelQry = queryNew("model_number,model_description,brand_code") />  <cfset var brand_code = arguments.brand />  <cfscript>    queryAddRow(modelQry);      querySetCell(modelQry,'model_number','123-qwe');      querySetCell(modelQry,'model_description','Apple Mac Book Pro 15.4"');     querySetCell(modelQry,'brand_code','apple');    queryAddRow(modelQry);      querySetCell(modelQry,'model_number','987123-123');     querySetCell(modelQry,'model_description','Apple Mac Book Pro 17"');     querySetCell(modelQry,'brand_code','apple');    queryAddRow(modelQry);      querySetCell(modelQry,'model_number','asdpo-1232');     querySetCell(modelQry,'model_description','Apple 72" Monitor');      querySetCell(modelQry,'brand_code','apple');    queryAddRow(modelQry);      querySetCell(modelQry,'model_number','d123');     querySetCell(modelQry,'model_description','XPS Mobile Gaming Laptop');      querySetCell(modelQry,'brand_code','dell');   queryAddRow(modelQry);      querySetCell(modelQry,'model_number','d6534');      querySetCell(modelQry,'model_description','64" Monitor');      querySetCell(modelQry,'brand_code','dell');   queryAddRow(modelQry);      querySetCell(modelQry,'model_number','123-mqwe');     querySetCell(modelQry,'model_description','DRM removal tool');      querySetCell(modelQry,'brand_code','microsoft');    queryAddRow(modelQry);      querySetCell(modelQry,'model_number','123-serr');     querySetCell(modelQry,'model_description','Windows Vista inc. SP4');      querySetCell(modelQry,'brand_code','microsoft');        </cfscript> <cfquery dbtype="query" name="qry">   SELECT      model_number,     model_description   FROM      modelQry    WHERE     brand_code = <cfqueryparam cfsqltype="cf_sql_varchar" value="#brand_code#" /> </cfquery>    <cfreturn qry/></cffunction></cfcomponent></code><p>Second the action &lt;cfform></p><p><strong>flashRemoting.cfm</strong></p><code><!--- These queries are copied from you flashRemotingResponder.cfc ---><cfset brandQry = queryNew("brand_code,brand_name") /><cfset modelQry = queryNew("model_number,model_description,brand_code") /><cfsavecontent variable="getBrands"> <cfoutput>    //create connection   var connection:mx.remoting.Connection = mx.remoting.NetServices.createGatewayConnection("http://#cgi.HTTP_HOST#/flashservices/gateway/");   //declare service   var myService:mx.remoting.NetServiceProxy;  </cfoutput> var responseHandler = {}; //put the controls in scope to avoid calling _root  var brand = brand;    responseHandler.onResult = function( results: Object ):Void {   //when results are back, populate the cfselect    brand.labelField = "brand_name";    brand.dataProvider = results; }     responseHandler.onStatus  = function( stat: Object ):Void {   //if there is any error, show an alert    alert("Error while calling cfc:" + stat.description); }   //get service myService = connection.getService("flashRemotingResponder", responseHandler );  //make call myService.getBrands();</cfsavecontent><cfsavecontent variable="getModel"> <cfoutput>    //create connection   var connection:mx.remoting.Connection = mx.remoting.NetServices.createGatewayConnection("http://#cgi.HTTP_HOST#/flashservices/gateway/");   //declare service   var myService:mx.remoting.NetServiceProxy;  </cfoutput> var responseHandler = {}; //put the controls in scope to avoid calling _root  var model = model;    responseHandler.onResult = function( results: Object ):Void {   //when results are back, populate the cfselect    model.labelField = "model_description";   model.dataProvider = results; }     responseHandler.onStatus  = function( stat: Object ):Void {   //if there is any error, show an alert    alert(stat.description);  }   //get service myService = connection.getService("flashRemotingResponder", responseHandler );  //make call myService.getModels(brand.selectedItem.brand_code);</cfsavecontent><cfform format="flash" name="myform" onload="#getBrands#" width="500" height="400">  <cfformgroup type="panel" label="Example of flash remoting and dynamically populating cfselect">    <cfselect name="brand" id="brand" query="brandQry" display="brand_name"     value="brand_code" onchange="#getModel#" label="What is the brand name"></cfselect>     <cfselect name="model" id="model" query="modelQry" display="model_description"      value="model_number" label="What Model Number"></cfselect>  </cfformgroup></cfform></code><p>You can download the source at: <a href="http://www.andyjarrett.co.uk/flash_remoting_populate_select.zip" title="Populating related cfselects via Flash Remoting">http://www.andyjarrett.co.uk/flash_remoting_populate_select.zip</a></p><br>
+            </section>
+
+            <footer>
+              <p>
+                <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider
+                  <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>.
+                  Your support keeps this site running and the coffee brewing! ☕️
+                </em>
+              </p>
+            </footer>
+
+            <script
+              src="https://giscus.app/client.js"
+              data-repo="andyj/andyjarrett.com"
+              data-repo-id="R_kgDOMjCDkQ"
+              data-category="Announcements"
+              data-category-id="DIC_kwDOMjCDkc4ChlfU"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="preferred_color_scheme"
+              data-lang="en"
+              crossorigin="anonymous"
+              async></script>
+            <a name="comment"></a>
+          </div>
+
+          <aside class="col-md-3 col-12">
+            <h4>Recent Posts</h4>
+            
+              <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">
+                Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">
+                How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">
+                NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">
+                Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">
+                Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">
+                Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">
+                Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">
+                Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+          </aside>
+        </section>
+      </article>
+    </main>
   </div>
 
   <footer class="container mt-5 border-top pt-2">
@@ -128,18 +164,18 @@
       <!-- Home Link -->
       <a href="https://andyjarrett.com" class=""><i class="bi bi-globe me-2"></i></a>
       <!-- linkedin Link -->
-      <a href="https://www.linkedin.com/in/andyjarrett/" title="inkedIn" target="_blank"><i class="bi bi-linkedin me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://www.linkedin.com/in/andyjarrett/" title="inkedIn" target="_blank"><i class="bi bi-linkedin me-2"></i></a>
       <!-- Twitter Link -->
-      <a href="https://twitter.com/andyj" title="Twitter" target="_blank"><i class="bi bi-twitter me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://twitter.com/andyj" title="Twitter" target="_blank"><i class="bi bi-twitter me-2"></i></a>
       <!-- GitHub Link -->
-      <a href="https://github.com/andyj" title="GitHub" target="_blank"><i class="bi bi-github me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://github.com/andyj" title="GitHub" target="_blank"><i class="bi bi-github me-2"></i></a>
       <!-- Stack Overflow Link -->
-      <a href="https://stackoverflow.com/users/371761/andy-jarrett" title="Stack overflow" target="_blank"><i class="bi bi-stack-overflow me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://stackoverflow.com/users/371761/andy-jarrett" title="Stack overflow" target="_blank"><i class="bi bi-stack-overflow me-2"></i></a>
       <!-- BlueSky Link -->
-      <a href="https://bsky.app/profile/andyjarrett.com" title="BlueSky" target="_blank"><i class="bi bi-cloud me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://bsky.app/profile/andyjarrett.com" title="BlueSky" target="_blank"><i class="bi bi-cloud me-2"></i></a>
       <!-- Instagram Link -->
-      <a href="https://instagram.com/andyjarrett" title="Instragram" target="_blank"><i class="bi bi-instagram me-2"></i></a>
-      <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee" target="_blank"><i class="bi bi-cup-hot-fill fs-5"></i></a>
+      <a rel="noopener noreferrer" href="https://instagram.com/andyjarrett" title="Instragram" target="_blank"><i class="bi bi-instagram me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://buymeacoffee.com/mailgw" title="Buy me a coffee" target="_blank"><i class="bi bi-cup-hot-fill fs-5"></i></a>
     </div>
     <div class="col">
       <div class="text-end">

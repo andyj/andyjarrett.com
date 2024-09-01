@@ -60,63 +60,99 @@
 
 
   <div class="container">
-    <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
-    <h1 class="mt-5 mb-5"><b>new udf- listReverse part 2</b></h1>
-    <div class="row">
-      <div class="col-md-9 col-12">
-        <main class="mw fw-lighter fs-5">
-          
-I got two comments with suggestions on my post yesterday regarding my UDF. Both solutions were considerably shorter in length and Bill Rawlinson even suggested dropping the arrays. Both suggestions seemed perfectly reasonable, but went against what I knew that manipulating lists. I always believed it is better to converet a list to an array then manipulate it, hence my solution. So after a quick, basic search on <a href="http://www.google.co.uk/search?num=30&hl=en&ie=UTF-8&safe=off&q=coldfusion+arrays+list+faster&meta=">Google</a> I came across the <a href="http://livedocs.macromedia.com/wtg/public/coding_standards/performance.html">ColdFusion MX Coding Guidelines</a> which states; <br/><em>"Don't slavishly convert lists to arrays<br/>Even though manipulating an array is generally faster than manipulating a list in CFMX, if you simply need to iterate over a list of items and process each one in turn the faster construct is &lt;cfloop list="#itemList#" index="x"&gt; ... &lt;/cfloop&gt;. Don't convert 'itemList' to an array and then loop over that - it's not worth it because it probably won't be faster."</em><br/><br/>In a nutshell then:- if the list is short don't worry about it.<br/><br/>So I 'd thought I 'd test all three solutions. Todo this I set up an Application variable called "application.list" which held a list of numbers from 1 to 1000 seperated by a comma. Then on each test just reference this into a local variable called "list". Before I tested each page I loaded it up and hit refresh a couple of times. Then inbetween each test I waited 5 seconds. If you want to see the three sample .cfm pages I used click on "more" at the end of this post, alternatively you can download them <a href="http://www.andyjarrett.co.uk/downloads/list_reverse_test.rar" title="listReverse examples">here</a> - please note they are uncommented.<br/><br/><h2>The Test</h2>ListReverse 1 = Bill Rawlinson suggestion.<br/>ListReverse 2 = Devin suggestion.<br/>ListReverse 3 = My suggestion.<br/><br/><table border="1" cellspacing="1" cellpadding="3"> <caption> <strong>ListReverse test, using "TOTAL EXECUTION TIME"</strong> </caption>  <tr>    <th>&nbsp;</th>   <th>ListReverse 1 (ms)</th>   <th>ListReverse 2 (ms)</th>   <th>ListReverse 3 (ms)</th> </tr>   <tr>    <th>1.</th>   <td>282</td>    <td>156</td>    <td>16</td> </tr> <tr>    <th>2.</th>   <td>266</td>    <td>78</td>   <td>47</td> </tr> <tr>    <th>3.</th>   <td>265</td>    <td>93</td>   <td>16</td> </tr> <tr>    <th>Average</th>    <td>271</td>    <td>109</td>    <td>26.3</td> </tr> </table><br/>So from this, using the arrays was quicker, in some cases quite significantly. To explain this a bit better than I could I found a quote from <a href="http://www.rewindlife.com/mt/mt-tb.cgi?tb_id=56">RewindLife</a> which stated:<br/><em>"After reading the generated Java code I found that when you loop over a list by specifying the list attribute of a cfloop statement, ColdFusion optimizes the code by tokenizing the list only at the outset. If you were to use an indexed loop and listGetAt() each element, then ColdFusion would retokenize the list on each call and you'd start to get serious performance degradation."</em>.<br/> <br/>In conclusion then, if you are just looping over a list don't and not using other list functions then there is no need to worry with the ListToArray() function, else convert. <h3>List Reverse 1</h3><div class="code"><FONT COLOR=MAROON>&lt;cfapplication name=<FONT COLOR=BLUE>"listChk"</FONT>&gt;</FONT><br>\n<FONT COLOR=MAROON>&lt;cfset list = application.list&gt;</FONT><br>\n<FONT COLOR=MAROON>&lt;cfscript&gt;</FONT><br>\noutList = '';<br>\nfor (i=ListLen(list); i GT<FONT COLOR=BLUE> 0</FONT>; i=i-1){ <br>\n&nbsp;&nbsp;&nbsp;outList = ListAppend(outList,ListGetAt(List,i));<br>\n&nbsp;&nbsp;&nbsp;}<br>\n<FONT COLOR=MAROON>&lt;/cfscript&gt;</FONT></div><h3>List Reverse 2</h3><div class="code"><FONT COLOR=MAROON>&lt;cfapplication name=<FONT COLOR=BLUE>"listChk"</FONT>&gt;</FONT><br>\n<FONT COLOR=MAROON>&lt;cfset list = application.list&gt;</FONT><br>\n<FONT COLOR=MAROON>&lt;cfset listReverse=Reverse(list)&gt;</FONT><br>\n<FONT COLOR=MAROON>&lt;cfloop list=<FONT COLOR=BLUE>"#listReverse#"</FONT> index=<FONT COLOR=BLUE>"i"</FONT>&gt;</FONT><br>\n<FONT COLOR=MAROON>&lt;cfset listReverse=Replace(listReverse, i, Reverse(i))&gt;</FONT><br>\n<FONT COLOR=MAROON>&lt;/cfloop&gt;</FONT></div><h3>List Reverse 3</h3><div class="code"><FONT COLOR=MAROON>&lt;cfapplication name=<FONT COLOR=BLUE>"listChk"</FONT>&gt;</FONT><br>\n<FONT COLOR=MAROON>&lt;cfset list = application.list&gt;</FONT><br>\n<FONT COLOR=MAROON>&lt;cfscript&gt;</FONT><br>\n&nbsp;&nbsp;&nbsp;function listReverse(inList){<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var outArray = ArrayNew(<FONT COLOR=BLUE>1</FONT>);<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var i=0;<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var j = 1;<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var inArray = listToArray(inList);&nbsp;&nbsp;&nbsp;<br>\n&nbsp;&nbsp;&nbsp;<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (i=ArrayLen(inArray);i GT<FONT COLOR=BLUE> 0</FONT>;i=i-1){<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outArray[j] = inArray[i];<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j = j + 1;<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return arrayToList(outArray);<br>\n&nbsp;&nbsp;&nbsp;}<br>\n<FONT COLOR=MAROON>&lt;/cfscript&gt;</FONT><br> <br>\n<FONT COLOR=MAROON>&lt;cfset theList = listReverse(list)&gt;</FONT></div><br>
-        </main>
-        <script
-          src="https://giscus.app/client.js"
-          data-repo="andyj/andyjarrett.com"
-          data-repo-id="R_kgDOMjCDkQ"
-          data-category="Announcements"
-          data-category-id="DIC_kwDOMjCDkc4ChlfU"
-          data-mapping="pathname"
-          data-strict="0"
-          data-reactions-enabled="1"
-          data-emit-metadata="0"
-          data-input-position="top"
-          data-theme="preferred_color_scheme"
-          data-lang="en"
-          crossorigin="anonymous"
-          async></script>
-        <a name="comment"></a>
-        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
-
-      </div>
-      <div class="col-md-3 col-12">
-        <!-- Side Content -->
-        <h4>Recent Posts</h4>
-        
-          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-      </div>
+    <div class="my-1 text-center text-primary" role="alert">
+      <a class="text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">
+        Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky
+      </a>
     </div>
+
+    <main>
+      <article>
+        <header>
+          <h1 class="mt-5 mb-5"><b>new udf- listReverse part 2</b></h1>
+        </header>
+
+        <section class="row">
+          <div class="col-md-9 col-12">
+            <section class="mw fw-lighter fs-5">
+              
+I got two comments with suggestions on my post yesterday regarding my UDF. Both solutions were considerably shorter in length and Bill Rawlinson even suggested dropping the arrays. Both suggestions seemed perfectly reasonable, but went against what I knew that manipulating lists. I always believed it is better to converet a list to an array then manipulate it, hence my solution. So after a quick, basic search on <a href="http://www.google.co.uk/search?num=30&hl=en&ie=UTF-8&safe=off&q=coldfusion+arrays+list+faster&meta=">Google</a> I came across the <a href="http://livedocs.macromedia.com/wtg/public/coding_standards/performance.html">ColdFusion MX Coding Guidelines</a> which states; <br/><em>"Don't slavishly convert lists to arrays<br/>Even though manipulating an array is generally faster than manipulating a list in CFMX, if you simply need to iterate over a list of items and process each one in turn the faster construct is &lt;cfloop list="#itemList#" index="x"&gt; ... &lt;/cfloop&gt;. Don't convert 'itemList' to an array and then loop over that - it's not worth it because it probably won't be faster."</em><br/><br/>In a nutshell then:- if the list is short don't worry about it.<br/><br/>So I 'd thought I 'd test all three solutions. Todo this I set up an Application variable called "application.list" which held a list of numbers from 1 to 1000 seperated by a comma. Then on each test just reference this into a local variable called "list". Before I tested each page I loaded it up and hit refresh a couple of times. Then inbetween each test I waited 5 seconds. If you want to see the three sample .cfm pages I used click on "more" at the end of this post, alternatively you can download them <a href="http://www.andyjarrett.co.uk/downloads/list_reverse_test.rar" title="listReverse examples">here</a> - please note they are uncommented.<br/><br/><h2>The Test</h2>ListReverse 1 = Bill Rawlinson suggestion.<br/>ListReverse 2 = Devin suggestion.<br/>ListReverse 3 = My suggestion.<br/><br/><table border="1" cellspacing="1" cellpadding="3"> <caption> <strong>ListReverse test, using "TOTAL EXECUTION TIME"</strong> </caption>  <tr>    <th>&nbsp;</th>   <th>ListReverse 1 (ms)</th>   <th>ListReverse 2 (ms)</th>   <th>ListReverse 3 (ms)</th> </tr>   <tr>    <th>1.</th>   <td>282</td>    <td>156</td>    <td>16</td> </tr> <tr>    <th>2.</th>   <td>266</td>    <td>78</td>   <td>47</td> </tr> <tr>    <th>3.</th>   <td>265</td>    <td>93</td>   <td>16</td> </tr> <tr>    <th>Average</th>    <td>271</td>    <td>109</td>    <td>26.3</td> </tr> </table><br/>So from this, using the arrays was quicker, in some cases quite significantly. To explain this a bit better than I could I found a quote from <a href="http://www.rewindlife.com/mt/mt-tb.cgi?tb_id=56">RewindLife</a> which stated:<br/><em>"After reading the generated Java code I found that when you loop over a list by specifying the list attribute of a cfloop statement, ColdFusion optimizes the code by tokenizing the list only at the outset. If you were to use an indexed loop and listGetAt() each element, then ColdFusion would retokenize the list on each call and you'd start to get serious performance degradation."</em>.<br/> <br/>In conclusion then, if you are just looping over a list don't and not using other list functions then there is no need to worry with the ListToArray() function, else convert. <h3>List Reverse 1</h3><div class="code"><FONT COLOR=MAROON>&lt;cfapplication name=<FONT COLOR=BLUE>"listChk"</FONT>&gt;</FONT><br>\n<FONT COLOR=MAROON>&lt;cfset list = application.list&gt;</FONT><br>\n<FONT COLOR=MAROON>&lt;cfscript&gt;</FONT><br>\noutList = '';<br>\nfor (i=ListLen(list); i GT<FONT COLOR=BLUE> 0</FONT>; i=i-1){ <br>\n&nbsp;&nbsp;&nbsp;outList = ListAppend(outList,ListGetAt(List,i));<br>\n&nbsp;&nbsp;&nbsp;}<br>\n<FONT COLOR=MAROON>&lt;/cfscript&gt;</FONT></div><h3>List Reverse 2</h3><div class="code"><FONT COLOR=MAROON>&lt;cfapplication name=<FONT COLOR=BLUE>"listChk"</FONT>&gt;</FONT><br>\n<FONT COLOR=MAROON>&lt;cfset list = application.list&gt;</FONT><br>\n<FONT COLOR=MAROON>&lt;cfset listReverse=Reverse(list)&gt;</FONT><br>\n<FONT COLOR=MAROON>&lt;cfloop list=<FONT COLOR=BLUE>"#listReverse#"</FONT> index=<FONT COLOR=BLUE>"i"</FONT>&gt;</FONT><br>\n<FONT COLOR=MAROON>&lt;cfset listReverse=Replace(listReverse, i, Reverse(i))&gt;</FONT><br>\n<FONT COLOR=MAROON>&lt;/cfloop&gt;</FONT></div><h3>List Reverse 3</h3><div class="code"><FONT COLOR=MAROON>&lt;cfapplication name=<FONT COLOR=BLUE>"listChk"</FONT>&gt;</FONT><br>\n<FONT COLOR=MAROON>&lt;cfset list = application.list&gt;</FONT><br>\n<FONT COLOR=MAROON>&lt;cfscript&gt;</FONT><br>\n&nbsp;&nbsp;&nbsp;function listReverse(inList){<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var outArray = ArrayNew(<FONT COLOR=BLUE>1</FONT>);<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var i=0;<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var j = 1;<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var inArray = listToArray(inList);&nbsp;&nbsp;&nbsp;<br>\n&nbsp;&nbsp;&nbsp;<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for (i=ArrayLen(inArray);i GT<FONT COLOR=BLUE> 0</FONT>;i=i-1){<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;outArray[j] = inArray[i];<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;j = j + 1;<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return arrayToList(outArray);<br>\n&nbsp;&nbsp;&nbsp;}<br>\n<FONT COLOR=MAROON>&lt;/cfscript&gt;</FONT><br> <br>\n<FONT COLOR=MAROON>&lt;cfset theList = listReverse(list)&gt;</FONT></div><br>
+            </section>
+
+            <footer>
+              <p>
+                <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider
+                  <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>.
+                  Your support keeps this site running and the coffee brewing! ☕️
+                </em>
+              </p>
+            </footer>
+
+            <script
+              src="https://giscus.app/client.js"
+              data-repo="andyj/andyjarrett.com"
+              data-repo-id="R_kgDOMjCDkQ"
+              data-category="Announcements"
+              data-category-id="DIC_kwDOMjCDkc4ChlfU"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="preferred_color_scheme"
+              data-lang="en"
+              crossorigin="anonymous"
+              async></script>
+            <a name="comment"></a>
+          </div>
+
+          <aside class="col-md-3 col-12">
+            <h4>Recent Posts</h4>
+            
+              <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">
+                Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">
+                How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">
+                NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">
+                Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">
+                Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">
+                Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">
+                Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">
+                Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+          </aside>
+        </section>
+      </article>
+    </main>
   </div>
 
   <footer class="container mt-5 border-top pt-2">
@@ -128,18 +164,18 @@ I got two comments with suggestions on my post yesterday regarding my UDF. Both 
       <!-- Home Link -->
       <a href="https://andyjarrett.com" class=""><i class="bi bi-globe me-2"></i></a>
       <!-- linkedin Link -->
-      <a href="https://www.linkedin.com/in/andyjarrett/" title="inkedIn" target="_blank"><i class="bi bi-linkedin me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://www.linkedin.com/in/andyjarrett/" title="inkedIn" target="_blank"><i class="bi bi-linkedin me-2"></i></a>
       <!-- Twitter Link -->
-      <a href="https://twitter.com/andyj" title="Twitter" target="_blank"><i class="bi bi-twitter me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://twitter.com/andyj" title="Twitter" target="_blank"><i class="bi bi-twitter me-2"></i></a>
       <!-- GitHub Link -->
-      <a href="https://github.com/andyj" title="GitHub" target="_blank"><i class="bi bi-github me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://github.com/andyj" title="GitHub" target="_blank"><i class="bi bi-github me-2"></i></a>
       <!-- Stack Overflow Link -->
-      <a href="https://stackoverflow.com/users/371761/andy-jarrett" title="Stack overflow" target="_blank"><i class="bi bi-stack-overflow me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://stackoverflow.com/users/371761/andy-jarrett" title="Stack overflow" target="_blank"><i class="bi bi-stack-overflow me-2"></i></a>
       <!-- BlueSky Link -->
-      <a href="https://bsky.app/profile/andyjarrett.com" title="BlueSky" target="_blank"><i class="bi bi-cloud me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://bsky.app/profile/andyjarrett.com" title="BlueSky" target="_blank"><i class="bi bi-cloud me-2"></i></a>
       <!-- Instagram Link -->
-      <a href="https://instagram.com/andyjarrett" title="Instragram" target="_blank"><i class="bi bi-instagram me-2"></i></a>
-      <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee" target="_blank"><i class="bi bi-cup-hot-fill fs-5"></i></a>
+      <a rel="noopener noreferrer" href="https://instagram.com/andyjarrett" title="Instragram" target="_blank"><i class="bi bi-instagram me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://buymeacoffee.com/mailgw" title="Buy me a coffee" target="_blank"><i class="bi bi-cup-hot-fill fs-5"></i></a>
     </div>
     <div class="col">
       <div class="text-end">

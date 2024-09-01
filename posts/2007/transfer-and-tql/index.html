@@ -60,63 +60,99 @@
 
 
   <div class="container">
-    <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
-    <h1 class="mt-5 mb-5"><b>Transfer and TQL</b></h1>
-    <div class="row">
-      <div class="col-md-9 col-12">
-        <main class="mw fw-lighter fs-5">
-          
-I love working with Transfer and Mark Mandel has done an amazing feat of giving it some really good documentation. But I remember when I was getting started I was looking for a rough guide to the TQL language for Transfer and how to implement it. So based on all the information at <a href="http://www.transfer-orm.com/transfer/documentation/">www.transfer-orm.com/transfer/documentation/</a> here's a quick start to TQL.Please note: I am presuming you already know how to set up Transfer and have basic knowledge of how it works.For this example here is our Transfer.xml configuration file:<code><package name="post">  <object name="Post" table="post_table">   <id name="postid" column="postid" type="numeric"/>    <property name="postText" type="string" column="postText" />    <property name="postDate" type="date" column="postDate" />  </object></package></code> First we need to create our <span style="text-decoration:line-through;">(S)</span>TQL statement. TQL is Transfers own scripting language written in Java and ColdFusion. The main difference over SQL is that you are referencing classes and properties from your Transfer.xml file (see above). So to run a "SELECT * FROM" the post_table our TQL would look like:<code><cfsavecontent variable="tql"><cfoutput>  SELECT * FROM post.Post</cfoutput></cfsavecontent></code>You can see here that in the query instead of using the table name after FROM we are using the Transfer Class post.Post. Next we use the TQL and create the query. Note at this point you are not running the statement against the database, you are just creating a TQL.query object.<code><!--- getTransfer().createQuery() returns a transfer.com.tql.Query object ---><cfset tqlObj = getTransfer().createQuery(TQL);</code>Once we have the object returned we just need to pass it on to one of Transfers generated methods such as .readByQuery() or .ListByQuery()<code><cfset query = getTransfer().listbyQuery(query) /><cfdump var="#query#" /></code>That's it. Nothing really new hear and like I said you can get all of this from the <a href="http://www.transfer-orm.com/transfer/documentation/">documentation</a>. There are some limits still to TQL, one of the is using TOP/LIMIT (see <a href="http://groups.google.com/group/transfer-dev/browse_thread/thread/c776ed68e63e5eeb/889bf30467e1f71d?lnk=gst&q=limit+top#889bf30467e1f71d">this thread</a>). In my next post i'll go into passing values to the TQL statement and look at other methods that can effect how the TQL script is resolved by TransferQuick reference points:<ul><li><a href="http://www.transfer-orm.com">www.transfer-orm.com</a></li><li><a href="http://groups.google.com/group/transfer-dev/">Mailing List/Google Group</a></li><li><a href="http://transfer.riaforge.org/index.cfm?event=page.forums">Forum at RiaForge</a></li></ul><br>
-        </main>
-        <script
-          src="https://giscus.app/client.js"
-          data-repo="andyj/andyjarrett.com"
-          data-repo-id="R_kgDOMjCDkQ"
-          data-category="Announcements"
-          data-category-id="DIC_kwDOMjCDkc4ChlfU"
-          data-mapping="pathname"
-          data-strict="0"
-          data-reactions-enabled="1"
-          data-emit-metadata="0"
-          data-input-position="top"
-          data-theme="preferred_color_scheme"
-          data-lang="en"
-          crossorigin="anonymous"
-          async></script>
-        <a name="comment"></a>
-        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
-
-      </div>
-      <div class="col-md-3 col-12">
-        <!-- Side Content -->
-        <h4>Recent Posts</h4>
-        
-          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
-          <hr>
-        
-      </div>
+    <div class="my-1 text-center text-primary" role="alert">
+      <a class="text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">
+        Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky
+      </a>
     </div>
+
+    <main>
+      <article>
+        <header>
+          <h1 class="mt-5 mb-5"><b>Transfer and TQL</b></h1>
+        </header>
+
+        <section class="row">
+          <div class="col-md-9 col-12">
+            <section class="mw fw-lighter fs-5">
+              
+I love working with Transfer and Mark Mandel has done an amazing feat of giving it some really good documentation. But I remember when I was getting started I was looking for a rough guide to the TQL language for Transfer and how to implement it. So based on all the information at <a href="http://www.transfer-orm.com/transfer/documentation/">www.transfer-orm.com/transfer/documentation/</a> here's a quick start to TQL.Please note: I am presuming you already know how to set up Transfer and have basic knowledge of how it works.For this example here is our Transfer.xml configuration file:<code><package name="post">  <object name="Post" table="post_table">   <id name="postid" column="postid" type="numeric"/>    <property name="postText" type="string" column="postText" />    <property name="postDate" type="date" column="postDate" />  </object></package></code> First we need to create our <span style="text-decoration:line-through;">(S)</span>TQL statement. TQL is Transfers own scripting language written in Java and ColdFusion. The main difference over SQL is that you are referencing classes and properties from your Transfer.xml file (see above). So to run a "SELECT * FROM" the post_table our TQL would look like:<code><cfsavecontent variable="tql"><cfoutput>  SELECT * FROM post.Post</cfoutput></cfsavecontent></code>You can see here that in the query instead of using the table name after FROM we are using the Transfer Class post.Post. Next we use the TQL and create the query. Note at this point you are not running the statement against the database, you are just creating a TQL.query object.<code><!--- getTransfer().createQuery() returns a transfer.com.tql.Query object ---><cfset tqlObj = getTransfer().createQuery(TQL);</code>Once we have the object returned we just need to pass it on to one of Transfers generated methods such as .readByQuery() or .ListByQuery()<code><cfset query = getTransfer().listbyQuery(query) /><cfdump var="#query#" /></code>That's it. Nothing really new hear and like I said you can get all of this from the <a href="http://www.transfer-orm.com/transfer/documentation/">documentation</a>. There are some limits still to TQL, one of the is using TOP/LIMIT (see <a href="http://groups.google.com/group/transfer-dev/browse_thread/thread/c776ed68e63e5eeb/889bf30467e1f71d?lnk=gst&q=limit+top#889bf30467e1f71d">this thread</a>). In my next post i'll go into passing values to the TQL statement and look at other methods that can effect how the TQL script is resolved by TransferQuick reference points:<ul><li><a href="http://www.transfer-orm.com">www.transfer-orm.com</a></li><li><a href="http://groups.google.com/group/transfer-dev/">Mailing List/Google Group</a></li><li><a href="http://transfer.riaforge.org/index.cfm?event=page.forums">Forum at RiaForge</a></li></ul><br>
+            </section>
+
+            <footer>
+              <p>
+                <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider
+                  <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>.
+                  Your support keeps this site running and the coffee brewing! ☕️
+                </em>
+              </p>
+            </footer>
+
+            <script
+              src="https://giscus.app/client.js"
+              data-repo="andyj/andyjarrett.com"
+              data-repo-id="R_kgDOMjCDkQ"
+              data-category="Announcements"
+              data-category-id="DIC_kwDOMjCDkc4ChlfU"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="preferred_color_scheme"
+              data-lang="en"
+              crossorigin="anonymous"
+              async></script>
+            <a name="comment"></a>
+          </div>
+
+          <aside class="col-md-3 col-12">
+            <h4>Recent Posts</h4>
+            
+              <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">
+                Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">
+                How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">
+                NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">
+                Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">
+                Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">
+                Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">
+                Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">
+                Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+          </aside>
+        </section>
+      </article>
+    </main>
   </div>
 
   <footer class="container mt-5 border-top pt-2">
@@ -128,18 +164,18 @@ I love working with Transfer and Mark Mandel has done an amazing feat of giving 
       <!-- Home Link -->
       <a href="https://andyjarrett.com" class=""><i class="bi bi-globe me-2"></i></a>
       <!-- linkedin Link -->
-      <a href="https://www.linkedin.com/in/andyjarrett/" title="inkedIn" target="_blank"><i class="bi bi-linkedin me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://www.linkedin.com/in/andyjarrett/" title="inkedIn" target="_blank"><i class="bi bi-linkedin me-2"></i></a>
       <!-- Twitter Link -->
-      <a href="https://twitter.com/andyj" title="Twitter" target="_blank"><i class="bi bi-twitter me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://twitter.com/andyj" title="Twitter" target="_blank"><i class="bi bi-twitter me-2"></i></a>
       <!-- GitHub Link -->
-      <a href="https://github.com/andyj" title="GitHub" target="_blank"><i class="bi bi-github me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://github.com/andyj" title="GitHub" target="_blank"><i class="bi bi-github me-2"></i></a>
       <!-- Stack Overflow Link -->
-      <a href="https://stackoverflow.com/users/371761/andy-jarrett" title="Stack overflow" target="_blank"><i class="bi bi-stack-overflow me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://stackoverflow.com/users/371761/andy-jarrett" title="Stack overflow" target="_blank"><i class="bi bi-stack-overflow me-2"></i></a>
       <!-- BlueSky Link -->
-      <a href="https://bsky.app/profile/andyjarrett.com" title="BlueSky" target="_blank"><i class="bi bi-cloud me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://bsky.app/profile/andyjarrett.com" title="BlueSky" target="_blank"><i class="bi bi-cloud me-2"></i></a>
       <!-- Instagram Link -->
-      <a href="https://instagram.com/andyjarrett" title="Instragram" target="_blank"><i class="bi bi-instagram me-2"></i></a>
-      <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee" target="_blank"><i class="bi bi-cup-hot-fill fs-5"></i></a>
+      <a rel="noopener noreferrer" href="https://instagram.com/andyjarrett" title="Instragram" target="_blank"><i class="bi bi-instagram me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://buymeacoffee.com/mailgw" title="Buy me a coffee" target="_blank"><i class="bi bi-cup-hot-fill fs-5"></i></a>
     </div>
     <div class="col">
       <div class="text-end">
