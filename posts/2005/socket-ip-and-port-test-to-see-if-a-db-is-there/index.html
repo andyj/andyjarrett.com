@@ -62,12 +62,12 @@
   <div class="container">
     <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
     <h1 class="mt-5 mb-5"><b>Socket IP and Port test to see if a DB is there</b></h1>
-    <main class="mw fw-lighter fs-5">
-      
-I've recently been having problems with a MSSQL server going down. The SQL box is geographically in a different place to the  CF server so the datasrouces are connecting remotely. All has been ok until recently. The MSSQL server has been playing up (due to a driver problem we think) and rebooting. When this happens CF is hanging. Probably because of open connections? I know i can play around with the Datasource settings and set up connection limits etc. <a href="http://www.houseoffusion.com/cf_lists/message.cfm/forumid:4/messageid:220116">Kola</a> on the <a href="http://www.houseoffusion.com/cf_lists/threads.cfm/4">CF-Talk</a> list even suggested removing the datasource via the admin API - though this would work was a little too radical for what  i wanted to do. All i wanted to do was check the SQL server was there before the page loaded without using the datasource. Thats when i thought about sockets, and after a little <a href="http://www.google.co.uk/search?hl=en&safe=off&q=using+sockets+java.net.Socket+%22coldfusion%22OR%22cfmx%22&btnG=Search&meta=">Googling</a> I came across <a href="http://cephas.net/blog/2003/06/06/using_sockets_in_cfmx.html">Aaron Johnson's post about using Sockets in CFMX</a>. After a little tweaking this is what i've came up with:<div class="code"><FONT COLOR=MAROON>&lt;cfset serverStruct = structNew()/&gt;</FONT><br><br><FONT COLOR=GRAY><I>&lt;!--- The server IP you want to check ---&gt;</I></FONT><br><FONT COLOR=MAROON>&lt;cfset serverStruct.serverIp = <FONT COLOR=BLUE>"127.0.0.1"</FONT>/&gt;</FONT><br><FONT COLOR=GRAY><I>&lt;!--- The port you want to check. In our case MSSQL ---&gt;</I></FONT><br><FONT COLOR=MAROON>&lt;cfset serverStruct.serverPort = <FONT COLOR=BLUE>"1433"</FONT>/&gt;</FONT><br><FONT COLOR=GRAY><I>&lt;!--- The response ---&gt;</I></FONT><br><FONT COLOR=MAROON>&lt;cfset serverStruct.portConnected = <FONT COLOR=BLUE>""</FONT>/&gt;</FONT><br><br><br><FONT COLOR=GRAY><I>&lt;!--- Create the socket object ---&gt;</I></FONT><br><FONT COLOR=MAROON>&lt;cfset objSocket = CreateObject(<FONT COLOR=BLUE>"java"</FONT>, <FONT COLOR=BLUE>"java.net.Socket"</FONT>) /&gt;</FONT><br><br><br><FONT COLOR=GRAY><I>&lt;!--- Now we try to connect to our port ---&gt;</I></FONT><br><FONT COLOR=MAROON>&lt;cftry&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=GRAY><I>&lt;!--- call the init constructor and connect to the IP and Port ---&gt;</I></FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset objSocket.init(serverStruct.serverIp, serverStruct.serverPort)/&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=GRAY><I>&lt;!--- Did we connect?  ---&gt;</I></FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset serverStruct.portConnected = objSocket.isConnected()/&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=GRAY><I>&lt;!--- Close connection ---&gt;</I></FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset objSocket.close()/&gt;</FONT>&nbsp;&nbsp;&nbsp;<br><FONT COLOR=MAROON>&lt;cfcatch type=<FONT COLOR=BLUE>"any"</FONT>&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=GRAY><I>&lt;!--- The connection wasnt made ---&gt;</I></FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset serverStruct.portConnected = <FONT COLOR=BLUE>"No"</FONT>/&gt;</FONT><br><FONT COLOR=MAROON>&lt;/cfcatch&gt;</FONT><br><FONT COLOR=MAROON>&lt;/cftry&gt;</FONT><br><br><FONT COLOR=MAROON>&lt;cfoutput&gt;</FONT>Is the server and port there : #serverStruct.portConnected#<FONT COLOR=MAROON>&lt;/cfoutput&gt;</FONT><br><br><FONT COLOR=MAROON>&lt;cfdump var=<FONT COLOR=BLUE>"#serverStruct#"</FONT>/&gt;</FONT></div>The only weird thing here, and as i've only be been up an hour i havent looked into more (wheres my coffe), is that if the socket cannot connect CFMX bombs out. Hence the try and catch block. I was more expecting the  isConnected() constructro to come back with a negative? Odd but i'll look into later.<br>
-    </main>
     <div class="row">
-      <div class="col">
+      <div class="col-md-9 col-12">
+        <main class="mw fw-lighter fs-5">
+          
+I've recently been having problems with a MSSQL server going down. The SQL box is geographically in a different place to the  CF server so the datasrouces are connecting remotely. All has been ok until recently. The MSSQL server has been playing up (due to a driver problem we think) and rebooting. When this happens CF is hanging. Probably because of open connections? I know i can play around with the Datasource settings and set up connection limits etc. <a href="http://www.houseoffusion.com/cf_lists/message.cfm/forumid:4/messageid:220116">Kola</a> on the <a href="http://www.houseoffusion.com/cf_lists/threads.cfm/4">CF-Talk</a> list even suggested removing the datasource via the admin API - though this would work was a little too radical for what  i wanted to do. All i wanted to do was check the SQL server was there before the page loaded without using the datasource. Thats when i thought about sockets, and after a little <a href="http://www.google.co.uk/search?hl=en&safe=off&q=using+sockets+java.net.Socket+%22coldfusion%22OR%22cfmx%22&btnG=Search&meta=">Googling</a> I came across <a href="http://cephas.net/blog/2003/06/06/using_sockets_in_cfmx.html">Aaron Johnson's post about using Sockets in CFMX</a>. After a little tweaking this is what i've came up with:<div class="code"><FONT COLOR=MAROON>&lt;cfset serverStruct = structNew()/&gt;</FONT><br><br><FONT COLOR=GRAY><I>&lt;!--- The server IP you want to check ---&gt;</I></FONT><br><FONT COLOR=MAROON>&lt;cfset serverStruct.serverIp = <FONT COLOR=BLUE>"127.0.0.1"</FONT>/&gt;</FONT><br><FONT COLOR=GRAY><I>&lt;!--- The port you want to check. In our case MSSQL ---&gt;</I></FONT><br><FONT COLOR=MAROON>&lt;cfset serverStruct.serverPort = <FONT COLOR=BLUE>"1433"</FONT>/&gt;</FONT><br><FONT COLOR=GRAY><I>&lt;!--- The response ---&gt;</I></FONT><br><FONT COLOR=MAROON>&lt;cfset serverStruct.portConnected = <FONT COLOR=BLUE>""</FONT>/&gt;</FONT><br><br><br><FONT COLOR=GRAY><I>&lt;!--- Create the socket object ---&gt;</I></FONT><br><FONT COLOR=MAROON>&lt;cfset objSocket = CreateObject(<FONT COLOR=BLUE>"java"</FONT>, <FONT COLOR=BLUE>"java.net.Socket"</FONT>) /&gt;</FONT><br><br><br><FONT COLOR=GRAY><I>&lt;!--- Now we try to connect to our port ---&gt;</I></FONT><br><FONT COLOR=MAROON>&lt;cftry&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=GRAY><I>&lt;!--- call the init constructor and connect to the IP and Port ---&gt;</I></FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset objSocket.init(serverStruct.serverIp, serverStruct.serverPort)/&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=GRAY><I>&lt;!--- Did we connect?  ---&gt;</I></FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset serverStruct.portConnected = objSocket.isConnected()/&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=GRAY><I>&lt;!--- Close connection ---&gt;</I></FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset objSocket.close()/&gt;</FONT>&nbsp;&nbsp;&nbsp;<br><FONT COLOR=MAROON>&lt;cfcatch type=<FONT COLOR=BLUE>"any"</FONT>&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=GRAY><I>&lt;!--- The connection wasnt made ---&gt;</I></FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset serverStruct.portConnected = <FONT COLOR=BLUE>"No"</FONT>/&gt;</FONT><br><FONT COLOR=MAROON>&lt;/cfcatch&gt;</FONT><br><FONT COLOR=MAROON>&lt;/cftry&gt;</FONT><br><br><FONT COLOR=MAROON>&lt;cfoutput&gt;</FONT>Is the server and port there : #serverStruct.portConnected#<FONT COLOR=MAROON>&lt;/cfoutput&gt;</FONT><br><br><FONT COLOR=MAROON>&lt;cfdump var=<FONT COLOR=BLUE>"#serverStruct#"</FONT>/&gt;</FONT></div>The only weird thing here, and as i've only be been up an hour i havent looked into more (wheres my coffe), is that if the socket cannot connect CFMX bombs out. Hence the try and catch block. I was more expecting the  isConnected() constructro to come back with a negative? Odd but i'll look into later.<br>
+        </main>
         <script
           src="https://giscus.app/client.js"
           data-repo="andyj/andyjarrett.com"
@@ -84,28 +84,41 @@ I've recently been having problems with a MSSQL server going down. The SQL box i
           crossorigin="anonymous"
           async></script>
         <a name="comment"></a>
+        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
+
       </div>
-    </div>
-    <div class="row mt-5 ">
-      <div class="col-6">
-        <strong>Recent Posts</strong>
-        <ul>
+      <div class="col-md-3 col-12">
+        <!-- Side Content -->
+        <h4>Recent Posts</h4>
         
-          <li ><a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw</a></li>
+          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script</a></li>
+          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare</a></li>
+          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader</a></li>
+          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-        </ul>
-      </div>
-      <div class="col-6 pt-3 text-end">
-        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
       </div>
     </div>
   </div>
+
   <footer class="container mt-5 border-top pt-2">
   <div class="row justify-content-md-center">
     <div class="col">

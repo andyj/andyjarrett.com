@@ -62,12 +62,12 @@
   <div class="container">
     <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
     <h1 class="mt-5 mb-5"><b>Adding Spry includes in a Model Glue template</b></h1>
-    <main class="mw fw-lighter fs-5">
-      
-As the <a href="http://labs.adobe.com/technologies/spry/">Spry</a>(and any Ajax framework) files aren't the smallest set of files to add to your page you don't want the user to download them if they don't need to. The way I add the <a href="http://labs.adobe.com/technologies/spry/">Spry</a> files to a display template in <a href="http://www.model-glue.com/">Model Glue</a> is per event via a variable defined in the XML controller. For this example I'm going to include the SpryCollapsiblePanel.js file. 1. The first change we make is to your display(also known as Layout) template. At the very top of the template add the following:<code><!--- This sets up the variable needSpryCollapsiblePanel with the value of false if it  cannot be found in the viewState---><cfset needSpryCollapsiblePanel = viewState.getValue('needSpryCollapsiblePanel', false) />  </code>Then in the &lt;head> section add the following<code><!--- If needSpryCollapsiblePanel is True then we include the SpryCollapsiblePanel.js I have omitted the CSS files that also come with this widget as I add my own.---><cfif needSpryCollapsiblePanel>  <script src="/includes/widgets/collapsiblepanel/SpryCollapsiblePanel.js" type="text/javascript"></script></cfif></code> 2. In the ModelGlue.xml we are going to modify a basic event i.eBefore:<code><event-handler name="page.index">  <broadcasts />  <views>   <inc1ude name="body" template="dspIndex.cfm"> </views>  <results>   <!--      Layout template   -->       <result do="view.template" /> </results>      </event-handler></code>After:Using the above event we are going to add a variable to the ViewState<code><event-handler name="page.index"> <broadcasts />  <views>   <!--      dspIndex.cfm is the template which needs      to use the Spry files   -->   <inc1ude name="body" template="dspIndex.cfm">     <!--        This value will be available in the viewState     -->     <value name="needSpryCollapsiblePanel" value="true" />    </include>  </views>  <results>   <!--      Layout template   -->   <result do="view.template" /> </results>      </event-handler></code>And thats it. When you go to index?event=page.index the &lt;views> will include your file that needs Spry while setting a variable to tell your Layout &lt;result> to add the line of script to the &lt;head>N.B. There is a deliberate spelling mistake in my MG events due to a small <a href="http://blogcfc.riaforge.org/index.cfm?event=page.issue&issueid=68C74AD8-0BBD-C613-4A53996C8D1DEF91">small bug</a> in BlogCFC<br>
-    </main>
     <div class="row">
-      <div class="col">
+      <div class="col-md-9 col-12">
+        <main class="mw fw-lighter fs-5">
+          
+As the <a href="http://labs.adobe.com/technologies/spry/">Spry</a>(and any Ajax framework) files aren't the smallest set of files to add to your page you don't want the user to download them if they don't need to. The way I add the <a href="http://labs.adobe.com/technologies/spry/">Spry</a> files to a display template in <a href="http://www.model-glue.com/">Model Glue</a> is per event via a variable defined in the XML controller. For this example I'm going to include the SpryCollapsiblePanel.js file. 1. The first change we make is to your display(also known as Layout) template. At the very top of the template add the following:<code><!--- This sets up the variable needSpryCollapsiblePanel with the value of false if it  cannot be found in the viewState---><cfset needSpryCollapsiblePanel = viewState.getValue('needSpryCollapsiblePanel', false) />  </code>Then in the &lt;head> section add the following<code><!--- If needSpryCollapsiblePanel is True then we include the SpryCollapsiblePanel.js I have omitted the CSS files that also come with this widget as I add my own.---><cfif needSpryCollapsiblePanel>  <script src="/includes/widgets/collapsiblepanel/SpryCollapsiblePanel.js" type="text/javascript"></script></cfif></code> 2. In the ModelGlue.xml we are going to modify a basic event i.eBefore:<code><event-handler name="page.index">  <broadcasts />  <views>   <inc1ude name="body" template="dspIndex.cfm"> </views>  <results>   <!--      Layout template   -->       <result do="view.template" /> </results>      </event-handler></code>After:Using the above event we are going to add a variable to the ViewState<code><event-handler name="page.index"> <broadcasts />  <views>   <!--      dspIndex.cfm is the template which needs      to use the Spry files   -->   <inc1ude name="body" template="dspIndex.cfm">     <!--        This value will be available in the viewState     -->     <value name="needSpryCollapsiblePanel" value="true" />    </include>  </views>  <results>   <!--      Layout template   -->   <result do="view.template" /> </results>      </event-handler></code>And thats it. When you go to index?event=page.index the &lt;views> will include your file that needs Spry while setting a variable to tell your Layout &lt;result> to add the line of script to the &lt;head>N.B. There is a deliberate spelling mistake in my MG events due to a small <a href="http://blogcfc.riaforge.org/index.cfm?event=page.issue&issueid=68C74AD8-0BBD-C613-4A53996C8D1DEF91">small bug</a> in BlogCFC<br>
+        </main>
         <script
           src="https://giscus.app/client.js"
           data-repo="andyj/andyjarrett.com"
@@ -84,28 +84,41 @@ As the <a href="http://labs.adobe.com/technologies/spry/">Spry</a>(and any Ajax 
           crossorigin="anonymous"
           async></script>
         <a name="comment"></a>
+        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
+
       </div>
-    </div>
-    <div class="row mt-5 ">
-      <div class="col-6">
-        <strong>Recent Posts</strong>
-        <ul>
+      <div class="col-md-3 col-12">
+        <!-- Side Content -->
+        <h4>Recent Posts</h4>
         
-          <li ><a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw</a></li>
+          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script</a></li>
+          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare</a></li>
+          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader</a></li>
+          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-        </ul>
-      </div>
-      <div class="col-6 pt-3 text-end">
-        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
       </div>
     </div>
   </div>
+
   <footer class="container mt-5 border-top pt-2">
   <div class="row justify-content-md-center">
     <div class="col">

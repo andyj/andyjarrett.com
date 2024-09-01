@@ -62,12 +62,12 @@
   <div class="container">
     <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
     <h1 class="mt-5 mb-5"><b>Googles Closure Linter</b></h1>
-    <main class="mw fw-lighter fs-5">
-      
-<p>  Style guides are a nice way of maintaining good code, even  <a href="http://livedocs.adobe.com/wtg/public/coding_standards/contents.html">ColdFusion has one</a> laying around  albeit a little neglected nowadays <a href="/blog/page.cfm/Contact-Me">anyone interested in looking over it with me</a>?).  Recently Google shared their  <a href="http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml" title="Js Style guide">Javascript</a> coding guide which although is not earth shatteringly new it proves to be a great developer resource  especialy if you work in a team of any size.</p> <p>  As a companion they are now making available, publicy,  <a href="http://closuretools.blogspot.com/2010/08/introducing-closure-linter.html" title="Introducing Closure Linter - Closure Tools Blog">   the Closure Linter  </a> which is a Js validator used from the terminal/command line that checks that the style guide is being followed.<br/></p><p>  <a href="http://code.google.com/closure/utilities/docs/linter_howto.html" title="How to Use Closure Linter - Closure Linter - Google Code">   Installing the program  </a> is made foolproof thanks to Pythons "easy_install" and once installed checking your Javascript file is  then a simple case of running the following from the Terminal</p><code>$ gjslint path/to/my/file.js</code><p>I managed to find 114 errors on the first Js file I tried it again which looked something like:</p><code>Line 67, E:0131: Single-quoted string preferred over double-quoted string.Line 67, E:0010: (New error) Missing semicolon at end of lineLine 68, E:0005: Illegal tab in whitespace before "}"Line 69, E:0005: Illegal tab in whitespace before "}"Line 69, E:0010: (New error) Missing semicolon at end of lineLine 70, E:0010: (New error) Missing semicolon at end of lineLine 70, E:0300: File does not end with new line.  (}))Found 114 errors, including 9 new errors, in 1 files (0 files OK).</code><p>Thats actually not the best bit, you can even fix most of the error too by running</p><code>fixjsstyle --strict  path/to/my/file.js</code><p>  Regretfully I haven't been able to test this yet due to a <a href="http://code.google.com/p/closure-linter/issues/detail?id=1">bug</a> with the "fixjsstyle" program on the Mac. Once that is resolved though I'll be hopefully be coming back here to share how succesfully it works.</p><br>
-    </main>
     <div class="row">
-      <div class="col">
+      <div class="col-md-9 col-12">
+        <main class="mw fw-lighter fs-5">
+          
+<p>  Style guides are a nice way of maintaining good code, even  <a href="http://livedocs.adobe.com/wtg/public/coding_standards/contents.html">ColdFusion has one</a> laying around  albeit a little neglected nowadays <a href="/blog/page.cfm/Contact-Me">anyone interested in looking over it with me</a>?).  Recently Google shared their  <a href="http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml" title="Js Style guide">Javascript</a> coding guide which although is not earth shatteringly new it proves to be a great developer resource  especialy if you work in a team of any size.</p> <p>  As a companion they are now making available, publicy,  <a href="http://closuretools.blogspot.com/2010/08/introducing-closure-linter.html" title="Introducing Closure Linter - Closure Tools Blog">   the Closure Linter  </a> which is a Js validator used from the terminal/command line that checks that the style guide is being followed.<br/></p><p>  <a href="http://code.google.com/closure/utilities/docs/linter_howto.html" title="How to Use Closure Linter - Closure Linter - Google Code">   Installing the program  </a> is made foolproof thanks to Pythons "easy_install" and once installed checking your Javascript file is  then a simple case of running the following from the Terminal</p><code>$ gjslint path/to/my/file.js</code><p>I managed to find 114 errors on the first Js file I tried it again which looked something like:</p><code>Line 67, E:0131: Single-quoted string preferred over double-quoted string.Line 67, E:0010: (New error) Missing semicolon at end of lineLine 68, E:0005: Illegal tab in whitespace before "}"Line 69, E:0005: Illegal tab in whitespace before "}"Line 69, E:0010: (New error) Missing semicolon at end of lineLine 70, E:0010: (New error) Missing semicolon at end of lineLine 70, E:0300: File does not end with new line.  (}))Found 114 errors, including 9 new errors, in 1 files (0 files OK).</code><p>Thats actually not the best bit, you can even fix most of the error too by running</p><code>fixjsstyle --strict  path/to/my/file.js</code><p>  Regretfully I haven't been able to test this yet due to a <a href="http://code.google.com/p/closure-linter/issues/detail?id=1">bug</a> with the "fixjsstyle" program on the Mac. Once that is resolved though I'll be hopefully be coming back here to share how succesfully it works.</p><br>
+        </main>
         <script
           src="https://giscus.app/client.js"
           data-repo="andyj/andyjarrett.com"
@@ -84,28 +84,41 @@
           crossorigin="anonymous"
           async></script>
         <a name="comment"></a>
+        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
+
       </div>
-    </div>
-    <div class="row mt-5 ">
-      <div class="col-6">
-        <strong>Recent Posts</strong>
-        <ul>
+      <div class="col-md-3 col-12">
+        <!-- Side Content -->
+        <h4>Recent Posts</h4>
         
-          <li ><a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw</a></li>
+          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script</a></li>
+          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare</a></li>
+          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader</a></li>
+          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-        </ul>
-      </div>
-      <div class="col-6 pt-3 text-end">
-        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
       </div>
     </div>
   </div>
+
   <footer class="container mt-5 border-top pt-2">
   <div class="row justify-content-md-center">
     <div class="col">

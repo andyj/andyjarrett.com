@@ -62,12 +62,12 @@
   <div class="container">
     <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
     <h1 class="mt-5 mb-5"><b>Dynamically hiding a HTML CFGridColumn</b></h1>
-    <main class="mw fw-lighter fs-5">
-      
-I've been working with <a href="http://www.cfquickdocs.com/cfgrid">CFGrid</a>s recently especially the HTML format. One recent issue I had was the ability to dynamically hide a column once the grid has been loaded. Luckily the <a href="http://extjs.com/deploy/ext/docs/">Ext's</a> framework that sits underneath is full of hidden gems in ways you can add extra functionality and ColdFusion provides <a href="http://livedocs.adobe.com/coldfusion/8/JavaScriptFcns_05.html">ColdFusion.Grid.getGridObject</a> that allows you to tap into this First, lets create our grid<code><cfset gridData = queryNew("col1,col2")><cfloop from="1" to="5" index="i">   <cfset queryAddRow(gridData)>   <cfset querySetCell(gridData, "col1", "Row #i# Col 1", i)>   <cfset querySetCell(gridData, "col2", "Row #i# Col 2", i)></cfloop><cfscript> args = structNew();   args.autowidth = true;  args.name = "myTestGrid"; args.format = "html"; args.width = "250"; args.query = "gridData";</cfscript><cfform name="test"><cfgrid attributeCollection="#args#">  <cfgridcolumn name="col1" header="My 1st Col">  <cfgridcolumn name="col2" header="My 2nd Col"></cfgrid></cfform></code>The idea of the code will be to dynamically hide the first column onLoad.<code><!--- When using ajaxOnLoad you need the <script> needs to be in the HTML head ---><cfsavecontent variable="ScriptForHead"><script language="JavaScript" type="text/javascript">  hideCol = function(){   // Get the grid object    gridObj = ColdFusion.Grid.getGridObject('myTestGrid');    // Get the column model   cm = gridObj.getColumnModel();    // On a column we can run a host of methods. Check out    // http://www.culture.gov.sk/extras/yui-ext/docs/YAHOO.ext.grid.DefaultColumnModel.html   // I'm using http://www.culture.gov.sk/extras/yui-ext/docs/YAHOO.ext.grid.DefaultColumnModel.html#setHidden    cm.setHidden(0,true); // setHidden(colIndex, hidden)        // reload the grid    gridObj.reconfigure(gridObj.getDataSource(),cm);   }   </script>  </cfsavecontent><cfhtmlhead text="#ScriptForHead#" /><!--- use AjaxOnLoad to Hide the column onLoad---><cfset ajaxOnLoad('hideCol')></code>Complete code should look like this:<code><!--- When using ajaxOnLoad you need the <script> needs to be in the HTML head ---><cfsavecontent variable="ScriptForHead"><script language="JavaScript" type="text/javascript"> hideCol = function(){   // Get the grid object    gridObj = ColdFusion.Grid.getGridObject('myTestGrid');    // Get the column model   cm = gridObj.getColumnModel();    // On a column we can run a host of methods. Check out    cm.setHidden(0,true);   // reload the grid    gridObj.reconfigure(gridObj.getDataSource(),cm);   }   </script></cfsavecontent><cfhtmlhead text="#ScriptForHead#" /><!--- use AjaxOnLoad to Hide the column onLoad---><cfset ajaxOnLoad('hideCol')>   <cfset gridData = queryNew("col1,col2")><cfloop from="1" to="5" index="i">   <cfset queryAddRow(gridData)>   <cfset querySetCell(gridData, "col1", "Row #i# Col 1", i)>   <cfset querySetCell(gridData, "col2", "Row #i# Col 2", i)></cfloop><cfscript>  args = structNew();   args.autowidth = true;  args.name = "myTestGrid"; args.format = "html"; args.width = "250"; args.query = "gridData";</cfscript><cfform name="test"><cfgrid attributeCollection="#args#">  <cfgridcolumn name="col1" header="My 1st Col">  <cfgridcolumn name="col2" header="My 2nd Col"></cfgrid></cfform></code><br>
-    </main>
     <div class="row">
-      <div class="col">
+      <div class="col-md-9 col-12">
+        <main class="mw fw-lighter fs-5">
+          
+I've been working with <a href="http://www.cfquickdocs.com/cfgrid">CFGrid</a>s recently especially the HTML format. One recent issue I had was the ability to dynamically hide a column once the grid has been loaded. Luckily the <a href="http://extjs.com/deploy/ext/docs/">Ext's</a> framework that sits underneath is full of hidden gems in ways you can add extra functionality and ColdFusion provides <a href="http://livedocs.adobe.com/coldfusion/8/JavaScriptFcns_05.html">ColdFusion.Grid.getGridObject</a> that allows you to tap into this First, lets create our grid<code><cfset gridData = queryNew("col1,col2")><cfloop from="1" to="5" index="i">   <cfset queryAddRow(gridData)>   <cfset querySetCell(gridData, "col1", "Row #i# Col 1", i)>   <cfset querySetCell(gridData, "col2", "Row #i# Col 2", i)></cfloop><cfscript> args = structNew();   args.autowidth = true;  args.name = "myTestGrid"; args.format = "html"; args.width = "250"; args.query = "gridData";</cfscript><cfform name="test"><cfgrid attributeCollection="#args#">  <cfgridcolumn name="col1" header="My 1st Col">  <cfgridcolumn name="col2" header="My 2nd Col"></cfgrid></cfform></code>The idea of the code will be to dynamically hide the first column onLoad.<code><!--- When using ajaxOnLoad you need the <script> needs to be in the HTML head ---><cfsavecontent variable="ScriptForHead"><script language="JavaScript" type="text/javascript">  hideCol = function(){   // Get the grid object    gridObj = ColdFusion.Grid.getGridObject('myTestGrid');    // Get the column model   cm = gridObj.getColumnModel();    // On a column we can run a host of methods. Check out    // http://www.culture.gov.sk/extras/yui-ext/docs/YAHOO.ext.grid.DefaultColumnModel.html   // I'm using http://www.culture.gov.sk/extras/yui-ext/docs/YAHOO.ext.grid.DefaultColumnModel.html#setHidden    cm.setHidden(0,true); // setHidden(colIndex, hidden)        // reload the grid    gridObj.reconfigure(gridObj.getDataSource(),cm);   }   </script>  </cfsavecontent><cfhtmlhead text="#ScriptForHead#" /><!--- use AjaxOnLoad to Hide the column onLoad---><cfset ajaxOnLoad('hideCol')></code>Complete code should look like this:<code><!--- When using ajaxOnLoad you need the <script> needs to be in the HTML head ---><cfsavecontent variable="ScriptForHead"><script language="JavaScript" type="text/javascript"> hideCol = function(){   // Get the grid object    gridObj = ColdFusion.Grid.getGridObject('myTestGrid');    // Get the column model   cm = gridObj.getColumnModel();    // On a column we can run a host of methods. Check out    cm.setHidden(0,true);   // reload the grid    gridObj.reconfigure(gridObj.getDataSource(),cm);   }   </script></cfsavecontent><cfhtmlhead text="#ScriptForHead#" /><!--- use AjaxOnLoad to Hide the column onLoad---><cfset ajaxOnLoad('hideCol')>   <cfset gridData = queryNew("col1,col2")><cfloop from="1" to="5" index="i">   <cfset queryAddRow(gridData)>   <cfset querySetCell(gridData, "col1", "Row #i# Col 1", i)>   <cfset querySetCell(gridData, "col2", "Row #i# Col 2", i)></cfloop><cfscript>  args = structNew();   args.autowidth = true;  args.name = "myTestGrid"; args.format = "html"; args.width = "250"; args.query = "gridData";</cfscript><cfform name="test"><cfgrid attributeCollection="#args#">  <cfgridcolumn name="col1" header="My 1st Col">  <cfgridcolumn name="col2" header="My 2nd Col"></cfgrid></cfform></code><br>
+        </main>
         <script
           src="https://giscus.app/client.js"
           data-repo="andyj/andyjarrett.com"
@@ -84,28 +84,41 @@ I've been working with <a href="http://www.cfquickdocs.com/cfgrid">CFGrid</a>s r
           crossorigin="anonymous"
           async></script>
         <a name="comment"></a>
+        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
+
       </div>
-    </div>
-    <div class="row mt-5 ">
-      <div class="col-6">
-        <strong>Recent Posts</strong>
-        <ul>
+      <div class="col-md-3 col-12">
+        <!-- Side Content -->
+        <h4>Recent Posts</h4>
         
-          <li ><a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw</a></li>
+          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script</a></li>
+          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare</a></li>
+          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader</a></li>
+          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-        </ul>
-      </div>
-      <div class="col-6 pt-3 text-end">
-        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
       </div>
     </div>
   </div>
+
   <footer class="container mt-5 border-top pt-2">
   <div class="row justify-content-md-center">
     <div class="col">

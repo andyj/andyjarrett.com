@@ -62,12 +62,12 @@
   <div class="container">
     <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
     <h1 class="mt-5 mb-5"><b>Cannot loop over cfpresentationslides ?</b></h1>
-    <main class="mw fw-lighter fs-5">
-      
-I was playing around with &lt;cfpresentation> last night when I had an idea which involved using a query to loop over and create the &lt;cfpresentationslides> tag.The idea seemed sound, but in practice it didn't work. What happens is that you will get as many slides as you have in the loop/query, but for each iteration you will only see the content from the last slide. Here's some sample code that I've been playing around with but instead of a query just a simple loop: <code><cfpresentation title="The Presentation" autoPlay="false"> <cfpresentationslide title="The welcome slide"  notes="Some notes">   <h1>Hello Foo </h1> </cfpresentationslide>    <!---   Loop from 1 to 5, creating a slide for each iteration.  --->  <cfloop from="1" to="5" index="i">    <cfpresentationslide title="title #i#" notes="notes #i#" >      <cfloop from="1" to="2" index="q"><cfoutput>#q#</cfoutput></cfloop>   </cfpresentationslide>    </cfloop> </cfpresentation></code>Running it on my machine gives me the following output:<img src="http://www.andyjarrett.co.uk/andy/blog/images/cfpresentation.png" alt="cfpresentation error" />If this is planned behavior it seems odd to me to put this kind of restriction on this dynamic presentation tag. Having to possibly write 30+ slide by hand makes this tag a nightmare for future maintainability. If this is a bug, then I should get it submitted.<br>
-    </main>
     <div class="row">
-      <div class="col">
+      <div class="col-md-9 col-12">
+        <main class="mw fw-lighter fs-5">
+          
+I was playing around with &lt;cfpresentation> last night when I had an idea which involved using a query to loop over and create the &lt;cfpresentationslides> tag.The idea seemed sound, but in practice it didn't work. What happens is that you will get as many slides as you have in the loop/query, but for each iteration you will only see the content from the last slide. Here's some sample code that I've been playing around with but instead of a query just a simple loop: <code><cfpresentation title="The Presentation" autoPlay="false"> <cfpresentationslide title="The welcome slide"  notes="Some notes">   <h1>Hello Foo </h1> </cfpresentationslide>    <!---   Loop from 1 to 5, creating a slide for each iteration.  --->  <cfloop from="1" to="5" index="i">    <cfpresentationslide title="title #i#" notes="notes #i#" >      <cfloop from="1" to="2" index="q"><cfoutput>#q#</cfoutput></cfloop>   </cfpresentationslide>    </cfloop> </cfpresentation></code>Running it on my machine gives me the following output:<img src="http://www.andyjarrett.co.uk/andy/blog/images/cfpresentation.png" alt="cfpresentation error" />If this is planned behavior it seems odd to me to put this kind of restriction on this dynamic presentation tag. Having to possibly write 30+ slide by hand makes this tag a nightmare for future maintainability. If this is a bug, then I should get it submitted.<br>
+        </main>
         <script
           src="https://giscus.app/client.js"
           data-repo="andyj/andyjarrett.com"
@@ -84,28 +84,41 @@ I was playing around with &lt;cfpresentation> last night when I had an idea whic
           crossorigin="anonymous"
           async></script>
         <a name="comment"></a>
+        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
+
       </div>
-    </div>
-    <div class="row mt-5 ">
-      <div class="col-6">
-        <strong>Recent Posts</strong>
-        <ul>
+      <div class="col-md-3 col-12">
+        <!-- Side Content -->
+        <h4>Recent Posts</h4>
         
-          <li ><a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw</a></li>
+          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script</a></li>
+          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare</a></li>
+          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader</a></li>
+          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-        </ul>
-      </div>
-      <div class="col-6 pt-3 text-end">
-        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
       </div>
     </div>
   </div>
+
   <footer class="container mt-5 border-top pt-2">
   <div class="row justify-content-md-center">
     <div class="col">

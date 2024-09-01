@@ -62,12 +62,12 @@
   <div class="container">
     <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
     <h1 class="mt-5 mb-5"><b>CSS and Divs or Good ol tables.</b></h1>
-    <main class="mw fw-lighter fs-5">
-      
-I've been battling recently with starting new projects using CSS and div positioning instead of, good old trusty tables. This all started eons ago when I came across, by accident, Jeff Zeldmans (<a href="http://www.zeldman.com/">http://www.zeldman.com/</a>) A-list Apart (<a href="http://www.alistapart.com">http://www.alistapart.com</a>) website. I remember thinking, "WOW, look ma no tables"Still being in my web infancy I played a little but didn't grasp the "why" i.e. standards.Its only a year or two on and more and more CSS aware site are appearing (mainly due to blogs I think as the layout tends to be an easy CSS two box model). So it got me going over all my CSS links and really considering it as an option. Around this time one of my friends who's a designer and ASP programmer (its not his fault ;o) )  was thinking about his next project and using XHTML and CSS, and he asked what do I think.My response and initial non-thinking reply:"Personally I wouldn't bother, if you look around no one is using it [in general], and the only sites that do tend to be aimed at the likes of us [developers, designers, general web savvy's], who have/keep their browser updated."And this is the problem I have with moving over to CSS, it's still not standard enough when it comes to browsers and there renditions of it. There's still more hacks you need, and I thought CSS was meant to move away from this. I know it cuts down on web page size, and saves money on bandwidth, but at the moment I think until it starts behaving properly in all browsers its never going be taken on. But before everyone thinks I hate CSS please don't get me wrong,  for CSS there are some amazing sites that prove it can done and done well, just check out <a href="http://www.sitepoint.com">http://www.sitepoint.com</a>. Also personally I love it, and my new blog layout will be in using CSS, because I know you [the reader] is probably a web developer who likes to keep their browser relatively updated (though I have one user apparently who wont except .png according to my logs, who are you ?), and because of that im fairly confident the site will work in *most* browsers.But until the hacks, positioning, box model, and all the other little things are addressed I don't think a full CSS site in a commercial environment is viable?But that's just my current thoughts? What do you think?<br>
-    </main>
     <div class="row">
-      <div class="col">
+      <div class="col-md-9 col-12">
+        <main class="mw fw-lighter fs-5">
+          
+I've been battling recently with starting new projects using CSS and div positioning instead of, good old trusty tables. This all started eons ago when I came across, by accident, Jeff Zeldmans (<a href="http://www.zeldman.com/">http://www.zeldman.com/</a>) A-list Apart (<a href="http://www.alistapart.com">http://www.alistapart.com</a>) website. I remember thinking, "WOW, look ma no tables"Still being in my web infancy I played a little but didn't grasp the "why" i.e. standards.Its only a year or two on and more and more CSS aware site are appearing (mainly due to blogs I think as the layout tends to be an easy CSS two box model). So it got me going over all my CSS links and really considering it as an option. Around this time one of my friends who's a designer and ASP programmer (its not his fault ;o) )  was thinking about his next project and using XHTML and CSS, and he asked what do I think.My response and initial non-thinking reply:"Personally I wouldn't bother, if you look around no one is using it [in general], and the only sites that do tend to be aimed at the likes of us [developers, designers, general web savvy's], who have/keep their browser updated."And this is the problem I have with moving over to CSS, it's still not standard enough when it comes to browsers and there renditions of it. There's still more hacks you need, and I thought CSS was meant to move away from this. I know it cuts down on web page size, and saves money on bandwidth, but at the moment I think until it starts behaving properly in all browsers its never going be taken on. But before everyone thinks I hate CSS please don't get me wrong,  for CSS there are some amazing sites that prove it can done and done well, just check out <a href="http://www.sitepoint.com">http://www.sitepoint.com</a>. Also personally I love it, and my new blog layout will be in using CSS, because I know you [the reader] is probably a web developer who likes to keep their browser relatively updated (though I have one user apparently who wont except .png according to my logs, who are you ?), and because of that im fairly confident the site will work in *most* browsers.But until the hacks, positioning, box model, and all the other little things are addressed I don't think a full CSS site in a commercial environment is viable?But that's just my current thoughts? What do you think?<br>
+        </main>
         <script
           src="https://giscus.app/client.js"
           data-repo="andyj/andyjarrett.com"
@@ -84,28 +84,41 @@ I've been battling recently with starting new projects using CSS and div positio
           crossorigin="anonymous"
           async></script>
         <a name="comment"></a>
+        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
+
       </div>
-    </div>
-    <div class="row mt-5 ">
-      <div class="col-6">
-        <strong>Recent Posts</strong>
-        <ul>
+      <div class="col-md-3 col-12">
+        <!-- Side Content -->
+        <h4>Recent Posts</h4>
         
-          <li ><a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw</a></li>
+          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script</a></li>
+          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare</a></li>
+          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader</a></li>
+          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-        </ul>
-      </div>
-      <div class="col-6 pt-3 text-end">
-        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
       </div>
     </div>
   </div>
+
   <footer class="container mt-5 border-top pt-2">
   <div class="row justify-content-md-center">
     <div class="col">

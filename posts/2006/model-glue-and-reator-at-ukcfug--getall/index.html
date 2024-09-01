@@ -62,12 +62,12 @@
   <div class="container">
     <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
     <h1 class="mt-5 mb-5"><b>Model Glue and Reator at UKCFUG - getAll()</b></h1>
-    <main class="mw fw-lighter fs-5">
-      
-<p>I traveled into London again last night to see the <a href="http://www.ukcfug.org/index.cfm?objectid=643A62AF-F1FF-921E-1372A1B7B3FBECE4" target="_blank">Model Glue and Reactor, a winning combination</a> presentation with Mark Drew as the speaker, compere, organiser and the general setting up guy.</p><p>The presentation lasted for 2 hours and covered everything from setting up your development environment, to creating the beginnings of a blog app using both frameworks. Mark started with a slide show presentation detailing the frameworks, explaining their relationships to each other and how they are used in the <a href="http://en.wikipedia.org/wiki/MVC" target="_blank">Model-View-Controller (MVC)</a> pattern.</p><table><tr><td><strong>M</strong>odel</td><td>Reactor</td><tr><tr><td><strong>V</strong>iew</td><td>CFMX</td><tr><tr><td><strong>C</strong>ontroller</td><td>Model Glue</td><tr></table><p>After this he went through each of the frameworks separately, starting with <a href="http://model-glue.com/" target="_blank">MG</a> and breaking down the nodes in the modelglue.xml (config file). This then lead onto <a href="http://www.doughughes.net/index.cfm?filter=category&categoryId=30" target="_blank">Reactor,</a> explaining that it is an <a href="http://en.wikipedia.org/wiki/Object-relationship_modeling" target="_blank">Object-relationship modeling (ORM)</a> framework. Basically it helps speeds up development but cutting out the need to create SQL statements, DAO's, and Active Records as it does all this on the fly. Using your reactor.xml file you create the links and relationships between you tables and Reactor does the rest.</p><p>After the theory we moved into coding which Mark was doing everything on a Mac Book pro - I gotta mentioned it as I bugged him about running anything and everything on it last night as i'm <em>still </em> thinking about getting one . This also meant that cause of the new intel chips he had to set up an extra mapping in the CF administrator which normally wouldn't actually be needed. Mark then went and setup a MG/Reactor environment straight from the .zip files you can download from the sites. There wasnt actually that much new there but it was nice to see it setup from scratch. The next hour or so was used setting up the MG events and listeners, then onto adding Reactor for the database interaction and I think at this point he really showed the power of Reactor. Using a cfc called formutils.cfc (which you gotta release Mark) he generated a form on the fly using the MySQL tables metadata available through Reactor. So if you deleted a field from you &quot;Comment&quot; table, refreshing the form would remove the field.  He then proceed to update/insert blog posts and comments all by just setting up the relationships in the reactor.xml. </p><p>My write up I don't think has covered half of it really as Mark went into dumping a lot of the objects that MG and Reactor returned to show and explain what is available. Most of the objects in both frameworks have a getAll() method  which Mark seemed to be hunting down and utilising everywhere but it did show and display that there are a lot of functions(methods)  in these  which are helpful but aren't necessarily in the documentation.</p><p>Overall it was a great presentation and well worth the trip up. It was also good to not rush off afterward and get a beer over at The Bull afterwards, shame though I had to go to get back to Waterloo before I could hit the vodka.</p><p>&nbsp;</p><p>&nbsp; </p><br>
-    </main>
     <div class="row">
-      <div class="col">
+      <div class="col-md-9 col-12">
+        <main class="mw fw-lighter fs-5">
+          
+<p>I traveled into London again last night to see the <a href="http://www.ukcfug.org/index.cfm?objectid=643A62AF-F1FF-921E-1372A1B7B3FBECE4" target="_blank">Model Glue and Reactor, a winning combination</a> presentation with Mark Drew as the speaker, compere, organiser and the general setting up guy.</p><p>The presentation lasted for 2 hours and covered everything from setting up your development environment, to creating the beginnings of a blog app using both frameworks. Mark started with a slide show presentation detailing the frameworks, explaining their relationships to each other and how they are used in the <a href="http://en.wikipedia.org/wiki/MVC" target="_blank">Model-View-Controller (MVC)</a> pattern.</p><table><tr><td><strong>M</strong>odel</td><td>Reactor</td><tr><tr><td><strong>V</strong>iew</td><td>CFMX</td><tr><tr><td><strong>C</strong>ontroller</td><td>Model Glue</td><tr></table><p>After this he went through each of the frameworks separately, starting with <a href="http://model-glue.com/" target="_blank">MG</a> and breaking down the nodes in the modelglue.xml (config file). This then lead onto <a href="http://www.doughughes.net/index.cfm?filter=category&categoryId=30" target="_blank">Reactor,</a> explaining that it is an <a href="http://en.wikipedia.org/wiki/Object-relationship_modeling" target="_blank">Object-relationship modeling (ORM)</a> framework. Basically it helps speeds up development but cutting out the need to create SQL statements, DAO's, and Active Records as it does all this on the fly. Using your reactor.xml file you create the links and relationships between you tables and Reactor does the rest.</p><p>After the theory we moved into coding which Mark was doing everything on a Mac Book pro - I gotta mentioned it as I bugged him about running anything and everything on it last night as i'm <em>still </em> thinking about getting one . This also meant that cause of the new intel chips he had to set up an extra mapping in the CF administrator which normally wouldn't actually be needed. Mark then went and setup a MG/Reactor environment straight from the .zip files you can download from the sites. There wasnt actually that much new there but it was nice to see it setup from scratch. The next hour or so was used setting up the MG events and listeners, then onto adding Reactor for the database interaction and I think at this point he really showed the power of Reactor. Using a cfc called formutils.cfc (which you gotta release Mark) he generated a form on the fly using the MySQL tables metadata available through Reactor. So if you deleted a field from you &quot;Comment&quot; table, refreshing the form would remove the field.  He then proceed to update/insert blog posts and comments all by just setting up the relationships in the reactor.xml. </p><p>My write up I don't think has covered half of it really as Mark went into dumping a lot of the objects that MG and Reactor returned to show and explain what is available. Most of the objects in both frameworks have a getAll() method  which Mark seemed to be hunting down and utilising everywhere but it did show and display that there are a lot of functions(methods)  in these  which are helpful but aren't necessarily in the documentation.</p><p>Overall it was a great presentation and well worth the trip up. It was also good to not rush off afterward and get a beer over at The Bull afterwards, shame though I had to go to get back to Waterloo before I could hit the vodka.</p><p>&nbsp;</p><p>&nbsp; </p><br>
+        </main>
         <script
           src="https://giscus.app/client.js"
           data-repo="andyj/andyjarrett.com"
@@ -84,28 +84,41 @@
           crossorigin="anonymous"
           async></script>
         <a name="comment"></a>
+        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
+
       </div>
-    </div>
-    <div class="row mt-5 ">
-      <div class="col-6">
-        <strong>Recent Posts</strong>
-        <ul>
+      <div class="col-md-3 col-12">
+        <!-- Side Content -->
+        <h4>Recent Posts</h4>
         
-          <li ><a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw</a></li>
+          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script</a></li>
+          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare</a></li>
+          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader</a></li>
+          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-        </ul>
-      </div>
-      <div class="col-6 pt-3 text-end">
-        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
       </div>
     </div>
   </div>
+
   <footer class="container mt-5 border-top pt-2">
   <div class="row justify-content-md-center">
     <div class="col">

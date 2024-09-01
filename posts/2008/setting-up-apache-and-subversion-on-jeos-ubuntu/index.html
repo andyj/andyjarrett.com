@@ -62,12 +62,12 @@
   <div class="container">
     <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
     <h1 class="mt-5 mb-5"><b>Setting up Apache and Subversion on JeOS (Ubuntu)</b></h1>
-    <main class="mw fw-lighter fs-5">
-      
-<p>I'll be honest, I don't have much linux experience. I've always liked the idea of Linux and a command line driven OS but as soon as I see the GUI I tend point and click, which means I don't learn anything new. Then comes along <a href="http://www.ubuntu.com/products/whatisubuntu/serveredition/jeos">JeOS (Just enough OS, pronounced as "juice") from Ubuntu</a> which doesn't give you a GUI, it just gives you the bare minimum to run a server. It's designed for VM's and perfect for running a Subversion server on your local machine in the background. The specs are: </p><ul><li>Less than 100Mb ISO image</li><li>Less than 300Mb installed footprint</li><li>Specialised -virtual Kernel 2.6.24 </li><li>Optimised for VMWare ESX, VMWare Server and KVM<br> </li><li>Intel or AMD x86 architecture </li><li>Minimum memory 128M </li><li>No graphical environment preloaded as it is aimed at server virtual appliance </li></ul><p>So with <a href="http://www.ubuntu.com/products/whatisubuntu/serveredition/jeos">JeOS</a>  and <a href="http://www.vmware.com/products/fusion/">VMWare Fusion</a> armed I was ready to setup a light-weight <a href="http://subversion.tigris.org/">Subversion</a> and <a href="http://httpd.apache.org/">Apache</a> server. Below documents  what I did to get a single SVN repository up and running. Im not installing  Trac or SSL with this just so you know. I might try and cover them later, along with multiple repositories.</p><p>Setting up JeOS with VMWare fusion is no different than setting up any other VM so I won't go over that here. I'll assume that you can do that, and have done that and now at the command prompt.</p><p>Obviously because there is no GUI supplied all commands have to be run from the Command Line/Terminal. This also means editing txt files from the terminal too. If you've never used <a href="http://www.vim.org/">VIMM</a> you might want to have the following URL handy <a href="http://www.gnulamp.com/vi.html">www.gnulamp.com/vi.html</a></p><p>First things first, lets make sure your install is up-to-date.<code>$ sudo apt-get update</code></p> <p>We're going to get curl to help with HTML checking later<code>$ sudo apt-get install curl</code></p><p>We need vim to edit some files (If you need help with Vi check out http://www.gnulamp.com/vi.html)<code>$  sudo apt-get install vim</code></p><p>  Install Apache  <code>$ sudo apt-get install apache2  </code> This command will not only install Apache, but will start it up as well. You can check that its running by using CURL and the following command <code>$ curl http://localhost </code> You should see something like:  <code><html><body><h1>It works!</h1></body></html>  </code></p><p>To view this from this from outside of the VM i.e. your host machine, you need to get the IP address which you can do with the following command.<code>$ ifconfig eth0</code>In the response look for <em>inet addr</em>. You should then be able to hit the IP address from your host machine and see "It works!" on your screen.</p><p>Install SVN<code>$  sudo apt-get install subversion</code></p><p>Install LibApach2<code>$ sudo apt-get install libapache2-svn</code></p><p>Note: For neatness we could of written the above to lines as<code>$  sudo apt-get install subversion libapache2-svn</code></p><p>Create SVN folders<code>$ sudo mkdir /var/svn$ sudo mkdir /var/svn/MyFirstRepos</code></p><p>Set up SVN folders<code>$ sudo svnadmin create /var/svn/MyFirstRepos$ sudo chown -R www-data /var/svn/MyFirstRepos</code></p><p>Create a password fileReplace {your name here} with your name i.e. andy<code>sudo htpasswd -cm /etc/apache2/dav_svn.passwd {your name here}</code>You'll be asked to enter a password. Do so, hit return until complete.</p><p>No we configure Apache by editing the following file with Vim that we installed at the beginning<code>sudo vim /etc/apache2/mods-enabled/dav_svn.conf</code>The file needs to look like this. To achieve this all you really need to do is remove the comments "#"<code><Location /svn>  DAV svn  SVNPath /var/svn/MyFirstRepos  AuthType Basic  AuthName "Subversion Repository"  AuthUserFile /etc/apache2/dav_svn.passwd  Require valid-user</Location></code></p><p>Restart Apache<code>$ sudo /etc/init.d/apache2 restart</code></p><p>Thats it, you're done. You can get to your repository via your hosts browser by going to http://{your VM IP}/svn. You should get a username/password dialog which to enter the details you created in.</p><p>The final size of my VM is 1.02GB, but with no graphical UI it is only using 25MB of real memory, so leaving it running on a low end machine, which is what I intend will be easy.</p><br>
-    </main>
     <div class="row">
-      <div class="col">
+      <div class="col-md-9 col-12">
+        <main class="mw fw-lighter fs-5">
+          
+<p>I'll be honest, I don't have much linux experience. I've always liked the idea of Linux and a command line driven OS but as soon as I see the GUI I tend point and click, which means I don't learn anything new. Then comes along <a href="http://www.ubuntu.com/products/whatisubuntu/serveredition/jeos">JeOS (Just enough OS, pronounced as "juice") from Ubuntu</a> which doesn't give you a GUI, it just gives you the bare minimum to run a server. It's designed for VM's and perfect for running a Subversion server on your local machine in the background. The specs are: </p><ul><li>Less than 100Mb ISO image</li><li>Less than 300Mb installed footprint</li><li>Specialised -virtual Kernel 2.6.24 </li><li>Optimised for VMWare ESX, VMWare Server and KVM<br> </li><li>Intel or AMD x86 architecture </li><li>Minimum memory 128M </li><li>No graphical environment preloaded as it is aimed at server virtual appliance </li></ul><p>So with <a href="http://www.ubuntu.com/products/whatisubuntu/serveredition/jeos">JeOS</a>  and <a href="http://www.vmware.com/products/fusion/">VMWare Fusion</a> armed I was ready to setup a light-weight <a href="http://subversion.tigris.org/">Subversion</a> and <a href="http://httpd.apache.org/">Apache</a> server. Below documents  what I did to get a single SVN repository up and running. Im not installing  Trac or SSL with this just so you know. I might try and cover them later, along with multiple repositories.</p><p>Setting up JeOS with VMWare fusion is no different than setting up any other VM so I won't go over that here. I'll assume that you can do that, and have done that and now at the command prompt.</p><p>Obviously because there is no GUI supplied all commands have to be run from the Command Line/Terminal. This also means editing txt files from the terminal too. If you've never used <a href="http://www.vim.org/">VIMM</a> you might want to have the following URL handy <a href="http://www.gnulamp.com/vi.html">www.gnulamp.com/vi.html</a></p><p>First things first, lets make sure your install is up-to-date.<code>$ sudo apt-get update</code></p> <p>We're going to get curl to help with HTML checking later<code>$ sudo apt-get install curl</code></p><p>We need vim to edit some files (If you need help with Vi check out http://www.gnulamp.com/vi.html)<code>$  sudo apt-get install vim</code></p><p>  Install Apache  <code>$ sudo apt-get install apache2  </code> This command will not only install Apache, but will start it up as well. You can check that its running by using CURL and the following command <code>$ curl http://localhost </code> You should see something like:  <code><html><body><h1>It works!</h1></body></html>  </code></p><p>To view this from this from outside of the VM i.e. your host machine, you need to get the IP address which you can do with the following command.<code>$ ifconfig eth0</code>In the response look for <em>inet addr</em>. You should then be able to hit the IP address from your host machine and see "It works!" on your screen.</p><p>Install SVN<code>$  sudo apt-get install subversion</code></p><p>Install LibApach2<code>$ sudo apt-get install libapache2-svn</code></p><p>Note: For neatness we could of written the above to lines as<code>$  sudo apt-get install subversion libapache2-svn</code></p><p>Create SVN folders<code>$ sudo mkdir /var/svn$ sudo mkdir /var/svn/MyFirstRepos</code></p><p>Set up SVN folders<code>$ sudo svnadmin create /var/svn/MyFirstRepos$ sudo chown -R www-data /var/svn/MyFirstRepos</code></p><p>Create a password fileReplace {your name here} with your name i.e. andy<code>sudo htpasswd -cm /etc/apache2/dav_svn.passwd {your name here}</code>You'll be asked to enter a password. Do so, hit return until complete.</p><p>No we configure Apache by editing the following file with Vim that we installed at the beginning<code>sudo vim /etc/apache2/mods-enabled/dav_svn.conf</code>The file needs to look like this. To achieve this all you really need to do is remove the comments "#"<code><Location /svn>  DAV svn  SVNPath /var/svn/MyFirstRepos  AuthType Basic  AuthName "Subversion Repository"  AuthUserFile /etc/apache2/dav_svn.passwd  Require valid-user</Location></code></p><p>Restart Apache<code>$ sudo /etc/init.d/apache2 restart</code></p><p>Thats it, you're done. You can get to your repository via your hosts browser by going to http://{your VM IP}/svn. You should get a username/password dialog which to enter the details you created in.</p><p>The final size of my VM is 1.02GB, but with no graphical UI it is only using 25MB of real memory, so leaving it running on a low end machine, which is what I intend will be easy.</p><br>
+        </main>
         <script
           src="https://giscus.app/client.js"
           data-repo="andyj/andyjarrett.com"
@@ -84,28 +84,41 @@
           crossorigin="anonymous"
           async></script>
         <a name="comment"></a>
+        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
+
       </div>
-    </div>
-    <div class="row mt-5 ">
-      <div class="col-6">
-        <strong>Recent Posts</strong>
-        <ul>
+      <div class="col-md-3 col-12">
+        <!-- Side Content -->
+        <h4>Recent Posts</h4>
         
-          <li ><a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw</a></li>
+          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script</a></li>
+          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare</a></li>
+          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader</a></li>
+          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-        </ul>
-      </div>
-      <div class="col-6 pt-3 text-end">
-        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
       </div>
     </div>
   </div>
+
   <footer class="container mt-5 border-top pt-2">
   <div class="row justify-content-md-center">
     <div class="col">

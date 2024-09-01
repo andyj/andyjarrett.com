@@ -62,12 +62,12 @@
   <div class="container">
     <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
     <h1 class="mt-5 mb-5"><b>Setting up and using windows HOST file</b></h1>
-    <main class="mw fw-lighter fs-5">
-      
-<p>Host files used in windows to describe many-to-one mapping of device names to IP addresses. Using this file is helpful when developing locally as it allows you to assign the URL of the site to a local IP. </p><p>First, find you host file:<br><strong>Windows NT/2000/XP Pro  c:\\winnt\\system32\\drivers\\etc\\hosts <br>Windows XP Home c:\\windows\\system32\\drivers\\etc\\hosts <br></strong></p><p>The HOST file doesn't have an extention and can be opened with notepad.</p><strong style="color:red">** Before we go any further make sure you back this up - just in case ***</strong> <p>You should see something like:</p><code>......# Additionally, comments (such as these) may be inserted on individual# lines or following the machine name denoted by a '#' symbol.# For example:# 102.54.94.97 rhino.acme.com # source server# 38.25.63.10 x.acme.com # x client host127.0.0.1  localhost  </code><p>As with SQL '#' mean comments, so the only active line there is </p><code> 127.0.0.1 localhost  </code><p>What does that mean. Well everytime you access localhost (like in a browser, or PING'd from a command line) you are acutally accessing the IP address 127.0.0.1. So lets say i'm developing a new blog. In Apache (or any web server) i'd set up the IP address 127.0.0.2 to look at my document root. Then in the HOST file i'd have </p><code> 127.0.0.2 www2.andyjarrett.co.uk </code><p>Alternatively I could just point the host to 127.0.0.1 instead of setting up a new IP. What you cannot do is map to a IP and port i.e. 127.0.0.1:8080</p><p>By the way, if you're wondering why i've changed the URL to have www2 as the prefix? It's that the HOST file is used first when going to a domain. For example try out the following</p><code> 127.0.0.1  www.google.co.uk </code><p>then goto <a href="http://www.google.co.uk">www.google.co.uk</a>.</p><p>N.B. If you use a proxy then you will need to bypass the proxy server for local addresses</p><br>
-    </main>
     <div class="row">
-      <div class="col">
+      <div class="col-md-9 col-12">
+        <main class="mw fw-lighter fs-5">
+          
+<p>Host files used in windows to describe many-to-one mapping of device names to IP addresses. Using this file is helpful when developing locally as it allows you to assign the URL of the site to a local IP. </p><p>First, find you host file:<br><strong>Windows NT/2000/XP Pro  c:\\winnt\\system32\\drivers\\etc\\hosts <br>Windows XP Home c:\\windows\\system32\\drivers\\etc\\hosts <br></strong></p><p>The HOST file doesn't have an extention and can be opened with notepad.</p><strong style="color:red">** Before we go any further make sure you back this up - just in case ***</strong> <p>You should see something like:</p><code>......# Additionally, comments (such as these) may be inserted on individual# lines or following the machine name denoted by a '#' symbol.# For example:# 102.54.94.97 rhino.acme.com # source server# 38.25.63.10 x.acme.com # x client host127.0.0.1  localhost  </code><p>As with SQL '#' mean comments, so the only active line there is </p><code> 127.0.0.1 localhost  </code><p>What does that mean. Well everytime you access localhost (like in a browser, or PING'd from a command line) you are acutally accessing the IP address 127.0.0.1. So lets say i'm developing a new blog. In Apache (or any web server) i'd set up the IP address 127.0.0.2 to look at my document root. Then in the HOST file i'd have </p><code> 127.0.0.2 www2.andyjarrett.co.uk </code><p>Alternatively I could just point the host to 127.0.0.1 instead of setting up a new IP. What you cannot do is map to a IP and port i.e. 127.0.0.1:8080</p><p>By the way, if you're wondering why i've changed the URL to have www2 as the prefix? It's that the HOST file is used first when going to a domain. For example try out the following</p><code> 127.0.0.1  www.google.co.uk </code><p>then goto <a href="http://www.google.co.uk">www.google.co.uk</a>.</p><p>N.B. If you use a proxy then you will need to bypass the proxy server for local addresses</p><br>
+        </main>
         <script
           src="https://giscus.app/client.js"
           data-repo="andyj/andyjarrett.com"
@@ -84,28 +84,41 @@
           crossorigin="anonymous"
           async></script>
         <a name="comment"></a>
+        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
+
       </div>
-    </div>
-    <div class="row mt-5 ">
-      <div class="col-6">
-        <strong>Recent Posts</strong>
-        <ul>
+      <div class="col-md-3 col-12">
+        <!-- Side Content -->
+        <h4>Recent Posts</h4>
         
-          <li ><a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw</a></li>
+          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script</a></li>
+          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare</a></li>
+          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader</a></li>
+          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-        </ul>
-      </div>
-      <div class="col-6 pt-3 text-end">
-        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
       </div>
     </div>
   </div>
+
   <footer class="container mt-5 border-top pt-2">
   <div class="row justify-content-md-center">
     <div class="col">

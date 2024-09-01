@@ -62,12 +62,12 @@
   <div class="container">
     <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
     <h1 class="mt-5 mb-5"><b>Building and installing Apache 2 on a Mac</b></h1>
-    <main class="mw fw-lighter fs-5">
-      
-Ok Below is a rough guide to get anyone up and going when it comes to building and installing Apache 2 from source. We're gonna do this all from the Terminal found in /Applications/Utilities/Termain.app.<em>Please note that '$' means new line, don't type this character</em>If you want to know about any of the commands we make from the terminal you can always type "man + command" e.g. <code>$ man curl</code>If you run the above code it should tell you that <blockquote>curl  is  a tool to transfer data from or to a server, using one of the supported protocols (HTTP, HTTPS, FTP, FTPS, GOPHER, DICT, TELNET, LDAP or FILE). The command is designed to work without user interaction.</blockquote>This will also detail the options I use. 1: Download Apache 2 from source.Now you can do this from the browser by simply going to <a href="http://httpd.apache.org/">http://httpd.apache.org/</a> but where is the fun in that :o) From the Termainal type:<code>$ curl -O http://www.eu.apache.org/dist/httpd-2.2.0.59.tar.gz$ gnutar -xzf httpd-2.0.59.tar.gz</code>2: Building<br/>Our installation of Apache2 is going to be stored on the root i.e. /apache2<code>$ cd httpd-2.2.2$ sudo ./configure --prefix=/apache2 </code>3: Installing<code>$ sudo make$ sudo make install</code>4: Starting and Stopping Apache 2Apache 2 should now be installed.To start Apache 2:<code>  $ sudo /apache2/bin/apachectl start</code>To restart Apache 2:<code>  $ sudo /apache2/bin/apachectl restart</code>To stop Apache 2:<code> $ sudo /apache2/bin/apachectl stop</code>That's all you need to get it installed. Once you are at this point the next move is to edit the httpd.conf file, which you can find at <em>/apache2/conf/httpd.conf</em><br>
-    </main>
     <div class="row">
-      <div class="col">
+      <div class="col-md-9 col-12">
+        <main class="mw fw-lighter fs-5">
+          
+Ok Below is a rough guide to get anyone up and going when it comes to building and installing Apache 2 from source. We're gonna do this all from the Terminal found in /Applications/Utilities/Termain.app.<em>Please note that '$' means new line, don't type this character</em>If you want to know about any of the commands we make from the terminal you can always type "man + command" e.g. <code>$ man curl</code>If you run the above code it should tell you that <blockquote>curl  is  a tool to transfer data from or to a server, using one of the supported protocols (HTTP, HTTPS, FTP, FTPS, GOPHER, DICT, TELNET, LDAP or FILE). The command is designed to work without user interaction.</blockquote>This will also detail the options I use. 1: Download Apache 2 from source.Now you can do this from the browser by simply going to <a href="http://httpd.apache.org/">http://httpd.apache.org/</a> but where is the fun in that :o) From the Termainal type:<code>$ curl -O http://www.eu.apache.org/dist/httpd-2.2.0.59.tar.gz$ gnutar -xzf httpd-2.0.59.tar.gz</code>2: Building<br/>Our installation of Apache2 is going to be stored on the root i.e. /apache2<code>$ cd httpd-2.2.2$ sudo ./configure --prefix=/apache2 </code>3: Installing<code>$ sudo make$ sudo make install</code>4: Starting and Stopping Apache 2Apache 2 should now be installed.To start Apache 2:<code>  $ sudo /apache2/bin/apachectl start</code>To restart Apache 2:<code>  $ sudo /apache2/bin/apachectl restart</code>To stop Apache 2:<code> $ sudo /apache2/bin/apachectl stop</code>That's all you need to get it installed. Once you are at this point the next move is to edit the httpd.conf file, which you can find at <em>/apache2/conf/httpd.conf</em><br>
+        </main>
         <script
           src="https://giscus.app/client.js"
           data-repo="andyj/andyjarrett.com"
@@ -84,28 +84,41 @@ Ok Below is a rough guide to get anyone up and going when it comes to building a
           crossorigin="anonymous"
           async></script>
         <a name="comment"></a>
+        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
+
       </div>
-    </div>
-    <div class="row mt-5 ">
-      <div class="col-6">
-        <strong>Recent Posts</strong>
-        <ul>
+      <div class="col-md-3 col-12">
+        <!-- Side Content -->
+        <h4>Recent Posts</h4>
         
-          <li ><a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw</a></li>
+          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script</a></li>
+          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare</a></li>
+          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader</a></li>
+          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-        </ul>
-      </div>
-      <div class="col-6 pt-3 text-end">
-        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
       </div>
     </div>
   </div>
+
   <footer class="container mt-5 border-top pt-2">
   <div class="row justify-content-md-center">
     <div class="col">

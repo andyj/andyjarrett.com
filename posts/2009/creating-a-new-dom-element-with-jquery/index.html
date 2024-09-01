@@ -62,12 +62,12 @@
   <div class="container">
     <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
     <h1 class="mt-5 mb-5"><b>Creating a new DOM element with jQuery</b></h1>
-    <main class="mw fw-lighter fs-5">
-      
-I've been using <a href="http://www.jquery.com/">jQuery</a> for a while now keep meaning to blog about the little bits I use often. One is creating a DIV object on the fly and loading content in to it.<code>$(document).ready(function(){  // Your URL of the page to be loaded  u = "/index.cfm?event=contactme"; // We're creating a div element to load the URL contents into  div = $("<div>"); // When the element is displayed at first we could leave it blank // or a loading image, or in this case the wording loading......  div.html("Loading......");  // We now load our file and inject it into the DOM.   div.load(u);  // With the DIV getting its content we need to put the DOM on the page  // and in to the body. $.prepend will put our content at the top of // of the <body>  $("body").prepend(div);})</code>Instead of having "Loading...." being displayed you can delay showing the content of the DIV until loading is completed.  <code>  // Your URL of the page to be loaded  u = "/index.cfm?event=contactme"; // We're creating a div element to load the URL contents into  div = $("<div>"); // We now load our file and inject it into the DOM.   div.load(u);    // By default we're going to hide the DIV until the content is loaded  div.hide(); // Before the DIV gets its content we need to put the DOM on the page // and in to the body. $.prepend will put our content at the top of // of the <body>. But this will be hid. $("body").prepend(div); // Now we load the content into the DOM and as a CALLBACK function  // we SLIDEDOWN the div. This could be FADEIN or something else.  div.load(u, {limit: 25}, function(){    div.slideDown();  }); </code>Both sets of code will load on document ready. Usually I tie this kind of process to a click event to load in a page dynamically when needed. Also don't forget you can chain these methods too and cut down on code. Taking the first example it could be written as:<code>  u = "/index.cfm?event=hermes.contactSeller";  div = $("<div>").html("Loading......").load(u); $("body").prepend(div);   </code>\n <br><br>\n<p>\n
-    </main>
     <div class="row">
-      <div class="col">
+      <div class="col-md-9 col-12">
+        <main class="mw fw-lighter fs-5">
+          
+I've been using <a href="http://www.jquery.com/">jQuery</a> for a while now keep meaning to blog about the little bits I use often. One is creating a DIV object on the fly and loading content in to it.<code>$(document).ready(function(){  // Your URL of the page to be loaded  u = "/index.cfm?event=contactme"; // We're creating a div element to load the URL contents into  div = $("<div>"); // When the element is displayed at first we could leave it blank // or a loading image, or in this case the wording loading......  div.html("Loading......");  // We now load our file and inject it into the DOM.   div.load(u);  // With the DIV getting its content we need to put the DOM on the page  // and in to the body. $.prepend will put our content at the top of // of the <body>  $("body").prepend(div);})</code>Instead of having "Loading...." being displayed you can delay showing the content of the DIV until loading is completed.  <code>  // Your URL of the page to be loaded  u = "/index.cfm?event=contactme"; // We're creating a div element to load the URL contents into  div = $("<div>"); // We now load our file and inject it into the DOM.   div.load(u);    // By default we're going to hide the DIV until the content is loaded  div.hide(); // Before the DIV gets its content we need to put the DOM on the page // and in to the body. $.prepend will put our content at the top of // of the <body>. But this will be hid. $("body").prepend(div); // Now we load the content into the DOM and as a CALLBACK function  // we SLIDEDOWN the div. This could be FADEIN or something else.  div.load(u, {limit: 25}, function(){    div.slideDown();  }); </code>Both sets of code will load on document ready. Usually I tie this kind of process to a click event to load in a page dynamically when needed. Also don't forget you can chain these methods too and cut down on code. Taking the first example it could be written as:<code>  u = "/index.cfm?event=hermes.contactSeller";  div = $("<div>").html("Loading......").load(u); $("body").prepend(div);   </code>\n <br><br>\n<p>\n
+        </main>
         <script
           src="https://giscus.app/client.js"
           data-repo="andyj/andyjarrett.com"
@@ -84,28 +84,41 @@ I've been using <a href="http://www.jquery.com/">jQuery</a> for a while now keep
           crossorigin="anonymous"
           async></script>
         <a name="comment"></a>
+        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
+
       </div>
-    </div>
-    <div class="row mt-5 ">
-      <div class="col-6">
-        <strong>Recent Posts</strong>
-        <ul>
+      <div class="col-md-3 col-12">
+        <!-- Side Content -->
+        <h4>Recent Posts</h4>
         
-          <li ><a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw</a></li>
+          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script</a></li>
+          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare</a></li>
+          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader</a></li>
+          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-        </ul>
-      </div>
-      <div class="col-6 pt-3 text-end">
-        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
       </div>
     </div>
   </div>
+
   <footer class="container mt-5 border-top pt-2">
   <div class="row justify-content-md-center">
     <div class="col">

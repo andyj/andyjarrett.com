@@ -62,12 +62,12 @@
   <div class="container">
     <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
     <h1 class="mt-5 mb-5"><b>ColdFusion on Railo</b></h1>
-    <main class="mw fw-lighter fs-5">
-      
-<p><a href="http://andyjarrett.co.uk/andy/blog/index.cfm/2006/1/31/Bluedragon-Licence-change">As you know from a previous post</a>, i've been looking at the possibilities of setting up a cheap CF enviroment. What I didn't mention is <a href="http://www.railo.ch/en/index.cfm">Railo</a>. I remember hearing about this probably a year plus ago, and Gert Franz (Railo core developer)  reminded me on the <a href="http://www.houseoffusion.com/cf_lists/message.cfm/forumid:4/messageid:230931">HoF</a> again.</p><p>Well what can i say. Its shocked me a little. I've been using the Railix version which &quot;<em>is a fully installed and configured version that can be used instantly. This version contains a fully functional Java Server (Jetty). You can use Railo without having installed any Webservers. </em>&quot; To set this up all i had to do was unzip the downloaded file to c:\\railo\\ and run start.bat. From there it was all ready to go at http://127.0.0.1:8888/. </p> <p>The first thing i did was fire up the <a href="http://www.model-glue.com/">Model Glue Samples</a>, they worked fine. They actually worked better than Adobes CF server and caught a spelling typeo in one of the Message.cfc's. I fired up one of my little test MG apps, that worked fine, then i hit a snag - I hadn't setup my DSN's. This has been my only draw back at the moment. I can't seem to set up my MYSQL datasources and have settled for an ODBC-JDBC bridge. That said and done the performance is still amazing.</p><p>As you can see i've liked it. Im going to carry on playing around with it, and if you are looking for a cheaper alternative now that BD licence has changed check it out. You can view the compatibility list out <a href="http://www.railo.ch/en/documentation/index.cfm?treeID=18">here</a>, and any feature missing you can vote in.</p><p>&nbsp;</p><p>Gert has also <a href="http://www.houseoffusion.com/cf_lists/message.cfm/forumid:4/messageid:230960">mentioned on the HoF list</a> that. <br>  <em>&quot;We will release Railo  in the next couple of Weeks. Railo Supports Fusebox up to 4.1, Mach II<br>  and Model Glue Frameworks. Some CMS already have been testedsucessfully.  </em></p><p><em> Pricing looks something like this:<br>   Developer, Community Version is free. (No CFX, No Search, 1 Datasource  per Web)<br>  Professional Version 200&euro; including one Web. Every further web 100&euro;<br>Enterprise Version 1600&euro; unlimited webs. &quot; </em></p><p>&nbsp;</p><br>
-    </main>
     <div class="row">
-      <div class="col">
+      <div class="col-md-9 col-12">
+        <main class="mw fw-lighter fs-5">
+          
+<p><a href="http://andyjarrett.co.uk/andy/blog/index.cfm/2006/1/31/Bluedragon-Licence-change">As you know from a previous post</a>, i've been looking at the possibilities of setting up a cheap CF enviroment. What I didn't mention is <a href="http://www.railo.ch/en/index.cfm">Railo</a>. I remember hearing about this probably a year plus ago, and Gert Franz (Railo core developer)  reminded me on the <a href="http://www.houseoffusion.com/cf_lists/message.cfm/forumid:4/messageid:230931">HoF</a> again.</p><p>Well what can i say. Its shocked me a little. I've been using the Railix version which &quot;<em>is a fully installed and configured version that can be used instantly. This version contains a fully functional Java Server (Jetty). You can use Railo without having installed any Webservers. </em>&quot; To set this up all i had to do was unzip the downloaded file to c:\\railo\\ and run start.bat. From there it was all ready to go at http://127.0.0.1:8888/. </p> <p>The first thing i did was fire up the <a href="http://www.model-glue.com/">Model Glue Samples</a>, they worked fine. They actually worked better than Adobes CF server and caught a spelling typeo in one of the Message.cfc's. I fired up one of my little test MG apps, that worked fine, then i hit a snag - I hadn't setup my DSN's. This has been my only draw back at the moment. I can't seem to set up my MYSQL datasources and have settled for an ODBC-JDBC bridge. That said and done the performance is still amazing.</p><p>As you can see i've liked it. Im going to carry on playing around with it, and if you are looking for a cheaper alternative now that BD licence has changed check it out. You can view the compatibility list out <a href="http://www.railo.ch/en/documentation/index.cfm?treeID=18">here</a>, and any feature missing you can vote in.</p><p>&nbsp;</p><p>Gert has also <a href="http://www.houseoffusion.com/cf_lists/message.cfm/forumid:4/messageid:230960">mentioned on the HoF list</a> that. <br>  <em>&quot;We will release Railo  in the next couple of Weeks. Railo Supports Fusebox up to 4.1, Mach II<br>  and Model Glue Frameworks. Some CMS already have been testedsucessfully.  </em></p><p><em> Pricing looks something like this:<br>   Developer, Community Version is free. (No CFX, No Search, 1 Datasource  per Web)<br>  Professional Version 200&euro; including one Web. Every further web 100&euro;<br>Enterprise Version 1600&euro; unlimited webs. &quot; </em></p><p>&nbsp;</p><br>
+        </main>
         <script
           src="https://giscus.app/client.js"
           data-repo="andyj/andyjarrett.com"
@@ -84,28 +84,41 @@
           crossorigin="anonymous"
           async></script>
         <a name="comment"></a>
+        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
+
       </div>
-    </div>
-    <div class="row mt-5 ">
-      <div class="col-6">
-        <strong>Recent Posts</strong>
-        <ul>
+      <div class="col-md-3 col-12">
+        <!-- Side Content -->
+        <h4>Recent Posts</h4>
         
-          <li ><a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw</a></li>
+          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script</a></li>
+          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare</a></li>
+          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader</a></li>
+          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-        </ul>
-      </div>
-      <div class="col-6 pt-3 text-end">
-        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
       </div>
     </div>
   </div>
+
   <footer class="container mt-5 border-top pt-2">
   <div class="row justify-content-md-center">
     <div class="col">

@@ -62,12 +62,12 @@
   <div class="container">
     <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
     <h1 class="mt-5 mb-5"><b>ColdSpring and Dependency Injection for the beginner part 1</b></h1>
-    <main class="mw fw-lighter fs-5">
-      
-<p>First off let me caveat this post by saying that I am no an OO guru, if you are looking for a more indepth look at DI, IOC, Constructors, setters/getter etc  then you should really check out sites like <a href="http://www.pbell.com/">Peter Bells site, Application Generation.</a></p><p>Ok, I am going to make this first post small (I know, I know boring chat first code later) and just give a little background in preparation for the next part which will be the code (I promise). This post also isn't for the total beginner to <a href="http://www.coldspringframework.org">Coldspring</a>. Really at this point you should know why you want to use Dependency Injections(DI) and roughly understand or know the benefits when it comes to a ColdSpring.xml file. If you are looking for an introduction to ColdSpring go to the <a href="http://www.coldspringframework.org/docs/index.htm">docs section of the CS site</a>, honestly they are really good and the introduction explains a lot.</p><p>So, you should know that ColdSpring is an inversion-of-control framework for CFCs. What does this mean, it handles dependencies. For example, if you have a userService that needs (depends on) an userDAO instead of having to initiate the components(beans) via CF code in the right order like:</p> <code><cfset userDAO = createObject('component', 'model.userDAO').init() /><cfset userService = createObject('component', 'model.userService').init(userDAO) /></code> <p>you can just tell the ColdSpring.xml file to do this for you (and in any order)</p><code><bean id="userService" class="model.userService">  <property name="userDAO">    <ref bean="userDAO" />  </property></bean>   <bean id="userDAO" class=".model.userDAO" /></code><p>I'm not expecting you to understand the above XML but just to comprehend what is roughly happening. I mean, if you are reading this post then you should also understand why we are doing this in the first place. It means that we don't have to worry about dependencies throughout our applications. Because of our xml configuration file we now know that when we call userService it will always have userDAO available.</p><p>So thats really it. Where am I going next then in my next post..... Well, when it comes to DI there are two methods of injecting your beans (components/CFC's) </p><ol><li>Constructor Injection and </li><li>Setter Injection</li></ol><p>From the ColdSpring site:</p><ol type="1"><li><p><span>&lt;constructor-arg name="argumentName"/&gt;</span><br>This tag will cause Coldspring to supply your bean with a value or object reference when it is instantiated (during a CFC's init() method), passed as an argument named via the name attribute.<br>&nbsp;</p></li><li><p><span>&lt;property name="propertyName" /&gt;</span><span style="margin-left: 0px;"><br>Similar in nature to constructor arg, however in this case ColdSpring will pass some value or object reference into your bean as an argument to a setter method, identified via the name attribute. Thus, your CFC must have a setter method name that matches the property tag's name attribute (for example if your property is named "foo" then your CFC needs a setFoo() method).<br>&nbsp;</span></p></li></ol><p>Which one too use is your choice and as with any choice there are two sides. All I am going to do in my next post is cover how to implement these from within ColdSpring and then let you choose the one that suits your project/style best. If you do want a little read on this subject then check out Peter Bell's site. It has a good post, which if you read Peter Farrell's comments as well it covers both sides of this injection coin. <a href="http://www.pbell.com/index.cfm/2006/11/18/Constructor-vs-Setter-Injection-Constructor-is-Better">Constructor vs. Setter Injection: Constructor is Better</a>.</p><p>Don't forget for more information check out</p><a href="http://www.coldspringframework.or/">coldspringframework.org</a>, or the mailing lists<p>To subscribe, send an email:</p><p><strong>To:</strong> <em><a href="mailto:MDaemon@coldspringframework.org?subject=SUBSCRIBE coldspring-dev@coldspringframework.org">MDaemon@coldspringframework.org</a></em></p><p><strong>Subject:</strong> <em>SUBSCRIBE </em><em>coldspring-dev@coldspringframework.org</em></p></p>p.s. I do know I said this was going to be a small post :o)<br>
-    </main>
     <div class="row">
-      <div class="col">
+      <div class="col-md-9 col-12">
+        <main class="mw fw-lighter fs-5">
+          
+<p>First off let me caveat this post by saying that I am no an OO guru, if you are looking for a more indepth look at DI, IOC, Constructors, setters/getter etc  then you should really check out sites like <a href="http://www.pbell.com/">Peter Bells site, Application Generation.</a></p><p>Ok, I am going to make this first post small (I know, I know boring chat first code later) and just give a little background in preparation for the next part which will be the code (I promise). This post also isn't for the total beginner to <a href="http://www.coldspringframework.org">Coldspring</a>. Really at this point you should know why you want to use Dependency Injections(DI) and roughly understand or know the benefits when it comes to a ColdSpring.xml file. If you are looking for an introduction to ColdSpring go to the <a href="http://www.coldspringframework.org/docs/index.htm">docs section of the CS site</a>, honestly they are really good and the introduction explains a lot.</p><p>So, you should know that ColdSpring is an inversion-of-control framework for CFCs. What does this mean, it handles dependencies. For example, if you have a userService that needs (depends on) an userDAO instead of having to initiate the components(beans) via CF code in the right order like:</p> <code><cfset userDAO = createObject('component', 'model.userDAO').init() /><cfset userService = createObject('component', 'model.userService').init(userDAO) /></code> <p>you can just tell the ColdSpring.xml file to do this for you (and in any order)</p><code><bean id="userService" class="model.userService">  <property name="userDAO">    <ref bean="userDAO" />  </property></bean>   <bean id="userDAO" class=".model.userDAO" /></code><p>I'm not expecting you to understand the above XML but just to comprehend what is roughly happening. I mean, if you are reading this post then you should also understand why we are doing this in the first place. It means that we don't have to worry about dependencies throughout our applications. Because of our xml configuration file we now know that when we call userService it will always have userDAO available.</p><p>So thats really it. Where am I going next then in my next post..... Well, when it comes to DI there are two methods of injecting your beans (components/CFC's) </p><ol><li>Constructor Injection and </li><li>Setter Injection</li></ol><p>From the ColdSpring site:</p><ol type="1"><li><p><span>&lt;constructor-arg name="argumentName"/&gt;</span><br>This tag will cause Coldspring to supply your bean with a value or object reference when it is instantiated (during a CFC's init() method), passed as an argument named via the name attribute.<br>&nbsp;</p></li><li><p><span>&lt;property name="propertyName" /&gt;</span><span style="margin-left: 0px;"><br>Similar in nature to constructor arg, however in this case ColdSpring will pass some value or object reference into your bean as an argument to a setter method, identified via the name attribute. Thus, your CFC must have a setter method name that matches the property tag's name attribute (for example if your property is named "foo" then your CFC needs a setFoo() method).<br>&nbsp;</span></p></li></ol><p>Which one too use is your choice and as with any choice there are two sides. All I am going to do in my next post is cover how to implement these from within ColdSpring and then let you choose the one that suits your project/style best. If you do want a little read on this subject then check out Peter Bell's site. It has a good post, which if you read Peter Farrell's comments as well it covers both sides of this injection coin. <a href="http://www.pbell.com/index.cfm/2006/11/18/Constructor-vs-Setter-Injection-Constructor-is-Better">Constructor vs. Setter Injection: Constructor is Better</a>.</p><p>Don't forget for more information check out</p><a href="http://www.coldspringframework.or/">coldspringframework.org</a>, or the mailing lists<p>To subscribe, send an email:</p><p><strong>To:</strong> <em><a href="mailto:MDaemon@coldspringframework.org?subject=SUBSCRIBE coldspring-dev@coldspringframework.org">MDaemon@coldspringframework.org</a></em></p><p><strong>Subject:</strong> <em>SUBSCRIBE </em><em>coldspring-dev@coldspringframework.org</em></p></p>p.s. I do know I said this was going to be a small post :o)<br>
+        </main>
         <script
           src="https://giscus.app/client.js"
           data-repo="andyj/andyjarrett.com"
@@ -84,28 +84,41 @@
           crossorigin="anonymous"
           async></script>
         <a name="comment"></a>
+        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
+
       </div>
-    </div>
-    <div class="row mt-5 ">
-      <div class="col-6">
-        <strong>Recent Posts</strong>
-        <ul>
+      <div class="col-md-3 col-12">
+        <!-- Side Content -->
+        <h4>Recent Posts</h4>
         
-          <li ><a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw</a></li>
+          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script</a></li>
+          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare</a></li>
+          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader</a></li>
+          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-        </ul>
-      </div>
-      <div class="col-6 pt-3 text-end">
-        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
       </div>
     </div>
   </div>
+
   <footer class="container mt-5 border-top pt-2">
   <div class="row justify-content-md-center">
     <div class="col">

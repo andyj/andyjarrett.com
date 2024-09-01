@@ -62,12 +62,12 @@
   <div class="container">
     <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
     <h1 class="mt-5 mb-5"><b>Calling an AS400/iSeries RPG in ColdFusion</b></h1>
-    <main class="mw fw-lighter fs-5">
-      
-<p>After googling the hell out of this over the last few days I decided that my effort should actually go back in to the community to hopefully make someone else's life easier than mine was. </p><p>I am assuming at this point that you have a AS400 datasource setup using the <a href="http://jt400.sourceforge.net/" title="JTOpen | Overview">JDBC JT400 driver</a>. If you don't know how, and there is enough demand I'll post something on this, otherwise this guide simply demonstrates how to call an RPG program on an AS400 and read the OUT param that comes back.</p><p>I've put all of my comments in the code rather than making this post longer than it needs to be. Any questions then please use the comments as usual</p> <p>All of my knowledge about the packages I have used come from <a href="http://publib.boulder.ibm.com/iseries/v5r1/ic2924/info/rzahh/javadoc/com/ibm/as400/access/package-tree.html">publib.boulder.ibm.com/iseries/ .... com/ibm/as400/access</a><code><cfscript> // AS400/iSeries attributes uname = "USERNAME"; pword = "PASSWORD"; as400Ip = "10.10.10.10";    if( NOT isDefined("application.as400") OR isDefined( "url.reload" ) ){    // get our JDBC driver 'iSeries'    iSeries = createObject("java", "com.ibm.as400.access.AS400");         // initilise the driver with our credentials    iseries.init(as400Ip, Trim(UCase(uname)), Left(Trim(pword), 10));       // Validate the passed in details   v = (iSeries.ValidateSignon());   // when valid put JDBC Connection drivers in Application scope    application.as400 = {       iSeries = iSeries,      Command = createObject("java", "com.ibm.as400.access.CommandCall"),     ProgramCall = createObject('java', 'com.ibm.as400.access.ProgramCall'),     ProgramParameter = createObject('java', 'com.ibm.as400.access.ProgramParameter'),     AS400Text = createObject('java', 'com.ibm.as400.access.AS400Text')          };  }   // 1) First parameter // Each paramater must be type of AS400Text application.as400.AS400Text.init( 11 ); // Set the length // init the fist ProgramParameter that is going to be passed in p1 = application.as400.ProgramParameter.init("1");  // Add the value in an AS/400 format in the specified byte array  p1.setInputData( application.as400.AS400Text.toBytes("") );   // 2) Second parameter  application.as400.AS400Text.init( 11 ); // Set the length // init the fist ProgramParameter that is going to be passed in p2 = application.as400.ProgramParameter.init("1");  // Add the value in an AS/400 format in the specified byte array  p2.setInputData( application.as400.AS400Text.toBytes("") );   // Put the params into an array paramAry = [p1,p2];   // The command/RPG you are going to call  CommandtoRun = "/QSYS.LIB/MYLIB1.LIB/VPCQWEQW.PGM";   // init using the iSeries connection we created, CommandToRun, and the params (in an array) PgmCall = application.as400.ProgramCall.init( application.as400.iSeries, CommandtoRun, paramAry );    // Now run it (returns boolean) PgmRun = ( application.as400.ProgramCall.Run());      // any errors or messages can be found here msgList = application.as400.ProgramCall.getMessageList()</cfscript><!--- Loop over any messages ---><ul><cfloop from="1" to="#arrayLen( msgList )#" index="i">  <li><cfdump var="#msgList[i].getText()#"></li></cfloop></ul><cfif NOT PgmRun> Did not run<cfelse> It ran. Im now going to get the second OUT param  <hr/>   <!--- The param are returned as an AS400Text byte array so we need to fix that ---> <cfset asText = application.as400.AS400Text.init( 11 ) /> <cfoutput>#application.as400.AS400Text.toObject( p2.getOutputData() )#</cfoutput></cfif><!--- disconnect from the as400 ---><cfset application.as400.iseries.disconnectservice(application.as400.iseries.command)></code><br>
-    </main>
     <div class="row">
-      <div class="col">
+      <div class="col-md-9 col-12">
+        <main class="mw fw-lighter fs-5">
+          
+<p>After googling the hell out of this over the last few days I decided that my effort should actually go back in to the community to hopefully make someone else's life easier than mine was. </p><p>I am assuming at this point that you have a AS400 datasource setup using the <a href="http://jt400.sourceforge.net/" title="JTOpen | Overview">JDBC JT400 driver</a>. If you don't know how, and there is enough demand I'll post something on this, otherwise this guide simply demonstrates how to call an RPG program on an AS400 and read the OUT param that comes back.</p><p>I've put all of my comments in the code rather than making this post longer than it needs to be. Any questions then please use the comments as usual</p> <p>All of my knowledge about the packages I have used come from <a href="http://publib.boulder.ibm.com/iseries/v5r1/ic2924/info/rzahh/javadoc/com/ibm/as400/access/package-tree.html">publib.boulder.ibm.com/iseries/ .... com/ibm/as400/access</a><code><cfscript> // AS400/iSeries attributes uname = "USERNAME"; pword = "PASSWORD"; as400Ip = "10.10.10.10";    if( NOT isDefined("application.as400") OR isDefined( "url.reload" ) ){    // get our JDBC driver 'iSeries'    iSeries = createObject("java", "com.ibm.as400.access.AS400");         // initilise the driver with our credentials    iseries.init(as400Ip, Trim(UCase(uname)), Left(Trim(pword), 10));       // Validate the passed in details   v = (iSeries.ValidateSignon());   // when valid put JDBC Connection drivers in Application scope    application.as400 = {       iSeries = iSeries,      Command = createObject("java", "com.ibm.as400.access.CommandCall"),     ProgramCall = createObject('java', 'com.ibm.as400.access.ProgramCall'),     ProgramParameter = createObject('java', 'com.ibm.as400.access.ProgramParameter'),     AS400Text = createObject('java', 'com.ibm.as400.access.AS400Text')          };  }   // 1) First parameter // Each paramater must be type of AS400Text application.as400.AS400Text.init( 11 ); // Set the length // init the fist ProgramParameter that is going to be passed in p1 = application.as400.ProgramParameter.init("1");  // Add the value in an AS/400 format in the specified byte array  p1.setInputData( application.as400.AS400Text.toBytes("") );   // 2) Second parameter  application.as400.AS400Text.init( 11 ); // Set the length // init the fist ProgramParameter that is going to be passed in p2 = application.as400.ProgramParameter.init("1");  // Add the value in an AS/400 format in the specified byte array  p2.setInputData( application.as400.AS400Text.toBytes("") );   // Put the params into an array paramAry = [p1,p2];   // The command/RPG you are going to call  CommandtoRun = "/QSYS.LIB/MYLIB1.LIB/VPCQWEQW.PGM";   // init using the iSeries connection we created, CommandToRun, and the params (in an array) PgmCall = application.as400.ProgramCall.init( application.as400.iSeries, CommandtoRun, paramAry );    // Now run it (returns boolean) PgmRun = ( application.as400.ProgramCall.Run());      // any errors or messages can be found here msgList = application.as400.ProgramCall.getMessageList()</cfscript><!--- Loop over any messages ---><ul><cfloop from="1" to="#arrayLen( msgList )#" index="i">  <li><cfdump var="#msgList[i].getText()#"></li></cfloop></ul><cfif NOT PgmRun> Did not run<cfelse> It ran. Im now going to get the second OUT param  <hr/>   <!--- The param are returned as an AS400Text byte array so we need to fix that ---> <cfset asText = application.as400.AS400Text.init( 11 ) /> <cfoutput>#application.as400.AS400Text.toObject( p2.getOutputData() )#</cfoutput></cfif><!--- disconnect from the as400 ---><cfset application.as400.iseries.disconnectservice(application.as400.iseries.command)></code><br>
+        </main>
         <script
           src="https://giscus.app/client.js"
           data-repo="andyj/andyjarrett.com"
@@ -84,28 +84,41 @@
           crossorigin="anonymous"
           async></script>
         <a name="comment"></a>
+        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
+
       </div>
-    </div>
-    <div class="row mt-5 ">
-      <div class="col-6">
-        <strong>Recent Posts</strong>
-        <ul>
+      <div class="col-md-3 col-12">
+        <!-- Side Content -->
+        <h4>Recent Posts</h4>
         
-          <li ><a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw</a></li>
+          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script</a></li>
+          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare</a></li>
+          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader</a></li>
+          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-        </ul>
-      </div>
-      <div class="col-6 pt-3 text-end">
-        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
       </div>
     </div>
   </div>
+
   <footer class="container mt-5 border-top pt-2">
   <div class="row justify-content-md-center">
     <div class="col">

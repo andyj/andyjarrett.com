@@ -62,12 +62,12 @@
   <div class="container">
     <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
     <h1 class="mt-5 mb-5"><b>Railo ORM initial setup</b></h1>
-    <main class="mw fw-lighter fs-5">
-      
-<p>This is a reminder post that when playing around with ORM you don't have to use a pre-created database! In fact you can setup the database, datasource, tables, and even table relationships without opening an SQL Gui/manager or writing a single line of SQL. When developing a new site or like me playing around with ORM you don't want to be tied to the data layer in anyway and thanks to the in built relational databases that comewith our beloved CFML engines you don't.</p><p>This all started with me putting together some code and a post about ORM and scripting and rather than worry about the database layer I simply set up a HSQLDB (Hypersonic SQL DB) datasource in the <a href="http://www.getrailo.org/">Railo</a> administrator ( with <a href="http://www.adobe.com/products/coldfusion/">Adobe CF</a> simply create an Apache Derby Embedded datasource in the Adobe ColdFusion 9 administrator).</p> <p>To do this log in to your Railo administrator and go <b>Datasource</b> under <b>Services</b> and "Create new datasource" selecting HSQLDB (Hypersonic SQL DB) from the dropdown. On the next page give your Database a Name, Username, and Password then click create.</p><p><img src="http://www.andyjarrett.co.uk/blog/images/ormsetup.png" alt="ColdFusion / Railo ORM datasource HSQLDB setup" /></p><p>You're now set to go. In my example I have called the datasource "ormTest", if you want to check that Railo has done its job then you can try the following snippet</p> <code><cfset dsn = "ormTest" /><cfdbinfo type="tables" datasource="#dsn#" name="dbi"><cfdump var="#dbi#"></code><p>Next you'll need to do is setup your ORM settings in <b>Application.cfc</b></p><code>component output="false"{  // application variables  this.name = "OrmEx_#hash( getCurrentTemplatePath() )#"; this.sessionmanagement = true;    // orm settings this.datasource = "ormTest";  this.ormEnabled = true; this.ormsettings = {    dbcreate = "dropcreate", // This value drops the table if it exists and then creates it   logSQL = true, // SQL queries are logged to the console   cfclocation = "models" // Specifies the directory(or multiple off) to search for persistent CFCs to generate the mappings };}</code><p>With your Application.cfc defining your Datasource and ORM we need to add our model (in a folder called Model which was defined in the orm setting (<b>this.ormsettings.cfclocation = "models"</b>). The good news   is that Hibernate will use our <b>Models</b> to go off and create the tables when the application is loaded thanks to the <b>dropcreate</b> setting above. Like I said we're not going to write a single line of SQL. Create a folder on the root called <b>models</b> and add <b>users.cfc</b>  with the following code in it</p> <code>component  displayname="User" hint="I am a model of a user" output="false" persistent="true"{ property name="userid" generator="increment" index="true" fieldtype="id" ormtype="int"; property name="username" ormtype="string";  property name="password" ormtype="string" ; property name="roleid" ormtype="int" ;} </code><p>And you're done. You can modify the <b>Application.cfc</b> adding the following and see your table outputted in an array, though there won't be much there untillyou add some records</p><code>public boolean function onRequestStart(String targetPage){ writeDump( var = EntityLoad( 'users' ), abort = 1 );  return true;} </code><p></p><p>n.b. If you want to add a user quickly here's the code</p><code>m = new model.users();m.setUsername( 'andy' );m.setPassword( 'password' );m.setRoleid( 1 );entitySave( m );ormflush(); //Flushes all pending CRUD operations</code><br>
-    </main>
     <div class="row">
-      <div class="col">
+      <div class="col-md-9 col-12">
+        <main class="mw fw-lighter fs-5">
+          
+<p>This is a reminder post that when playing around with ORM you don't have to use a pre-created database! In fact you can setup the database, datasource, tables, and even table relationships without opening an SQL Gui/manager or writing a single line of SQL. When developing a new site or like me playing around with ORM you don't want to be tied to the data layer in anyway and thanks to the in built relational databases that comewith our beloved CFML engines you don't.</p><p>This all started with me putting together some code and a post about ORM and scripting and rather than worry about the database layer I simply set up a HSQLDB (Hypersonic SQL DB) datasource in the <a href="http://www.getrailo.org/">Railo</a> administrator ( with <a href="http://www.adobe.com/products/coldfusion/">Adobe CF</a> simply create an Apache Derby Embedded datasource in the Adobe ColdFusion 9 administrator).</p> <p>To do this log in to your Railo administrator and go <b>Datasource</b> under <b>Services</b> and "Create new datasource" selecting HSQLDB (Hypersonic SQL DB) from the dropdown. On the next page give your Database a Name, Username, and Password then click create.</p><p><img src="http://www.andyjarrett.co.uk/blog/images/ormsetup.png" alt="ColdFusion / Railo ORM datasource HSQLDB setup" /></p><p>You're now set to go. In my example I have called the datasource "ormTest", if you want to check that Railo has done its job then you can try the following snippet</p> <code><cfset dsn = "ormTest" /><cfdbinfo type="tables" datasource="#dsn#" name="dbi"><cfdump var="#dbi#"></code><p>Next you'll need to do is setup your ORM settings in <b>Application.cfc</b></p><code>component output="false"{  // application variables  this.name = "OrmEx_#hash( getCurrentTemplatePath() )#"; this.sessionmanagement = true;    // orm settings this.datasource = "ormTest";  this.ormEnabled = true; this.ormsettings = {    dbcreate = "dropcreate", // This value drops the table if it exists and then creates it   logSQL = true, // SQL queries are logged to the console   cfclocation = "models" // Specifies the directory(or multiple off) to search for persistent CFCs to generate the mappings };}</code><p>With your Application.cfc defining your Datasource and ORM we need to add our model (in a folder called Model which was defined in the orm setting (<b>this.ormsettings.cfclocation = "models"</b>). The good news   is that Hibernate will use our <b>Models</b> to go off and create the tables when the application is loaded thanks to the <b>dropcreate</b> setting above. Like I said we're not going to write a single line of SQL. Create a folder on the root called <b>models</b> and add <b>users.cfc</b>  with the following code in it</p> <code>component  displayname="User" hint="I am a model of a user" output="false" persistent="true"{ property name="userid" generator="increment" index="true" fieldtype="id" ormtype="int"; property name="username" ormtype="string";  property name="password" ormtype="string" ; property name="roleid" ormtype="int" ;} </code><p>And you're done. You can modify the <b>Application.cfc</b> adding the following and see your table outputted in an array, though there won't be much there untillyou add some records</p><code>public boolean function onRequestStart(String targetPage){ writeDump( var = EntityLoad( 'users' ), abort = 1 );  return true;} </code><p></p><p>n.b. If you want to add a user quickly here's the code</p><code>m = new model.users();m.setUsername( 'andy' );m.setPassword( 'password' );m.setRoleid( 1 );entitySave( m );ormflush(); //Flushes all pending CRUD operations</code><br>
+        </main>
         <script
           src="https://giscus.app/client.js"
           data-repo="andyj/andyjarrett.com"
@@ -84,28 +84,41 @@
           crossorigin="anonymous"
           async></script>
         <a name="comment"></a>
+        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
+
       </div>
-    </div>
-    <div class="row mt-5 ">
-      <div class="col-6">
-        <strong>Recent Posts</strong>
-        <ul>
+      <div class="col-md-3 col-12">
+        <!-- Side Content -->
+        <h4>Recent Posts</h4>
         
-          <li ><a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw</a></li>
+          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script</a></li>
+          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare</a></li>
+          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader</a></li>
+          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-        </ul>
-      </div>
-      <div class="col-6 pt-3 text-end">
-        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
       </div>
     </div>
   </div>
+
   <footer class="container mt-5 border-top pt-2">
   <div class="row justify-content-md-center">
     <div class="col">

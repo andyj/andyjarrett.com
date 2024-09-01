@@ -62,12 +62,12 @@
   <div class="container">
     <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
     <h1 class="mt-5 mb-5"><b>ContentEditable Area</b></h1>
-    <main class="mw fw-lighter fs-5">
-      
-So i've been thinking about making lots of little, small areas editable in my next applicaiton. All i want the client to able to do is edit the text, NOT FORMAT IT in any shape or form. As <a href="http://www.corfield.org/blog/">Sean Corfield</a> pointed out in the comments of my previous <a href="http://www.andyjarrett.co.uk/andy/blog/Index.cfm?mode=entry&entry=51F603AC-3048-28EB-0E7ADB94F63A25A3">posts</a> using something like Contribute with Fusebox is just impossible (though possbile with Mach-ii if you know the view pages to go to).<br/><br/> Anyway it got me thinking, i dont want to build a whole administration side, i just want a user to be able to go in and edit small bits of text when they are logged in. So i've been playing for the last half hour or so and got the following. Its a bare bones idea to a pluggin that i'm thinking about for FB4. Basically if you use content variables then you can make a <em>&lt;div&gt;</em> region which has a <em>class</em> attribute begining <em>="edit</em> editable. It does this by adding <em>contentEditable="true"</em> when the content variable is passed (and of course you are logged in), it also highlights the area with a red border and makes it editable (to IE only).   <div class="code"><FONT COLOR=MAROON>&lt;cfset editable = <FONT COLOR=BLUE>"true"</FONT>&gt;</FONT><br> <br>\n<FONT COLOR=MAROON>&lt;cfsavecontent variable=<FONT COLOR=BLUE>"q"</FONT>&gt;</FONT><br>\n<FONT COLOR=NAVY>&lt;div id=<FONT COLOR=BLUE>"myId"</FONT> class=<FONT COLOR=BLUE>"editBody"</FONT>&gt;</FONT>test<FONT COLOR=NAVY>&lt;/div&gt;</FONT><br>\n<FONT COLOR=MAROON>&lt;/cfsavecontent&gt;</FONT><br> <br>\n<FONT COLOR=MAROON>&lt;cfscript&gt;</FONT><br>\n&nbsp;&nbsp;&nbsp;if(editAble){<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;edString =  'style=<FONT COLOR=BLUE>"border:1px solid red"</FONT> contentEditable=<FONT COLOR=BLUE>"true"</FONT>';<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reDiv = '(<FONT COLOR=NAVY>&lt;div)[ \\w\\_<FONT COLOR=BLUE>"=:;]*(class="</FONT>edit)[ \\w\\_<FONT COLOR=BLUE>"=:;]*&gt;</FONT>';<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(reFind(reDiv, q)){<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q = replaceNoCase(q, 'class="</FONT>edit', edString&' class=<FONT COLOR=BLUE>"edit', "</FONT>ALL");<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>\n&nbsp;&nbsp;&nbsp;}<br>\n&nbsp;&nbsp;&nbsp;writeOutput(q);<br>\n<FONT COLOR=MAROON>&lt;/cfscript&gt;</FONT></div>My next problem is the submiting the page bit???<br>
-    </main>
     <div class="row">
-      <div class="col">
+      <div class="col-md-9 col-12">
+        <main class="mw fw-lighter fs-5">
+          
+So i've been thinking about making lots of little, small areas editable in my next applicaiton. All i want the client to able to do is edit the text, NOT FORMAT IT in any shape or form. As <a href="http://www.corfield.org/blog/">Sean Corfield</a> pointed out in the comments of my previous <a href="http://www.andyjarrett.co.uk/andy/blog/Index.cfm?mode=entry&entry=51F603AC-3048-28EB-0E7ADB94F63A25A3">posts</a> using something like Contribute with Fusebox is just impossible (though possbile with Mach-ii if you know the view pages to go to).<br/><br/> Anyway it got me thinking, i dont want to build a whole administration side, i just want a user to be able to go in and edit small bits of text when they are logged in. So i've been playing for the last half hour or so and got the following. Its a bare bones idea to a pluggin that i'm thinking about for FB4. Basically if you use content variables then you can make a <em>&lt;div&gt;</em> region which has a <em>class</em> attribute begining <em>="edit</em> editable. It does this by adding <em>contentEditable="true"</em> when the content variable is passed (and of course you are logged in), it also highlights the area with a red border and makes it editable (to IE only).   <div class="code"><FONT COLOR=MAROON>&lt;cfset editable = <FONT COLOR=BLUE>"true"</FONT>&gt;</FONT><br> <br>\n<FONT COLOR=MAROON>&lt;cfsavecontent variable=<FONT COLOR=BLUE>"q"</FONT>&gt;</FONT><br>\n<FONT COLOR=NAVY>&lt;div id=<FONT COLOR=BLUE>"myId"</FONT> class=<FONT COLOR=BLUE>"editBody"</FONT>&gt;</FONT>test<FONT COLOR=NAVY>&lt;/div&gt;</FONT><br>\n<FONT COLOR=MAROON>&lt;/cfsavecontent&gt;</FONT><br> <br>\n<FONT COLOR=MAROON>&lt;cfscript&gt;</FONT><br>\n&nbsp;&nbsp;&nbsp;if(editAble){<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;edString =  'style=<FONT COLOR=BLUE>"border:1px solid red"</FONT> contentEditable=<FONT COLOR=BLUE>"true"</FONT>';<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;reDiv = '(<FONT COLOR=NAVY>&lt;div)[ \\w\\_<FONT COLOR=BLUE>"=:;]*(class="</FONT>edit)[ \\w\\_<FONT COLOR=BLUE>"=:;]*&gt;</FONT>';<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(reFind(reDiv, q)){<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;q = replaceNoCase(q, 'class="</FONT>edit', edString&' class=<FONT COLOR=BLUE>"edit', "</FONT>ALL");<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>\n&nbsp;&nbsp;&nbsp;}<br>\n&nbsp;&nbsp;&nbsp;writeOutput(q);<br>\n<FONT COLOR=MAROON>&lt;/cfscript&gt;</FONT></div>My next problem is the submiting the page bit???<br>
+        </main>
         <script
           src="https://giscus.app/client.js"
           data-repo="andyj/andyjarrett.com"
@@ -84,28 +84,41 @@ So i've been thinking about making lots of little, small areas editable in my ne
           crossorigin="anonymous"
           async></script>
         <a name="comment"></a>
+        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
+
       </div>
-    </div>
-    <div class="row mt-5 ">
-      <div class="col-6">
-        <strong>Recent Posts</strong>
-        <ul>
+      <div class="col-md-3 col-12">
+        <!-- Side Content -->
+        <h4>Recent Posts</h4>
         
-          <li ><a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw</a></li>
+          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script</a></li>
+          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare</a></li>
+          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader</a></li>
+          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-        </ul>
-      </div>
-      <div class="col-6 pt-3 text-end">
-        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
       </div>
     </div>
   </div>
+
   <footer class="container mt-5 border-top pt-2">
   <div class="row justify-content-md-center">
     <div class="col">

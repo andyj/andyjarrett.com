@@ -62,12 +62,12 @@
   <div class="container">
     <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
     <h1 class="mt-5 mb-5"><b>Parallels VM locked out</b></h1>
-    <main class="mw fw-lighter fs-5">
-      
-This morning when I went to start up WinXp on Parallels and I got a scary message: "Virtual Machine Windows XP cannot be opened since it is already used in another Parallels Desktop window"Oh no its not I thought, I'm sure of that. Luckily after a little while of looking around (googling bascialyl!) I found a solution. Apparently Parallels creates a .lock file when you open a VM and sometimes (mainly after abnormal shutdowns) this file isn't removed - causing Parallels to think its in use. The fix is simple(ish) though it would be easier if it wasn't a hidden file. <ol><li>Exit Parallels</li><li>Launch the Terminal application (in the Utilities folder inside the Applications folder on your hard drive)</li><li>Inside a Teminal command window, type: "cd ~/Library/Parallels"</li><li>Type "ls" (to confirm you're in the right place; you should see a listing of .pvs and .hdd files)</li><li>Type "ls -asl"</li><li>Look for a file whose name begins with a dot (".") and ends in ".lock</li><li>Remove that file by typing "rm -i <that file name>" (e.g., "rm -i .winxp.1.pvs.lock") The "-i" tells the remove command to prompt you before deleting the file)</li><li>Type "ls -asl" to confirm that it's gone</li><li>Exit the terminal window (command-Q or type "exit" then command-Q)</li><li></li></ol>Hat tip to the <a href="http://forums.parallels.com/thread6264.html">Parallels Forum for this answer</a><br>
-    </main>
     <div class="row">
-      <div class="col">
+      <div class="col-md-9 col-12">
+        <main class="mw fw-lighter fs-5">
+          
+This morning when I went to start up WinXp on Parallels and I got a scary message: "Virtual Machine Windows XP cannot be opened since it is already used in another Parallels Desktop window"Oh no its not I thought, I'm sure of that. Luckily after a little while of looking around (googling bascialyl!) I found a solution. Apparently Parallels creates a .lock file when you open a VM and sometimes (mainly after abnormal shutdowns) this file isn't removed - causing Parallels to think its in use. The fix is simple(ish) though it would be easier if it wasn't a hidden file. <ol><li>Exit Parallels</li><li>Launch the Terminal application (in the Utilities folder inside the Applications folder on your hard drive)</li><li>Inside a Teminal command window, type: "cd ~/Library/Parallels"</li><li>Type "ls" (to confirm you're in the right place; you should see a listing of .pvs and .hdd files)</li><li>Type "ls -asl"</li><li>Look for a file whose name begins with a dot (".") and ends in ".lock</li><li>Remove that file by typing "rm -i <that file name>" (e.g., "rm -i .winxp.1.pvs.lock") The "-i" tells the remove command to prompt you before deleting the file)</li><li>Type "ls -asl" to confirm that it's gone</li><li>Exit the terminal window (command-Q or type "exit" then command-Q)</li><li></li></ol>Hat tip to the <a href="http://forums.parallels.com/thread6264.html">Parallels Forum for this answer</a><br>
+        </main>
         <script
           src="https://giscus.app/client.js"
           data-repo="andyj/andyjarrett.com"
@@ -84,28 +84,41 @@ This morning when I went to start up WinXp on Parallels and I got a scary messag
           crossorigin="anonymous"
           async></script>
         <a name="comment"></a>
+        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
+
       </div>
-    </div>
-    <div class="row mt-5 ">
-      <div class="col-6">
-        <strong>Recent Posts</strong>
-        <ul>
+      <div class="col-md-3 col-12">
+        <!-- Side Content -->
+        <h4>Recent Posts</h4>
         
-          <li ><a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw</a></li>
+          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script</a></li>
+          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare</a></li>
+          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader</a></li>
+          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-        </ul>
-      </div>
-      <div class="col-6 pt-3 text-end">
-        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
       </div>
     </div>
   </div>
+
   <footer class="container mt-5 border-top pt-2">
   <div class="row justify-content-md-center">
     <div class="col">

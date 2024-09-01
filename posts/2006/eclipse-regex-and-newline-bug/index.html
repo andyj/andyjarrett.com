@@ -62,12 +62,12 @@
   <div class="container">
     <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
     <h1 class="mt-5 mb-5"><b>Eclipse regex and newline bug</b></h1>
-    <main class="mw fw-lighter fs-5">
-      
-This is more of a case of just letting everyone know as to prevent head butting against the wall and going back through RegEx books.I was trying to replace a load of commas with newlines via the find/replace using regex a task I thought was simple:Find: ","Replace with: "\\n"All that happend was an "n" being inserted. I tried"Find: ","Replace with: "\\\\n"This inserted "\\n". So I grabbed the <a href="http://www.forta.com/blog/index.cfm?mode=e&entry=1082">RegEx book</a> and went online and all was working. Luckily I then came across <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=52338">Bug 52338</a> and found out this has been an issue since 2004, with the last 2 recent posts reading like this:<p>The bug is 2 years old and the required functionality is one of basics forextended editors (which I hope should be the Eclipse text editor too).For me it doesn't matter if JDK has this particular implementation problem(<a href="show_bug.cgi?id=52338#c12">comment 12</a>) - in other Java editors (JEdit for example) you could find/replacealmost everything - so they have also managed the problem somehow.Together with <a href="show_bug.cgi?id=44766" title="ASSIGNED - [find/replace] Regular expressions cannot match across lines">bug 44766</a> it would be really nice to have it fixed in 3.3.BTW, why this bug belongs to JDT/Text and not to the Platform/Text?</p><p>We will not have time to address this ourselves but would thankfully accept ahigh quality patch.</p><p>This has actually gotta be probably the one thing I miss with DWMX is the multiline find/replace dialogue. </p><br>
-    </main>
     <div class="row">
-      <div class="col">
+      <div class="col-md-9 col-12">
+        <main class="mw fw-lighter fs-5">
+          
+This is more of a case of just letting everyone know as to prevent head butting against the wall and going back through RegEx books.I was trying to replace a load of commas with newlines via the find/replace using regex a task I thought was simple:Find: ","Replace with: "\\n"All that happend was an "n" being inserted. I tried"Find: ","Replace with: "\\\\n"This inserted "\\n". So I grabbed the <a href="http://www.forta.com/blog/index.cfm?mode=e&entry=1082">RegEx book</a> and went online and all was working. Luckily I then came across <a href="https://bugs.eclipse.org/bugs/show_bug.cgi?id=52338">Bug 52338</a> and found out this has been an issue since 2004, with the last 2 recent posts reading like this:<p>The bug is 2 years old and the required functionality is one of basics forextended editors (which I hope should be the Eclipse text editor too).For me it doesn't matter if JDK has this particular implementation problem(<a href="show_bug.cgi?id=52338#c12">comment 12</a>) - in other Java editors (JEdit for example) you could find/replacealmost everything - so they have also managed the problem somehow.Together with <a href="show_bug.cgi?id=44766" title="ASSIGNED - [find/replace] Regular expressions cannot match across lines">bug 44766</a> it would be really nice to have it fixed in 3.3.BTW, why this bug belongs to JDT/Text and not to the Platform/Text?</p><p>We will not have time to address this ourselves but would thankfully accept ahigh quality patch.</p><p>This has actually gotta be probably the one thing I miss with DWMX is the multiline find/replace dialogue. </p><br>
+        </main>
         <script
           src="https://giscus.app/client.js"
           data-repo="andyj/andyjarrett.com"
@@ -84,28 +84,41 @@ This is more of a case of just letting everyone know as to prevent head butting 
           crossorigin="anonymous"
           async></script>
         <a name="comment"></a>
+        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
+
       </div>
-    </div>
-    <div class="row mt-5 ">
-      <div class="col-6">
-        <strong>Recent Posts</strong>
-        <ul>
+      <div class="col-md-3 col-12">
+        <!-- Side Content -->
+        <h4>Recent Posts</h4>
         
-          <li ><a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw</a></li>
+          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script</a></li>
+          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare</a></li>
+          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader</a></li>
+          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-        </ul>
-      </div>
-      <div class="col-6 pt-3 text-end">
-        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
       </div>
     </div>
   </div>
+
   <footer class="container mt-5 border-top pt-2">
   <div class="row justify-content-md-center">
     <div class="col">

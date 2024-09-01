@@ -62,12 +62,12 @@
   <div class="container">
     <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
     <h1 class="mt-5 mb-5"><b>RSS weather CFC</b></h1>
-    <main class="mw fw-lighter fs-5">
-      
-You most likely didn't notice but i have a new "pod" called "Weather". I got the idea this morning after reading <a href="http://www.flex-mx.com/archives/001531.html">this post at Flex-MX</a>. Its generated from a RSS feed from <a href="http://www.rssweather.com">RSSWeather.com</a>. If you want the code you can download it <a href="http://www.andyjarrett.co.uk/downloads/myWeather.rar">here</a> or its below for you if you click on "more" <div class="code"><FONT COLOR=MAROON>&lt;cfcomponent hint=<FONT COLOR=BLUE>"Return the weather"</FONT>&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&lt;!---<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Author: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Andy Jarrett - <A HREF="mailto:mail@andyjarrett.co.uk">mail@andyjarrett.co.uk</A><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Created:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20/08/04<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Desciption: Returns the weather for you area from a RSS feed<br>&nbsp;&nbsp;&nbsp;---&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cffunction name=<FONT COLOR=BLUE>"myWeather"</FONT> returntype=<FONT COLOR=BLUE>"struct"</FONT> hint=<FONT COLOR=BLUE>"Returns the weather from <A TARGET="_blank" HREF="http://www.rssweather.com">http://www.rssweather.com</A>"</FONT> &gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=GRAY><I>&lt;!--- Basic vars needed ---&gt;</I></FONT><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset var weatherRss = <FONT COLOR=BLUE>"<A TARGET="_blank" HREF="http://www.rssweather.com/rss.php?config=&forecast=zandh&icao=EGHI&alt=rss20a">http://www.rssweather.com/rss.php?config=&forecast=zandh&icao=EGHI&alt=rss20a</A>"</FONT>&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset var weatherXML = <FONT COLOR=BLUE>""</FONT>&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset var weatherToday = structNew()&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfif NOT isDefined(<FONT COLOR=BLUE>"application.weatherXML.lastParsed"</FONT>) OR NOW() GT dateAdd(<FONT COLOR=BLUE>"H"</FONT>,<FONT COLOR=BLUE> 3</FONT>, application.weatherXML.lastParsed)&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=GRAY><I>&lt;!--- Get feed ---&gt;</I></FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfhttp url=<FONT COLOR=BLUE>"#weatherRss#"</FONT> method=<FONT COLOR=BLUE>"GET"</FONT>&gt;</FONT><FONT COLOR=MAROON>&lt;/cfhttp&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=GRAY><I>&lt;!--- You need to know the reason it was last parsed because you will get banned if you hit several times within the hour. ---&gt;</I></FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset application.weatherXml.lastParsed = NOW()&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset application.weatherXml.parsed = xmlParse(cfhttp.filecontent)&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;/cfif&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfscript&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weatherXML = application.weatherXml.parsed;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weatherToday.text = weatherXML.rss.channel.item.description.xmlText;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weatherToday.link = weatherXML.rss.channel.item.link.xmlText;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;/cfscript&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfreturn weatherToday&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;/cffunction&gt;</FONT>&nbsp;&nbsp;&nbsp;<br><FONT COLOR=MAROON>&lt;/cfcomponent&gt;</FONT></div><br>
-    </main>
     <div class="row">
-      <div class="col">
+      <div class="col-md-9 col-12">
+        <main class="mw fw-lighter fs-5">
+          
+You most likely didn't notice but i have a new "pod" called "Weather". I got the idea this morning after reading <a href="http://www.flex-mx.com/archives/001531.html">this post at Flex-MX</a>. Its generated from a RSS feed from <a href="http://www.rssweather.com">RSSWeather.com</a>. If you want the code you can download it <a href="http://www.andyjarrett.co.uk/downloads/myWeather.rar">here</a> or its below for you if you click on "more" <div class="code"><FONT COLOR=MAROON>&lt;cfcomponent hint=<FONT COLOR=BLUE>"Return the weather"</FONT>&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&lt;!---<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Author: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Andy Jarrett - <A HREF="mailto:mail@andyjarrett.co.uk">mail@andyjarrett.co.uk</A><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Created:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;20/08/04<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Desciption: Returns the weather for you area from a RSS feed<br>&nbsp;&nbsp;&nbsp;---&gt;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cffunction name=<FONT COLOR=BLUE>"myWeather"</FONT> returntype=<FONT COLOR=BLUE>"struct"</FONT> hint=<FONT COLOR=BLUE>"Returns the weather from <A TARGET="_blank" HREF="http://www.rssweather.com">http://www.rssweather.com</A>"</FONT> &gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=GRAY><I>&lt;!--- Basic vars needed ---&gt;</I></FONT><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset var weatherRss = <FONT COLOR=BLUE>"<A TARGET="_blank" HREF="http://www.rssweather.com/rss.php?config=&forecast=zandh&icao=EGHI&alt=rss20a">http://www.rssweather.com/rss.php?config=&forecast=zandh&icao=EGHI&alt=rss20a</A>"</FONT>&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset var weatherXML = <FONT COLOR=BLUE>""</FONT>&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset var weatherToday = structNew()&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfif NOT isDefined(<FONT COLOR=BLUE>"application.weatherXML.lastParsed"</FONT>) OR NOW() GT dateAdd(<FONT COLOR=BLUE>"H"</FONT>,<FONT COLOR=BLUE> 3</FONT>, application.weatherXML.lastParsed)&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=GRAY><I>&lt;!--- Get feed ---&gt;</I></FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfhttp url=<FONT COLOR=BLUE>"#weatherRss#"</FONT> method=<FONT COLOR=BLUE>"GET"</FONT>&gt;</FONT><FONT COLOR=MAROON>&lt;/cfhttp&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=GRAY><I>&lt;!--- You need to know the reason it was last parsed because you will get banned if you hit several times within the hour. ---&gt;</I></FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset application.weatherXml.lastParsed = NOW()&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset application.weatherXml.parsed = xmlParse(cfhttp.filecontent)&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;/cfif&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfscript&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weatherXML = application.weatherXml.parsed;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weatherToday.text = weatherXML.rss.channel.item.description.xmlText;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;weatherToday.link = weatherXML.rss.channel.item.link.xmlText;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;/cfscript&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfreturn weatherToday&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;/cffunction&gt;</FONT>&nbsp;&nbsp;&nbsp;<br><FONT COLOR=MAROON>&lt;/cfcomponent&gt;</FONT></div><br>
+        </main>
         <script
           src="https://giscus.app/client.js"
           data-repo="andyj/andyjarrett.com"
@@ -84,28 +84,41 @@ You most likely didn't notice but i have a new "pod" called "Weather". I got the
           crossorigin="anonymous"
           async></script>
         <a name="comment"></a>
+        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
+
       </div>
-    </div>
-    <div class="row mt-5 ">
-      <div class="col-6">
-        <strong>Recent Posts</strong>
-        <ul>
+      <div class="col-md-3 col-12">
+        <!-- Side Content -->
+        <h4>Recent Posts</h4>
         
-          <li ><a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw</a></li>
+          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script</a></li>
+          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare</a></li>
+          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader</a></li>
+          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-        </ul>
-      </div>
-      <div class="col-6 pt-3 text-end">
-        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
       </div>
     </div>
   </div>
+
   <footer class="container mt-5 border-top pt-2">
   <div class="row justify-content-md-center">
     <div class="col">

@@ -62,12 +62,12 @@
   <div class="container">
     <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
     <h1 class="mt-5 mb-5"><b>Google sitemap creator for Model-Glue apps</b></h1>
-    <main class="mw fw-lighter fs-5">
-      
-<p>I have a new project hosted at <a href="http://mgsitemaptool.riaforge.org/">RIA Forge</a>. It's a small idea which I just want to put out there for now, basically a <a href="http://mgsitemaptool.riaforge.org/">Google Sitemap tool for Model Glue</a>. The idea is simple, using your <a href="http://www.model-glue.com/">ModelGlue</a>.xml file (and any includes) the application looks through all your public &lt;event-handler> to create a simple Google Sitemap.</p><p>All you need to do is drop the folder into the root of your MG app and from within there is an "index.cfm" file with the following small bit of code in it.</p><code><cfscript> sitemaptool = createObject('component', 'sitemaptool'); theXml1 = siteMapTool.getSiteMap("/config/coldSpring.xml", "siteMap.xml");  writeOutput(HTMLCodeFormat(theXml1)); </cfscript></code>The component first looks into your ColdSpring.xml config file for the "modelGlueConfiguration" bean. From there it picks up your values like "eventvalue" and "defaulttemplate". Using the "configurationPath" it reads your ModelGlue.xml including any &lt;includes> you use to find all the &lt;event-handler>'sThe variable "theXml1" holds the sitemap and from there you can do what you want with it. Also check out "index_documented.cfm" in the zip file its where I have put in some details of other ways of calling the component. Obviously all the work is done within the <b>sitemaptool.cfc</b> component so dig into there and have a look too.Get it from <a href="http://mgsitemaptool.riaforge.org/">http://mgsitemaptool.riaforge.org/</a> where you can add issues etc<br>
-    </main>
     <div class="row">
-      <div class="col">
+      <div class="col-md-9 col-12">
+        <main class="mw fw-lighter fs-5">
+          
+<p>I have a new project hosted at <a href="http://mgsitemaptool.riaforge.org/">RIA Forge</a>. It's a small idea which I just want to put out there for now, basically a <a href="http://mgsitemaptool.riaforge.org/">Google Sitemap tool for Model Glue</a>. The idea is simple, using your <a href="http://www.model-glue.com/">ModelGlue</a>.xml file (and any includes) the application looks through all your public &lt;event-handler> to create a simple Google Sitemap.</p><p>All you need to do is drop the folder into the root of your MG app and from within there is an "index.cfm" file with the following small bit of code in it.</p><code><cfscript> sitemaptool = createObject('component', 'sitemaptool'); theXml1 = siteMapTool.getSiteMap("/config/coldSpring.xml", "siteMap.xml");  writeOutput(HTMLCodeFormat(theXml1)); </cfscript></code>The component first looks into your ColdSpring.xml config file for the "modelGlueConfiguration" bean. From there it picks up your values like "eventvalue" and "defaulttemplate". Using the "configurationPath" it reads your ModelGlue.xml including any &lt;includes> you use to find all the &lt;event-handler>'sThe variable "theXml1" holds the sitemap and from there you can do what you want with it. Also check out "index_documented.cfm" in the zip file its where I have put in some details of other ways of calling the component. Obviously all the work is done within the <b>sitemaptool.cfc</b> component so dig into there and have a look too.Get it from <a href="http://mgsitemaptool.riaforge.org/">http://mgsitemaptool.riaforge.org/</a> where you can add issues etc<br>
+        </main>
         <script
           src="https://giscus.app/client.js"
           data-repo="andyj/andyjarrett.com"
@@ -84,28 +84,41 @@
           crossorigin="anonymous"
           async></script>
         <a name="comment"></a>
+        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
+
       </div>
-    </div>
-    <div class="row mt-5 ">
-      <div class="col-6">
-        <strong>Recent Posts</strong>
-        <ul>
+      <div class="col-md-3 col-12">
+        <!-- Side Content -->
+        <h4>Recent Posts</h4>
         
-          <li ><a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw</a></li>
+          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script</a></li>
+          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare</a></li>
+          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader</a></li>
+          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-        </ul>
-      </div>
-      <div class="col-6 pt-3 text-end">
-        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
       </div>
     </div>
   </div>
+
   <footer class="container mt-5 border-top pt-2">
   <div class="row justify-content-md-center">
     <div class="col">

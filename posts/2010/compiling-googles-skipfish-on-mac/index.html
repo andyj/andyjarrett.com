@@ -62,12 +62,12 @@
   <div class="container">
     <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
     <h1 class="mt-5 mb-5"><b>Compiling Googles Skipfish on Mac</b></h1>
-    <main class="mw fw-lighter fs-5">
-      
-<p>Google have made available, for free, their <a href="http://googleonlinesecurity.blogspot.com/2010/03/meet-skipfish-our-automated-web.html">automated web scanner, Skipfish</a>. This is a quick guide to setting it up on the Mac. You can download Skipfish from <a href="http://code.google.com/p/skipfish/">http://code.google.com/p/skipfish/</a> - I've put it in <em>/opt/skipfish/</em>.</p><p>To get this running you'll need <b>Libidn</b> which is easily available from <a href="http://www.macports.org/">Mac Ports</a> via:</p><code>$sudo port install libidn</code><p>With Libidn installed we can now make Skipfish. Before starting though we need to edit the Makefile and add some arguments (I use Textmate from the Terminal. You could swap "mate" for "vi").</p><code>$ mate Makefile</code><p>Change<br/><b>$ CFLAGS_GEN = -Wall -funsigned-char -g -ggdb -D_FORTIFY_SOURCE=0</b><br/>for<br/><b>$ CFLAGS_GEN = -Wall -funsigned-char -g -ggdb -D_FORTIFY_SOURCE=0 -I/opt/local/include -L/opt/local/lib</b><br/></p><p>Once thats done you should now be ready to MAKE Skipfish</p><code>$ cd /opt/skipfish/$ make</code><p>Once done you need to copy a dictionary file from the dictionaries/ directory (use <b>default.wl</b> for your first run) and rename this to <b>skipfish.wl</b>. </p><p>Im not going in to how to run this and what it does as the <a href="http://code.google.com/p/skipfish/wiki/SkipfishDoc">docs</a> does this quite well but below an example string which limits the requests to a 1000 so you can get feedback quickly (one scan took over an hour without the restriction).</p><code>$ ./skipfish -o test/ -r 1000 -B .google-analytics.com -B .googleapis.com http://www.[your site].co.uk/</code><p>To explain the flags used:<br/><dl><dd>-B</dd><dt>You do not want to actually crawl a third-party domain, but you trust the owner of that domain enough not to worry about cross-domain content inclusion from that location. To suppress warnings, you can use the -B option</dt><dd>-r</dd><dt>limits the total number of requests to send in a scan</dt><dd>-o</dd><dt>Reduces the risk of persistent effects of a scan which inhibits all form parsing and submission steps</dt></dl></p><p>N.B. the results file doesn't work in Google Chrome</p><br>
-    </main>
     <div class="row">
-      <div class="col">
+      <div class="col-md-9 col-12">
+        <main class="mw fw-lighter fs-5">
+          
+<p>Google have made available, for free, their <a href="http://googleonlinesecurity.blogspot.com/2010/03/meet-skipfish-our-automated-web.html">automated web scanner, Skipfish</a>. This is a quick guide to setting it up on the Mac. You can download Skipfish from <a href="http://code.google.com/p/skipfish/">http://code.google.com/p/skipfish/</a> - I've put it in <em>/opt/skipfish/</em>.</p><p>To get this running you'll need <b>Libidn</b> which is easily available from <a href="http://www.macports.org/">Mac Ports</a> via:</p><code>$sudo port install libidn</code><p>With Libidn installed we can now make Skipfish. Before starting though we need to edit the Makefile and add some arguments (I use Textmate from the Terminal. You could swap "mate" for "vi").</p><code>$ mate Makefile</code><p>Change<br/><b>$ CFLAGS_GEN = -Wall -funsigned-char -g -ggdb -D_FORTIFY_SOURCE=0</b><br/>for<br/><b>$ CFLAGS_GEN = -Wall -funsigned-char -g -ggdb -D_FORTIFY_SOURCE=0 -I/opt/local/include -L/opt/local/lib</b><br/></p><p>Once thats done you should now be ready to MAKE Skipfish</p><code>$ cd /opt/skipfish/$ make</code><p>Once done you need to copy a dictionary file from the dictionaries/ directory (use <b>default.wl</b> for your first run) and rename this to <b>skipfish.wl</b>. </p><p>Im not going in to how to run this and what it does as the <a href="http://code.google.com/p/skipfish/wiki/SkipfishDoc">docs</a> does this quite well but below an example string which limits the requests to a 1000 so you can get feedback quickly (one scan took over an hour without the restriction).</p><code>$ ./skipfish -o test/ -r 1000 -B .google-analytics.com -B .googleapis.com http://www.[your site].co.uk/</code><p>To explain the flags used:<br/><dl><dd>-B</dd><dt>You do not want to actually crawl a third-party domain, but you trust the owner of that domain enough not to worry about cross-domain content inclusion from that location. To suppress warnings, you can use the -B option</dt><dd>-r</dd><dt>limits the total number of requests to send in a scan</dt><dd>-o</dd><dt>Reduces the risk of persistent effects of a scan which inhibits all form parsing and submission steps</dt></dl></p><p>N.B. the results file doesn't work in Google Chrome</p><br>
+        </main>
         <script
           src="https://giscus.app/client.js"
           data-repo="andyj/andyjarrett.com"
@@ -84,28 +84,41 @@
           crossorigin="anonymous"
           async></script>
         <a name="comment"></a>
+        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
+
       </div>
-    </div>
-    <div class="row mt-5 ">
-      <div class="col-6">
-        <strong>Recent Posts</strong>
-        <ul>
+      <div class="col-md-3 col-12">
+        <!-- Side Content -->
+        <h4>Recent Posts</h4>
         
-          <li ><a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw</a></li>
+          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script</a></li>
+          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare</a></li>
+          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader</a></li>
+          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-        </ul>
-      </div>
-      <div class="col-6 pt-3 text-end">
-        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
       </div>
     </div>
   </div>
+
   <footer class="container mt-5 border-top pt-2">
   <div class="row justify-content-md-center">
     <div class="col">

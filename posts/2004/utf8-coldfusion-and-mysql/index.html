@@ -62,12 +62,12 @@
   <div class="container">
     <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
     <h1 class="mt-5 mb-5"><b>UTF-8, ColdFusion and MySQL</b></h1>
-    <main class="mw fw-lighter fs-5">
-      
-I've just been setting up my first true UTF-8 application with MySQL and just wanted to share the basic setup incase you ever need to.<br><br><strong>The Database</strong><br>First you need to use <a href="http://www.mysql.com">MySQL version 4.1+</a> as this offers two new character set for storing unicode data<ul>  <li>ucs2, the UCS-2 Unicode character set.</li> <li>utf8, the UTF8 encoding of the Unicode character set.</li></ul> When you create your table you need to state the following character set <em>"CHARACTER SET utf8"</em> at the end of the SQL string.<br><div class="code">CREATE TABLE `person` (<br>\n&nbsp;&nbsp;&nbsp;`name` varchar(<FONT COLOR=BLUE>100</FONT>) NOT NULL,<br>\n&nbsp;&nbsp;&nbsp;`email` varchar(<FONT COLOR=BLUE>100</FONT>) NOT NULL,<br>\n&nbsp;&nbsp;&nbsp;PRIMARY KEY (`name`),<br>\n&nbsp;&nbsp;&nbsp;UNIQUE KEY `name` (`name`)<br>\n&nbsp;&nbsp;&nbsp;) TYPE=InnoDB "CHARACTER SET utf8;</div><br><br><strong>The Datasource</strong><br>Goto "Advanced Settings" and the connection string: <em>"useUnicode=true&characterEncoding=utf-8"</em><br><br><strong>The HTML page</strong><br>In your Application.cfm place:<br><div class="code"><FONT COLOR=MAROON>&lt;cfset setEncoding(<FONT COLOR=BLUE>"form"</FONT>,<FONT COLOR=BLUE>"utf-8"</FONT>)&gt;</FONT> <br>\n&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset setEncoding(<FONT COLOR=BLUE>"url"</FONT>,<FONT COLOR=BLUE>"utf-8"</FONT>)&gt;</FONT><br>\n&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfcontent type=<FONT COLOR=BLUE>"text/html; charset=utf-8"</FONT>&gt;</FONT></div>Then on everypage that makes a DB call place:<div class="code"><FONT COLOR=MAROON>&lt;cfprocessingdirective pageEncoding=<FONT COLOR=BLUE>"utf-8"</FONT>&gt;</FONT></div>And before you think it - no this cannot go into the Application.cfm, or be &lt;cfinclud&gt;'ed<br>For more information goto <a href="http://mysecretbase.com/ColdFusion_and_Unicode.cfm">http://mysecretbase.com/ColdFusion_and_Unicode.cfm</a>.  Matt Robertson explains in more details about this set up, including setting the HTML page as well.<br><br>And thats the bare bones of it. <br><br>I just want to say thank you to <a href="http://sustainablegis.com">Paul Hasting</a>s for helping me on <a href="http://www.houseoffusion.com">CF-TALK</a><br>
-    </main>
     <div class="row">
-      <div class="col">
+      <div class="col-md-9 col-12">
+        <main class="mw fw-lighter fs-5">
+          
+I've just been setting up my first true UTF-8 application with MySQL and just wanted to share the basic setup incase you ever need to.<br><br><strong>The Database</strong><br>First you need to use <a href="http://www.mysql.com">MySQL version 4.1+</a> as this offers two new character set for storing unicode data<ul>  <li>ucs2, the UCS-2 Unicode character set.</li> <li>utf8, the UTF8 encoding of the Unicode character set.</li></ul> When you create your table you need to state the following character set <em>"CHARACTER SET utf8"</em> at the end of the SQL string.<br><div class="code">CREATE TABLE `person` (<br>\n&nbsp;&nbsp;&nbsp;`name` varchar(<FONT COLOR=BLUE>100</FONT>) NOT NULL,<br>\n&nbsp;&nbsp;&nbsp;`email` varchar(<FONT COLOR=BLUE>100</FONT>) NOT NULL,<br>\n&nbsp;&nbsp;&nbsp;PRIMARY KEY (`name`),<br>\n&nbsp;&nbsp;&nbsp;UNIQUE KEY `name` (`name`)<br>\n&nbsp;&nbsp;&nbsp;) TYPE=InnoDB "CHARACTER SET utf8;</div><br><br><strong>The Datasource</strong><br>Goto "Advanced Settings" and the connection string: <em>"useUnicode=true&characterEncoding=utf-8"</em><br><br><strong>The HTML page</strong><br>In your Application.cfm place:<br><div class="code"><FONT COLOR=MAROON>&lt;cfset setEncoding(<FONT COLOR=BLUE>"form"</FONT>,<FONT COLOR=BLUE>"utf-8"</FONT>)&gt;</FONT> <br>\n&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset setEncoding(<FONT COLOR=BLUE>"url"</FONT>,<FONT COLOR=BLUE>"utf-8"</FONT>)&gt;</FONT><br>\n&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfcontent type=<FONT COLOR=BLUE>"text/html; charset=utf-8"</FONT>&gt;</FONT></div>Then on everypage that makes a DB call place:<div class="code"><FONT COLOR=MAROON>&lt;cfprocessingdirective pageEncoding=<FONT COLOR=BLUE>"utf-8"</FONT>&gt;</FONT></div>And before you think it - no this cannot go into the Application.cfm, or be &lt;cfinclud&gt;'ed<br>For more information goto <a href="http://mysecretbase.com/ColdFusion_and_Unicode.cfm">http://mysecretbase.com/ColdFusion_and_Unicode.cfm</a>.  Matt Robertson explains in more details about this set up, including setting the HTML page as well.<br><br>And thats the bare bones of it. <br><br>I just want to say thank you to <a href="http://sustainablegis.com">Paul Hasting</a>s for helping me on <a href="http://www.houseoffusion.com">CF-TALK</a><br>
+        </main>
         <script
           src="https://giscus.app/client.js"
           data-repo="andyj/andyjarrett.com"
@@ -84,28 +84,41 @@ I've just been setting up my first true UTF-8 application with MySQL and just wa
           crossorigin="anonymous"
           async></script>
         <a name="comment"></a>
+        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
+
       </div>
-    </div>
-    <div class="row mt-5 ">
-      <div class="col-6">
-        <strong>Recent Posts</strong>
-        <ul>
+      <div class="col-md-3 col-12">
+        <!-- Side Content -->
+        <h4>Recent Posts</h4>
         
-          <li ><a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw</a></li>
+          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script</a></li>
+          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare</a></li>
+          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader</a></li>
+          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-        </ul>
-      </div>
-      <div class="col-6 pt-3 text-end">
-        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
       </div>
     </div>
   </div>
+
   <footer class="container mt-5 border-top pt-2">
   <div class="row justify-content-md-center">
     <div class="col">

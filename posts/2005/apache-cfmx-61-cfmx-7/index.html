@@ -62,12 +62,12 @@
   <div class="container">
     <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
     <h1 class="mt-5 mb-5"><b>Apache, CFMX 6.1, CFMX 7</b></h1>
-    <main class="mw fw-lighter fs-5">
-      
-Im currently running two seperate installs of CFMX, both 6.1 and 7 with apache as my local server. To do this ensure in your httpd.conf file you have the following<div class="code">#######################<br> <br>\n### FOR CFMX 6.1<br> <br>\n#######################<br> <br>\n#<br>\n# Bring in additional module-specific configurations<br>\n#<br>\n<FONT COLOR=NAVY>&lt;IfModule mod_ssl.c&gt;</FONT><br>\n    Include conf/ssl.conf<br>\n<FONT COLOR=NAVY>&lt;/IfModule&gt;</FONT><br>\n# JRun Settings<br>\nLoadModule jrun_module <FONT COLOR=BLUE>"C:/CFusionMX/runtime/lib/wsconfig/1/mod_jrun20.so"</FONT><br>\n<FONT COLOR=NAVY>&lt;IfModule mod_jrun20.c&gt;</FONT><br>\n    JRunConfig Verbose false<br>\n    JRunConfig Apialloc false<br>\n    JRunConfig Ssl false<br>\n    JRunConfig Ignoresuffixmap false<br>\n    JRunConfig Serverstore <FONT COLOR=BLUE>"C:/CFusionMX/runtime/lib/wsconfig/1/jrunserver.store"</FONT><br>\n    JRunConfig Bootstrap 127.0.0.1:51010<br>\n    #JRunConfig Errorurl <FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;optionally redirect to this URL on errors&gt;</FONT></FONT><br>\n    AddHandler jrun-handler .jsp .jws .cfm .cfml .cfc<br>\n<FONT COLOR=NAVY>&lt;/IfModule&gt;</FONT><br>\nLoadModule dav_svn_module modules/mod_dav_svn.so<br>\nLoadModule authz_svn_module modules/mod_authz_svn.so<br> <br> <br>\n#######################<br> <br>\n### FOR CFMX 7<br> <br>\n#######################<br> <br>\n# JRun Settings<br>\nLoadModule jrun_module <FONT COLOR=BLUE>"C:/CFusionMX7/runtime/lib/wsconfig/1/mod_jrun20.so"</FONT><br>\n<FONT COLOR=NAVY>&lt;IfModule mod_jrun20.c&gt;</FONT><br>\n    JRunConfig Verbose false<br>\n    JRunConfig Apialloc false<br>\n    JRunConfig Ssl false<br>\n    JRunConfig Ignoresuffixmap false<br>\n    JRunConfig Serverstore <FONT COLOR=BLUE>"C:/CFusionMX7/runtime/lib/wsconfig/1/jrunserver.store"</FONT><br>\n    JRunConfig Bootstrap 127.0.0.1:51011<br>\n    #JRunConfig Errorurl <FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;optionally redirect to this URL on errors&gt;</FONT></FONT><br>\n    #JRunConfig ProxyRetryInterval 600<br>\n    #JRunConfig ConnectTimeout 15<br>\n    #JRunConfig RecvTimeout 300<br>\n    #JRunConfig SendTimeout 15<br>\n    AddHandler jrun-handler .jsp .jws .cfm .cfml .cfc .cfr .cfswf<br>\n<FONT COLOR=NAVY>&lt;/IfModule&gt;</FONT></div>Also to make my life easier (though not as easy as i first thought it would but thats for another post) i'm using <a href="http://www.orbwave.com/software/systemmanager/index.cfm">System Manager</a><br>
-    </main>
     <div class="row">
-      <div class="col">
+      <div class="col-md-9 col-12">
+        <main class="mw fw-lighter fs-5">
+          
+Im currently running two seperate installs of CFMX, both 6.1 and 7 with apache as my local server. To do this ensure in your httpd.conf file you have the following<div class="code">#######################<br> <br>\n### FOR CFMX 6.1<br> <br>\n#######################<br> <br>\n#<br>\n# Bring in additional module-specific configurations<br>\n#<br>\n<FONT COLOR=NAVY>&lt;IfModule mod_ssl.c&gt;</FONT><br>\n    Include conf/ssl.conf<br>\n<FONT COLOR=NAVY>&lt;/IfModule&gt;</FONT><br>\n# JRun Settings<br>\nLoadModule jrun_module <FONT COLOR=BLUE>"C:/CFusionMX/runtime/lib/wsconfig/1/mod_jrun20.so"</FONT><br>\n<FONT COLOR=NAVY>&lt;IfModule mod_jrun20.c&gt;</FONT><br>\n    JRunConfig Verbose false<br>\n    JRunConfig Apialloc false<br>\n    JRunConfig Ssl false<br>\n    JRunConfig Ignoresuffixmap false<br>\n    JRunConfig Serverstore <FONT COLOR=BLUE>"C:/CFusionMX/runtime/lib/wsconfig/1/jrunserver.store"</FONT><br>\n    JRunConfig Bootstrap 127.0.0.1:51010<br>\n    #JRunConfig Errorurl <FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;optionally redirect to this URL on errors&gt;</FONT></FONT><br>\n    AddHandler jrun-handler .jsp .jws .cfm .cfml .cfc<br>\n<FONT COLOR=NAVY>&lt;/IfModule&gt;</FONT><br>\nLoadModule dav_svn_module modules/mod_dav_svn.so<br>\nLoadModule authz_svn_module modules/mod_authz_svn.so<br> <br> <br>\n#######################<br> <br>\n### FOR CFMX 7<br> <br>\n#######################<br> <br>\n# JRun Settings<br>\nLoadModule jrun_module <FONT COLOR=BLUE>"C:/CFusionMX7/runtime/lib/wsconfig/1/mod_jrun20.so"</FONT><br>\n<FONT COLOR=NAVY>&lt;IfModule mod_jrun20.c&gt;</FONT><br>\n    JRunConfig Verbose false<br>\n    JRunConfig Apialloc false<br>\n    JRunConfig Ssl false<br>\n    JRunConfig Ignoresuffixmap false<br>\n    JRunConfig Serverstore <FONT COLOR=BLUE>"C:/CFusionMX7/runtime/lib/wsconfig/1/jrunserver.store"</FONT><br>\n    JRunConfig Bootstrap 127.0.0.1:51011<br>\n    #JRunConfig Errorurl <FONT COLOR=NAVY><FONT COLOR=FF8000>&lt;optionally redirect to this URL on errors&gt;</FONT></FONT><br>\n    #JRunConfig ProxyRetryInterval 600<br>\n    #JRunConfig ConnectTimeout 15<br>\n    #JRunConfig RecvTimeout 300<br>\n    #JRunConfig SendTimeout 15<br>\n    AddHandler jrun-handler .jsp .jws .cfm .cfml .cfc .cfr .cfswf<br>\n<FONT COLOR=NAVY>&lt;/IfModule&gt;</FONT></div>Also to make my life easier (though not as easy as i first thought it would but thats for another post) i'm using <a href="http://www.orbwave.com/software/systemmanager/index.cfm">System Manager</a><br>
+        </main>
         <script
           src="https://giscus.app/client.js"
           data-repo="andyj/andyjarrett.com"
@@ -84,28 +84,41 @@ Im currently running two seperate installs of CFMX, both 6.1 and 7 with apache a
           crossorigin="anonymous"
           async></script>
         <a name="comment"></a>
+        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
+
       </div>
-    </div>
-    <div class="row mt-5 ">
-      <div class="col-6">
-        <strong>Recent Posts</strong>
-        <ul>
+      <div class="col-md-3 col-12">
+        <!-- Side Content -->
+        <h4>Recent Posts</h4>
         
-          <li ><a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw</a></li>
+          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script</a></li>
+          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare</a></li>
+          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader</a></li>
+          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-        </ul>
-      </div>
-      <div class="col-6 pt-3 text-end">
-        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
       </div>
     </div>
   </div>
+
   <footer class="container mt-5 border-top pt-2">
   <div class="row justify-content-md-center">
     <div class="col">

@@ -62,12 +62,12 @@
   <div class="container">
     <div class="my-1 text-center text-primary" role="alert"><a class=" text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div>
     <h1 class="mt-5 mb-5"><b>Installing ANT on Windows and or Mac OS X</b></h1>
-    <main class="mw fw-lighter fs-5">
-      
-I'm gonna try and cover the two OS's here so be kind.First things first, goto <a href="http://ant.apache.org/bindownload.cgi">http://ant.apache.org/bindownload.cgi</a> and download the appropriate archive (zip) file: <em>apache-ant-[VERSION NUMBER HERE]-bin.zip</em> Then for Windows: Extract the .zip to c:\\ant. From the command line set the following environment variables:<code>set ANT_HOME=c:\\antset JAVA_HOME=c:\\jdk-1.5.0.05set PATH=%PATH%;%ANT_HOME%\\bin      </code>For Mac: Unpack the zip file to /usr/local/ant/. Then from the command line set the following environment variables:<code>export ANT_HOME=/usr/local/antexport PATH=${PATH}:${ANT_HOME}/bin</code>Now open up the Terminal(Mac)/Command line(Win) and just type "ANT" and hit return. You should see:<code>Buildfile: build.xml does not exist!Build failed</code>To demonstrate calling a file we're gonna create a quick build.xml. Create a new text file, enter the following bit of XML and save it as build.xml<code><?xml version="1.0" encoding="UTF-8"?><project name="myProject" default="runEcho" basedir="."> <target name="runEcho">   <!-- Simply echo's a message to the screen -->   <echo message="Is anybody out there"/>  </target></project></code>If you are on Windows save this file to the root of c:\\ and from the command line run the following<code>ant -buildfile c:\\build.xml</code><br/>If you are on Mac then just save this to the desktop and from the Terminal run:<code>ant -buildfile ~/desktop/build.xml</code>You should now see<code>Buildfile: {PATH_TO_YOU_BUILD_FILE}build.xmlrunEcho:[echo] Is anybody out thereBUILD SUCCESSFULTotal time: 0 seconds</code>That's pretty much it, from here you you are now set to run Ant from the Terminal/Command line so in theory you should be able to schedule tasks etc!<br>
-    </main>
     <div class="row">
-      <div class="col">
+      <div class="col-md-9 col-12">
+        <main class="mw fw-lighter fs-5">
+          
+I'm gonna try and cover the two OS's here so be kind.First things first, goto <a href="http://ant.apache.org/bindownload.cgi">http://ant.apache.org/bindownload.cgi</a> and download the appropriate archive (zip) file: <em>apache-ant-[VERSION NUMBER HERE]-bin.zip</em> Then for Windows: Extract the .zip to c:\\ant. From the command line set the following environment variables:<code>set ANT_HOME=c:\\antset JAVA_HOME=c:\\jdk-1.5.0.05set PATH=%PATH%;%ANT_HOME%\\bin      </code>For Mac: Unpack the zip file to /usr/local/ant/. Then from the command line set the following environment variables:<code>export ANT_HOME=/usr/local/antexport PATH=${PATH}:${ANT_HOME}/bin</code>Now open up the Terminal(Mac)/Command line(Win) and just type "ANT" and hit return. You should see:<code>Buildfile: build.xml does not exist!Build failed</code>To demonstrate calling a file we're gonna create a quick build.xml. Create a new text file, enter the following bit of XML and save it as build.xml<code><?xml version="1.0" encoding="UTF-8"?><project name="myProject" default="runEcho" basedir="."> <target name="runEcho">   <!-- Simply echo's a message to the screen -->   <echo message="Is anybody out there"/>  </target></project></code>If you are on Windows save this file to the root of c:\\ and from the command line run the following<code>ant -buildfile c:\\build.xml</code><br/>If you are on Mac then just save this to the desktop and from the Terminal run:<code>ant -buildfile ~/desktop/build.xml</code>You should now see<code>Buildfile: {PATH_TO_YOU_BUILD_FILE}build.xmlrunEcho:[echo] Is anybody out thereBUILD SUCCESSFULTotal time: 0 seconds</code>That's pretty much it, from here you you are now set to run Ant from the Terminal/Command line so in theory you should be able to schedule tasks etc!<br>
+        </main>
         <script
           src="https://giscus.app/client.js"
           data-repo="andyj/andyjarrett.com"
@@ -84,28 +84,41 @@ I'm gonna try and cover the two OS's here so be kind.First things first, goto <a
           crossorigin="anonymous"
           async></script>
         <a name="comment"></a>
+        <p>        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p>
+
       </div>
-    </div>
-    <div class="row mt-5 ">
-      <div class="col-6">
-        <strong>Recent Posts</strong>
-        <ul>
+      <div class="col-md-3 col-12">
+        <!-- Side Content -->
+        <h4>Recent Posts</h4>
         
-          <li ><a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw</a></li>
+          <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script</a></li>
+          <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare</a></li>
+          <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-          <li ><a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader</a></li>
+          <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
         
-        </ul>
-      </div>
-      <div class="col-6 pt-3 text-end">
-        <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em>
+          <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" class="card-link link-underline-light">Utility Console Methods For Debugging Your Javascript Workflow <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
+          <a href="/posts/2024/advanced-javascript-console-methods/" class="card-link link-underline-light">Advanced Javascript Console Techniques Every Developer Should Be Aware Of <i class="bi bi-box-arrow-up-right"></i></a>
+          <hr>
+        
       </div>
     </div>
   </div>
+
   <footer class="container mt-5 border-top pt-2">
   <div class="row justify-content-md-center">
     <div class="col">
