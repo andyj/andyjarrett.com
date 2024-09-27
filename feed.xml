@@ -7,73 +7,6 @@
     <language>en</language>
     <atom:link href="https://andyjarrett.com/feed.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Reduce clutter and confusion by finally deleting those old branches, local and remote.</title>
-      <link>https://andyjarrett.com/posts/2024/reduce-clutter-and-confusion-by-finally-deleting-those-old-branches-local-and-remote/</link>
-      <description><![CDATA[
-&lt;div class=&quot;image-container my-2&quot;&gt;
-  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/brina-blum-Bb_X4JgSqIM-unsplash.jpg&quot; alt=&quot;Github dongle, because this post is about Git&quot; class=&quot;img-fluid&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;text-end&quot;&gt;
-  &lt;sup&gt;
-    &lt;cite&gt;
-      Photo by &lt;a href=&quot;https://unsplash.com/@brina_blum?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Brina Blum&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/black-usb-flash-drive-Bb_X4JgSqIM?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;
-    &lt;/cite&gt;
-  &lt;/sup&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;TL;DR:&lt;/strong&gt; Jump to the &lt;a href=&quot;https://andyjarrett.com/posts/2024/reduce-clutter-and-confusion-by-finally-deleting-those-old-branches-local-and-remote/#thescript&quot;&gt;script&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;I know my way around &lt;a rel=&quot;noopener noreferrer&quot; href=&quot;https://git-scm.com/&quot;&gt;Git&lt;/a&gt; well enough to get by, but recently, I realised just how many old branches we have in our project—some dating back years! It&#39;s definitely time for a clean-up. There are plenty of good reasons to do this, like reducing clutter, preventing confusion, improving performance, ensuring security, and freeing up space. So, I decided to tackle the mess. Now, there might be a better way to go about this, but using a script seemed like the most straightforward way to clear out the remote and local branches that are no longer needed.&lt;/p&gt;
-
-&lt;h4&gt;Deleting Local Branches&lt;/h4&gt;
-&lt;p&gt;For local branches, you can use the following command:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;git branch -d [branch name]&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;This command deletes the branch if it has been fully merged into its upstream branch (usually the branch you&#39;re currently on, like main or master).&lt;/p&gt;
-
-&lt;p&gt;If the branch has not been merged, you might need to force delete it using:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;git branch -D [branch name]&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;The &lt;code&gt;-D&lt;/code&gt; flag is a shorthand for &lt;code&gt;--delete --force&lt;/code&gt;, which forcefully deletes the branch, even if it hasn&#39;t been merged.&lt;/p&gt;
-
-&lt;h4&gt;Deleting Remote Branches&lt;/h4&gt;
-&lt;p&gt;For remote branches, use the following command:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;git push origin --delete [branch name]&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Note that it&#39;s &lt;code&gt;--delete&lt;/code&gt;, not &lt;code&gt;-d&lt;/code&gt;, when deleting remote branches.&lt;/p&gt;
-
-&lt;p&gt;That&#39;s manageable for a few branches, but if you need a larger cleanup, a script can save a lot of time and effort:&lt;/p&gt;
-&lt;a name=&quot;thescript&quot;&gt;&lt;/a&gt;
-&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;#!/bin/bash
-
-branches=(
-  &quot;main_test&quot;
-  &quot;main_example&quot;
-  &quot;remotes/origin/main_bkp&quot;
-  &quot;remotes/origin/main_bkp_bkp&quot;
-  &quot;remotes/origin/main_bkp_bkp_20240201&quot;
-)
-
-for branch in &quot;${branches[@]}&quot;
-do
-  # Check if branch is remote or local
-  if [[ $branch == remotes/origin/* ]]; then
-    remote_branch=${branch#remotes/origin/}
-    echo &quot;Deleting remote branch $remote_branch&quot;
-    git push origin --delete $remote_branch
-  else
-    echo &quot;Deleting local branch $branch&quot;
-    git branch -D $branch
-  fi
-done
-&lt;/code&gt;&lt;/pre&gt;]]></description>
-      <pubDate>Tue, 30 Jul 2024 21:02:00 +0000</pubDate>
-      <dc:creator>Andy Jarrett</dc:creator>
-      <guid>https://andyjarrett.com/posts/2024/reduce-clutter-and-confusion-by-finally-deleting-those-old-branches-local-and-remote/</guid>
-      <enclosure url="https://andyjarrett.com/public/blogimage/brina-blum-Bb_X4JgSqIM-unsplash.jpg" type="image/jpeg" />
-      <category>posts, git, csv, script, bash</category>
-      <author>Andy Jarrett &lt;email@example.com&gt;</author>
-    </item>
-    <item>
       <title>Basic Javascript Console Logging Techniques Every Developer Should Know</title>
       <link>https://andyjarrett.com/posts/2024/basic-javascript-console-logging-methods/</link>
       <description><![CDATA[
@@ -1003,6 +936,38 @@ curl -X POST &quot;https://api.indexnow.org/indexnow&quot; &#92;
       <guid>https://andyjarrett.com/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/</guid>
       <enclosure url="https://andyjarrett.com/public/blogimage/nathan-cima-2JNNpq4nGls-unsplash.jpg" type="image/jpeg" />
       <category>posts, docker, macos, disk space, docker.raw, system maintenance</category>
+      <author>Andy Jarrett &lt;email@example.com&gt;</author>
+    </item>
+    <item>
+      <title>Bluesky now has over 10 million users, and I was #56,137!</title>
+      <link>https://andyjarrett.com/posts/2024/bluesky-now-has-over-10-million-users-and-i-was-number-56137/</link>
+      <description><![CDATA[
+&lt;div class=&quot;image-container my-2&quot;&gt;
+  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/adam-birkett-P2ah-LaV52I-unsplash.jpg&quot; alt=&quot;Developer debugging&quot; class=&quot;img-fluid&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;text-end&quot;&gt;
+  &lt;sup&gt;
+    &lt;cite&gt;Photo by &lt;a href=&quot;https://unsplash.com/@abrkett?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Adam Birkett&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/white-and-black-light-post-under-blue-sky-P2ah-LaV52I?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;&lt;/cite&gt;
+  &lt;/sup&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;row&quot;&gt;
+  &lt;div class=&quot;col-12&quot;&gt;
+    &lt;p&gt;Bluesky now has over 10 million users, and I was  &lt;a href=&quot;https://bsky.app/profile/andyjarrett.com&quot;&gt;#56137&lt;/a&gt;!&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;row mb-5&quot;&gt;
+  &lt;div class=&quot;col-6&quot;&gt;
+    &lt;a href=&quot;https://bsky.app/profile/andyjarrett.com&quot;&gt;
+      &lt;img src=&quot;https://andyjarrett.com/public/img/bluesky-andyjarrett.png&quot; alt=&quot;A virtual certificate with text &#39;Celebrating 10M users on Bluesky, #56,137, Andy Jarrett @andyjarrett.com, joined on May 3, 2023&#39;&quot; class=&quot;img-fluid&quot; /&gt;
+    &lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;]]></description>
+      <pubDate>Mon, 16 Sep 2024 18:01:00 +0000</pubDate>
+      <dc:creator>Andy Jarrett</dc:creator>
+      <guid>https://andyjarrett.com/posts/2024/bluesky-now-has-over-10-million-users-and-i-was-number-56137/</guid>
+      <enclosure url="https://andyjarrett.com/public/blogimage/adam-birkett-P2ah-LaV52I-unsplash.jpg" type="image/jpeg" />
+      <category>posts, bluesky, 10million</category>
       <author>Andy Jarrett &lt;email@example.com&gt;</author>
     </item>
     <image>
