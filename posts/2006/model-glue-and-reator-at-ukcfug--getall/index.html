@@ -9,7 +9,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Model Glue and Reator at UKCFUG - getAll()">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
-<meta name="twitter:creator" content="@andyj" />
+<meta name="twitter:creator" content="@andyj">
 <meta property="og:title" content="Model Glue and Reator at UKCFUG - getAll()">
 <meta property="og:description" content="Go to AndyJarrett.com for more">
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
@@ -17,10 +17,10 @@
 <meta property="og:image:height" content="630">
 <link rel="canonical" href="https://www.andyjarrett.com/posts/2006/model-glue-and-reator-at-ukcfug--getall/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
-<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
-<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj">
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml">
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
@@ -78,7 +78,7 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-<p>I traveled into London again last night to see the <a href="http://www.ukcfug.org/index.cfm?objectid=643A62AF-F1FF-921E-1372A1B7B3FBECE4" target="_blank">Model Glue and Reactor, a winning combination</a> presentation with Mark Drew as the speaker, compere, organiser and the general setting up guy.</p><p>The presentation lasted for 2 hours and covered everything from setting up your development environment, to creating the beginnings of a blog app using both frameworks. Mark started with a slide show presentation detailing the frameworks, explaining their relationships to each other and how they are used in the <a href="http://en.wikipedia.org/wiki/MVC" target="_blank">Model-View-Controller (MVC)</a> pattern.</p><table><tr><td><strong>M</strong>odel</td><td>Reactor</td><tr><tr><td><strong>V</strong>iew</td><td>CFMX</td><tr><tr><td><strong>C</strong>ontroller</td><td>Model Glue</td><tr></table><p>After this he went through each of the frameworks separately, starting with <a href="http://model-glue.com/" target="_blank">MG</a> and breaking down the nodes in the modelglue.xml (config file). This then lead onto <a href="http://www.doughughes.net/index.cfm?filter=category&categoryId=30" target="_blank">Reactor,</a> explaining that it is an <a href="http://en.wikipedia.org/wiki/Object-relationship_modeling" target="_blank">Object-relationship modeling (ORM)</a> framework. Basically it helps speeds up development but cutting out the need to create SQL statements, DAO's, and Active Records as it does all this on the fly. Using your reactor.xml file you create the links and relationships between you tables and Reactor does the rest.</p><p>After the theory we moved into coding which Mark was doing everything on a Mac Book pro - I gotta mentioned it as I bugged him about running anything and everything on it last night as i'm <em>still </em> thinking about getting one . This also meant that cause of the new intel chips he had to set up an extra mapping in the CF administrator which normally wouldn't actually be needed. Mark then went and setup a MG/Reactor environment straight from the .zip files you can download from the sites. There wasnt actually that much new there but it was nice to see it setup from scratch. The next hour or so was used setting up the MG events and listeners, then onto adding Reactor for the database interaction and I think at this point he really showed the power of Reactor. Using a cfc called formutils.cfc (which you gotta release Mark) he generated a form on the fly using the MySQL tables metadata available through Reactor. So if you deleted a field from you &quot;Comment&quot; table, refreshing the form would remove the field.  He then proceed to update/insert blog posts and comments all by just setting up the relationships in the reactor.xml. </p><p>My write up I don't think has covered half of it really as Mark went into dumping a lot of the objects that MG and Reactor returned to show and explain what is available. Most of the objects in both frameworks have a getAll() method  which Mark seemed to be hunting down and utilising everywhere but it did show and display that there are a lot of functions(methods)  in these  which are helpful but aren't necessarily in the documentation.</p><p>Overall it was a great presentation and well worth the trip up. It was also good to not rush off afterward and get a beer over at The Bull afterwards, shame though I had to go to get back to Waterloo before I could hit the vodka.</p><p>&nbsp;</p><p>&nbsp; </p><br>
+<p>I traveled into London again last night to see the <a href="http://www.ukcfug.org/index.cfm?objectid=643A62AF-F1FF-921E-1372A1B7B3FBECE4" target="_blank">Model Glue and Reactor, a winning combination</a> presentation with Mark Drew as the speaker, compere, organiser and the general setting up guy.</p><p>The presentation lasted for 2 hours and covered everything from setting up your development environment, to creating the beginnings of a blog app using both frameworks. Mark started with a slide show presentation detailing the frameworks, explaining their relationships to each other and how they are used in the <a href="http://en.wikipedia.org/wiki/MVC" target="_blank">Model-View-Controller (MVC)</a> pattern.</p><table><tr><td><strong>M</strong>odel</td><td>Reactor</td></tr><tr></tr><tr><td><strong>V</strong>iew</td><td>CFMX</td></tr><tr></tr><tr><td><strong>C</strong>ontroller</td><td>Model Glue</td></tr><tr></tr></table><p>After this he went through each of the frameworks separately, starting with <a href="http://model-glue.com/" target="_blank">MG</a> and breaking down the nodes in the modelglue.xml (config file). This then lead onto <a href="http://www.doughughes.net/index.cfm?filter=category&categoryId=30" target="_blank">Reactor,</a> explaining that it is an <a href="http://en.wikipedia.org/wiki/Object-relationship_modeling" target="_blank">Object-relationship modeling (ORM)</a> framework. Basically it helps speeds up development but cutting out the need to create SQL statements, DAO's, and Active Records as it does all this on the fly. Using your reactor.xml file you create the links and relationships between you tables and Reactor does the rest.</p><p>After the theory we moved into coding which Mark was doing everything on a Mac Book pro - I gotta mentioned it as I bugged him about running anything and everything on it last night as i'm <em>still </em> thinking about getting one . This also meant that cause of the new intel chips he had to set up an extra mapping in the CF administrator which normally wouldn't actually be needed. Mark then went and setup a MG/Reactor environment straight from the .zip files you can download from the sites. There wasnt actually that much new there but it was nice to see it setup from scratch. The next hour or so was used setting up the MG events and listeners, then onto adding Reactor for the database interaction and I think at this point he really showed the power of Reactor. Using a cfc called formutils.cfc (which you gotta release Mark) he generated a form on the fly using the MySQL tables metadata available through Reactor. So if you deleted a field from you &quot;Comment&quot; table, refreshing the form would remove the field.  He then proceed to update/insert blog posts and comments all by just setting up the relationships in the reactor.xml. </p><p>My write up I don't think has covered half of it really as Mark went into dumping a lot of the objects that MG and Reactor returned to show and explain what is available. Most of the objects in both frameworks have a getAll() method  which Mark seemed to be hunting down and utilising everywhere but it did show and display that there are a lot of functions(methods)  in these  which are helpful but aren't necessarily in the documentation.</p><p>Overall it was a great presentation and well worth the trip up. It was also good to not rush off afterward and get a beer over at The Bull afterwards, shame though I had to go to get back to Waterloo before I could hit the vodka.</p><p>&nbsp;</p><p>&nbsp; </p><br>
             </section>
 
             <footer>
@@ -90,21 +90,7 @@
               </p>
             </footer>
 
-            <script
-              src="https://giscus.app/client.js"
-              data-repo="andyj/andyjarrett.com"
-              data-repo-id="R_kgDOMjCDkQ"
-              data-category="Announcements"
-              data-category-id="DIC_kwDOMjCDkc4ChlfU"
-              data-mapping="pathname"
-              data-strict="0"
-              data-reactions-enabled="1"
-              data-emit-metadata="0"
-              data-input-position="top"
-              data-theme="preferred_color_scheme"
-              data-lang="en"
-              crossorigin="anonymous"
-              async></script>
+            <script src="https://giscus.app/client.js" data-repo="andyj/andyjarrett.com" data-repo-id="R_kgDOMjCDkQ" data-category="Announcements" data-category-id="DIC_kwDOMjCDkc4ChlfU" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async=""></script>
             <a name="comment"></a>
           </div>
 

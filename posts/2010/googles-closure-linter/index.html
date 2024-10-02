@@ -9,7 +9,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Googles Closure Linter">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
-<meta name="twitter:creator" content="@andyj" />
+<meta name="twitter:creator" content="@andyj">
 <meta property="og:title" content="Googles Closure Linter">
 <meta property="og:description" content="Go to AndyJarrett.com for more">
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
@@ -17,10 +17,10 @@
 <meta property="og:image:height" content="630">
 <link rel="canonical" href="https://www.andyjarrett.com/posts/2010/googles-closure-linter/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
-<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
-<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj">
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml">
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
@@ -78,7 +78,7 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-<p>  Style guides are a nice way of maintaining good code, even  <a href="http://livedocs.adobe.com/wtg/public/coding_standards/contents.html">ColdFusion has one</a> laying around  albeit a little neglected nowadays <a href="/blog/page.cfm/Contact-Me">anyone interested in looking over it with me</a>?).  Recently Google shared their  <a href="http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml" title="Js Style guide">Javascript</a> coding guide which although is not earth shatteringly new it proves to be a great developer resource  especialy if you work in a team of any size.</p> <p>  As a companion they are now making available, publicy,  <a href="http://closuretools.blogspot.com/2010/08/introducing-closure-linter.html" title="Introducing Closure Linter - Closure Tools Blog">   the Closure Linter  </a> which is a Js validator used from the terminal/command line that checks that the style guide is being followed.<br/></p><p>  <a href="http://code.google.com/closure/utilities/docs/linter_howto.html" title="How to Use Closure Linter - Closure Linter - Google Code">   Installing the program  </a> is made foolproof thanks to Pythons "easy_install" and once installed checking your Javascript file is  then a simple case of running the following from the Terminal</p><code>$ gjslint path/to/my/file.js</code><p>I managed to find 114 errors on the first Js file I tried it again which looked something like:</p><code>Line 67, E:0131: Single-quoted string preferred over double-quoted string.Line 67, E:0010: (New error) Missing semicolon at end of lineLine 68, E:0005: Illegal tab in whitespace before "}"Line 69, E:0005: Illegal tab in whitespace before "}"Line 69, E:0010: (New error) Missing semicolon at end of lineLine 70, E:0010: (New error) Missing semicolon at end of lineLine 70, E:0300: File does not end with new line.  (}))Found 114 errors, including 9 new errors, in 1 files (0 files OK).</code><p>Thats actually not the best bit, you can even fix most of the error too by running</p><code>fixjsstyle --strict  path/to/my/file.js</code><p>  Regretfully I haven't been able to test this yet due to a <a href="http://code.google.com/p/closure-linter/issues/detail?id=1">bug</a> with the "fixjsstyle" program on the Mac. Once that is resolved though I'll be hopefully be coming back here to share how succesfully it works.</p><br>
+<p>  Style guides are a nice way of maintaining good code, even  <a href="http://livedocs.adobe.com/wtg/public/coding_standards/contents.html">ColdFusion has one</a> laying around  albeit a little neglected nowadays <a href="/blog/page.cfm/Contact-Me">anyone interested in looking over it with me</a>?).  Recently Google shared their  <a href="http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml" title="Js Style guide">Javascript</a> coding guide which although is not earth shatteringly new it proves to be a great developer resource  especialy if you work in a team of any size.</p> <p>  As a companion they are now making available, publicy,  <a href="http://closuretools.blogspot.com/2010/08/introducing-closure-linter.html" title="Introducing Closure Linter - Closure Tools Blog">   the Closure Linter  </a> which is a Js validator used from the terminal/command line that checks that the style guide is being followed.<br></p><p>  <a href="http://code.google.com/closure/utilities/docs/linter_howto.html" title="How to Use Closure Linter - Closure Linter - Google Code">   Installing the program  </a> is made foolproof thanks to Pythons "easy_install" and once installed checking your Javascript file is  then a simple case of running the following from the Terminal</p><code>$ gjslint path/to/my/file.js</code><p>I managed to find 114 errors on the first Js file I tried it again which looked something like:</p><code>Line 67, E:0131: Single-quoted string preferred over double-quoted string.Line 67, E:0010: (New error) Missing semicolon at end of lineLine 68, E:0005: Illegal tab in whitespace before "}"Line 69, E:0005: Illegal tab in whitespace before "}"Line 69, E:0010: (New error) Missing semicolon at end of lineLine 70, E:0010: (New error) Missing semicolon at end of lineLine 70, E:0300: File does not end with new line.  (}))Found 114 errors, including 9 new errors, in 1 files (0 files OK).</code><p>Thats actually not the best bit, you can even fix most of the error too by running</p><code>fixjsstyle --strict  path/to/my/file.js</code><p>  Regretfully I haven't been able to test this yet due to a <a href="http://code.google.com/p/closure-linter/issues/detail?id=1">bug</a> with the "fixjsstyle" program on the Mac. Once that is resolved though I'll be hopefully be coming back here to share how succesfully it works.</p><br>
             </section>
 
             <footer>
@@ -90,21 +90,7 @@
               </p>
             </footer>
 
-            <script
-              src="https://giscus.app/client.js"
-              data-repo="andyj/andyjarrett.com"
-              data-repo-id="R_kgDOMjCDkQ"
-              data-category="Announcements"
-              data-category-id="DIC_kwDOMjCDkc4ChlfU"
-              data-mapping="pathname"
-              data-strict="0"
-              data-reactions-enabled="1"
-              data-emit-metadata="0"
-              data-input-position="top"
-              data-theme="preferred_color_scheme"
-              data-lang="en"
-              crossorigin="anonymous"
-              async></script>
+            <script src="https://giscus.app/client.js" data-repo="andyj/andyjarrett.com" data-repo-id="R_kgDOMjCDkQ" data-category="Announcements" data-category-id="DIC_kwDOMjCDkc4ChlfU" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async=""></script>
             <a name="comment"></a>
           </div>
 

@@ -9,7 +9,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Firefox bookmarks">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
-<meta name="twitter:creator" content="@andyj" />
+<meta name="twitter:creator" content="@andyj">
 <meta property="og:title" content="Firefox bookmarks">
 <meta property="og:description" content="Go to AndyJarrett.com for more">
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
@@ -17,10 +17,10 @@
 <meta property="og:image:height" content="630">
 <link rel="canonical" href="https://www.andyjarrett.com/posts/2004/firefox-bookmarks/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
-<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
-<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj">
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml">
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
@@ -78,7 +78,7 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-I mentioned in my <a href="http://andyjarrett.co.uk/andy/blog/Index.cfm?mode=entry&entry=9B9B8ED6-3048-28EB-0E29DE4FB8F69353">last post</a> about Firefox bookmarks. If you have have never used this function let me explain. <br/><br/>This techniques allows you to do searches from the address bar by first typing in some keyords then a search string. So to search <a href="http://www.google.com">Google</a> i type something like <a href="http://www.google.co.uk/search?q=bill%20hicks">gg bill hicks</a>, and it goes off and grabs the page. To set this up is easy. In my example i'll set up a search to look through <a href="http://www.macromedia.com">Macromedia.com</a>. First goto:<br/>Bookmarks &raquo; Manage Bookmarks  &raquo; New Bookmarks<br/><br/>Then add the following information to the fields<br/><br/><strong>Name =</strong> Macromedia Search<br/><strong>Location = </strong>http://www.macromedia.com/cfusion/search/index.cfm?term=%s<br/><strong>Keyword = </strong>mm<br/><br/>Close that, go back to FF and type something like <a href="http://www.macromedia.com/cfusion/search/index.cfm?term=blackstone">mm blackstone</a> to search Macromedia for Blackstone information.<br/><br/>As you can see this all lies in the %s, this is the string that FF passes to the url. With this in mind, you can now be really lazy and set up bookmarks like:<table cellpadding="3"><tr> <th>keyword</th>  <th>Location</th> <th>Desc.</th></tr><tr> <td>com</td>  <td>http://www.%s.com</td>  <td>Look up .com address. Also do this for .net .org etc</td></tr><tr>  <td>dict</td> <td>http://dictionary.reference.com/search?q=%s</td>  <td>Dictionary look up</td></tr><tr>  <td>aj</td> <td>http://www.andyjarrett.co.uk</td> <td>Don't forget you can just use it as a shortcut to your favourite site</td></tr></table><br>
+I mentioned in my <a href="http://andyjarrett.co.uk/andy/blog/Index.cfm?mode=entry&entry=9B9B8ED6-3048-28EB-0E29DE4FB8F69353">last post</a> about Firefox bookmarks. If you have have never used this function let me explain. <br><br>This techniques allows you to do searches from the address bar by first typing in some keyords then a search string. So to search <a href="http://www.google.com">Google</a> i type something like <a href="http://www.google.co.uk/search?q=bill%20hicks">gg bill hicks</a>, and it goes off and grabs the page. To set this up is easy. In my example i'll set up a search to look through <a href="http://www.macromedia.com">Macromedia.com</a>. First goto:<br>Bookmarks &raquo; Manage Bookmarks  &raquo; New Bookmarks<br><br>Then add the following information to the fields<br><br><strong>Name =</strong> Macromedia Search<br><strong>Location = </strong>http://www.macromedia.com/cfusion/search/index.cfm?term=%s<br><strong>Keyword = </strong>mm<br><br>Close that, go back to FF and type something like <a href="http://www.macromedia.com/cfusion/search/index.cfm?term=blackstone">mm blackstone</a> to search Macromedia for Blackstone information.<br><br>As you can see this all lies in the %s, this is the string that FF passes to the url. With this in mind, you can now be really lazy and set up bookmarks like:<table cellpadding="3"><tr> <th>keyword</th>  <th>Location</th> <th>Desc.</th></tr><tr> <td>com</td>  <td>http://www.%s.com</td>  <td>Look up .com address. Also do this for .net .org etc</td></tr><tr>  <td>dict</td> <td>http://dictionary.reference.com/search?q=%s</td>  <td>Dictionary look up</td></tr><tr>  <td>aj</td> <td>http://www.andyjarrett.co.uk</td> <td>Don't forget you can just use it as a shortcut to your favourite site</td></tr></table><br>
             </section>
 
             <footer>
@@ -90,21 +90,7 @@ I mentioned in my <a href="http://andyjarrett.co.uk/andy/blog/Index.cfm?mode=ent
               </p>
             </footer>
 
-            <script
-              src="https://giscus.app/client.js"
-              data-repo="andyj/andyjarrett.com"
-              data-repo-id="R_kgDOMjCDkQ"
-              data-category="Announcements"
-              data-category-id="DIC_kwDOMjCDkc4ChlfU"
-              data-mapping="pathname"
-              data-strict="0"
-              data-reactions-enabled="1"
-              data-emit-metadata="0"
-              data-input-position="top"
-              data-theme="preferred_color_scheme"
-              data-lang="en"
-              crossorigin="anonymous"
-              async></script>
+            <script src="https://giscus.app/client.js" data-repo="andyj/andyjarrett.com" data-repo-id="R_kgDOMjCDkQ" data-category="Announcements" data-category-id="DIC_kwDOMjCDkc4ChlfU" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async=""></script>
             <a name="comment"></a>
           </div>
 

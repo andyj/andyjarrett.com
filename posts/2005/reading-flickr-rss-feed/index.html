@@ -9,7 +9,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Reading Flickr RSS feed">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
-<meta name="twitter:creator" content="@andyj" />
+<meta name="twitter:creator" content="@andyj">
 <meta property="og:title" content="Reading Flickr RSS feed">
 <meta property="og:description" content="Go to AndyJarrett.com for more">
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
@@ -17,10 +17,10 @@
 <meta property="og:image:height" content="630">
 <link rel="canonical" href="https://www.andyjarrett.com/posts/2005/reading-flickr-rss-feed/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
-<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
-<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj">
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml">
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
@@ -78,7 +78,7 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-This is nothing great, and it uses Ray Camden <a href="http://ray.camdenfamily.com/index.cfm?mode=entry&entry=C8B6CE92-0411-13B5-781AF39306642922">RSS.cfc</a> to read and execute your Flickr feed.<div class="code"><FONT COLOR=GRAY><I>&lt;!--- Your feed (this is mine) ---&gt;</I></FONT><br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset myRssFeed = <FONT COLOR=BLUE>"<A TARGET="_blank" HREF="http://www.flickr.com/services/feeds/photos_public.gne?id=38904643@N00&format=rss_200">http://www.flickr.com/services/feeds/photos_public.gne?id=38904643@N00&format=rss_200</A>"</FONT> /&gt;</FONT><br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfhttp method=<FONT COLOR=BLUE>"get"</FONT> url=<FONT COLOR=BLUE>"#myRssFeed#"</FONT>&gt;</FONT><FONT COLOR=MAROON>&lt;/cfhttp&gt;</FONT><br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset flickr_rss&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= cfhttp.FileContent /&gt;</FONT><br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfscript&gt;</FONT><br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feed &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= flickr_rss;<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rss &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= createObject(<FONT COLOR=BLUE>"component"</FONT>, <FONT COLOR=BLUE>"rss"</FONT>);<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entries = rss.getEntries(feed);<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;/cfscript&gt;</FONT>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfdump var=<FONT COLOR=BLUE>"#entries#"</FONT> /&gt;</FONT></div><br>
+This is nothing great, and it uses Ray Camden <a href="http://ray.camdenfamily.com/index.cfm?mode=entry&entry=C8B6CE92-0411-13B5-781AF39306642922">RSS.cfc</a> to read and execute your Flickr feed.<div class="code"><FONT COLOR="GRAY"><I>&lt;!--- Your feed (this is mine) ---&gt;</I></FONT><br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="MAROON">&lt;cfset myRssFeed = <FONT COLOR="BLUE">"<A TARGET="_blank" HREF="http://www.flickr.com/services/feeds/photos_public.gne?id=38904643@N00&format=rss_200">http://www.flickr.com/services/feeds/photos_public.gne?id=38904643@N00&format=rss_200</A>"</FONT> /&gt;</FONT><br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="MAROON">&lt;cfhttp method=<FONT COLOR="BLUE">"get"</FONT> url=<FONT COLOR="BLUE">"#myRssFeed#"</FONT>&gt;</FONT><FONT COLOR="MAROON">&lt;/cfhttp&gt;</FONT><br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="MAROON">&lt;cfset flickr_rss&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= cfhttp.FileContent /&gt;</FONT><br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="MAROON">&lt;cfscript&gt;</FONT><br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;feed &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= flickr_rss;<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;rss &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;= createObject(<FONT COLOR="BLUE">"component"</FONT>, <FONT COLOR="BLUE">"rss"</FONT>);<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;entries = rss.getEntries(feed);<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="MAROON">&lt;/cfscript&gt;</FONT>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="MAROON">&lt;cfdump var=<FONT COLOR="BLUE">"#entries#"</FONT> /&gt;</FONT></div><br>
             </section>
 
             <footer>
@@ -90,21 +90,7 @@ This is nothing great, and it uses Ray Camden <a href="http://ray.camdenfamily.c
               </p>
             </footer>
 
-            <script
-              src="https://giscus.app/client.js"
-              data-repo="andyj/andyjarrett.com"
-              data-repo-id="R_kgDOMjCDkQ"
-              data-category="Announcements"
-              data-category-id="DIC_kwDOMjCDkc4ChlfU"
-              data-mapping="pathname"
-              data-strict="0"
-              data-reactions-enabled="1"
-              data-emit-metadata="0"
-              data-input-position="top"
-              data-theme="preferred_color_scheme"
-              data-lang="en"
-              crossorigin="anonymous"
-              async></script>
+            <script src="https://giscus.app/client.js" data-repo="andyj/andyjarrett.com" data-repo-id="R_kgDOMjCDkQ" data-category="Announcements" data-category-id="DIC_kwDOMjCDkc4ChlfU" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async=""></script>
             <a name="comment"></a>
           </div>
 

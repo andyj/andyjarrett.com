@@ -9,7 +9,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Calling an AS400/iSeries RPG in ColdFusion">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
-<meta name="twitter:creator" content="@andyj" />
+<meta name="twitter:creator" content="@andyj">
 <meta property="og:title" content="Calling an AS400/iSeries RPG in ColdFusion">
 <meta property="og:description" content="Go to AndyJarrett.com for more">
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
@@ -17,10 +17,10 @@
 <meta property="og:image:height" content="630">
 <link rel="canonical" href="https://www.andyjarrett.com/posts/2010/calling-an-as400iseries-rpg-in-coldfusion/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
-<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
-<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj">
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml">
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
@@ -78,8 +78,8 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-<p>After googling the hell out of this over the last few days I decided that my effort should actually go back in to the community to hopefully make someone else's life easier than mine was. </p><p>I am assuming at this point that you have a AS400 datasource setup using the <a href="http://jt400.sourceforge.net/" title="JTOpen | Overview">JDBC JT400 driver</a>. If you don't know how, and there is enough demand I'll post something on this, otherwise this guide simply demonstrates how to call an RPG program on an AS400 and read the OUT param that comes back.</p><p>I've put all of my comments in the code rather than making this post longer than it needs to be. Any questions then please use the comments as usual</p> <p>All of my knowledge about the packages I have used come from <a href="http://publib.boulder.ibm.com/iseries/v5r1/ic2924/info/rzahh/javadoc/com/ibm/as400/access/package-tree.html">publib.boulder.ibm.com/iseries/ .... com/ibm/as400/access</a><code><cfscript> // AS400/iSeries attributes uname = "USERNAME"; pword = "PASSWORD"; as400Ip = "10.10.10.10";    if( NOT isDefined("application.as400") OR isDefined( "url.reload" ) ){    // get our JDBC driver 'iSeries'    iSeries = createObject("java", "com.ibm.as400.access.AS400");         // initilise the driver with our credentials    iseries.init(as400Ip, Trim(UCase(uname)), Left(Trim(pword), 10));       // Validate the passed in details   v = (iSeries.ValidateSignon());   // when valid put JDBC Connection drivers in Application scope    application.as400 = {       iSeries = iSeries,      Command = createObject("java", "com.ibm.as400.access.CommandCall"),     ProgramCall = createObject('java', 'com.ibm.as400.access.ProgramCall'),     ProgramParameter = createObject('java', 'com.ibm.as400.access.ProgramParameter'),     AS400Text = createObject('java', 'com.ibm.as400.access.AS400Text')          };  }   // 1) First parameter // Each paramater must be type of AS400Text application.as400.AS400Text.init( 11 ); // Set the length // init the fist ProgramParameter that is going to be passed in p1 = application.as400.ProgramParameter.init("1");  // Add the value in an AS/400 format in the specified byte array  p1.setInputData( application.as400.AS400Text.toBytes("") );   // 2) Second parameter  application.as400.AS400Text.init( 11 ); // Set the length // init the fist ProgramParameter that is going to be passed in p2 = application.as400.ProgramParameter.init("1");  // Add the value in an AS/400 format in the specified byte array  p2.setInputData( application.as400.AS400Text.toBytes("") );   // Put the params into an array paramAry = [p1,p2];   // The command/RPG you are going to call  CommandtoRun = "/QSYS.LIB/MYLIB1.LIB/VPCQWEQW.PGM";   // init using the iSeries connection we created, CommandToRun, and the params (in an array) PgmCall = application.as400.ProgramCall.init( application.as400.iSeries, CommandtoRun, paramAry );    // Now run it (returns boolean) PgmRun = ( application.as400.ProgramCall.Run());      // any errors or messages can be found here msgList = application.as400.ProgramCall.getMessageList()</cfscript><!--- Loop over any messages ---><ul><cfloop from="1" to="#arrayLen( msgList )#" index="i">  <li><cfdump var="#msgList[i].getText()#"></li></cfloop></ul><cfif NOT PgmRun> Did not run<cfelse> It ran. Im now going to get the second OUT param  <hr/>   <!--- The param are returned as an AS400Text byte array so we need to fix that ---> <cfset asText = application.as400.AS400Text.init( 11 ) /> <cfoutput>#application.as400.AS400Text.toObject( p2.getOutputData() )#</cfoutput></cfif><!--- disconnect from the as400 ---><cfset application.as400.iseries.disconnectservice(application.as400.iseries.command)></code><br>
-            </section>
+<p>After googling the hell out of this over the last few days I decided that my effort should actually go back in to the community to hopefully make someone else's life easier than mine was. </p><p>I am assuming at this point that you have a AS400 datasource setup using the <a href="http://jt400.sourceforge.net/" title="JTOpen | Overview">JDBC JT400 driver</a>. If you don't know how, and there is enough demand I'll post something on this, otherwise this guide simply demonstrates how to call an RPG program on an AS400 and read the OUT param that comes back.</p><p>I've put all of my comments in the code rather than making this post longer than it needs to be. Any questions then please use the comments as usual</p> <p>All of my knowledge about the packages I have used come from <a href="http://publib.boulder.ibm.com/iseries/v5r1/ic2924/info/rzahh/javadoc/com/ibm/as400/access/package-tree.html">publib.boulder.ibm.com/iseries/ .... com/ibm/as400/access</a><code><cfscript> // AS400/iSeries attributes uname = "USERNAME"; pword = "PASSWORD"; as400Ip = "10.10.10.10";    if( NOT isDefined("application.as400") OR isDefined( "url.reload" ) ){    // get our JDBC driver 'iSeries'    iSeries = createObject("java", "com.ibm.as400.access.AS400");         // initilise the driver with our credentials    iseries.init(as400Ip, Trim(UCase(uname)), Left(Trim(pword), 10));       // Validate the passed in details   v = (iSeries.ValidateSignon());   // when valid put JDBC Connection drivers in Application scope    application.as400 = {       iSeries = iSeries,      Command = createObject("java", "com.ibm.as400.access.CommandCall"),     ProgramCall = createObject('java', 'com.ibm.as400.access.ProgramCall'),     ProgramParameter = createObject('java', 'com.ibm.as400.access.ProgramParameter'),     AS400Text = createObject('java', 'com.ibm.as400.access.AS400Text')          };  }   // 1) First parameter // Each paramater must be type of AS400Text application.as400.AS400Text.init( 11 ); // Set the length // init the fist ProgramParameter that is going to be passed in p1 = application.as400.ProgramParameter.init("1");  // Add the value in an AS/400 format in the specified byte array  p1.setInputData( application.as400.AS400Text.toBytes("") );   // 2) Second parameter  application.as400.AS400Text.init( 11 ); // Set the length // init the fist ProgramParameter that is going to be passed in p2 = application.as400.ProgramParameter.init("1");  // Add the value in an AS/400 format in the specified byte array  p2.setInputData( application.as400.AS400Text.toBytes("") );   // Put the params into an array paramAry = [p1,p2];   // The command/RPG you are going to call  CommandtoRun = "/QSYS.LIB/MYLIB1.LIB/VPCQWEQW.PGM";   // init using the iSeries connection we created, CommandToRun, and the params (in an array) PgmCall = application.as400.ProgramCall.init( application.as400.iSeries, CommandtoRun, paramAry );    // Now run it (returns boolean) PgmRun = ( application.as400.ProgramCall.Run());      // any errors or messages can be found here msgList = application.as400.ProgramCall.getMessageList()</cfscript><!--- Loop over any messages ---><ul><cfloop from="1" to="#arrayLen( msgList )#" index="i">  <li><cfdump var="#msgList[i].getText()#"></cfdump></li></cfloop></ul><cfif NOT="" PgmRun=""> Did not run<cfelse> It ran. Im now going to get the second OUT param  <hr>   <!--- The param are returned as an AS400Text byte array so we need to fix that ---> <cfset 11="" asText="application.as400.AS400Text.init(" )=""> <cfoutput>#application.as400.AS400Text.toObject( p2.getOutputData() )#</cfoutput></cfset></cfelse></cfif><!--- disconnect from the as400 ---><cfset application.as400.iseries.disconnectservice(application.as400.iseries.command)=""></cfset></code><br>
+            </p></section>
 
             <footer>
               <p>
@@ -90,21 +90,7 @@
               </p>
             </footer>
 
-            <script
-              src="https://giscus.app/client.js"
-              data-repo="andyj/andyjarrett.com"
-              data-repo-id="R_kgDOMjCDkQ"
-              data-category="Announcements"
-              data-category-id="DIC_kwDOMjCDkc4ChlfU"
-              data-mapping="pathname"
-              data-strict="0"
-              data-reactions-enabled="1"
-              data-emit-metadata="0"
-              data-input-position="top"
-              data-theme="preferred_color_scheme"
-              data-lang="en"
-              crossorigin="anonymous"
-              async></script>
+            <script src="https://giscus.app/client.js" data-repo="andyj/andyjarrett.com" data-repo-id="R_kgDOMjCDkQ" data-category="Announcements" data-category-id="DIC_kwDOMjCDkc4ChlfU" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async=""></script>
             <a name="comment"></a>
           </div>
 

@@ -9,7 +9,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Setting Up Model Glue with no mappings">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
-<meta name="twitter:creator" content="@andyj" />
+<meta name="twitter:creator" content="@andyj">
 <meta property="og:title" content="Setting Up Model Glue with no mappings">
 <meta property="og:description" content="Go to AndyJarrett.com for more">
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
@@ -17,10 +17,10 @@
 <meta property="og:image:height" content="630">
 <link rel="canonical" href="https://www.andyjarrett.com/posts/2006/setting-up-model-glue-with-no-mappings/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
-<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
-<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj">
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml">
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
@@ -78,8 +78,8 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-<p>There was a post on the MG lists about setting up Model Glue and the fact you need mappings. I had this lying around from some internal writings and thought it might be useful. It details setting up MG with no mappings. <strong>Example 1 - Root setup</strong><br><strong>URL :</strong> www.mysite.com <br><more/><p>On the root of your site you have the MG folder along with the others e.g./modelglue/<br>/controller/<br>/views/<br>/model/<br>/config/</p><p>To call the welcome page the URL would be www.mysite.com/index.cfm?event=welcome</p>In the modelglue.xml the config looks like this:<code><config> <setting name="beanMappings" value="/config/beans/" />  <setting name="viewMappings" value="/views" />  <setting name="reload" value="true" />  <setting name="defaultEvent" value="Home" />  <setting name="debug" value="true" /></config><controllers> <controller name="myController" type="controller.Controller">   <message-listener message="OnRequestStart" function="OnRequestStart" />   <message-listener message="OnRequestEnd" function="OnRequestEnd" /> </controller></controllers></code><br/><br/><strong>Example 2 - Folder setup</strong><br><strong>URL :</strong>www.anothersite.com/myapp/<br><p>From the root the set up looks like this/modelglue/<br>/myapp/controller/<br>/myapp/views/<br>/myapp/model/<br>/myapp/config/</p>The welcome page the URL would be www.anothersite.com/myapp/index.cfm?event=welcomeIn my modelglue.xml the config looks like this:<code><config> <setting name="beanMappings" value="/myapp/config/beans/" />  <setting name="viewMappings" value="/myapp/views" />  <setting name="reload" value="true" />  <setting name="defaultEvent" value="Home" />  <setting name="debug" value="true" /></config><controllers> <controller name="myController" type="myapp.controller.Controller">   <message-listener message="OnRequestStart" function="OnRequestStart" />   <message-listener message="OnRequestEnd" function="OnRequestEnd" /> </controller></controllers></code><br>
-            </section>
+<p>There was a post on the MG lists about setting up Model Glue and the fact you need mappings. I had this lying around from some internal writings and thought it might be useful. It details setting up MG with no mappings. <strong>Example 1 - Root setup</strong><br><strong>URL :</strong> www.mysite.com <br><more><p>On the root of your site you have the MG folder along with the others e.g./modelglue/<br>/controller/<br>/views/<br>/model/<br>/config/</p><p>To call the welcome page the URL would be www.mysite.com/index.cfm?event=welcome</p>In the modelglue.xml the config looks like this:<code><config> <setting name="beanMappings" value="/config/beans/">  <setting name="viewMappings" value="/views">  <setting name="reload" value="true">  <setting name="defaultEvent" value="Home">  <setting name="debug" value="true"></setting></setting></setting></setting></setting></config><controllers> <controller name="myController" type="controller.Controller">   <message-listener message="OnRequestStart" function="OnRequestStart">   <message-listener message="OnRequestEnd" function="OnRequestEnd"> </message-listener></message-listener></controller></controllers></code><br><br><strong>Example 2 - Folder setup</strong><br><strong>URL :</strong>www.anothersite.com/myapp/<br><p>From the root the set up looks like this/modelglue/<br>/myapp/controller/<br>/myapp/views/<br>/myapp/model/<br>/myapp/config/</p>The welcome page the URL would be www.anothersite.com/myapp/index.cfm?event=welcomeIn my modelglue.xml the config looks like this:<code><config> <setting name="beanMappings" value="/myapp/config/beans/">  <setting name="viewMappings" value="/myapp/views">  <setting name="reload" value="true">  <setting name="defaultEvent" value="Home">  <setting name="debug" value="true"></setting></setting></setting></setting></setting></config><controllers> <controller name="myController" type="myapp.controller.Controller">   <message-listener message="OnRequestStart" function="OnRequestStart">   <message-listener message="OnRequestEnd" function="OnRequestEnd"> </message-listener></message-listener></controller></controllers></code><br>
+            </more></p></section>
 
             <footer>
               <p>
@@ -90,21 +90,7 @@
               </p>
             </footer>
 
-            <script
-              src="https://giscus.app/client.js"
-              data-repo="andyj/andyjarrett.com"
-              data-repo-id="R_kgDOMjCDkQ"
-              data-category="Announcements"
-              data-category-id="DIC_kwDOMjCDkc4ChlfU"
-              data-mapping="pathname"
-              data-strict="0"
-              data-reactions-enabled="1"
-              data-emit-metadata="0"
-              data-input-position="top"
-              data-theme="preferred_color_scheme"
-              data-lang="en"
-              crossorigin="anonymous"
-              async></script>
+            <script src="https://giscus.app/client.js" data-repo="andyj/andyjarrett.com" data-repo-id="R_kgDOMjCDkQ" data-category="Announcements" data-category-id="DIC_kwDOMjCDkc4ChlfU" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async=""></script>
             <a name="comment"></a>
           </div>
 

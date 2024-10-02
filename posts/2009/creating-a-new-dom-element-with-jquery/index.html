@@ -9,7 +9,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Creating a new DOM element with jQuery">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
-<meta name="twitter:creator" content="@andyj" />
+<meta name="twitter:creator" content="@andyj">
 <meta property="og:title" content="Creating a new DOM element with jQuery">
 <meta property="og:description" content="Go to AndyJarrett.com for more">
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
@@ -17,10 +17,10 @@
 <meta property="og:image:height" content="630">
 <link rel="canonical" href="https://www.andyjarrett.com/posts/2009/creating-a-new-dom-element-with-jquery/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
-<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
-<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj">
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml">
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
@@ -78,8 +78,8 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-I've been using <a href="http://www.jquery.com/">jQuery</a> for a while now keep meaning to blog about the little bits I use often. One is creating a DIV object on the fly and loading content in to it.<code>$(document).ready(function(){  // Your URL of the page to be loaded  u = "/index.cfm?event=contactme"; // We're creating a div element to load the URL contents into  div = $("<div>"); // When the element is displayed at first we could leave it blank // or a loading image, or in this case the wording loading......  div.html("Loading......");  // We now load our file and inject it into the DOM.   div.load(u);  // With the DIV getting its content we need to put the DOM on the page  // and in to the body. $.prepend will put our content at the top of // of the <body>  $("body").prepend(div);})</code>Instead of having "Loading...." being displayed you can delay showing the content of the DIV until loading is completed.  <code>  // Your URL of the page to be loaded  u = "/index.cfm?event=contactme"; // We're creating a div element to load the URL contents into  div = $("<div>"); // We now load our file and inject it into the DOM.   div.load(u);    // By default we're going to hide the DIV until the content is loaded  div.hide(); // Before the DIV gets its content we need to put the DOM on the page // and in to the body. $.prepend will put our content at the top of // of the <body>. But this will be hid. $("body").prepend(div); // Now we load the content into the DOM and as a CALLBACK function  // we SLIDEDOWN the div. This could be FADEIN or something else.  div.load(u, {limit: 25}, function(){    div.slideDown();  }); </code>Both sets of code will load on document ready. Usually I tie this kind of process to a click event to load in a page dynamically when needed. Also don't forget you can chain these methods too and cut down on code. Taking the first example it could be written as:<code>  u = "/index.cfm?event=hermes.contactSeller";  div = $("<div>").html("Loading......").load(u); $("body").prepend(div);   </code>\n <br><br>\n<p>\n
-            </section>
+I've been using <a href="http://www.jquery.com/">jQuery</a> for a while now keep meaning to blog about the little bits I use often. One is creating a DIV object on the fly and loading content in to it.<code>$(document).ready(function(){  // Your URL of the page to be loaded  u = "/index.cfm?event=contactme"; // We're creating a div element to load the URL contents into  div = $("<div>"); // When the element is displayed at first we could leave it blank // or a loading image, or in this case the wording loading......  div.html("Loading......");  // We now load our file and inject it into the DOM.   div.load(u);  // With the DIV getting its content we need to put the DOM on the page  // and in to the body. $.prepend will put our content at the top of // of the <body>  $("body").prepend(div);})</body></div></code>Instead of having "Loading...." being displayed you can delay showing the content of the DIV until loading is completed.  <code>  // Your URL of the page to be loaded  u = "/index.cfm?event=contactme"; // We're creating a div element to load the URL contents into  div = $("<div>"); // We now load our file and inject it into the DOM.   div.load(u);    // By default we're going to hide the DIV until the content is loaded  div.hide(); // Before the DIV gets its content we need to put the DOM on the page // and in to the body. $.prepend will put our content at the top of // of the <body>. But this will be hid. $("body").prepend(div); // Now we load the content into the DOM and as a CALLBACK function  // we SLIDEDOWN the div. This could be FADEIN or something else.  div.load(u, {limit: 25}, function(){    div.slideDown();  }); </body></div></code>Both sets of code will load on document ready. Usually I tie this kind of process to a click event to load in a page dynamically when needed. Also don't forget you can chain these methods too and cut down on code. Taking the first example it could be written as:<code>  u = "/index.cfm?event=hermes.contactSeller";  div = $("<div>").html("Loading......").load(u); $("body").prepend(div);   </div></code>\n <br><br>\n<p>\n
+            </p></section>
 
             <footer>
               <p>
@@ -90,21 +90,7 @@ I've been using <a href="http://www.jquery.com/">jQuery</a> for a while now keep
               </p>
             </footer>
 
-            <script
-              src="https://giscus.app/client.js"
-              data-repo="andyj/andyjarrett.com"
-              data-repo-id="R_kgDOMjCDkQ"
-              data-category="Announcements"
-              data-category-id="DIC_kwDOMjCDkc4ChlfU"
-              data-mapping="pathname"
-              data-strict="0"
-              data-reactions-enabled="1"
-              data-emit-metadata="0"
-              data-input-position="top"
-              data-theme="preferred_color_scheme"
-              data-lang="en"
-              crossorigin="anonymous"
-              async></script>
+            <script src="https://giscus.app/client.js" data-repo="andyj/andyjarrett.com" data-repo-id="R_kgDOMjCDkQ" data-category="Announcements" data-category-id="DIC_kwDOMjCDkc4ChlfU" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async=""></script>
             <a name="comment"></a>
           </div>
 

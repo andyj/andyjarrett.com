@@ -9,7 +9,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Visible attribute and the gap left in Flash forms">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
-<meta name="twitter:creator" content="@andyj" />
+<meta name="twitter:creator" content="@andyj">
 <meta property="og:title" content="Visible attribute and the gap left in Flash forms">
 <meta property="og:description" content="Go to AndyJarrett.com for more">
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
@@ -17,10 +17,10 @@
 <meta property="og:image:height" content="630">
 <link rel="canonical" href="https://www.andyjarrett.com/posts/2006/visible-attribute-and-the-gap-left-in-flash-forms/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
-<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
-<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj">
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml">
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
@@ -78,8 +78,8 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-The visible attribute and the gap left in Flash formsFirst of thanks to <a href="http://www.houseoffusion.com/cf_lists/messages.cfm/forumid:4/threadid:46885#247185">Kelly Keith</a> to actually putting me onto this solution after my <a href="http://www.houseoffusion.com/cf_lists/messages.cfm/forumid:4/threadid:46885#247166">post to CF-Talk</a> about removing the gap left in <cfform format="flash"> when you set an item like <cfformgroup type="page"> visibilites to hidden. To quote Kelly direct the short answer is "When visible is set to false set the height to a negative number."Below I've got three examples of problem, the solution and an event driven solution. 1. This first exaple is a example of the visible gap left by setting visible to false<code><cfform format="flash" action="#cgi.script_name#" name="form1"> <cfformitem type="text">Form 1</cfformitem> <cfformgroup type="panel" label="top panel" visible="false">    <cfformitem type="html">Panel 1</cfformitem>  </cfformgroup>  <cfformgroup type="panel" label="bottom panel">   <cfformitem type="html">      You'll notice the gap above this "panel" left by the first hidden panel    </cfformitem> </cfformgroup></cfform></code>2. Below I have put in place Kelly's suggestion which resolves the whitespace<code><cfform format="flash" action="#cgi.script_name#" name="form2"> <cfformitem type="text">Form 2</cfformitem> <cfformgroup type="panel" label="top panel" visible="false" height="-1">    <cfformitem type="html">Panel 1</cfformitem>  </cfformgroup>  <cfformgroup type="panel" label="bottom panel">   <cfformitem type="html">      You'll notice the gap is now removed. This is done by setting a negative height e.g.     <br><br>      <cfformgroup type="panel" label="top panel" visible="false" height="-1">    </cfformitem> </cfformgroup></cfform></code>3. The final bit of code uses some basic Actionscipt to remove on a onClick event to hide/show the panel along with setting the height<code><cfform format="flash" action="#cgi.script_name#" name="form3"> <cfformitem type="script">    function hidePanel(){     _root.pan1.visible = false;     _root.pan1.height = -1;   }   function showPanel(){     _root.pan1.visible = true;      _root.pan1.height = 100;    } </cfformitem> <cfformitem type="text">Form 3</cfformitem> <cfformgroup type="panel" label="top panel" id="pan1">    <cfformitem type="html">Panel 1</cfformitem>  </cfformgroup>  <cfformgroup type="panel" label="bottom panel">   <cfformitem type="html">      Bottom Panel    </cfformitem> </cfformgroup>  <cfformgroup type="horizontal">   <cfinput type="button" name="hideBtn" id="hideBtn" value="Hide Top Panel" onclick="hidePanel()" />    <cfinput type="button" name="showBtn" id="showBtn" value="Show Top Panel" onclick="showPanel()" />  </cfformgroup></cfform></code>If you are working with Flash Forms I gotta say check out <a href="http://www.asfusion.com/">AsFusion.com</a>. I've been working on a few rather complex forms which has meant even replicating some Ajax functionality via Flash Remoting all of which I've got from there. I'll try and blog about that soon.<br>
-            </section>
+The visible attribute and the gap left in Flash formsFirst of thanks to <a href="http://www.houseoffusion.com/cf_lists/messages.cfm/forumid:4/threadid:46885#247185">Kelly Keith</a> to actually putting me onto this solution after my <a href="http://www.houseoffusion.com/cf_lists/messages.cfm/forumid:4/threadid:46885#247166">post to CF-Talk</a> about removing the gap left in <cfform format="flash"> when you set an item like <cfformgroup type="page"> visibilites to hidden. To quote Kelly direct the short answer is "When visible is set to false set the height to a negative number."Below I've got three examples of problem, the solution and an event driven solution. 1. This first exaple is a example of the visible gap left by setting visible to false<code><cfform format="flash" action="#cgi.script_name#" name="form1"> <cfformitem type="text">Form 1</cfformitem> <cfformgroup type="panel" label="top panel" visible="false">    <cfformitem type="html">Panel 1</cfformitem>  </cfformgroup>  <cfformgroup type="panel" label="bottom panel">   <cfformitem type="html">      You'll notice the gap above this "panel" left by the first hidden panel    </cfformitem> </cfformgroup></cfform></code>2. Below I have put in place Kelly's suggestion which resolves the whitespace<code><cfform format="flash" action="#cgi.script_name#" name="form2"> <cfformitem type="text">Form 2</cfformitem> <cfformgroup type="panel" label="top panel" visible="false" height="-1">    <cfformitem type="html">Panel 1</cfformitem>  </cfformgroup>  <cfformgroup type="panel" label="bottom panel">   <cfformitem type="html">      You'll notice the gap is now removed. This is done by setting a negative height e.g.     <br><br>      <cfformgroup type="panel" label="top panel" visible="false" height="-1">    </cfformgroup></cfformitem> </cfformgroup></cfform></code>3. The final bit of code uses some basic Actionscipt to remove on a onClick event to hide/show the panel along with setting the height<code><cfform format="flash" action="#cgi.script_name#" name="form3"> <cfformitem type="script">    function hidePanel(){     _root.pan1.visible = false;     _root.pan1.height = -1;   }   function showPanel(){     _root.pan1.visible = true;      _root.pan1.height = 100;    } </cfformitem> <cfformitem type="text">Form 3</cfformitem> <cfformgroup type="panel" label="top panel" id="pan1">    <cfformitem type="html">Panel 1</cfformitem>  </cfformgroup>  <cfformgroup type="panel" label="bottom panel">   <cfformitem type="html">      Bottom Panel    </cfformitem> </cfformgroup>  <cfformgroup type="horizontal">   <cfinput type="button" name="hideBtn" id="hideBtn" value="Hide Top Panel" onclick="hidePanel()">    <cfinput type="button" name="showBtn" id="showBtn" value="Show Top Panel" onclick="showPanel()">  </cfinput></cfinput></cfformgroup></cfform></code>If you are working with Flash Forms I gotta say check out <a href="http://www.asfusion.com/">AsFusion.com</a>. I've been working on a few rather complex forms which has meant even replicating some Ajax functionality via Flash Remoting all of which I've got from there. I'll try and blog about that soon.<br>
+            </cfformgroup></cfform></section>
 
             <footer>
               <p>
@@ -90,21 +90,7 @@ The visible attribute and the gap left in Flash formsFirst of thanks to <a href=
               </p>
             </footer>
 
-            <script
-              src="https://giscus.app/client.js"
-              data-repo="andyj/andyjarrett.com"
-              data-repo-id="R_kgDOMjCDkQ"
-              data-category="Announcements"
-              data-category-id="DIC_kwDOMjCDkc4ChlfU"
-              data-mapping="pathname"
-              data-strict="0"
-              data-reactions-enabled="1"
-              data-emit-metadata="0"
-              data-input-position="top"
-              data-theme="preferred_color_scheme"
-              data-lang="en"
-              crossorigin="anonymous"
-              async></script>
+            <script src="https://giscus.app/client.js" data-repo="andyj/andyjarrett.com" data-repo-id="R_kgDOMjCDkQ" data-category="Announcements" data-category-id="DIC_kwDOMjCDkc4ChlfU" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async=""></script>
             <a name="comment"></a>
           </div>
 
