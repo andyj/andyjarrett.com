@@ -9,7 +9,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Ant- Copying files and directories">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
-<meta name="twitter:creator" content="@andyj">
+<meta name="twitter:creator" content="@andyj" />
 <meta property="og:title" content="Ant- Copying files and directories">
 <meta property="og:description" content="Go to AndyJarrett.com for more">
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
@@ -17,10 +17,10 @@
 <meta property="og:image:height" content="630">
 <link rel="canonical" href="https://www.andyjarrett.com/posts/2007/ant-copying-files-and-directories/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj">
-<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml">
-<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
@@ -85,11 +85,11 @@
     I also want to mention that I am running all my Ant tasks via <a href="http://www.eclipse.org">Eclipse</a> and not the command line. If there is a demand to know how to install Ant and run it from the command line I'll do that post separately. At this point I'm assuming you've got Eclipse and you know your way around it enough? Before we do begin you will need to ensure that you can see the Console 'View', you can get to this by going to:
 </p>
 <p>
-    <code> Window >> Show View >> Other >> General >> Console</code>
+    <code > Window >> Show View >> Other >> General >> Console</code>
 </p>
 <p>
-    Before we jump in, if you are on Unix then know that the file permissions are not retained when files are copied; they end up with the default UMASK permissions instead. This is down to the current Java runtimes and the inability to set the permissions. You can get around this by using ANT to call Copy Path view the terminal i.e. <exec executable="cp" ...=""> instead. If you are on Windows and you copy a file to a directory where that file already exists, but with different casing, the copied file takes on the case of the original. The workaround is to delete the file in the destination directory before you copy it.
-</exec></p>
+    Before we jump in, if you are on Unix then know that the file permissions are not retained when files are copied; they end up with the default UMASK permissions instead. This is down to the current Java runtimes and the inability to set the permissions. You can get around this by using ANT to call Copy Path view the terminal i.e. <exec executable="cp" ... > instead. If you are on Windows and you copy a file to a directory where that file already exists, but with different casing, the copied file takes on the case of the original. The workaround is to delete the file in the destination directory before you copy it.
+</p>
 <p>
     Let's begin!
 </p>
@@ -256,7 +256,21 @@
               </p>
             </footer>
 
-            <script src="https://giscus.app/client.js" data-repo="andyj/andyjarrett.com" data-repo-id="R_kgDOMjCDkQ" data-category="Announcements" data-category-id="DIC_kwDOMjCDkc4ChlfU" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async=""></script>
+            <script
+              src="https://giscus.app/client.js"
+              data-repo="andyj/andyjarrett.com"
+              data-repo-id="R_kgDOMjCDkQ"
+              data-category="Announcements"
+              data-category-id="DIC_kwDOMjCDkc4ChlfU"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="preferred_color_scheme"
+              data-lang="en"
+              crossorigin="anonymous"
+              async></script>
             <a name="comment"></a>
           </div>
 

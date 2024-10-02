@@ -9,7 +9,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="htaccess for moving domain names">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
-<meta name="twitter:creator" content="@andyj">
+<meta name="twitter:creator" content="@andyj" />
 <meta property="og:title" content="htaccess for moving domain names">
 <meta property="og:description" content="Go to AndyJarrett.com for more">
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
@@ -17,10 +17,10 @@
 <meta property="og:image:height" content="630">
 <link rel="canonical" href="https://www.andyjarrett.com/posts/2010/htaccess-for-moving-domain-names/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj">
-<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml">
-<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
@@ -78,7 +78,7 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-<p>Apache uses .htaccess files as a way to make configuration changes on a per-directory (and subdirectories) basis. They are a powerful tool when it comes to moving folders of changed files or in my case domain name rewriting. </p><p>Currently I am using a short domain name (<a href="http://www.prsos.co.uk">prsos.co.uk</a>) as a redirect to a specific page on the full domain name <a href="http://www.petrescuesos.co.uk">petrescuesos.co.uk</a>. In the past I've even used ColdFusion to do by putting something along the lines in my Application.cfm.</p><code><cfif findNoCase('prsos',="" cgi.server_name)=""><cfheader statustext="Moved permanently" statuscode="301"><cfheader value="http://www.petrescuesos.co.uk" name="Location"></cfheader></cfheader></cfif></code><p>This still gives the browser/spider the correct http header but why waste cpu styles on even doing this when the web-server can handle it natively. Below is the Apache .htaccess I've just put in place.</p><code>#Turn rewrite onRewriteEngine on#Look at the HTTP_HOST and regex search for old domain namerewritecond %{http_host} ^(.*)prsos.co.uk [nc]# The rule. Change the http_host to the new domain location. NC means NoCaserewriterule ^(.*)$ http://www.petrescuesos.co.uk/index.cfm?action=pets.found [r=301,nc]</code><br>
+<p>Apache uses .htaccess files as a way to make configuration changes on a per-directory (and subdirectories) basis. They are a powerful tool when it comes to moving folders of changed files or in my case domain name rewriting. </p><p>Currently I am using a short domain name (<a href="http://www.prsos.co.uk">prsos.co.uk</a>) as a redirect to a specific page on the full domain name <a href="http://www.petrescuesos.co.uk">petrescuesos.co.uk</a>. In the past I've even used ColdFusion to do by putting something along the lines in my Application.cfm.</p><code><cfif findNoCase('prsos', cgi.server_name)><cfheader statustext="Moved permanently" statuscode="301" /><cfheader value="http://www.petrescuesos.co.uk" name="Location"></cfif></code><p>This still gives the browser/spider the correct http header but why waste cpu styles on even doing this when the web-server can handle it natively. Below is the Apache .htaccess I've just put in place.</p><code>#Turn rewrite onRewriteEngine on#Look at the HTTP_HOST and regex search for old domain namerewritecond %{http_host} ^(.*)prsos.co.uk [nc]# The rule. Change the http_host to the new domain location. NC means NoCaserewriterule ^(.*)$ http://www.petrescuesos.co.uk/index.cfm?action=pets.found [r=301,nc]</code><br>
             </section>
 
             <footer>
@@ -90,7 +90,21 @@
               </p>
             </footer>
 
-            <script src="https://giscus.app/client.js" data-repo="andyj/andyjarrett.com" data-repo-id="R_kgDOMjCDkQ" data-category="Announcements" data-category-id="DIC_kwDOMjCDkc4ChlfU" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async=""></script>
+            <script
+              src="https://giscus.app/client.js"
+              data-repo="andyj/andyjarrett.com"
+              data-repo-id="R_kgDOMjCDkQ"
+              data-category="Announcements"
+              data-category-id="DIC_kwDOMjCDkc4ChlfU"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="preferred_color_scheme"
+              data-lang="en"
+              crossorigin="anonymous"
+              async></script>
             <a name="comment"></a>
           </div>
 

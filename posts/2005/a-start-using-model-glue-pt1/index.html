@@ -9,7 +9,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="A start using Model Glue pt1">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
-<meta name="twitter:creator" content="@andyj">
+<meta name="twitter:creator" content="@andyj" />
 <meta property="og:title" content="A start using Model Glue pt1">
 <meta property="og:description" content="Go to AndyJarrett.com for more">
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
@@ -17,10 +17,10 @@
 <meta property="og:image:height" content="630">
 <link rel="canonical" href="https://www.andyjarrett.com/posts/2005/a-start-using-model-glue-pt1/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj">
-<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml">
-<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
@@ -78,7 +78,7 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-After a couple of false starts i'm finally getting my head down and into <a href="http://www.model-glue.com/">Model Glue(MG)</a> - you know, the framework that a few people have mentioned on their blogs :o). Why now? is it to jump on a band wagon? Is it because ver 1.0 has now gone <a href="http://www.model-glue.com/downloadmg.cfm">stable</a>? Sorry no, its because i want to learn it, and have a small (very small) app to do, and where better to start? <p><a href="http://www.andyjarrett.co.uk/andy/blog/index_clip_image002.jpg" target="_blank"><img src="http://www.andyjarrett.co.uk/andy/blog/index_clip_image002.jpg" width="200" height="200" alt="Flow" align="left" border="0"></a></p>Though instead of leanring it on my own i'm going to blog my journey, starting today. So if you have no idea of MG, but wanna start you can try and follow me and whatever you do Don't Panic:o)<p>Where to start? Well, like learning most languages it is best to  build an app, and being the adventurous, life on the bleeding edge kinda person I am, I&rsquo;m going to throw myself in right in at the deep end. That&rsquo;s right I&rsquo;m  going to build a one page application (two pages at a stretch-but you have to  reallllllyyyy stretch). The idea is simple, build a form that submits its data  to a database.&nbsp; Why I hear you cry, why  waste the bandwidth telling us. Because now and then you have to create these  for work or a client &ndash; and guess who has to, that&rsquo;s right yours truly. So with  this in mind I thought it might be good to get to learn the basics of Model  Glue.</p><p><a href="http://www.andyjarrett.co.uk/andy/blog/index_clip_image002.jpg" target="_blank">Click here to see the basic flow of the app</a></p><p>A (really) simple flow of what we need to achieve. </p><p>Now if you are reading this and made it this far then I&rsquo;m  guessing you are looking to start getting into MG, like me and have read or  looked the <strong>Quick Start Guide</strong> (<a href="http://www.model-glue.com/quickstart/index.html">http://www.model-glue.com/quickstart/index.html</a>)  and probably even <strong>Tiered Events with Model Glue</strong> (<a href="http://www.web-relevant.com/mg_tutorial/">http://www.web-relevant.com/mg_tutorial/</a>)  and just want more info so let begin.</p><p><em>Well lets nearly begin. I'm stopping there already. If you havent read the Quick Start Guide then i suggest you read it in the break. I'll be posting part 2 soon, give me the weekend at least :o)</em></p>Update: Joe from MG has pointed out in my comments that it is best to use the Quick start guide from that comes in the distro as that is more up-to-date.<br>
+After a couple of false starts i'm finally getting my head down and into <a href="http://www.model-glue.com/">Model Glue(MG)</a> - you know, the framework that a few people have mentioned on their blogs :o). Why now? is it to jump on a band wagon? Is it because ver 1.0 has now gone <a href="http://www.model-glue.com/downloadmg.cfm">stable</a>? Sorry no, its because i want to learn it, and have a small (very small) app to do, and where better to start? <p><a href="http://www.andyjarrett.co.uk/andy/blog/index_clip_image002.jpg" target="_blank"><img src="http://www.andyjarrett.co.uk/andy/blog/index_clip_image002.jpg" width="200" height="200" alt="Flow" align="left" border="0" /></a></p>Though instead of leanring it on my own i'm going to blog my journey, starting today. So if you have no idea of MG, but wanna start you can try and follow me and whatever you do Don't Panic:o)<p>Where to start? Well, like learning most languages it is best to  build an app, and being the adventurous, life on the bleeding edge kinda person I am, I&rsquo;m going to throw myself in right in at the deep end. That&rsquo;s right I&rsquo;m  going to build a one page application (two pages at a stretch-but you have to  reallllllyyyy stretch). The idea is simple, build a form that submits its data  to a database.&nbsp; Why I hear you cry, why  waste the bandwidth telling us. Because now and then you have to create these  for work or a client &ndash; and guess who has to, that&rsquo;s right yours truly. So with  this in mind I thought it might be good to get to learn the basics of Model  Glue.</p><p><a href="http://www.andyjarrett.co.uk/andy/blog/index_clip_image002.jpg" target="_blank">Click here to see the basic flow of the app</a></p><p>A (really) simple flow of what we need to achieve. </p><p>Now if you are reading this and made it this far then I&rsquo;m  guessing you are looking to start getting into MG, like me and have read or  looked the <strong>Quick Start Guide</strong> (<a href="http://www.model-glue.com/quickstart/index.html">http://www.model-glue.com/quickstart/index.html</a>)  and probably even <strong>Tiered Events with Model Glue</strong> (<a href="http://www.web-relevant.com/mg_tutorial/">http://www.web-relevant.com/mg_tutorial/</a>)  and just want more info so let begin.</p><p><em>Well lets nearly begin. I'm stopping there already. If you havent read the Quick Start Guide then i suggest you read it in the break. I'll be posting part 2 soon, give me the weekend at least :o)</em></p>Update: Joe from MG has pointed out in my comments that it is best to use the Quick start guide from that comes in the distro as that is more up-to-date.<br>
             </section>
 
             <footer>
@@ -90,7 +90,21 @@ After a couple of false starts i'm finally getting my head down and into <a href
               </p>
             </footer>
 
-            <script src="https://giscus.app/client.js" data-repo="andyj/andyjarrett.com" data-repo-id="R_kgDOMjCDkQ" data-category="Announcements" data-category-id="DIC_kwDOMjCDkc4ChlfU" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async=""></script>
+            <script
+              src="https://giscus.app/client.js"
+              data-repo="andyj/andyjarrett.com"
+              data-repo-id="R_kgDOMjCDkQ"
+              data-category="Announcements"
+              data-category-id="DIC_kwDOMjCDkc4ChlfU"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="preferred_color_scheme"
+              data-lang="en"
+              crossorigin="anonymous"
+              async></script>
             <a name="comment"></a>
           </div>
 

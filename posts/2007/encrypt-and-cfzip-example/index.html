@@ -9,7 +9,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Encrypt and cfZip Example">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
-<meta name="twitter:creator" content="@andyj">
+<meta name="twitter:creator" content="@andyj" />
 <meta property="og:title" content="Encrypt and cfZip Example">
 <meta property="og:description" content="Go to AndyJarrett.com for more">
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
@@ -17,10 +17,10 @@
 <meta property="og:image:height" content="630">
 <link rel="canonical" href="https://www.andyjarrett.com/posts/2007/encrypt-and-cfzip-example/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj">
-<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml">
-<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
@@ -78,7 +78,7 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-I've modified the <a href="http://livedocs.adobe.com/coldfusion/8/functions_e-g_01.html">ColdFusion 8 livedocs</a> version of Encrypt() to include:<ol><li>uploading a file e.g. .CSV</li><li>reading contents and encrypting</li><li>Zip the new encrypted file</li></ol>It could probably do with some refinement as I was just using it for some generic testing tonight. Hope it comes in useful. <code><h1>Encrypt and Zip Example</h1><!--- Do the following if the form+file has been submitted. ---><cfif IsDefined("Form.uplfile")="">  <cftry> <!--- Upload the file --->  <cffile action="upload" fileField="uplfile" destination="#expandPath('.')#" nameConflict="MakeUnique" result="uploadedFile">        <!--- Read the file --->  <cffile action="read" file="#uploadedFile.serverDirectory#/#uploadedFile.SERVERFILE#" variable="inFile">    <!--- For all encryption techniques, generate a secret key. --->  <cfset theKey="generateSecretKey(Form.myAlgorithm)">    <!--- Encrypt the filecontent. ---> <cfset encrypted="encrypt(inFile," theKey,="" Form.myAlgorithm,Form.myEncoding)="">   <!--- Now we've encrypted the content lets create a new file' --->  <cfset encryptedCSVLoc="uploadedFile.serverDirectory" &"="" encoded_"&="" uploadedFile.SERVERFILE="">    <!--- Write the newly encrypted file to server for reference ---> <cffile action="write" file="#encryptedCSVLoc#" output="#encrypted#">   <!--- Lets zip the file now --->  <cfzip file="#uploadedFile.serverDirectory#/#uploadedFile.SERVERFILENAME#.zip" source="#encryptedCSVLoc#">      <!--- Display the values used for encryption  --->  <cfoutput>  <h2>Encrypted details</h2>  <p><b>The algorithm:</b> #Form.myAlgorithm#</p> <p><b>The key: <span style="color:red">#theKey#</span> <em>(- save this, it's uniquely generated per encryption')</em></b></p>  <p>Click the link to download the zip file with the encrypted file in it <a href="#uploadedFile.SERVERFILENAME#.zip">#uploadedFile.SERVERFILENAME#.zip</a></p>  <p></p><hr><p></p>  </cfoutput>   <cfcatch type="any">    <cfdump var="#cfcatch#">  </cfdump></cfcatch>  </cfzip></cffile></cfset></cfset></cfset></cffile></cffile></cftry></cfif><h2>Encrypt new file</h2><!--- The input form. ---><cfoutput>  <form action="#CGI.SCRIPT_NAME#" method="post" enctype="multipart/form-data"><table><tr>  <th colspan="2"><b>Select the encoding</b></th></tr><tr>  <td>    <select size="1" name="myEncoding">      <option selected="">UU</option>      <option>Base64</option>     <option>Hex</option>    </select> </td> <td>    <ul>      <li>Base64: the Base64 algorithm, as specified by IETF RFC 2045.</li>     <li>Hex: the characters A-F0-9 represent the hexadecimal byte values.</li>      <li>UU: the UUEncode algorithm (default).</li>    </ul> </td></tr><tr>  <th colspan="2"><b>Select the algorithm</b></th></tr><tr> <td>   <select size="1" name="myAlgorithm">       <option>AES</option>       <option>DES</option>       <option>DESEDE</option>   </select>      </td> <td>    <ul>      <li>AES: the Advanced Encryption Standard specified by the National Institute of Standards and Technology (NIST) FIPS-197.</li>     <li>DES: the Data Encryption Standard algorithm defined by NIST FIPS-46-3.</li>     <li>DESEDE: the &quot;Triple DES&quot; algorithm defined by NIST FIPS-46-3.</li>    </ul>     </td></tr><tr>  <th colspan="2">Upload CSV file</th></tr><tr> <td><input type="file" id="uplfile" name="uplfile" value=""></td> <td></td></tr>  </table><input type="submit" value="Submit and encrypt"></form> </cfoutput> </code><br>
+I've modified the <a href="http://livedocs.adobe.com/coldfusion/8/functions_e-g_01.html">ColdFusion 8 livedocs</a> version of Encrypt() to include:<ol><li>uploading a file e.g. .CSV</li><li>reading contents and encrypting</li><li>Zip the new encrypted file</li></ol>It could probably do with some refinement as I was just using it for some generic testing tonight. Hope it comes in useful. <code><h1>Encrypt and Zip Example</h1><!--- Do the following if the form+file has been submitted. ---><cfif IsDefined("Form.uplfile")>  <cftry> <!--- Upload the file --->  <cffile action = "upload"     fileField = "uplfile"     destination = "#expandPath('.')#"     nameConflict = "MakeUnique" result="uploadedFile">        <!--- Read the file --->  <cffile action="read" file="#uploadedFile.serverDirectory#/#uploadedFile.SERVERFILE#" variable="inFile">    <!--- For all encryption techniques, generate a secret key. --->  <cfset theKey=generateSecretKey(Form.myAlgorithm) />    <!--- Encrypt the filecontent. ---> <cfset encrypted=encrypt(inFile, theKey, Form.myAlgorithm,Form.myEncoding) />   <!--- Now we've encrypted the content lets create a new file' --->  <cfset encryptedCSVLoc = uploadedFile.serverDirectory &"/encoded_"& uploadedFile.SERVERFILE />    <!--- Write the newly encrypted file to server for reference ---> <cffile action="write" file="#encryptedCSVLoc#" output="#encrypted#" />   <!--- Lets zip the file now --->  <cfzip file="#uploadedFile.serverDirectory#/#uploadedFile.SERVERFILENAME#.zip" source="#encryptedCSVLoc#" />      <!--- Display the values used for encryption  --->  <cfoutput>  <h2>Encrypted details</h2>  <p><b>The algorithm:</b> #Form.myAlgorithm#</p> <p><b>The key:</B> <span style="color:red">#theKey#</span> <em>(- save this, it's uniquely generated per encryption')</em></p>  <p>Click the link to download the zip file with the encrypted file in it <a href="#uploadedFile.SERVERFILENAME#.zip">#uploadedFile.SERVERFILENAME#.zip</a></p>  <p><hr/></p>  </cfoutput>   <cfcatch type="any">    <cfdump var="#cfcatch#">  </cfcatch>  </cftry></cfif><h2>Encrypt new file</h2><!--- The input form. ---><cfoutput>  <form action="#CGI.SCRIPT_NAME#" method="post" enctype="multipart/form-data"><table><tr>  <th colspan="2"><b>Select the encoding</b></th></tr><tr>  <td>    <select size="1" name="myEncoding" >      <option selected>UU</option>      <option>Base64</option>     <option>Hex</option>    </select> </td> <td>    <ul>      <li>Base64: the Base64 algorithm, as specified by IETF RFC 2045.</li>     <li>Hex: the characters A-F0-9 represent the hexadecimal byte values.</li>      <li>UU: the UUEncode algorithm (default).</li>    </ul> </td></tr><tr>  <th colspan="2"><b>Select the algorithm</b></th></tr><tr> <td>   <select size="1" name="myAlgorithm" >       <option>AES</option>       <option>DES</option>       <option>DESEDE</option>   </select>      </td> <td>    <ul>      <li>AES: the Advanced Encryption Standard specified by the National Institute of Standards and Technology (NIST) FIPS-197.</li>     <li>DES: the Data Encryption Standard algorithm defined by NIST FIPS-46-3.</li>     <li>DESEDE: the &quot;Triple DES&quot; algorithm defined by NIST FIPS-46-3.</li>    </ul>     </td></tr><tr>  <th colspan="2">Upload CSV file</th></tr><tr> <td><input type="file" id="uplfile" name="uplfile" value="" /></td> <td></td></tr>  </table><input type="submit" value="Submit and encrypt" /></form> </cfoutput> </code><br>
             </section>
 
             <footer>
@@ -90,7 +90,21 @@ I've modified the <a href="http://livedocs.adobe.com/coldfusion/8/functions_e-g_
               </p>
             </footer>
 
-            <script src="https://giscus.app/client.js" data-repo="andyj/andyjarrett.com" data-repo-id="R_kgDOMjCDkQ" data-category="Announcements" data-category-id="DIC_kwDOMjCDkc4ChlfU" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async=""></script>
+            <script
+              src="https://giscus.app/client.js"
+              data-repo="andyj/andyjarrett.com"
+              data-repo-id="R_kgDOMjCDkQ"
+              data-category="Announcements"
+              data-category-id="DIC_kwDOMjCDkc4ChlfU"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="preferred_color_scheme"
+              data-lang="en"
+              crossorigin="anonymous"
+              async></script>
             <a name="comment"></a>
           </div>
 

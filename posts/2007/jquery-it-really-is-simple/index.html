@@ -9,7 +9,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="jQuery, it really is simple">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
-<meta name="twitter:creator" content="@andyj">
+<meta name="twitter:creator" content="@andyj" />
 <meta property="og:title" content="jQuery, it really is simple">
 <meta property="og:description" content="Go to AndyJarrett.com for more">
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
@@ -17,10 +17,10 @@
 <meta property="og:image:height" content="630">
 <link rel="canonical" href="https://www.andyjarrett.com/posts/2007/jquery-it-really-is-simple/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj">
-<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml">
-<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
@@ -78,7 +78,7 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-<p>I've started playing around with <a href="http://jquery.com/">jQuery</a> along with the rest of the world it seems and all I can say is WOW. Working with it has been straight forwards and simple.</p> <p>There's a couple of things out of the box that I like about it, but mainly the fact it comes as one .js file so doesn't matter what affect you want its there. In regards to it's simplness here some quickexamples to get going:</p> <p> First you need the jQuery.js file. This comes in 3 flavours, while i'm still testing I'm using option 2 </p><ol>  <li><span><a href="http://code.google.com/p/jqueryjs/downloads/detail?name=jquery-1.2.1.min.js">Download</a> jQuery 1.2.1 (14kb, <a href="http://www.julienlecomte.net/blog/2007/08/21/gzip-your-minified-javascript-files/">Minified and Gzipped</a>) Great for production use.</span></li> <li><a href="http://code.google.com/p/jqueryjs/downloads/detail?name=jquery-1.2.1.js">Download</a> jQuery 1.2.1 (77kb, Uncompressed) Great for testing, learning and development.</li>  <li><a href="http://code.google.com/p/jqueryjs/downloads/detail?name=jquery-1.2.1.pack.js">Download</a> jQuery 1.2.1 (26kb, <a href="http://dean.edwards.name/packer/">Packed</a>)  For those that can't <a href="http://www.julienlecomte.net/blog/2007/08/21/gzip-your-minified-javascript-files/">Gzip</a> their JavaScript.</li> </ol><p></p>Adding jQuery to your HTML is an easy one-liner<code><!-- Fall all effects etc this is all you need--><script type="text/javascript" src="/jquery/jquery-1.2.1.js"></script></code><script type="text/javascript" src="/jquery/jquery-1.2.1.js"></script><p> This is an example bit of code that fades out a link (click the link to see it in action) <a href="http://localhost" onclick="$(this).fadeOut('slow');return false">$(this).fadeOut('slow')</a> <br> This is what the full code looks like:<code><!-- jQuery Code--><a href="http://localhost" onclick="$(this).fadeOut('slow');return false">$(this).fadeOut('slow');return false;</a></code>     <br> How simple is that?</p><p>  To fade in a link you just use <em>$(this).fadeIn('slow')</em>. Whats even better about jQuery is that you can join these effects together on a actions; "<a href="http://docs.jquery.com/How_jQuery_Works#Chainability_.28The_Magic_of_jQuery.29">chainability</a>". So upon one click you can fadeOut() and fadeIn() a link by joining the effects. <a href="http://localhost" onclick="$(this).fadeOut('slow').fadeIn('slow');return false">$(this).fadeOut('slow').fadeIn('slow');return false;</a><code><!-- jQuery Code--><a href="http://localhost" onclick="$(this).fadeOut('slow');return false">$(this).fadeOut('slow');return false;</a></code>  </p>  <p>As I carry on my journey I'll hopefully blog more this.</p> <p>In the meantime has anyone read the book <a href="http://www.packtpub.com/jQuery/book/mid/1004077zztq0">Learning jQuery : Better Interaction Design and Web Development with Simple JavaScript Techniques</a>. Is it worth buying or can you find everything online?</p><br>
+<p>I've started playing around with <a href="http://jquery.com/">jQuery</a> along with the rest of the world it seems and all I can say is WOW. Working with it has been straight forwards and simple.</p> <p>There's a couple of things out of the box that I like about it, but mainly the fact it comes as one .js file so doesn't matter what affect you want its there. In regards to it's simplness here some quickexamples to get going:</p> <p> First you need the jQuery.js file. This comes in 3 flavours, while i'm still testing I'm using option 2 <ol>  <li><span><a href="http://code.google.com/p/jqueryjs/downloads/detail?name=jquery-1.2.1.min.js">Download</a> jQuery 1.2.1 (14kb, <a href="http://www.julienlecomte.net/blog/2007/08/21/gzip-your-minified-javascript-files/">Minified and Gzipped</a>) Great for production use.</li> <li><a href="http://code.google.com/p/jqueryjs/downloads/detail?name=jquery-1.2.1.js">Download</a> jQuery 1.2.1 (77kb, Uncompressed) Great for testing, learning and development.</li>  <li><a href="http://code.google.com/p/jqueryjs/downloads/detail?name=jquery-1.2.1.pack.js">Download</a> jQuery 1.2.1 (26kb, <a href="http://dean.edwards.name/packer/">Packed</a>)  For those that can't <a href="http://www.julienlecomte.net/blog/2007/08/21/gzip-your-minified-javascript-files/">Gzip</a> their JavaScript.</li> </ol></p>Adding jQuery to your HTML is an easy one-liner<code><!-- Fall all effects etc this is all you need--><script type="text/javascript" src="/jquery/jquery-1.2.1.js"></script></code><script type="text/javascript" src="/jquery/jquery-1.2.1.js"></script><p> This is an example bit of code that fades out a link (click the link to see it in action) <a href="http://localhost" onclick="$(this).fadeOut('slow');return false">$(this).fadeOut('slow')</a> <br/> This is what the full code looks like:<code><!-- jQuery Code--><a href="http://localhost" onclick="$(this).fadeOut('slow');return false">$(this).fadeOut('slow');return false;</a></code>     <br/> How simple is that?</p><p>  To fade in a link you just use <em>$(this).fadeIn('slow')</em>. Whats even better about jQuery is that you can join these effects together on a actions; "<a href="http://docs.jquery.com/How_jQuery_Works#Chainability_.28The_Magic_of_jQuery.29">chainability</a>". So upon one click you can fadeOut() and fadeIn() a link by joining the effects. <a href="http://localhost" onclick="$(this).fadeOut('slow').fadeIn('slow');return false">$(this).fadeOut('slow').fadeIn('slow');return false;</a><code><!-- jQuery Code--><a href="http://localhost" onclick="$(this).fadeOut('slow');return false">$(this).fadeOut('slow');return false;</a></code>  </p>  <p>As I carry on my journey I'll hopefully blog more this.</p> <p>In the meantime has anyone read the book <a href="http://www.packtpub.com/jQuery/book/mid/1004077zztq0">Learning jQuery : Better Interaction Design and Web Development with Simple JavaScript Techniques</a>. Is it worth buying or can you find everything online?</p><br>
             </section>
 
             <footer>
@@ -90,7 +90,21 @@
               </p>
             </footer>
 
-            <script src="https://giscus.app/client.js" data-repo="andyj/andyjarrett.com" data-repo-id="R_kgDOMjCDkQ" data-category="Announcements" data-category-id="DIC_kwDOMjCDkc4ChlfU" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async=""></script>
+            <script
+              src="https://giscus.app/client.js"
+              data-repo="andyj/andyjarrett.com"
+              data-repo-id="R_kgDOMjCDkQ"
+              data-category="Announcements"
+              data-category-id="DIC_kwDOMjCDkc4ChlfU"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="preferred_color_scheme"
+              data-lang="en"
+              crossorigin="anonymous"
+              async></script>
             <a name="comment"></a>
           </div>
 

@@ -9,7 +9,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Cfeclipse ANT build update">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
-<meta name="twitter:creator" content="@andyj">
+<meta name="twitter:creator" content="@andyj" />
 <meta property="og:title" content="Cfeclipse ANT build update">
 <meta property="og:description" content="Go to AndyJarrett.com for more">
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
@@ -17,10 +17,10 @@
 <meta property="og:image:height" content="630">
 <link rel="canonical" href="https://www.andyjarrett.com/posts/2006/cfeclipse-ant-build-update/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj">
-<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml">
-<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
@@ -78,7 +78,7 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-For anyone who is using <a href="http://andyjarrett.co.uk/andy/blog/index.cfm/2006/1/13/CFeclipse-ANT-nightly-build">Ant script</a> to get the <a href="http://cfeclipse.org/go/project/nightly-builds">CFE nightly builds</a> will need to update the srcURL property. The srcURL should now be <a href="http://cfeclipse.org/nightly/cfeclipse_nightly.zip">http://cfeclipse.org/nightly/cfeclipse_nightly.zip</a>Below is the updated code<code><project name="build-nightly-cfe" default="setup" basedir=".">  <description>      Download the CFE nightly build and extracts to your pluggin folder </description>    <!-- =================================  Some values ================================== -->  <property name="cfePluginFolder" value="d:/program files/eclipse/">  <property name="srcURL" value="http://www.cfeclipse.org/beta/cfeclipse_beta.zip">     <!-- =================================   target: setup   ================================= -->   <target name="setup" depends="init,downloadZip,unzip,cleanDirs" description="-->Sets up your CFeclipse nightly build">      <tstamp>      <echo message="Build fininshed at ${DSTAMP}">   </echo></tstamp></target>   <!-- - - - - - - - - - - - - - - - - -   target: init   - - - - - - - - - - - - - - - - - -->   <target name="init" description="Build directory structure">      <mkdir dir="tmp">   </mkdir></target>   <!-- - - - - - - - - - - - - - - - - -   target: cleanDirs   - - - - - - - - - - - - - - - - - -->   <target name="cleanDirs" description="clean up">     <delete dir="${basedir}/tmp">   </delete></target>   <!-- - - - - - - - - - - - - - - - - -   target: unzip   - - - - - - - - - - - - - - - - - -->   <target name="unzip" description="Unzip the file">      <unzip src="${basedir}/tmp/cfeclipse_nightly.zip" dest="${cfePluginFolder}">   </unzip></target>   <!-- - - - - - - - - - - - - - - - - -   target: downloadZip   - - - - - - - - - - - - - - - - - -->   <target name="downloadZip" depends="init" description="Download the      zip file for ModelGlue">      <get src="${srcURL}" dest="${basedir}/tmp/cfeclipse_nightly.zip" verbose="true" usetimestamp="true">   </get></target></property></property></project></code><br>
+For anyone who is using <a href="http://andyjarrett.co.uk/andy/blog/index.cfm/2006/1/13/CFeclipse-ANT-nightly-build">Ant script</a> to get the <a href="http://cfeclipse.org/go/project/nightly-builds">CFE nightly builds</a> will need to update the srcURL property. The srcURL should now be <a href="http://cfeclipse.org/nightly/cfeclipse_nightly.zip">http://cfeclipse.org/nightly/cfeclipse_nightly.zip</a>Below is the updated code<code><?xml version="1.0" encoding="UTF-8"?><project name="build-nightly-cfe" default="setup" basedir=".">  <description>      Download the CFE nightly build and extracts to your pluggin folder </description>    <!-- =================================  Some values ================================== -->  <property name="cfePluginFolder" value="d:/program files/eclipse/" />  <property name="srcURL" value="http://www.cfeclipse.org/beta/cfeclipse_beta.zip" />     <!-- =================================   target: setup   ================================= -->   <target name="setup" depends="init,downloadZip,unzip,cleanDirs"       description="-->Sets up your CFeclipse nightly build">      <tstamp/>      <echo message="Build fininshed at ${DSTAMP}" />   </target>   <!-- - - - - - - - - - - - - - - - - -   target: init   - - - - - - - - - - - - - - - - - -->   <target name="init" description="Build directory structure">      <mkdir dir="tmp"/>   </target>   <!-- - - - - - - - - - - - - - - - - -   target: cleanDirs   - - - - - - - - - - - - - - - - - -->   <target name="cleanDirs" description="clean up">     <delete dir="${basedir}/tmp" />   </target>   <!-- - - - - - - - - - - - - - - - - -   target: unzip   - - - - - - - - - - - - - - - - - -->   <target name="unzip" description="Unzip the file">      <unzip src="${basedir}/tmp/cfeclipse_nightly.zip" dest="${cfePluginFolder}" />   </target>   <!-- - - - - - - - - - - - - - - - - -   target: downloadZip   - - - - - - - - - - - - - - - - - -->   <target name="downloadZip" depends="init" description="Download the      zip file for ModelGlue">      <get src="${srcURL}" dest="${basedir}/tmp/cfeclipse_nightly.zip"         verbose="true" usetimestamp="true" />   </target></project></code><br>
             </section>
 
             <footer>
@@ -90,7 +90,21 @@ For anyone who is using <a href="http://andyjarrett.co.uk/andy/blog/index.cfm/20
               </p>
             </footer>
 
-            <script src="https://giscus.app/client.js" data-repo="andyj/andyjarrett.com" data-repo-id="R_kgDOMjCDkQ" data-category="Announcements" data-category-id="DIC_kwDOMjCDkc4ChlfU" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async=""></script>
+            <script
+              src="https://giscus.app/client.js"
+              data-repo="andyj/andyjarrett.com"
+              data-repo-id="R_kgDOMjCDkQ"
+              data-category="Announcements"
+              data-category-id="DIC_kwDOMjCDkc4ChlfU"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="preferred_color_scheme"
+              data-lang="en"
+              crossorigin="anonymous"
+              async></script>
             <a name="comment"></a>
           </div>
 

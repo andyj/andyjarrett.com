@@ -9,7 +9,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Dynamically hiding a HTML CFGridColumn">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
-<meta name="twitter:creator" content="@andyj">
+<meta name="twitter:creator" content="@andyj" />
 <meta property="og:title" content="Dynamically hiding a HTML CFGridColumn">
 <meta property="og:description" content="Go to AndyJarrett.com for more">
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
@@ -17,10 +17,10 @@
 <meta property="og:image:height" content="630">
 <link rel="canonical" href="https://www.andyjarrett.com/posts/2008/dynamically-hiding-a-html-cfgridcolumn/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj">
-<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml">
-<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
@@ -78,7 +78,7 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-I've been working with <a href="http://www.cfquickdocs.com/cfgrid">CFGrid</a>s recently especially the HTML format. One recent issue I had was the ability to dynamically hide a column once the grid has been loaded. Luckily the <a href="http://extjs.com/deploy/ext/docs/">Ext's</a> framework that sits underneath is full of hidden gems in ways you can add extra functionality and ColdFusion provides <a href="http://livedocs.adobe.com/coldfusion/8/JavaScriptFcns_05.html">ColdFusion.Grid.getGridObject</a> that allows you to tap into this First, lets create our grid<code><cfset gridData="queryNew(&quot;col1,col2&quot;)"><cfloop from="1" to="5" index="i">   <cfset queryAddRow(gridData)="">   <cfset querySetCell(gridData,="" "col1",="" "Row="" #i#="" Col="" 1",="" i)="">   <cfset querySetCell(gridData,="" "col2",="" "Row="" #i#="" Col="" 2",="" i)=""></cfset></cfset></cfset></cfloop><cfscript> args = structNew();   args.autowidth = true;  args.name = "myTestGrid"; args.format = "html"; args.width = "250"; args.query = "gridData";</cfscript><cfform name="test"><cfgrid attributeCollection="#args#">  <cfgridcolumn name="col1" header="My 1st Col">  <cfgridcolumn name="col2" header="My 2nd Col"></cfgridcolumn></cfgridcolumn></cfgrid></cfform></cfset></code>The idea of the code will be to dynamically hide the first column onLoad.<code><!--- When using ajaxOnLoad you need the <script> needs to be in the HTML head ---><cfsavecontent variable="ScriptForHead"><script language="JavaScript" type="text/javascript">  hideCol = function(){   // Get the grid object    gridObj = ColdFusion.Grid.getGridObject('myTestGrid');    // Get the column model   cm = gridObj.getColumnModel();    // On a column we can run a host of methods. Check out    // http://www.culture.gov.sk/extras/yui-ext/docs/YAHOO.ext.grid.DefaultColumnModel.html   // I'm using http://www.culture.gov.sk/extras/yui-ext/docs/YAHOO.ext.grid.DefaultColumnModel.html#setHidden    cm.setHidden(0,true); // setHidden(colIndex, hidden)        // reload the grid    gridObj.reconfigure(gridObj.getDataSource(),cm);   }   </script>  </cfsavecontent><cfhtmlhead text="#ScriptForHead#"><!--- use AjaxOnLoad to Hide the column onLoad---><cfset ajaxOnLoad('hideCol')=""></cfset></cfhtmlhead></code>Complete code should look like this:<code><!--- When using ajaxOnLoad you need the <script> needs to be in the HTML head ---><cfsavecontent variable="ScriptForHead"><script language="JavaScript" type="text/javascript"> hideCol = function(){   // Get the grid object    gridObj = ColdFusion.Grid.getGridObject('myTestGrid');    // Get the column model   cm = gridObj.getColumnModel();    // On a column we can run a host of methods. Check out    cm.setHidden(0,true);   // reload the grid    gridObj.reconfigure(gridObj.getDataSource(),cm);   }   </script></cfsavecontent><cfhtmlhead text="#ScriptForHead#"><!--- use AjaxOnLoad to Hide the column onLoad---><cfset ajaxOnLoad('hideCol')="">   <cfset gridData="queryNew(&quot;col1,col2&quot;)"><cfloop from="1" to="5" index="i">   <cfset queryAddRow(gridData)="">   <cfset querySetCell(gridData,="" "col1",="" "Row="" #i#="" Col="" 1",="" i)="">   <cfset querySetCell(gridData,="" "col2",="" "Row="" #i#="" Col="" 2",="" i)=""></cfset></cfset></cfset></cfloop><cfscript>  args = structNew();   args.autowidth = true;  args.name = "myTestGrid"; args.format = "html"; args.width = "250"; args.query = "gridData";</cfscript><cfform name="test"><cfgrid attributeCollection="#args#">  <cfgridcolumn name="col1" header="My 1st Col">  <cfgridcolumn name="col2" header="My 2nd Col"></cfgridcolumn></cfgridcolumn></cfgrid></cfform></cfset></cfset></cfhtmlhead></code><br>
+I've been working with <a href="http://www.cfquickdocs.com/cfgrid">CFGrid</a>s recently especially the HTML format. One recent issue I had was the ability to dynamically hide a column once the grid has been loaded. Luckily the <a href="http://extjs.com/deploy/ext/docs/">Ext's</a> framework that sits underneath is full of hidden gems in ways you can add extra functionality and ColdFusion provides <a href="http://livedocs.adobe.com/coldfusion/8/JavaScriptFcns_05.html">ColdFusion.Grid.getGridObject</a> that allows you to tap into this First, lets create our grid<code><cfset gridData = queryNew("col1,col2")><cfloop from="1" to="5" index="i">   <cfset queryAddRow(gridData)>   <cfset querySetCell(gridData, "col1", "Row #i# Col 1", i)>   <cfset querySetCell(gridData, "col2", "Row #i# Col 2", i)></cfloop><cfscript> args = structNew();   args.autowidth = true;  args.name = "myTestGrid"; args.format = "html"; args.width = "250"; args.query = "gridData";</cfscript><cfform name="test"><cfgrid attributeCollection="#args#">  <cfgridcolumn name="col1" header="My 1st Col">  <cfgridcolumn name="col2" header="My 2nd Col"></cfgrid></cfform></code>The idea of the code will be to dynamically hide the first column onLoad.<code><!--- When using ajaxOnLoad you need the <script> needs to be in the HTML head ---><cfsavecontent variable="ScriptForHead"><script language="JavaScript" type="text/javascript">  hideCol = function(){   // Get the grid object    gridObj = ColdFusion.Grid.getGridObject('myTestGrid');    // Get the column model   cm = gridObj.getColumnModel();    // On a column we can run a host of methods. Check out    // http://www.culture.gov.sk/extras/yui-ext/docs/YAHOO.ext.grid.DefaultColumnModel.html   // I'm using http://www.culture.gov.sk/extras/yui-ext/docs/YAHOO.ext.grid.DefaultColumnModel.html#setHidden    cm.setHidden(0,true); // setHidden(colIndex, hidden)        // reload the grid    gridObj.reconfigure(gridObj.getDataSource(),cm);   }   </script>  </cfsavecontent><cfhtmlhead text="#ScriptForHead#" /><!--- use AjaxOnLoad to Hide the column onLoad---><cfset ajaxOnLoad('hideCol')></code>Complete code should look like this:<code><!--- When using ajaxOnLoad you need the <script> needs to be in the HTML head ---><cfsavecontent variable="ScriptForHead"><script language="JavaScript" type="text/javascript"> hideCol = function(){   // Get the grid object    gridObj = ColdFusion.Grid.getGridObject('myTestGrid');    // Get the column model   cm = gridObj.getColumnModel();    // On a column we can run a host of methods. Check out    cm.setHidden(0,true);   // reload the grid    gridObj.reconfigure(gridObj.getDataSource(),cm);   }   </script></cfsavecontent><cfhtmlhead text="#ScriptForHead#" /><!--- use AjaxOnLoad to Hide the column onLoad---><cfset ajaxOnLoad('hideCol')>   <cfset gridData = queryNew("col1,col2")><cfloop from="1" to="5" index="i">   <cfset queryAddRow(gridData)>   <cfset querySetCell(gridData, "col1", "Row #i# Col 1", i)>   <cfset querySetCell(gridData, "col2", "Row #i# Col 2", i)></cfloop><cfscript>  args = structNew();   args.autowidth = true;  args.name = "myTestGrid"; args.format = "html"; args.width = "250"; args.query = "gridData";</cfscript><cfform name="test"><cfgrid attributeCollection="#args#">  <cfgridcolumn name="col1" header="My 1st Col">  <cfgridcolumn name="col2" header="My 2nd Col"></cfgrid></cfform></code><br>
             </section>
 
             <footer>
@@ -90,7 +90,21 @@ I've been working with <a href="http://www.cfquickdocs.com/cfgrid">CFGrid</a>s r
               </p>
             </footer>
 
-            <script src="https://giscus.app/client.js" data-repo="andyj/andyjarrett.com" data-repo-id="R_kgDOMjCDkQ" data-category="Announcements" data-category-id="DIC_kwDOMjCDkc4ChlfU" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async=""></script>
+            <script
+              src="https://giscus.app/client.js"
+              data-repo="andyj/andyjarrett.com"
+              data-repo-id="R_kgDOMjCDkQ"
+              data-category="Announcements"
+              data-category-id="DIC_kwDOMjCDkc4ChlfU"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="preferred_color_scheme"
+              data-lang="en"
+              crossorigin="anonymous"
+              async></script>
             <a name="comment"></a>
           </div>
 

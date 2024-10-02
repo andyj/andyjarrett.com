@@ -9,7 +9,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="CFCHART annoying axis label bug">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
-<meta name="twitter:creator" content="@andyj">
+<meta name="twitter:creator" content="@andyj" />
 <meta property="og:title" content="CFCHART annoying axis label bug">
 <meta property="og:description" content="Go to AndyJarrett.com for more">
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
@@ -17,10 +17,10 @@
 <meta property="og:image:height" content="630">
 <link rel="canonical" href="https://www.andyjarrett.com/posts/2005/cfchart-annoying-axis-label-bug/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj">
-<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml">
-<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
@@ -78,7 +78,7 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-Creating a chart today (for the first time in a long time) and all i wanted to do was display a list of users against total forms submitted. All went well until i looked at the Y axis. Instead of going up incrementally in whole numbers from 1-20 it went up in decimals (fractions). Aparently what ever the total of the y-axis is you need to +1 as the amount of gridlines. So if user A submitted 8 forms and user b submitted 12 forms, you need to take the 12 plus 1 then use this totals for your Gridlines attribute. A better explanation quoting <a href="http://livedocs.macromedia.com/coldfusion/6/CFML_Reference/Tags-pt112.htm?">zedfox on the livedocs</a> is below:<em>On charts, you may find your Y-axis values to be in decimals instead of whole integers. To have your Y-axis values in integers, find out the max. and min. value of the series you are plotting. Create as many gridlines as there are whole numbers from the range of series data.e.g. if your values that you want to plot are 1.5,2.5 and 3.5,your range is 1.5 to 3.5 is actually 2, but it would be best if you FLOOR 1.5 to 1 and CEILING 3.5 to 4. Your max and min are 4 and 1 respectively and your range is 3. Create a variable called #gridline# that is your-range + 1 = 4. Pass this variable to gridline attribute in <cfchart>. There goes your whole integer valued Y-axis now :)Thanks zedfox</cfchart></em>Note: This isn't an issue on CFMX 7<br>
+Creating a chart today (for the first time in a long time) and all i wanted to do was display a list of users against total forms submitted. All went well until i looked at the Y axis. Instead of going up incrementally in whole numbers from 1-20 it went up in decimals (fractions). Aparently what ever the total of the y-axis is you need to +1 as the amount of gridlines. So if user A submitted 8 forms and user b submitted 12 forms, you need to take the 12 plus 1 then use this totals for your Gridlines attribute. A better explanation quoting <a href="http://livedocs.macromedia.com/coldfusion/6/CFML_Reference/Tags-pt112.htm?">zedfox on the livedocs</a> is below:<em>On charts, you may find your Y-axis values to be in decimals instead of whole integers. To have your Y-axis values in integers, find out the max. and min. value of the series you are plotting. Create as many gridlines as there are whole numbers from the range of series data.e.g. if your values that you want to plot are 1.5,2.5 and 3.5,your range is 1.5 to 3.5 is actually 2, but it would be best if you FLOOR 1.5 to 1 and CEILING 3.5 to 4. Your max and min are 4 and 1 respectively and your range is 3. Create a variable called #gridline# that is your-range + 1 = 4. Pass this variable to gridline attribute in <cfchart>. There goes your whole integer valued Y-axis now :)Thanks zedfox</em>Note: This isn't an issue on CFMX 7<br>
             </section>
 
             <footer>
@@ -90,7 +90,21 @@ Creating a chart today (for the first time in a long time) and all i wanted to d
               </p>
             </footer>
 
-            <script src="https://giscus.app/client.js" data-repo="andyj/andyjarrett.com" data-repo-id="R_kgDOMjCDkQ" data-category="Announcements" data-category-id="DIC_kwDOMjCDkc4ChlfU" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async=""></script>
+            <script
+              src="https://giscus.app/client.js"
+              data-repo="andyj/andyjarrett.com"
+              data-repo-id="R_kgDOMjCDkQ"
+              data-category="Announcements"
+              data-category-id="DIC_kwDOMjCDkc4ChlfU"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="preferred_color_scheme"
+              data-lang="en"
+              crossorigin="anonymous"
+              async></script>
             <a name="comment"></a>
           </div>
 

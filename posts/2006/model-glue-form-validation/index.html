@@ -9,7 +9,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Model Glue Form Validation">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
-<meta name="twitter:creator" content="@andyj">
+<meta name="twitter:creator" content="@andyj" />
 <meta property="og:title" content="Model Glue Form Validation">
 <meta property="og:description" content="Go to AndyJarrett.com for more">
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
@@ -17,10 +17,10 @@
 <meta property="og:image:height" content="630">
 <link rel="canonical" href="https://www.andyjarrett.com/posts/2006/model-glue-form-validation/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj">
-<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml">
-<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
@@ -78,7 +78,7 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-I've been working on a app with a couple of forms and wanted to break the validation rules into different group of rules e.g.<br><br>1. Rules for address<br>2. Rules for personal information<br>3. Rules specific per form.<br><br>What this allows me to do is is per validation call in the controller just use the validators i need.<br><br>How I am doing it:<br><br>1. Create a controller called validator.cfc<br>2. Create you validation.cfc's i.e.<br><ol> <li>validator_Personal.cfc</li> <li>validator_address.cfc</li>  <li>validator_other.cfc</li></ol>Your validation cfc's should look like this:<code><cfcomponent> <cffunction name="validate" returnType="ModelGlue.Util.ValidationErrorCollection">    <cfargument name="formFields">    <cfset var="" val="createObject(&quot;component&quot;," "ModelGlue.Util.ValidationErrorCollection").init()="">    <cfif structKeyExists(formFields,="" "address1")="" AND="" not="" len(trim(formFields.address1))="">     <cfset val.addError("address1",="" "Please="" enter="" the="" first="" line="" of="" your="" address.")="">    </cfset></cfif> </cfset></cfargument></cffunction></cfcomponent></code> <br><br>3. In validator controller create a listener which has calls the validator objects e.g.<br><br><code><cffunction name="validateDetails" access="Public" returnType="ModelGlue.Core.Event" output="false" hint="I am an event handler.">  <cfargument name="event" type="ModelGlue.Core.Event" required="true">     <!--- These are added here for clarity. Usually they should go in the init() ---> <cfset variables.validatePersonal="createObject(&quot;component&quot;," "model.validator_Personal")=""> <cfset variables.validateAddress="createObject(&quot;component&quot;," "model.validator_address")="">    <!--- Validate the values --->  <cfset valReq="variables.validatePersonal.validate(arguments.event.getAllValues())">  <cfset valAddress="variables.validateAddress.validate(arguments.event.getAllValues())">       <!--- here we bring to the sets of rules together into on value---> <cfset valReq.merge(valAddress)="">    <!--- Now we set the result --->  <cfif valReq.hasErrors()="">   <cfset arguments.event.addResult("inValid")="">      <cfset arguments.event.setValue("validation",="" valReq.getErrors())="">  <cfelse>    <cfset arguments.event.addResult("valid")="">  </cfset></cfelse></cfset></cfset></cfif>  <cfreturn arguments.event=""></cfreturn></cfset></cfset></cfset></cfset></cfset></cfargument></cffunction></code><br><br>4. To finish it off, in your form you need the usual viewState calls<br><br><code><!--- Gets any validation errors ---><cfset val="viewState.getValue(&quot;validation&quot;," structNew())=""></cfset></code><br>
+I've been working on a app with a couple of forms and wanted to break the validation rules into different group of rules e.g.<br><br>1. Rules for address<br>2. Rules for personal information<br>3. Rules specific per form.<br><br>What this allows me to do is is per validation call in the controller just use the validators i need.<br><br>How I am doing it:<br><br>1. Create a controller called validator.cfc<br>2. Create you validation.cfc's i.e.<br><ol> <li>validator_Personal.cfc</li> <li>validator_address.cfc</li>  <li>validator_other.cfc</li></ol>Your validation cfc's should look like this:<code><cfcomponent> <cffunction name="validate" returnType="ModelGlue.Util.ValidationErrorCollection">    <cfargument name="formFields">    <cfset var val = createObject("component", "ModelGlue.Util.ValidationErrorCollection").init() />    <cfif structKeyExists(formFields, "address1") AND not len(trim(formFields.address1))>     <cfset val.addError("address1", "Please enter the first line of your address.") />    </cfif> </cffunction></cfcomponent></code> <br/><br/>3. In validator controller create a listener which has calls the validator objects e.g.<br/><br/><code><cffunction name="validateDetails" access="Public" returnType="ModelGlue.Core.Event" output="false" hint="I am an event handler.">  <cfargument name="event" type="ModelGlue.Core.Event" required="true">     <!--- These are added here for clarity. Usually they should go in the init() ---> <cfset variables.validatePersonal = createObject("component", "model.validator_Personal") > <cfset variables.validateAddress = createObject("component", "model.validator_address")>    <!--- Validate the values --->  <cfset valReq = variables.validatePersonal.validate(arguments.event.getAllValues()) />  <cfset valAddress = variables.validateAddress.validate(arguments.event.getAllValues()) />       <!--- here we bring to the sets of rules together into on value---> <cfset valReq.merge(valAddress) />    <!--- Now we set the result --->  <cfif valReq.hasErrors()>   <cfset arguments.event.addResult("inValid") />      <cfset arguments.event.setValue("validation", valReq.getErrors()) />  <cfelse>    <cfset arguments.event.addResult("valid") />  </cfif>  <cfreturn arguments.event /></cffunction></code><br/><br/>4. To finish it off, in your form you need the usual viewState calls<br/><br/><code><!--- Gets any validation errors ---><cfset val = viewState.getValue("validation", structNew()) /></code><br>
             </section>
 
             <footer>
@@ -90,7 +90,21 @@ I've been working on a app with a couple of forms and wanted to break the valida
               </p>
             </footer>
 
-            <script src="https://giscus.app/client.js" data-repo="andyj/andyjarrett.com" data-repo-id="R_kgDOMjCDkQ" data-category="Announcements" data-category-id="DIC_kwDOMjCDkc4ChlfU" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async=""></script>
+            <script
+              src="https://giscus.app/client.js"
+              data-repo="andyj/andyjarrett.com"
+              data-repo-id="R_kgDOMjCDkQ"
+              data-category="Announcements"
+              data-category-id="DIC_kwDOMjCDkc4ChlfU"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="preferred_color_scheme"
+              data-lang="en"
+              crossorigin="anonymous"
+              async></script>
             <a name="comment"></a>
           </div>
 

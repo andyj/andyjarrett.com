@@ -9,7 +9,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="geo based IP lookup with ColdFusion">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
-<meta name="twitter:creator" content="@andyj">
+<meta name="twitter:creator" content="@andyj" />
 <meta property="og:title" content="geo based IP lookup with ColdFusion">
 <meta property="og:description" content="Go to AndyJarrett.com for more">
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
@@ -17,10 +17,10 @@
 <meta property="og:image:height" content="630">
 <link rel="canonical" href="https://www.andyjarrett.com/posts/2008/geo-based-ip-lookup-with-coldfusion/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj">
-<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml">
-<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
@@ -78,8 +78,8 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-I've been looking around for a bit for a free location lookup based on an IP address. Preferably as an API call so I don't need to install/add too much my end.I've come across <a href="http://www.hostip.info/">hostip.info</a>. This service is a community-based project with around 8,542,587 entries in the database!They have a good <a href="http://www.hostip.info/use.html">API</a> which supplies text and XML results, and they even have the <a href="http://www.hostip.info/dl/index.html">database freely available</a> for download with daily updates.Below is a quick example of some code to get the country (you can find more examples <a href="http://www.hostip.info/use.html">at the site</a>). If you want to see it in action <a href="http://andyjarrett.co.uk/downloads/geolookup.cfm">click here</a>.<code><cfhttp url="http://api.hostip.info/?ip=#cgi.remote_host#" method="get" result="geoInfo"><cfscript> geoXml = xmlParse(geoInfo.fileContent); country = geoXml.HostipLookupResultSet['gml:featureMember']['hostip']['countryname'].xmlText; countryAbbrev = geoXml.HostipLookupResultSet['gml:featureMember']['hostip']['countryAbbrev'].xmlText;</cfscript><cfoutput>Your IP address is: #cgi.remote_host#<br>Your country is: #country#  (#countryAbbrev#)</cfoutput>  <hr>Full dump<cfdump var="#geoXml#"></cfdump></cfhttp></code>For more info/help see also:<ul><li><a href="http://www.hostip.info/use.html">API Examples</a> </li><li><a href="http://www.hostip.info/faq.html">FAQ</a></li>  <li><a href="http://www.hostip.info/about.html">About</a></li>  <li><a href="http://www.hostip.info/ipaddress_forum/">Forum</a></li>    </ul>\n\n <br><br>\n<p>\n
-            </p></section>
+I've been looking around for a bit for a free location lookup based on an IP address. Preferably as an API call so I don't need to install/add too much my end.I've come across <a href="http://www.hostip.info/">hostip.info</a>. This service is a community-based project with around 8,542,587 entries in the database!They have a good <a href="http://www.hostip.info/use.html">API</a> which supplies text and XML results, and they even have the <a href="http://www.hostip.info/dl/index.html">database freely available</a> for download with daily updates.Below is a quick example of some code to get the country (you can find more examples <a href="http://www.hostip.info/use.html">at the site</a>). If you want to see it in action <a href="http://andyjarrett.co.uk/downloads/geolookup.cfm">click here</a>.<code><cfhttp url="http://api.hostip.info/?ip=#cgi.remote_host#" method="get" result="geoInfo" /><cfscript> geoXml = xmlParse(geoInfo.fileContent); country = geoXml.HostipLookupResultSet['gml:featureMember']['hostip']['countryname'].xmlText; countryAbbrev = geoXml.HostipLookupResultSet['gml:featureMember']['hostip']['countryAbbrev'].xmlText;</cfscript><cfoutput>Your IP address is: #cgi.remote_host#<br/>Your country is: #country#  (#countryAbbrev#)</cfoutput>  <hr/>Full dump<cfdump var="#geoXml#"  /></code>For more info/help see also:<ul><li><a href="http://www.hostip.info/use.html">API Examples</a></a> <li><a href="http://www.hostip.info/faq.html">FAQ</a></li>  <li><a href="http://www.hostip.info/about.html">About</a></li>  <li><a href="http://www.hostip.info/ipaddress_forum/">Forum</a></li>    </ul>\n\n <br><br>\n<p>\n
+            </section>
 
             <footer>
               <p>
@@ -90,7 +90,21 @@ I've been looking around for a bit for a free location lookup based on an IP add
               </p>
             </footer>
 
-            <script src="https://giscus.app/client.js" data-repo="andyj/andyjarrett.com" data-repo-id="R_kgDOMjCDkQ" data-category="Announcements" data-category-id="DIC_kwDOMjCDkc4ChlfU" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async=""></script>
+            <script
+              src="https://giscus.app/client.js"
+              data-repo="andyj/andyjarrett.com"
+              data-repo-id="R_kgDOMjCDkQ"
+              data-category="Announcements"
+              data-category-id="DIC_kwDOMjCDkc4ChlfU"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="preferred_color_scheme"
+              data-lang="en"
+              crossorigin="anonymous"
+              async></script>
             <a name="comment"></a>
           </div>
 

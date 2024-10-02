@@ -9,7 +9,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="layout.jade for Twitters Bootstrap">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
-<meta name="twitter:creator" content="@andyj">
+<meta name="twitter:creator" content="@andyj" />
 <meta property="og:title" content="layout.jade for Twitters Bootstrap">
 <meta property="og:description" content="Go to AndyJarrett.com for more">
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
@@ -17,10 +17,10 @@
 <meta property="og:image:height" content="630">
 <link rel="canonical" href="https://www.andyjarrett.com/posts/2011/layoutjade-for-twitters-bootstrap/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj">
-<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml">
-<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
@@ -78,8 +78,8 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-<p>When moving over to a templating system like <a href="http://jade-lang.com/">Jade</a> it is the silly things you get stuck on. This is probably more for my reference than anyone else but its a simple <b>layout.jade</b> to use with <a href="http://twitter.github.com/bootstrap/">Twitters Bootstrap</a>.</p><code>!!!html head    title= title    link(rel='stylesheet', href='http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css')  body    div.topbar      div.fill        div.container         a(href='#').brand #{title}          ul.nav            li.active               a(href='#') Home            li              a(href='http://www.andyjarrett.co.uk/blog') Blog            li              a(href='#') Contact                               div.container!= body    footer      p &copy; Company 2011</code><p>Each of your views will then be within the container, you just need to add the div.row in each view file. Below is the current index file at <a href="http://andyjarrett.nodester.com/">andyjarrett.nodester.com</a> <span class="help-block">(subject to change of course)</span></p><code>div.hero-unit  h1 Hello Node and Nodester  p More content coming soondiv.content div.page-header div.row   div.span6     h2 Currently using      p Jade and Express    div.span5     h2 Starting with Node.js      p <a href="http://www.andyjarrett.co.uk/blog/index.cfm/2011/4/20/Developing-with-NodeJs-starting-links">Links to start you off</a>    div.span5     h2 The message board      p.label.notice Coming soon</code><p>If you are looking for more documentation then check this out from the Scala communitya href="http://scalate.fusesource.org/documentation/jade-syntax.html">scalate.fusesource.org/documentation/jade-syntax.html<br>
-            </p></section>
+<p>When moving over to a templating system like <a href="http://jade-lang.com/">Jade</a> it is the silly things you get stuck on. This is probably more for my reference than anyone else but its a simple <b>layout.jade</b> to use with <a href="http://twitter.github.com/bootstrap/">Twitters Bootstrap</a>.</p><code>!!!html head    title= title    link(rel='stylesheet', href='http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css')  body    div.topbar      div.fill        div.container         a(href='#').brand #{title}          ul.nav            li.active               a(href='#') Home            li              a(href='http://www.andyjarrett.co.uk/blog') Blog            li              a(href='#') Contact                               div.container!= body    footer      p &copy; Company 2011</code><p>Each of your views will then be within the container, you just need to add the div.row in each view file. Below is the current index file at <a href="http://andyjarrett.nodester.com/">andyjarrett.nodester.com</a> <span class="help-block">(subject to change of course)</span></p><code>div.hero-unit  h1 Hello Node and Nodester  p More content coming soondiv.content div.page-header div.row   div.span6     h2 Currently using      p Jade and Express    div.span5     h2 Starting with Node.js      p <a href="http://www.andyjarrett.co.uk/blog/index.cfm/2011/4/20/Developing-with-NodeJs-starting-links">Links to start you off</a>    div.span5     h2 The message board      p.label.notice Coming soon</code><p>If you are looking for more documentation then check this out from the Scala communitya href="http://scalate.fusesource.org/documentation/jade-syntax.html">scalate.fusesource.org/documentation/jade-syntax.html</a><br>
+            </section>
 
             <footer>
               <p>
@@ -90,7 +90,21 @@
               </p>
             </footer>
 
-            <script src="https://giscus.app/client.js" data-repo="andyj/andyjarrett.com" data-repo-id="R_kgDOMjCDkQ" data-category="Announcements" data-category-id="DIC_kwDOMjCDkc4ChlfU" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async=""></script>
+            <script
+              src="https://giscus.app/client.js"
+              data-repo="andyj/andyjarrett.com"
+              data-repo-id="R_kgDOMjCDkQ"
+              data-category="Announcements"
+              data-category-id="DIC_kwDOMjCDkc4ChlfU"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="preferred_color_scheme"
+              data-lang="en"
+              crossorigin="anonymous"
+              async></script>
             <a name="comment"></a>
           </div>
 

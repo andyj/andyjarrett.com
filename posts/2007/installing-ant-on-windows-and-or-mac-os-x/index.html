@@ -9,7 +9,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Installing ANT on Windows and or Mac OS X">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
-<meta name="twitter:creator" content="@andyj">
+<meta name="twitter:creator" content="@andyj" />
 <meta property="og:title" content="Installing ANT on Windows and or Mac OS X">
 <meta property="og:description" content="Go to AndyJarrett.com for more">
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
@@ -17,10 +17,10 @@
 <meta property="og:image:height" content="630">
 <link rel="canonical" href="https://www.andyjarrett.com/posts/2007/installing-ant-on-windows-and-or-mac-os-x/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj">
-<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml">
-<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
@@ -78,7 +78,7 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-I'm gonna try and cover the two OS's here so be kind.First things first, goto <a href="http://ant.apache.org/bindownload.cgi">http://ant.apache.org/bindownload.cgi</a> and download the appropriate archive (zip) file: <em>apache-ant-[VERSION NUMBER HERE]-bin.zip</em> Then for Windows: Extract the .zip to c:\\ant. From the command line set the following environment variables:<code>set ANT_HOME=c:\\antset JAVA_HOME=c:\\jdk-1.5.0.05set PATH=%PATH%;%ANT_HOME%\\bin      </code>For Mac: Unpack the zip file to /usr/local/ant/. Then from the command line set the following environment variables:<code>export ANT_HOME=/usr/local/antexport PATH=${PATH}:${ANT_HOME}/bin</code>Now open up the Terminal(Mac)/Command line(Win) and just type "ANT" and hit return. You should see:<code>Buildfile: build.xml does not exist!Build failed</code>To demonstrate calling a file we're gonna create a quick build.xml. Create a new text file, enter the following bit of XML and save it as build.xml<code><project name="myProject" default="runEcho" basedir="."> <target name="runEcho">   <!-- Simply echo's a message to the screen -->   <echo message="Is anybody out there">  </echo></target></project></code>If you are on Windows save this file to the root of c:\\ and from the command line run the following<code>ant -buildfile c:\\build.xml</code><br>If you are on Mac then just save this to the desktop and from the Terminal run:<code>ant -buildfile ~/desktop/build.xml</code>You should now see<code>Buildfile: {PATH_TO_YOU_BUILD_FILE}build.xmlrunEcho:[echo] Is anybody out thereBUILD SUCCESSFULTotal time: 0 seconds</code>That's pretty much it, from here you you are now set to run Ant from the Terminal/Command line so in theory you should be able to schedule tasks etc!<br>
+I'm gonna try and cover the two OS's here so be kind.First things first, goto <a href="http://ant.apache.org/bindownload.cgi">http://ant.apache.org/bindownload.cgi</a> and download the appropriate archive (zip) file: <em>apache-ant-[VERSION NUMBER HERE]-bin.zip</em> Then for Windows: Extract the .zip to c:\\ant. From the command line set the following environment variables:<code>set ANT_HOME=c:\\antset JAVA_HOME=c:\\jdk-1.5.0.05set PATH=%PATH%;%ANT_HOME%\\bin      </code>For Mac: Unpack the zip file to /usr/local/ant/. Then from the command line set the following environment variables:<code>export ANT_HOME=/usr/local/antexport PATH=${PATH}:${ANT_HOME}/bin</code>Now open up the Terminal(Mac)/Command line(Win) and just type "ANT" and hit return. You should see:<code>Buildfile: build.xml does not exist!Build failed</code>To demonstrate calling a file we're gonna create a quick build.xml. Create a new text file, enter the following bit of XML and save it as build.xml<code><?xml version="1.0" encoding="UTF-8"?><project name="myProject" default="runEcho" basedir="."> <target name="runEcho">   <!-- Simply echo's a message to the screen -->   <echo message="Is anybody out there"/>  </target></project></code>If you are on Windows save this file to the root of c:\\ and from the command line run the following<code>ant -buildfile c:\\build.xml</code><br/>If you are on Mac then just save this to the desktop and from the Terminal run:<code>ant -buildfile ~/desktop/build.xml</code>You should now see<code>Buildfile: {PATH_TO_YOU_BUILD_FILE}build.xmlrunEcho:[echo] Is anybody out thereBUILD SUCCESSFULTotal time: 0 seconds</code>That's pretty much it, from here you you are now set to run Ant from the Terminal/Command line so in theory you should be able to schedule tasks etc!<br>
             </section>
 
             <footer>
@@ -90,7 +90,21 @@ I'm gonna try and cover the two OS's here so be kind.First things first, goto <a
               </p>
             </footer>
 
-            <script src="https://giscus.app/client.js" data-repo="andyj/andyjarrett.com" data-repo-id="R_kgDOMjCDkQ" data-category="Announcements" data-category-id="DIC_kwDOMjCDkc4ChlfU" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async=""></script>
+            <script
+              src="https://giscus.app/client.js"
+              data-repo="andyj/andyjarrett.com"
+              data-repo-id="R_kgDOMjCDkQ"
+              data-category="Announcements"
+              data-category-id="DIC_kwDOMjCDkc4ChlfU"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="preferred_color_scheme"
+              data-lang="en"
+              crossorigin="anonymous"
+              async></script>
             <a name="comment"></a>
           </div>
 

@@ -9,7 +9,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Framework One for when you don't need a framework pt2">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
-<meta name="twitter:creator" content="@andyj">
+<meta name="twitter:creator" content="@andyj" />
 <meta property="og:title" content="Framework One for when you don't need a framework pt2">
 <meta property="og:description" content="Go to AndyJarrett.com for more">
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
@@ -17,10 +17,10 @@
 <meta property="og:image:height" content="630">
 <link rel="canonical" href="https://www.andyjarrett.com/posts/2010/framework-one-for-when-you-dont-need-a-framework-pt2/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj">
-<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml">
-<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
@@ -78,8 +78,8 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-<p>This post follows on from my <a href="http://www.andyjarrett.com/blog/index.cfm/2010/6/7/Framework-One-for-when-you-dont-need-a-framework">first part</a> and is all about using a framework for even the most simplest sites.</p><p>So our family member, Marvin Acme, has come back with the layout for his ACME gadgets to capture and kill rodents site. <br><img src="http://www.andyjarrett.co.uk/blog/images/layout.png" alt="Site layout" style="width:400px;height:250px;"></p><p>Being a family member means we're getting paid most likely with canned beer and with that in mind they are notgetting me working on stylesheets!</p> <p></p><ol><li>Create a new folder called <b>layouts</b> in the root of <b>/acme/</b> and add a file called default.cfm. Inthere place the following snippet:<br><code><cfparam name="rc.pagetitle" default="A.C.M.E">&lt;html><head>&lt;title><cfoutput>#rc.pagetitle#</cfoutput>&lt;style>*{font-family:"Comic Sans MS";text-align:center;}</head><body><cfoutput><div id="wrap"><h1>A.C.M.E - Outlandish and downright dangerous products</h1><div id="nav"><a href="#buildURL(framework.home)#">Home Page</a> |<a href="#buildURL('main.about-us')#">About Acme</a> |<a href="#buildURL('main.contact-us')#">Contact Us</a></div>#body#<div id="footer">A.C.M.E &copy #year(now())#</div></div></cfoutput></body></cfparam></code></li></ol></section></div></section></article></main></div></body></html>There are 3 elements in here that relate to the framework<ol><li>#rc.pagetitle#: the "rc" refers to the <b>R</b>equest <b>C</b>ontext and contains all theURL and form variables from the browser which are also made available to the view directly. We canalso update this variable from within a view for the <b>default.cfm</b> to read, in this case to updatethe page title</li><li><b>buildURL</b> simply creates the <b>index.cfm?action=</b> strings for us. You reference the folder name within the<b>views/</b> folder (in this instance we called it <b>main</b>) and the file name (without the .cfm extention)</li><li><b>#body#</b> is where our view file will be populated in to. There is a lot more to the layouts than I needto go in to here so make sure you check out <a href="http://wiki.github.com/seancorfield/fw1/developing-applications-manual" title="Developing Applications Manual - fw1 - GitHub">manual</a>to see what else you can do.</li></ol><li>In <b>views/main/</b> add <b>about-us.cfm</b>. In there put the following code:<br><code><cfset rc.pageTitle="About A.C.M.E"><p>About us text coming soon</p></cfset></code></li><li>In <b>views/main/</b> add <b>countact-us.cfm</b>. In there put the following code:<br><code><cfset rc.pageTitle="Contact A.C.M.E"><p>Contact us text coming soon</p></cfset></code></li><li>In <b>views/main/default.cfm</b> replace the currect code with the following:<br><code><p>New site coming soon</p></code></li><p></p><p>You should now be able to go to <a href="http://localhost/acme">localhost/acme</a> and see the following:<br><img src="http://www.andyjarrett.co.uk/blog/images/comic-sans.png" alt="The site"></p><p>You're done - obviously minus the content but your 3 page brouchware is setup. No XML config files, setting up debug mode, and thinking about your event names ahead of time head of time.</p><p>What is so great about this then?</p><ul><li>The speed! Yes we could of used no framework and <b>cfmodule</b> on <b>default.cfm</b>, <b>contact-us.cfm</b>, and <b>about-us.cfm</b>but thats a lot of edits to do if the location of cfmodule changed or you wanted to add a required attribute. Look at what has beenachieved and we spent no time setting the site up and got all the benefits of having a framework!</li><li>If Marvin came back and wanted a form or some kind of data displayed we have the benfit of the framework and its abiltiy in handlingand passing data around.</li><li>And again speed! All you've done is created/edited 4 files! No more than if you would of done this without a framework!</li></ul><p></p><p>Hopefully you've seen that there is no reason not to use a framework even in the smallest of projects. We've managed to create a site and nothave to think about MVC or OO (or even XML config files) but at the same time whilst still having the power of these methodologies in the background in case we need them. Don't see this as I am against MVC or OO its just for some apps you don't need to think about these principles and <a href="http://github.com/seancorfield/fw1/downloads" title="Downloads for seancorfield's fw1 - GitHub">convention over configuration</a> has made this possible.</p><p>In keeping with the series I have some more posts as Marvin already has some idea posting and retrieving data and I'll look at how to grow the site.</p><p>Found out more about Framework One via:</p><ul><li><a href="http://fw1.riaforge.org/" title="FW/1 - Framework One">Project home page</a></li><li><a href="http://corfield.org/blog/archives.cfm/category/fw1" title="Blog">The blog</a></li><li><a href="http://wiki.github.com/seancorfield/fw1/" title="Home - fw1 - GitHub">The wiki</a></li></ul><p></p><br>
-            
+<p>This post follows on from my <a href="http://www.andyjarrett.com/blog/index.cfm/2010/6/7/Framework-One-for-when-you-dont-need-a-framework">first part</a> and is all about using a framework for even the most simplest sites.</p><p>So our family member, Marvin Acme, has come back with the layout for his ACME gadgets to capture and kill rodents site. <br/><img src="http://www.andyjarrett.co.uk/blog/images/layout.png" alt="Site layout" style="width:400px;height:250px;" /></p><p>Being a family member means we're getting paid most likely with canned beer and with that in mind they are notgetting me working on stylesheets!</p> <p><ol><li>Create a new folder called <b>layouts</b> in the root of <b>/acme/</b> and add a file called default.cfm. Inthere place the following snippet:<br/><code><cfparam name="rc.pagetitle" default="A.C.M.E">&lt;html><head>&lt;title><cfoutput>#rc.pagetitle#</cfoutput></title>&lt;style>*{font-family:"Comic Sans MS";text-align:center;}</style></head><body><cfoutput><div id="wrap"><h1>A.C.M.E - Outlandish and downright dangerous products</h1><div id="nav"><a href="#buildURL(framework.home)#">Home Page</a> |<a href="#buildURL('main.about-us')#">About Acme</a> |<a href="#buildURL('main.contact-us')#">Contact Us</a></div>#body#<div id="footer">A.C.M.E &copy #year(now())#</div></div></cfoutput></body></html></code>There are 3 elements in here that relate to the framework<ol><li>#rc.pagetitle#: the "rc" refers to the <b>R</b>equest <b>C</b>ontext and contains all theURL and form variables from the browser which are also made available to the view directly. We canalso update this variable from within a view for the <b>default.cfm</b> to read, in this case to updatethe page title</li><li><b>buildURL</b> simply creates the <b>index.cfm?action=</b> strings for us. You reference the folder name within the<b>views/</b> folder (in this instance we called it <b>main</b>) and the file name (without the .cfm extention)</li><li><b>#body#</b> is where our view file will be populated in to. There is a lot more to the layouts than I needto go in to here so make sure you check out <a href="http://wiki.github.com/seancorfield/fw1/developing-applications-manual" title="Developing Applications Manual - fw1 - GitHub">manual</a>to see what else you can do.</li></ol></li><li>In <b>views/main/</b> add <b>about-us.cfm</b>. In there put the following code:<br/><code><cfset rc.pageTitle = "About A.C.M.E" /><p>About us text coming soon</p></code></li><li>In <b>views/main/</b> add <b>countact-us.cfm</b>. In there put the following code:<br/><code><cfset rc.pageTitle = "Contact A.C.M.E" /><p>Contact us text coming soon</p></code></li><li>In <b>views/main/default.cfm</b> replace the currect code with the following:<br/><code><p>New site coming soon</p></code></li></ol></p><p>You should now be able to go to <a href="http://localhost/acme">localhost/acme</a> and see the following:<br/><img src="http://www.andyjarrett.co.uk/blog/images/comic-sans.png" alt="The site" /></p><p>You're done - obviously minus the content but your 3 page brouchware is setup. No XML config files, setting up debug mode, and thinking about your event names ahead of time head of time.</p><p>What is so great about this then?<ul><li>The speed! Yes we could of used no framework and <b>cfmodule</b> on <b>default.cfm</b>, <b>contact-us.cfm</b>, and <b>about-us.cfm</b>but thats a lot of edits to do if the location of cfmodule changed or you wanted to add a required attribute. Look at what has beenachieved and we spent no time setting the site up and got all the benefits of having a framework!</li><li>If Marvin came back and wanted a form or some kind of data displayed we have the benfit of the framework and its abiltiy in handlingand passing data around.</li><li>And again speed! All you've done is created/edited 4 files! No more than if you would of done this without a framework!</li></ul></p><p>Hopefully you've seen that there is no reason not to use a framework even in the smallest of projects. We've managed to create a site and nothave to think about MVC or OO (or even XML config files) but at the same time whilst still having the power of these methodologies in the background in case we need them. Don't see this as I am against MVC or OO its just for some apps you don't need to think about these principles and <a href="http://github.com/seancorfield/fw1/downloads" title="Downloads for seancorfield's fw1 - GitHub">convention over configuration</a> has made this possible.</p><p>In keeping with the series I have some more posts as Marvin already has some idea posting and retrieving data and I'll look at how to grow the site.</p><p>Found out more about Framework One via:<ul><li><a href="http://fw1.riaforge.org/" title="FW/1 - Framework One">Project home page</a></li><li><a href="http://corfield.org/blog/archives.cfm/category/fw1" title="Blog">The blog</a></li><li><a href="http://wiki.github.com/seancorfield/fw1/" title="Home - fw1 - GitHub">The wiki</a></li></ul></p><br>
+            </section>
 
             <footer>
               <p>
@@ -90,9 +90,23 @@
               </p>
             </footer>
 
-            <script src="https://giscus.app/client.js" data-repo="andyj/andyjarrett.com" data-repo-id="R_kgDOMjCDkQ" data-category="Announcements" data-category-id="DIC_kwDOMjCDkc4ChlfU" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async=""></script>
+            <script
+              src="https://giscus.app/client.js"
+              data-repo="andyj/andyjarrett.com"
+              data-repo-id="R_kgDOMjCDkQ"
+              data-category="Announcements"
+              data-category-id="DIC_kwDOMjCDkc4ChlfU"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="preferred_color_scheme"
+              data-lang="en"
+              crossorigin="anonymous"
+              async></script>
             <a name="comment"></a>
-          
+          </div>
 
           <aside class="col-md-3 col-12">
             <h4>Recent Posts</h4>
@@ -138,10 +152,10 @@
               <hr>
             
           </aside>
-        
-      
-    
-  
+        </section>
+      </article>
+    </main>
+  </div>
 
   <footer class="container mt-5 border-top pt-2">
   <div class="row justify-content-md-center">
@@ -185,4 +199,5 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 <script src="/public/js/toggle.js" type="text/javascript"></script>
 <script src="/public/prismjs/prism.js"></script>
-
+</body>
+</html>

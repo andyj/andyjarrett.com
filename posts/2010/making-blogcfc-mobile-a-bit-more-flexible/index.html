@@ -9,7 +9,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Making BlogCFC mobile a bit more flexible">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
-<meta name="twitter:creator" content="@andyj">
+<meta name="twitter:creator" content="@andyj" />
 <meta property="og:title" content="Making BlogCFC mobile a bit more flexible">
 <meta property="og:description" content="Go to AndyJarrett.com for more">
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
@@ -17,10 +17,10 @@
 <meta property="og:image:height" content="630">
 <link rel="canonical" href="https://www.andyjarrett.com/posts/2010/making-blogcfc-mobile-a-bit-more-flexible/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj">
-<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml">
-<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
@@ -78,7 +78,7 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-<img src="http://www.andyjarrett.co.uk/blog/images/blogcfc-mobile-iphone.png" align="right" style="padding:0 0 20px 20px;"><p>As you can tell from the URL I run <a href="http://www.blogcfc.com/index.cfm" title="BlogCFC - BlogCFC - Open Source, ColdFusion Blogging Software Solution">BlogCFC</a>  from a sub-directory which has been fine for me until I tried to use the new mobile blogCFC by <a href="http://blog.dkferguson.com/" title="Dave Ferguson's Blog">Dave Ferguson</a>. This is when everything didn't go to plan as the mobile version assumes you run your blog from the root. After some investigating I think I have made it easier  to drop in to most environments.</p><p>The instructions are references from the blogcfc root folder. First change: </p><ol> <li>Go to <b>/mobile/Application.cfm</b></li> <li>Change:<br>&lt;cfinclude template="/Application.cfm"> to<br> &lt;cfinclude template="../Application.cfm"></li></ol><p>The second change is to simply stop create an object when we have a reference of it already.</p><ol>  <li>Go to <b>/mobile/components/blogMobile.cfc</b> </li>  <li>Change:<br> &lt;cfset variables.utils = createObject("component", "org.camden.blog.utils")> to<br> &lt;cfset variables.utils = application.utils></li></ol><br>
+<img src="http://www.andyjarrett.co.uk/blog/images/blogcfc-mobile-iphone.png" align="right"  style="padding:0 0 20px 20px;" /><p>As you can tell from the URL I run <a href="http://www.blogcfc.com/index.cfm" title="BlogCFC - BlogCFC - Open Source, ColdFusion Blogging Software Solution">BlogCFC</a>  from a sub-directory which has been fine for me until I tried to use the new mobile blogCFC by <a href="http://blog.dkferguson.com/" title="Dave Ferguson's Blog">Dave Ferguson</a>. This is when everything didn't go to plan as the mobile version assumes you run your blog from the root. After some investigating I think I have made it easier  to drop in to most environments.</p><p>The instructions are references from the blogcfc root folder. First change: </p><ol> <li>Go to <b>/mobile/Application.cfm</b></li> <li>Change:<br/>&lt;cfinclude template="/Application.cfm"> to<br/> &lt;cfinclude template="../Application.cfm"></li></ol><p>The second change is to simply stop create an object when we have a reference of it already.</p><ol>  <li>Go to <b>/mobile/components/blogMobile.cfc</b> </li>  <li>Change:<br/> &lt;cfset variables.utils = createObject("component", "org.camden.blog.utils")> to<br/> &lt;cfset variables.utils = application.utils></li></ol><br>
             </section>
 
             <footer>
@@ -90,7 +90,21 @@
               </p>
             </footer>
 
-            <script src="https://giscus.app/client.js" data-repo="andyj/andyjarrett.com" data-repo-id="R_kgDOMjCDkQ" data-category="Announcements" data-category-id="DIC_kwDOMjCDkc4ChlfU" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async=""></script>
+            <script
+              src="https://giscus.app/client.js"
+              data-repo="andyj/andyjarrett.com"
+              data-repo-id="R_kgDOMjCDkQ"
+              data-category="Announcements"
+              data-category-id="DIC_kwDOMjCDkc4ChlfU"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="preferred_color_scheme"
+              data-lang="en"
+              crossorigin="anonymous"
+              async></script>
             <a name="comment"></a>
           </div>
 

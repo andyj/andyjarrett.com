@@ -9,7 +9,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Explaing ColdFusion in relation to J2EE">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
-<meta name="twitter:creator" content="@andyj">
+<meta name="twitter:creator" content="@andyj" />
 <meta property="og:title" content="Explaing ColdFusion in relation to J2EE">
 <meta property="og:description" content="Go to AndyJarrett.com for more">
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
@@ -17,10 +17,10 @@
 <meta property="og:image:height" content="630">
 <link rel="canonical" href="https://www.andyjarrett.com/posts/2007/explaing-coldfusion-in-relation-to-j2ee/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj">
-<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml">
-<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
@@ -78,8 +78,8 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-I just had to put together a small bit of info of how ColdFusion fits into the J2EE world ... something I'm terrible at explaining in words. So I put the below text together with some help from sources around the web and figured that it might be good to post here as well. I wasn't trying to sell it, just explained where it fitted ... what would you of added that I missed?<b>ColdFusion and J2EE</b><br><br><b>What is J2EE?</b><br><p>J = Java; Java, an object orientated language which is typically compiled down to byte code. All source code is first written in plain text files ending with the .java extension. Those source files are then compiled into .class files which contains bytecodes the machine language of the Java Virtual Machine (Java VM). Bytecode is usually Machine (operating system) independant.</p> <p>2 = Version number, though this has now been dropped; 2, is nothing more than a version number and is now dropped (though still used)</p><p>EE = Enterprise Edition; EE, Enterprise Edition, includes all the functionality of the Java languages and also features routines and subroutines designed specifically for servers and mainframes by extending the base Java API's. Example of some J2EE serves are <a href="http://en.wikipedia.org/wiki/JBoss" title="JBoss">JBoss</a>, <a href="http://en.wikipedia.org/wiki/WebSphere_Application_Server" title="WebSphere Application Server">IBM WebSphere Application Server</a> (WAS), and <a href="http://en.wikipedia.org/wiki/JRun" title="JRun">JRun (which ColdFusion initially deploys on)</a>.</p><br><br><b>What is ColdFusion</b><br><p>ColdFusion is deployed as a Java application on a standards-based Java 2 Enterprise Edition (J2EE) application server. This mean that ColdFusion applications leverage features of the J2EE architecture, such as support for multiple application instances and multiple-instance clustering. The ColdFusion architecture gives the developer the ability to use the power of Java application servers and any native objects like Enterprise JavaBeans (EJB). </p><p>The ability to integrate Java into ColdFusion provides all sorts of opportunities, including access to freely and commercially available Java libraries; features in the standard Java and J2EE libraries; and your own Java code. In some cases, this can mean access to functionality that's simply not available in ColdFusion.</p><p>e.g.<b>user created java object</b><br></p><p><code>public class simpleMath {   public int addNumbers(int val1, int val2){      return num1 + num2;   }}</code></p><b>Using the object in ColdFusion</b><br><p><code><!--- create an object based on the simpleMath class  ---><cfset myObject="createObject(" "java",="" "simpleMath"="" )=""><!--- call the addNumbers method and store the result in a variable. ---><cfset result="myObject.addNumbers(" 25,25="" )=""><!--- Print the value of the variable.  ---><cfoutput>The result is: #result#</cfoutput></cfset></cfset></code><br>
-            </p></section>
+I just had to put together a small bit of info of how ColdFusion fits into the J2EE world ... something I'm terrible at explaining in words. So I put the below text together with some help from sources around the web and figured that it might be good to post here as well. I wasn't trying to sell it, just explained where it fitted ... what would you of added that I missed?<b>ColdFusion and J2EE</b><br/><br/><b>What is J2EE?</b><br/><p>J = Java; Java, an object orientated language which is typically compiled down to byte code. All source code is first written in plain text files ending with the .java extension. Those source files are then compiled into .class files which contains bytecodes the machine language of the Java Virtual Machine (Java VM). Bytecode is usually Machine (operating system) independant.</p> <p>2 = Version number, though this has now been dropped; 2, is nothing more than a version number and is now dropped (though still used)</p><p>EE = Enterprise Edition; EE, Enterprise Edition, includes all the functionality of the Java languages and also features routines and subroutines designed specifically for servers and mainframes by extending the base Java API's. Example of some J2EE serves are <a href="http://en.wikipedia.org/wiki/JBoss" title="JBoss">JBoss</a>, <a href="http://en.wikipedia.org/wiki/WebSphere_Application_Server" title="WebSphere Application Server">IBM WebSphere Application Server</a> (WAS), and <a href="http://en.wikipedia.org/wiki/JRun" title="JRun">JRun (which ColdFusion initially deploys on)</a>.</p><br/><br/><b>What is ColdFusion</b><br/><p>ColdFusion is deployed as a Java application on a standards-based Java 2 Enterprise Edition (J2EE) application server. This mean that ColdFusion applications leverage features of the J2EE architecture, such as support for multiple application instances and multiple-instance clustering. The ColdFusion architecture gives the developer the ability to use the power of Java application servers and any native objects like Enterprise JavaBeans (EJB). </p><p>The ability to integrate Java into ColdFusion provides all sorts of opportunities, including access to freely and commercially available Java libraries; features in the standard Java and J2EE libraries; and your own Java code. In some cases, this can mean access to functionality that's simply not available in ColdFusion.</p><p>e.g.<b>user created java object</b><br/><p><code>public class simpleMath {   public int addNumbers(int val1, int val2){      return num1 + num2;   }}</code></p><b>Using the object in ColdFusion</b><br/><p><code><!--- create an object based on the simpleMath class  ---><cfset myObject = createObject( "java", "simpleMath" ) /><!--- call the addNumbers method and store the result in a variable. ---><cfset result = myObject.addNumbers( 25,25 ) /><!--- Print the value of the variable.  ---><cfoutput>The result is: #result#</cfoutput></code><br>
+            </section>
 
             <footer>
               <p>
@@ -90,7 +90,21 @@ I just had to put together a small bit of info of how ColdFusion fits into the J
               </p>
             </footer>
 
-            <script src="https://giscus.app/client.js" data-repo="andyj/andyjarrett.com" data-repo-id="R_kgDOMjCDkQ" data-category="Announcements" data-category-id="DIC_kwDOMjCDkc4ChlfU" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async=""></script>
+            <script
+              src="https://giscus.app/client.js"
+              data-repo="andyj/andyjarrett.com"
+              data-repo-id="R_kgDOMjCDkQ"
+              data-category="Announcements"
+              data-category-id="DIC_kwDOMjCDkc4ChlfU"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="preferred_color_scheme"
+              data-lang="en"
+              crossorigin="anonymous"
+              async></script>
             <a name="comment"></a>
           </div>
 

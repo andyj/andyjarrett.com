@@ -9,7 +9,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Ant- Passing attributes to Build.xml">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
-<meta name="twitter:creator" content="@andyj">
+<meta name="twitter:creator" content="@andyj" />
 <meta property="og:title" content="Ant- Passing attributes to Build.xml">
 <meta property="og:description" content="Go to AndyJarrett.com for more">
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
@@ -17,10 +17,10 @@
 <meta property="og:image:height" content="630">
 <link rel="canonical" href="https://www.andyjarrett.com/posts/2007/ant-passing-attributes-to-buildxml/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj">
-<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml">
-<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
@@ -78,7 +78,7 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-<a href="http://single-dads.us/">Critter</a> on a <a href="http://www.andyjarrett.co.uk/andy/blog/index.cfm/2007/6/27/Installing-ANT-on-Windows-and-or-Mac-OS-X#c76F0DC32-3048-28EB-0EA23F2E5BEDBF9C">previous post asked</a> "if you can pass in attributes to the build.xml file?" From the Terminal this is as easy as adding another argument "-D". -D&lt;property>=&lt;value><br>This will update a property in you build.xml file with the value you passed inFor example you would use something similar to<code>ant -buildfile ~/desktop/build.xml -DechoMsg=NewEchoMessage</code>Putting this into practice here is a sample build.xml which I am going to save to my Desktop<code><project name="myProject" default="runEcho" basedir=".">  <property name="echoMsg" value="I am the original message">  <target name="runEcho"><!-- Simply echo's a message to the screen -->    <echo message="${echoMsg}">  </echo></target></property></project></code>From the Terminal no run<code>ant -buildfile ~/desktop/build.xml -DechoMsg='I overwrite the echo message'</code>In your terminal window you should see something like<code>Buildfile: [PATH TO BUILD FILE]build.xmlrunEcho:[echo] I overwrite the echo messageBUILD SUCCESSFULTotal time: 0 seconds</code><br>
+<a href="http://single-dads.us/">Critter</a> on a <a href="http://www.andyjarrett.co.uk/andy/blog/index.cfm/2007/6/27/Installing-ANT-on-Windows-and-or-Mac-OS-X#c76F0DC32-3048-28EB-0EA23F2E5BEDBF9C">previous post asked</a> "if you can pass in attributes to the build.xml file?" From the Terminal this is as easy as adding another argument "-D". -D&lt;property>=&lt;value><br/>This will update a property in you build.xml file with the value you passed inFor example you would use something similar to<code>ant -buildfile ~/desktop/build.xml -DechoMsg=NewEchoMessage</code>Putting this into practice here is a sample build.xml which I am going to save to my Desktop<code><?xml version="1.0" encoding="UTF-8"?><project name="myProject" default="runEcho" basedir=".">  <property name="echoMsg" value="I am the original message" />  <target name="runEcho"><!-- Simply echo's a message to the screen -->    <echo message="${echoMsg}"/>  </target></project></code>From the Terminal no run<code>ant -buildfile ~/desktop/build.xml -DechoMsg='I overwrite the echo message'</code>In your terminal window you should see something like<code>Buildfile: [PATH TO BUILD FILE]build.xmlrunEcho:[echo] I overwrite the echo messageBUILD SUCCESSFULTotal time: 0 seconds</code><br>
             </section>
 
             <footer>
@@ -90,7 +90,21 @@
               </p>
             </footer>
 
-            <script src="https://giscus.app/client.js" data-repo="andyj/andyjarrett.com" data-repo-id="R_kgDOMjCDkQ" data-category="Announcements" data-category-id="DIC_kwDOMjCDkc4ChlfU" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async=""></script>
+            <script
+              src="https://giscus.app/client.js"
+              data-repo="andyj/andyjarrett.com"
+              data-repo-id="R_kgDOMjCDkQ"
+              data-category="Announcements"
+              data-category-id="DIC_kwDOMjCDkc4ChlfU"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="preferred_color_scheme"
+              data-lang="en"
+              crossorigin="anonymous"
+              async></script>
             <a name="comment"></a>
           </div>
 

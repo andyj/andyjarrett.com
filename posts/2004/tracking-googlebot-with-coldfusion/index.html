@@ -9,7 +9,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Tracking Googlebot with ColdFusion">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
-<meta name="twitter:creator" content="@andyj">
+<meta name="twitter:creator" content="@andyj" />
 <meta property="og:title" content="Tracking Googlebot with ColdFusion">
 <meta property="og:description" content="Go to AndyJarrett.com for more">
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
@@ -17,10 +17,10 @@
 <meta property="og:image:height" content="630">
 <link rel="canonical" href="https://www.andyjarrett.com/posts/2004/tracking-googlebot-with-coldfusion/">
 <link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj">
-<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml">
-<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
@@ -78,7 +78,7 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-I came across this little script which is a kind of Googlebot alert at <a href="http://www.mitchkeeler.com/tutorial_tracking_google.php">http://www.mitchkeeler.com/tutorial_tracking_google.php</a>.  It could be worth sticking on a new site to be alerted when Google has arrived.Easy Version<div class="code"><FONT COLOR="MAROON">&lt;cfif findNoCase(<FONT COLOR="BLUE">"googlebot"</FONT>, cgi.HTTP_USER_AGENT)&gt;</FONT><br><FONT COLOR="MAROON">&lt;cfmail to=<FONT COLOR="BLUE">"<A HREF="mailto:you@youremail.com">you@youremail.com</A>"</FONT> from=<FONT COLOR="BLUE">"<A HREF="mailto:website@yourdomain.com">website@yourdomain.com</A>"</FONT> subject=<FONT COLOR="BLUE">"Google has crawled yourdomainname.com"</FONT>&gt;</FONT><FONT COLOR="MAROON">&lt;/cfmail&gt;</FONT><br><FONT COLOR="MAROON">&lt;/cfif&gt;</FONT></div>Expert Version<div class="code"><FONT COLOR="MAROON">&lt;cfif findNoCase(<FONT COLOR="BLUE">"googlebot"</FONT>, cgi.HTTP_USER_AGENT)&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR="MAROON">&lt;cfset today = dateFormat(now(), 'dd/mm/yy')&timeFormat(now(), 'HH:mm:ss')&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR="MAROON">&lt;cfset urlString = <FONT COLOR="BLUE">"http://"</FONT>&cgi.SERVER_NAME&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR="MAROON">&lt;cfif len(trim(cgi.QUERY_STRING))&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR="MAROON">&lt;cfset urlString = urlString&<FONT COLOR="BLUE">"?"</FONT>&cgi.QUERY_STRING&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR="MAROON">&lt;/cfif&gt;</FONT>&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;<FONT COLOR="MAROON">&lt;cfmail to=<FONT COLOR="BLUE">"<A HREF="mailto:you@youremail.com">you@youremail.com</A>"</FONT> from=<FONT COLOR="BLUE">"<A HREF="mailto:website@yourdomain.com">website@yourdomain.com</A>"</FONT> subject=<FONT COLOR="BLUE">"Google has crawled yourdomainname.com"</FONT>&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Google Detected @ #urlString#<br>&nbsp;&nbsp;&nbsp;<FONT COLOR="MAROON">&lt;/cfmail&gt;</FONT><br><FONT COLOR="MAROON">&lt;/cfif&gt;</FONT></div>Warning: they are not tested yet so use at own risk.Obviously this has a few other uses, it could even be modified to see when the MSN bot or all of them coming across.<br>
+I came across this little script which is a kind of Googlebot alert at <a href="http://www.mitchkeeler.com/tutorial_tracking_google.php">http://www.mitchkeeler.com/tutorial_tracking_google.php</a>.  It could be worth sticking on a new site to be alerted when Google has arrived.Easy Version<div class="code"><FONT COLOR=MAROON>&lt;cfif findNoCase(<FONT COLOR=BLUE>"googlebot"</FONT>, cgi.HTTP_USER_AGENT)&gt;</FONT><br><FONT COLOR=MAROON>&lt;cfmail to=<FONT COLOR=BLUE>"<A HREF="mailto:you@youremail.com">you@youremail.com</A>"</FONT> from=<FONT COLOR=BLUE>"<A HREF="mailto:website@yourdomain.com">website@yourdomain.com</A>"</FONT> subject=<FONT COLOR=BLUE>"Google has crawled yourdomainname.com"</FONT>&gt;</FONT><FONT COLOR=MAROON>&lt;/cfmail&gt;</FONT><br><FONT COLOR=MAROON>&lt;/cfif&gt;</FONT></div>Expert Version<div class="code"><FONT COLOR=MAROON>&lt;cfif findNoCase(<FONT COLOR=BLUE>"googlebot"</FONT>, cgi.HTTP_USER_AGENT)&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset today = dateFormat(now(), 'dd/mm/yy')&timeFormat(now(), 'HH:mm:ss')&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset urlString = <FONT COLOR=BLUE>"http://"</FONT>&cgi.SERVER_NAME&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfif len(trim(cgi.QUERY_STRING))&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfset urlString = urlString&<FONT COLOR=BLUE>"?"</FONT>&cgi.QUERY_STRING&gt;</FONT><br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;/cfif&gt;</FONT>&nbsp;&nbsp;&nbsp;<br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;cfmail to=<FONT COLOR=BLUE>"<A HREF="mailto:you@youremail.com">you@youremail.com</A>"</FONT> from=<FONT COLOR=BLUE>"<A HREF="mailto:website@yourdomain.com">website@yourdomain.com</A>"</FONT> subject=<FONT COLOR=BLUE>"Google has crawled yourdomainname.com"</FONT>&gt;</FONT><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Google Detected @ #urlString#<br>&nbsp;&nbsp;&nbsp;<FONT COLOR=MAROON>&lt;/cfmail&gt;</FONT><br><FONT COLOR=MAROON>&lt;/cfif&gt;</FONT></div>Warning: they are not tested yet so use at own risk.Obviously this has a few other uses, it could even be modified to see when the MSN bot or all of them coming across.<br>
             </section>
 
             <footer>
@@ -90,7 +90,21 @@ I came across this little script which is a kind of Googlebot alert at <a href="
               </p>
             </footer>
 
-            <script src="https://giscus.app/client.js" data-repo="andyj/andyjarrett.com" data-repo-id="R_kgDOMjCDkQ" data-category="Announcements" data-category-id="DIC_kwDOMjCDkc4ChlfU" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async=""></script>
+            <script
+              src="https://giscus.app/client.js"
+              data-repo="andyj/andyjarrett.com"
+              data-repo-id="R_kgDOMjCDkQ"
+              data-category="Announcements"
+              data-category-id="DIC_kwDOMjCDkc4ChlfU"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="preferred_color_scheme"
+              data-lang="en"
+              crossorigin="anonymous"
+              async></script>
             <a name="comment"></a>
           </div>
 
