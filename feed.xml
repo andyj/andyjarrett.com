@@ -7,134 +7,6 @@
     <language>en</language>
     <atom:link href="https://andyjarrett.com/feed.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Basic Javascript Console Logging Techniques Every Developer Should Know</title>
-      <link>https://andyjarrett.com/posts/2024/basic-javascript-console-logging-methods/</link>
-      <description><![CDATA[
-
-&lt;div class=&quot;image-container my-2&quot;&gt;
-  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/zan-lazarevic--gxW3aq6onU-unsplash.jpg&quot; alt=&quot;Developer debugging&quot; class=&quot;img-fluid&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;text-end&quot;&gt;
-  &lt;sup&gt;
-    &lt;cite&gt;
-      Photo by &lt;a href=&quot;https://unsplash.com/@zanlazarevic?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Zan Lazarevic&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/black-iphone-near-macbook-pro--gxW3aq6onU?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;
-    &lt;/cite&gt;
-  &lt;/sup&gt;
-&lt;/div&gt;
-
-
-&lt;p&gt;In JavaScript, the console object provides access to the browser&#39;s debugging console. There are more methods available on the console object than I ever realised or looked into. Over the next few posts, I hope to list them all out along with some examples.&lt;/p&gt;
-
-&lt;p&gt;FYI: Part 2 is &lt;a href=&quot;https://andyjarrett.com/posts/2024/advanced-javascript-console-methods/&quot; title=&quot;Advanced Javascript Console Techniques Every Developer Should Be Aware Off&quot;&gt;now out&lt;/a&gt; and &lt;a href=&quot;https://andyjarrett.com/posts/2024/utility-console-methods-for-debugging-workflow/&quot; title=&quot;Utility Console Methods For Debugging Your Javascript Workflow&quot;&gt;Part 3&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3&gt;These are the ones that you should all know&lt;/h3&gt;
-
-&lt;div class=&quot;row mb-5&quot;&gt;
-  &lt;div class=&quot;col&quot;&gt;
-    &lt;div class=&quot;card&quot;&gt;
-      &lt;div class=&quot;card-header&quot;&gt;
-        &lt;code&gt;console.log();&lt;/code&gt; // General logging and the basics
-      &lt;/div&gt;
-      &lt;div class=&quot;card-body&quot;&gt;
-        &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;let someVar = 42;
-console.log(someVar); // Direct output of variables
-console.log(&quot;This is a log message&quot;); // Strings
-console.log(`The answer is ${someVar}`); //Embedded Expression allowed too
-console.log(&quot;Variable value:&quot;, someVar);&lt;/code&gt;&lt;/pre&gt;
-        &lt;p&gt;Output:&lt;/p&gt;
-        &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;42
-This is a log message
-The answer is 42
-Variable value: 42&lt;/code&gt;&lt;/pre&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;row mb-5&quot;&gt;
-  &lt;div class=&quot;col&quot;&gt;
-    &lt;div class=&quot;card&quot;&gt;
-      &lt;div class=&quot;card-header&quot;&gt;
-        &lt;code&gt;console.error();&lt;/code&gt; // Logging errors
-      &lt;/div&gt;
-      &lt;div class=&quot;card-body&quot;&gt;
-        &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;console.error(&quot;This is an error message&quot;);
-console.error(&quot;Error details:&quot;, new Error(&quot;Something went wrong&quot;));&lt;/code&gt;&lt;/pre&gt;
-        &lt;p&gt;Output:&lt;/p&gt;
-        &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;This is an error message
-Error details: Error: Something went wrong
-    at &amp;lt;anonymous&amp;gt;:1:42&lt;/code&gt;&lt;/pre&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;row mb-5&quot;&gt;
-  &lt;div class=&quot;col&quot;&gt;
-    &lt;div class=&quot;card&quot;&gt;
-      &lt;div class=&quot;card-header&quot;&gt;
-        &lt;code&gt;console.warn();&lt;/code&gt; // Logging warnings
-      &lt;/div&gt;
-      &lt;div class=&quot;card-body&quot;&gt;
-        &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;console.warn(&quot;This is a warning message&quot;);
-console.warn(&quot;Warning details:&quot;, &quot;Low disk space&quot;);&lt;/code&gt;&lt;/pre&gt;
-        &lt;p&gt;Output:&lt;/p&gt;
-        &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;This is a warning message
-Warning details: Low disk space&lt;/code&gt;&lt;/pre&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;row mb-5&quot;&gt;
-  &lt;div class=&quot;col&quot;&gt;
-    &lt;div class=&quot;card&quot;&gt;
-      &lt;div class=&quot;card-header&quot;&gt;
-        &lt;code&gt;console.info();&lt;/code&gt; // Logging informational messages
-      &lt;/div&gt;
-      &lt;div class=&quot;card-body&quot;&gt;
-        &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;console.info(&quot;This is an informational message&quot;);
-console.info(&quot;Info details:&quot;, { status: &quot;OK&quot; });&lt;/code&gt;&lt;/pre&gt;
-        &lt;p&gt;Output:&lt;/p&gt;
-        &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;This is an informational message
-Info details: { status: &quot;OK&quot; }&lt;/code&gt;&lt;/pre&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class=&quot;row mb-5&quot;&gt;
-  &lt;div class=&quot;col&quot;&gt;
-    &lt;div class=&quot;card&quot;&gt;
-      &lt;div class=&quot;card-header&quot;&gt;
-        &lt;code&gt;console.debug();&lt;/code&gt; // Logging debug messages
-      &lt;/div&gt;
-      &lt;div class=&quot;card-body&quot;&gt;
-        &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;console.debug(&quot;This is a debug message&quot;);
-console.debug(&quot;Debug details:&quot;, { debugMode: true });&lt;/code&gt;&lt;/pre&gt;
-        &lt;p&gt;Output:&lt;/p&gt;
-        &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;This is a debug message
-Debug details: { debugMode: true }&lt;/code&gt;&lt;/pre&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-
-&lt;div class=&quot;row&quot;&gt;
-  &lt;div class=&quot;col&quot;&gt;
-    &lt;p&gt;Why not try it out now in the developer console now? If you&#39;re on Chrone/Edge check out &lt;a href=&quot;https://developer.chrome.com/docs/devtools/console/javascript&quot; target=&quot;_blank&quot;&gt;this guide&lt;/a&gt;.&lt;/p&gt;
-
-  &lt;/div&gt;
-&lt;/div&gt;]]></description>
-      <pubDate>Thu, 08 Aug 2024 01:01:00 +0000</pubDate>
-      <dc:creator>Andy Jarrett</dc:creator>
-      <guid>https://andyjarrett.com/posts/2024/basic-javascript-console-logging-methods/</guid>
-      <enclosure url="https://andyjarrett.com/public/blogimage/zan-lazarevic--gxW3aq6onU-unsplash.jpg" type="image/jpeg" />
-      <category>posts, javascript, console, debug</category>
-      <author>Andy Jarrett &lt;email@example.com&gt;</author>
-    </item>
-    <item>
       <title>Advanced Javascript Console Techniques Every Developer Should Be Aware Of</title>
       <link>https://andyjarrett.com/posts/2024/advanced-javascript-console-methods/</link>
       <description><![CDATA[
@@ -968,6 +840,117 @@ curl -X POST &quot;https://api.indexnow.org/indexnow&quot; &#92;
       <guid>https://andyjarrett.com/posts/2024/bluesky-now-has-over-10-million-users-and-i-was-number-56137/</guid>
       <enclosure url="https://andyjarrett.com/public/blogimage/adam-birkett-P2ah-LaV52I-unsplash.jpg" type="image/jpeg" />
       <category>posts, bluesky, 10million</category>
+      <author>Andy Jarrett &lt;email@example.com&gt;</author>
+    </item>
+    <item>
+      <title>Understanding Variable Scoping Differences Between Lucee 5 and Lucee 6</title>
+      <link>https://andyjarrett.com/posts/2024/understanding-variable-scoping-differences-between-lucee-5-and-lucee-6/</link>
+      <description><![CDATA[
+
+
+
+&lt;div class=&quot;image-container my-2&quot;&gt;
+  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/lewis-kang-ethe-ngugi-f5pTwLHCsAg-unsplash.jpg&quot; alt=&quot;Computer with code&quot; class=&quot;img-fluid&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;text-end&quot;&gt;
+  &lt;sup&gt;
+    &lt;cite&gt;
+      Photo by &lt;a href=&quot;https://unsplash.com/@brina_blum?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Brina Blum&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/black-usb-flash-drive-Bb_X4JgSqIM?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;
+    &lt;/cite&gt;
+  &lt;/sup&gt;
+&lt;/div&gt;
+
+
+  &lt;h1 class=&quot;mb-4&quot;&gt;&lt;/h1&gt;
+  &lt;p&gt;
+    From a conversation on the &lt;a href=&quot;https://workingcode.dev/&quot;&gt;Working Code Podcast&lt;/a&gt; &lt;a href=&quot;https://workingcode.dev/discord/&quot;&gt;Discord&lt;/a&gt; channel I came across
+    a change between Lucee 5 to Lucee 6, and how variables are scoped and handled, specifically when/if using &lt;code&gt;var&lt;/code&gt; in a &lt;code&gt;.cfm&lt;/code&gt; template.
+    This post is just the sample code I used to do some digging on how the scoping differences between the two versions using a simple test cases to show the different outcomes&lt;/p&gt;
+
+  &lt;h2&gt;Test Scenario&lt;/h2&gt;
+  &lt;p&gt;Here are my test files, &lt;code&gt;var.cfm&lt;/code&gt; and &lt;code&gt;varinclude.cfm&lt;/code&gt;.&lt;/p&gt;
+
+  &lt;h3&gt;&lt;code&gt;var.cfm&lt;/code&gt; (main template):&lt;/h3&gt;
+  &lt;pre&gt;&lt;code&gt;&amp;lt;cfscript&amp;gt;
+  var a = &quot;a&quot;;
+  b = &quot;b&quot;;
+  local.c = &quot;c&quot;;
+
+  dump(a); // Output: &quot;a&quot;
+  dump(b); // Output: &quot;b&quot;
+  dump(c); // Output: &quot;c&quot;
+  dump(local.c); // Output: &quot;c&quot;
+
+  cfinclude(template=&quot;varinclude.cfm&quot;);
+&amp;lt;/cfscript&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+  &lt;h3&gt;&lt;code&gt;varinclude.cfm&lt;/code&gt; (included template):&lt;/h3&gt;
+  &lt;pre&gt;&lt;code&gt;&amp;lt;cfscript&amp;gt;
+  dump(a); // Output: &quot;a&quot;
+  dump(b); // Output: &quot;b&quot;
+  dump(c); // Output: &quot;c&quot;
+  dump(local.c); // Output: &quot;c&quot;
+&amp;lt;/cfscript&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+  &lt;p&gt;This setup works well on &lt;strong&gt;Lucee 5&lt;/strong&gt;, where:&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;The &lt;code&gt;var&lt;/code&gt; keyword is used to declare variables with function-local scope, even outside functions.&lt;/li&gt;
+    &lt;li&gt;The variable &lt;code&gt;b&lt;/code&gt; is implicitly scoped to the current page.&lt;/li&gt;
+    &lt;li&gt;The &lt;code&gt;local&lt;/code&gt; scope is explicitly used for &lt;code&gt;c&lt;/code&gt;.&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;h2&gt;Results on Lucee 5&lt;/h2&gt;
+  &lt;p&gt;On Lucee 5, the following outputs occur:&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;code&gt;dump(a);&lt;/code&gt; outputs &lt;code&gt;&quot;a&quot;&lt;/code&gt;.&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt;dump(b);&lt;/code&gt; outputs &lt;code&gt;&quot;b&quot;&lt;/code&gt;.&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt;dump(c);&lt;/code&gt; outputs &lt;code&gt;&quot;c&quot;&lt;/code&gt;.&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt;dump(local.c);&lt;/code&gt; outputs &lt;code&gt;&quot;c&quot;&lt;/code&gt;.&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;img src=&quot;https://andyjarrett.com/public/postimages/understanding-variable-scoping-differences-between-lucee-5-and-lucee-6.img1.png&quot; alt=&quot;Output results&quot; /&gt;
+
+  &lt;p&gt;The included template (&lt;code&gt;varinclude.cfm&lt;/code&gt;) inherits these variables, and everything behaves as expected. This is because, in Lucee 5, &lt;code&gt;var&lt;/code&gt; declarations work even outside of functions.&lt;/p&gt;
+
+  &lt;h2&gt;Behaviour in Lucee 6&lt;/h2&gt;
+  &lt;p&gt;When upgrading to &lt;strong&gt;Lucee 6&lt;/strong&gt;, however, some changes in scoping rules cause issues:&lt;/p&gt;
+
+  &lt;ol&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;strong&gt;Using &lt;code&gt;var&lt;/code&gt; outside a function:&lt;/strong&gt;&lt;/p&gt;
+      &lt;pre&gt;&lt;code&gt;&amp;lt;cfscript&amp;gt;
+  var a = &quot;a&quot;; // This line fails with &quot;Can&#39;t invoke key A, Local Scope can only be invoked inside a Function&quot;
+&amp;lt;/cfscript&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;p&gt;In Lucee 6, the &lt;code&gt;var&lt;/code&gt; keyword is now restricted to function scopes, and attempting to use it outside a function will result in an error. This is a notable shift from Lucee 5. &lt;/p&gt;
+      &lt;p&gt;&lt;img src=&quot;https://andyjarrett.com/public/postimages/understanding-variable-scoping-differences-between-lucee-5-and-lucee-6.img2.png&quot; alt=&quot;Output results&quot; /&gt;&lt;/p&gt;
+    &lt;/li&gt;
+
+    &lt;li&gt;
+      &lt;p&gt;&lt;strong&gt;Accessing &lt;code&gt;c&lt;/code&gt; without scoping:&lt;/strong&gt;&lt;/p&gt;
+      &lt;pre&gt;&lt;code&gt;&amp;lt;cfscript&amp;gt;
+  dump(c); // This line fails with &quot;variable [C] doesn&#39;t exist&quot;
+&amp;lt;/cfscript&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;p&gt;Lucee 6 enforces stricter scoping rules. Without explicitly declaring &lt;code&gt;c&lt;/code&gt; in a shared scope (such as &lt;code&gt;local.c&lt;/code&gt;), it&#39;s no longer accessible in the same way as in Lucee 5.&lt;/p&gt;
+      &lt;p&gt; &lt;img src=&quot;https://andyjarrett.com/public/postimages/understanding-variable-scoping-differences-between-lucee-5-and-lucee-6.img3.png&quot; alt=&quot;Output results&quot; /&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+
+
+
+  &lt;h2&gt;TL;DR&lt;/h2&gt;
+  &lt;p&gt;When migrating from Lucee 5 to Lucee 6, developers need to be aware of the stricter scoping rules.
+    &lt;strong&gt;&lt;code&gt;var&lt;/code&gt; is now restricted to function scope in Lucee 6&lt;/strong&gt;. Attempting to use it outside of a function will result in an error.
+  &lt;/p&gt;
+]]></description>
+      <pubDate>Wed, 09 Oct 2024 08:28:00 +0000</pubDate>
+      <dc:creator>Andy Jarrett</dc:creator>
+      <guid>https://andyjarrett.com/posts/2024/understanding-variable-scoping-differences-between-lucee-5-and-lucee-6/</guid>
+      <enclosure url="https://andyjarrett.com/public/blogimage/lewis-kang-ethe-ngugi-f5pTwLHCsAg-unsplash.jpg" type="image/jpeg" />
+      <category>posts, CFML, ColdFusion, Lucee</category>
       <author>Andy Jarrett &lt;email@example.com&gt;</author>
     </item>
     <image>

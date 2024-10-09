@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="description" content="When upgrading from Lucee 5 to Lucee 6, developers may encounter some changes in how variables are scoped and handled, especially when using var in a .cfm template.">
+<meta name="author" content="Andy Jarrett">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Understanding Variable Scoping Differences Between Lucee 5 and Lucee 6</title>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Understanding Variable Scoping Differences Between Lucee 5 and Lucee 6">
+<meta name="twitter:description" content="When upgrading from Lucee 5 to Lucee 6, developers may encounter some changes in how variables are scoped and handled, especially when using var in a .cfm template.">
+<meta name="twitter:creator" content="@andyj" />
+<meta property="og:title" content="Understanding Variable Scoping Differences Between Lucee 5 and Lucee 6">
+<meta property="og:description" content="When upgrading from Lucee 5 to Lucee 6, developers may encounter some changes in how variables are scoped and handled, especially when using var in a .cfm template.">
+<meta property="og:image" content="https://www.andyjarrett.com/public/blogimage/lewis-kang-ethe-ngugi-f5pTwLHCsAg-unsplash.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="canonical" href="https://www.andyjarrett.com/posts/2024/understanding-variable-scoping-differences-between-lucee-5-and-lucee-6/">
+<link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://andyjarrett.com/feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
+<link rel="sitemap" href="https://andyjarrett.com/sitemap.xml" type="application/xml" />
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="/public/css/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
+<link rel="stylesheet" href="/public/prismjs/prism.css">
+  <script src="https://unpkg.com/htmx.org@2.0.2" integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ" crossorigin="anonymous"></script>
+
+</head>
+<body>
+  <div class="container border-bottom pb-2">
+  <header class="d-flex flex-wrap justify-content-center">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+      <span class="fs-2">Andy Jarrett // <span class="lead">Code. Develop. Create.</span></span>
+    </a>
+    <ul class="nav nav-pills">
+      <li class="nav-item  p-2">
+        <a href="/" class="btn btn-outline-primary rounded-circle p-3 lh-1">
+          <i class="bi bi-house fs-5"></i>
+          <span class="visually-hidden">Dismiss</span>
+        </a>
+      </li>
+      <li class="nav-item  p-2">
+        <a href="/feed.xml" class="btn btn-outline-primary rounded-circle p-3 lh-1">
+          <i class="bi bi-rss fs-5"></i>
+        </a>
+      </li>
+      <li class="nav-item  p-2">
+        <a href="/linktree" class="btn btn-outline-primary rounded-circle p-3 lh-1" title="Linktree for Andy Jarrett">
+          <i class="bi bi-tree fs-5"></i>
+        </a>
+      </li>
+      <li class="nav-item  p-2">
+        <a href="https://buymeacoffee.com/mailgw" class="btn btn-outline-primary rounded-circle p-3 lh-1">
+          <i class="bi bi-cup-hot-fill fs-5"></i>
+        </a>
+      </li>
+    </ul>
+  </header>
+</div>  
+
+
+  <div class="container">
+    <div class="my-1 text-center text-primary" role="alert">
+      <a class="text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">
+        Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky
+      </a>
+    </div>
+
+    <main>
+      <article>
+        <header>
+          <h1 class="mt-5 mb-5"><b>Understanding Variable Scoping Differences Between Lucee 5 and Lucee 6</b></h1>
+        </header>
+
+        <section class="row">
+          <div class="col-md-9 col-12">
+            <section class="mw fw-lighter fs-5">
+              
+
+
+
+<div class="image-container my-2">
+  <img src="/public/blogimage/lewis-kang-ethe-ngugi-f5pTwLHCsAg-unsplash.jpg" alt="Computer with code" class="img-fluid">
+</div>
+<div class="text-end">
+  <sup>
+    <cite>
+      Photo by <a href="https://unsplash.com/@brina_blum?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Brina Blum</a> on <a href="https://unsplash.com/photos/black-usb-flash-drive-Bb_X4JgSqIM?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+    </cite>
+  </sup>
+</div>
+
+
+  <h1 class="mb-4"></h1>
+  <p>
+    From a conversation on the <a href="https://workingcode.dev/">Working Code Podcast</a> <a href="https://workingcode.dev/discord/">Discord</a> channel I came across
+    a change between Lucee 5 to Lucee 6, and how variables are scoped and handled, specifically when/if using <code>var</code> in a <code>.cfm</code> template.
+    This post is just the sample code I used to do some digging on how the scoping differences between the two versions using a simple test cases to show the different outcomes</p>
+
+  <h2>Test Scenario</h2>
+  <p>Here are my test files, <code>var.cfm</code> and <code>varinclude.cfm</code>.</p>
+
+  <h3><code>var.cfm</code> (main template):</h3>
+  <pre><code>&lt;cfscript&gt;
+  var a = "a";
+  b = "b";
+  local.c = "c";
+
+  dump(a); // Output: "a"
+  dump(b); // Output: "b"
+  dump(c); // Output: "c"
+  dump(local.c); // Output: "c"
+
+  cfinclude(template="varinclude.cfm");
+&lt;/cfscript&gt;
+</code></pre>
+
+  <h3><code>varinclude.cfm</code> (included template):</h3>
+  <pre><code>&lt;cfscript&gt;
+  dump(a); // Output: "a"
+  dump(b); // Output: "b"
+  dump(c); // Output: "c"
+  dump(local.c); // Output: "c"
+&lt;/cfscript&gt;
+</code></pre>
+
+  <p>This setup works well on <strong>Lucee 5</strong>, where:</p>
+  <ul>
+    <li>The <code>var</code> keyword is used to declare variables with function-local scope, even outside functions.</li>
+    <li>The variable <code>b</code> is implicitly scoped to the current page.</li>
+    <li>The <code>local</code> scope is explicitly used for <code>c</code>.</li>
+  </ul>
+
+  <h2>Results on Lucee 5</h2>
+  <p>On Lucee 5, the following outputs occur:</p>
+  <ul>
+    <li><code>dump(a);</code> outputs <code>"a"</code>.</li>
+    <li><code>dump(b);</code> outputs <code>"b"</code>.</li>
+    <li><code>dump(c);</code> outputs <code>"c"</code>.</li>
+    <li><code>dump(local.c);</code> outputs <code>"c"</code>.</li>
+  </ul>
+
+  <img src="/public/postimages/understanding-variable-scoping-differences-between-lucee-5-and-lucee-6.img1.png" alt="Output results">
+
+  <p>The included template (<code>varinclude.cfm</code>) inherits these variables, and everything behaves as expected. This is because, in Lucee 5, <code>var</code> declarations work even outside of functions.</p>
+
+  <h2>Behaviour in Lucee 6</h2>
+  <p>When upgrading to <strong>Lucee 6</strong>, however, some changes in scoping rules cause issues:</p>
+
+  <ol>
+    <li>
+      <p><strong>Using <code>var</code> outside a function:</strong></p>
+      <pre><code>&lt;cfscript&gt;
+  var a = "a"; // This line fails with "Can't invoke key A, Local Scope can only be invoked inside a Function"
+&lt;/cfscript&gt;
+</code></pre>
+      <p>In Lucee 6, the <code>var</code> keyword is now restricted to function scopes, and attempting to use it outside a function will result in an error. This is a notable shift from Lucee 5. </p>
+      <p><img src="/public/postimages/understanding-variable-scoping-differences-between-lucee-5-and-lucee-6.img2.png" alt="Output results"></p>
+    </li>
+
+    <li>
+      <p><strong>Accessing <code>c</code> without scoping:</strong></p>
+      <pre><code>&lt;cfscript&gt;
+  dump(c); // This line fails with "variable [C] doesn't exist"
+&lt;/cfscript&gt;
+</code></pre>
+      <p>Lucee 6 enforces stricter scoping rules. Without explicitly declaring <code>c</code> in a shared scope (such as <code>local.c</code>), it's no longer accessible in the same way as in Lucee 5.</p>
+      <p> <img src="/public/postimages/understanding-variable-scoping-differences-between-lucee-5-and-lucee-6.img3.png" alt="Output results"></p>
+    </li>
+  </ol>
+
+
+
+  <h2>TL;DR</h2>
+  <p>When migrating from Lucee 5 to Lucee 6, developers need to be aware of the stricter scoping rules.
+    <strong><code>var</code> is now restricted to function scope in Lucee 6</strong>. Attempting to use it outside of a function will result in an error.
+  </p>
+
+            </section>
+
+            <footer>
+              <p>
+                <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider
+                  <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>.
+                  Your support keeps this site running and the coffee brewing! ☕️
+                </em>
+              </p>
+            </footer>
+
+            <script
+              src="https://giscus.app/client.js"
+              data-repo="andyj/andyjarrett.com"
+              data-repo-id="R_kgDOMjCDkQ"
+              data-category="Announcements"
+              data-category-id="DIC_kwDOMjCDkc4ChlfU"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="preferred_color_scheme"
+              data-lang="en"
+              crossorigin="anonymous"
+              async></script>
+            <a name="comment"></a>
+          </div>
+
+          <aside class="col-md-3 col-12">
+            <h4>Recent Posts</h4>
+            
+              <a href="/posts/2024/understanding-variable-scoping-differences-between-lucee-5-and-lucee-6/" class="card-link link-underline-light">
+                Understanding Variable Scoping Differences Between Lucee 5 and Lucee 6 <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/bluesky-now-has-over-10-million-users-and-i-was-number-56137/" class="card-link link-underline-light">
+                Bluesky now has over 10 million users, and I was #56,137! <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">
+                Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">
+                How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">
+                NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">
+                Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">
+                Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/comments-via-giscus-now-live-on-my-blog/" class="card-link link-underline-light">
+                Comments Via Giscus Now Live My Blog <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+          </aside>
+        </section>
+      </article>
+    </main>
+  </div>
+
+  <footer class="container mt-5 border-top pt-2">
+  <div class="row justify-content-md-center">
+    <div class="col">
+      ©AndyJarrett
+      <a href="/linktree" title="Linktree for AndyJarrett" target="_blank"><i class="bi bi-tree"></i></a>
+      <a href="/sitemap.xml" title="Site map for AndyJarrett.com" target="_blank"><i class="bi bi-map"></i></a>
+      <!-- Home Link -->
+      <a href="https://andyjarrett.com" class=""><i class="bi bi-globe me-2"></i></a>
+      <!-- linkedin Link -->
+      <a rel="noopener noreferrer" href="https://www.linkedin.com/in/andyjarrett/" title="inkedIn" target="_blank"><i class="bi bi-linkedin me-2"></i></a>
+      <!-- Twitter Link -->
+      <a rel="noopener noreferrer" href="https://twitter.com/andyj" title="Twitter" target="_blank"><i class="bi bi-twitter me-2"></i></a>
+      <!-- GitHub Link -->
+      <a rel="noopener noreferrer" href="https://github.com/andyj" title="GitHub" target="_blank"><i class="bi bi-github me-2"></i></a>
+      <!-- Stack Overflow Link -->
+      <a rel="noopener noreferrer" href="https://stackoverflow.com/users/371761/andy-jarrett" title="Stack overflow" target="_blank"><i class="bi bi-stack-overflow me-2"></i></a>
+      <!-- BlueSky Link -->
+      <a rel="noopener noreferrer" href="https://bsky.app/profile/andyjarrett.com" title="BlueSky" target="_blank"><i class="bi bi-cloud me-2"></i></a>
+      <!-- Instagram Link -->
+      <a rel="noopener noreferrer" href="https://instagram.com/andyjarrett" title="Instragram" target="_blank"><i class="bi bi-instagram me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://buymeacoffee.com/mailgw" title="Buy me a coffee" target="_blank"><i class="bi bi-cup-hot-fill fs-5"></i></a>
+    </div>
+    <div class="col">
+      <div class="text-end">
+        <div class="btn-group">
+          <a href="#" class="btn btn-secondary btn-sm" id="lightThemeButton" data-bs-theme-value="light">
+            <i class="bi bi-sun"></i>
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" id="darkThemeButton" data-bs-theme-value="dark">
+            <i class="bi bi-moon-stars-fill"></i>
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" id="autoThemeButton" data-bs-theme-value="auto">
+            <i class="bi bi-circle-half"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script src="/public/js/toggle.js" type="text/javascript"></script>
+<script src="/public/prismjs/prism.js"></script>
+</body>
+</html>
