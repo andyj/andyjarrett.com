@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" xml:base="https://andyjarrett.com/" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:media="http://search.yahoo.com/mrss/" xml:base="https://www.andyjarrett.com//" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>AndyJarrett.com</title>
-    <link>https://andyjarrett.com/</link>
+    <link>https://www.andyjarrett.com//</link>
     <description>Posts about web app development</description>
     <language>en</language>
-    <atom:link href="https://andyjarrett.com/feed.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://www.andyjarrett.com//feed.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Advanced Javascript Console Techniques Every Developer Should Be Aware Of</title>
-      <link>https://andyjarrett.com/posts/2024/advanced-javascript-console-methods/</link>
+      <link>https://www.andyjarrett.com/posts/2024/advanced-javascript-console-methods/</link>
       <description><![CDATA[
 &lt;div class=&quot;image-container my-2&quot;&gt;
-  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/kevin-ku-w7ZyuGYNpRQ-unsplash.jpg&quot; alt=&quot;Developer debugging&quot; class=&quot;img-fluid&quot; /&gt;
+  &lt;img src=&quot;https://www.andyjarrett.com/public/blogimage/kevin-ku-w7ZyuGYNpRQ-unsplash.jpg&quot; alt=&quot;Developer debugging&quot; class=&quot;img-fluid&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;text-end&quot;&gt;
   &lt;sup&gt;
@@ -27,15 +27,15 @@
 &lt;div class=&quot;row&quot;&gt;
   &lt;div class=&quot;col&quot;&gt;
     &lt;p&gt;
-      If you&#39;ve missed it, Part 1 of this series is &lt;a href=&quot;https://andyjarrett.com/posts/2024/basic-javascript-console-logging-methods/&quot; titl=&quot;Basic Javascript Console Logging Techniques Every Developer Should Know&quot;&gt;here&lt;/a&gt; and the final post is  &lt;a href=&quot;https://andyjarrett.com/posts/2024/utility-console-methods-for-debugging-workflow/&quot;&gt;here&lt;/a&gt;.
+      If you&#39;ve missed it, Part 1 of this series is &lt;a href=&quot;https://www.andyjarrett.com/posts/2024/basic-javascript-console-logging-methods/&quot; titl=&quot;Basic Javascript Console Logging Techniques Every Developer Should Know&quot;&gt;here&lt;/a&gt; and the final post is  &lt;a href=&quot;https://www.andyjarrett.com/posts/2024/utility-console-methods-for-debugging-workflow/&quot;&gt;here&lt;/a&gt;.
     &lt;/p&gt;
     &lt;p&gt;Second part of this short series. This is when I started to really learn something new. It covers methods that offer more advanced features and capabilities for console logging rather than simply dumping variable values.&lt;/p&gt;
     &lt;ul&gt;
-      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://andyjarrett.com/posts/2024/advanced-javascript-console-methods/#consoleassert&quot;&gt;console.assert()&lt;/a&gt; &lt;em&gt;- Conditional logging to verify assumptions&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://andyjarrett.com/posts/2024/advanced-javascript-console-methods/#consoletable&quot;&gt;console.table()&lt;/a&gt; &lt;em&gt;- Display data in a tabular format&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://andyjarrett.com/posts/2024/advanced-javascript-console-methods/#consolegroup&quot;&gt;console.group()&lt;/a&gt; &lt;em&gt;- Group related log messages together&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://andyjarrett.com/posts/2024/advanced-javascript-console-methods/#consoletrace&quot;&gt;console.trace()&lt;/a&gt; &lt;em&gt;- Print a stack trace from the point where it is called&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://andyjarrett.com/posts/2024/advanced-javascript-console-methods/#consolecount&quot;&gt;console.count()&lt;/a&gt; &lt;em&gt;- Count the number of times a label has been logged&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://www.andyjarrett.com/posts/2024/advanced-javascript-console-methods/#consoleassert&quot;&gt;console.assert()&lt;/a&gt; &lt;em&gt;- Conditional logging to verify assumptions&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://www.andyjarrett.com/posts/2024/advanced-javascript-console-methods/#consoletable&quot;&gt;console.table()&lt;/a&gt; &lt;em&gt;- Display data in a tabular format&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://www.andyjarrett.com/posts/2024/advanced-javascript-console-methods/#consolegroup&quot;&gt;console.group()&lt;/a&gt; &lt;em&gt;- Group related log messages together&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://www.andyjarrett.com/posts/2024/advanced-javascript-console-methods/#consoletrace&quot;&gt;console.trace()&lt;/a&gt; &lt;em&gt;- Print a stack trace from the point where it is called&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://www.andyjarrett.com/posts/2024/advanced-javascript-console-methods/#consolecount&quot;&gt;console.count()&lt;/a&gt; &lt;em&gt;- Count the number of times a label has been logged&lt;/em&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -162,18 +162,18 @@ Count label: 1&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;]]></description>
       <pubDate>Thu, 08 Aug 2024 19:02:00 +0000</pubDate>
       <dc:creator>Andy Jarrett</dc:creator>
-      <guid>https://andyjarrett.com/posts/2024/advanced-javascript-console-methods/</guid>
-      <enclosure url="https://andyjarrett.com/public/blogimage/kevin-ku-w7ZyuGYNpRQ-unsplash.jpg" type="image/jpeg" />
+      <guid>https://www.andyjarrett.com/posts/2024/advanced-javascript-console-methods/</guid>
+      <enclosure url="https://www.andyjarrett.com/public/blogimage/kevin-ku-w7ZyuGYNpRQ-unsplash.jpg" type="image/jpeg" />
       <category>posts, javascript, console, debug</category>
       <author>Andy Jarrett &lt;email@example.com&gt;</author>
     </item>
     <item>
       <title>Utility Console Methods For Debugging Your Javascript Workflow</title>
-      <link>https://andyjarrett.com/posts/2024/utility-console-methods-for-debugging-workflow/</link>
+      <link>https://www.andyjarrett.com/posts/2024/utility-console-methods-for-debugging-workflow/</link>
       <description><![CDATA[
 
 &lt;div class=&quot;image-container my-2&quot;&gt;
-  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/altumcode-PNbDkQ2DDgM-unsplash.jpg&quot; alt=&quot;Console debugging&quot; class=&quot;img-fluid&quot; /&gt;
+  &lt;img src=&quot;https://www.andyjarrett.com/public/blogimage/altumcode-PNbDkQ2DDgM-unsplash.jpg&quot; alt=&quot;Console debugging&quot; class=&quot;img-fluid&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;text-end&quot;&gt;
   &lt;sup&gt;
@@ -186,13 +186,13 @@ Count label: 1&lt;/code&gt;&lt;/pre&gt;
 &lt;div class=&quot;row&quot;&gt;
   &lt;div class=&quot;col&quot;&gt;
     &lt;p&gt;
-      If you&#39;ve missed the previous parts of this series, you can find Part 1 &lt;a href=&quot;https://andyjarrett.com/posts/2024/basic-javascript-console-logging-methods/&quot; title=&quot;Basic Javascript Console Logging Techniques Every Developer Should Know&quot;&gt;here&lt;/a&gt; and Part 2 &lt;a href=&quot;https://andyjarrett.com/posts/2024/advanced-javascript-console-methods/&quot; title=&quot;Advanced Javascript Console Techniques Every Developer Should Be Aware Of&quot;&gt;here&lt;/a&gt;.
+      If you&#39;ve missed the previous parts of this series, you can find Part 1 &lt;a href=&quot;https://www.andyjarrett.com/posts/2024/basic-javascript-console-logging-methods/&quot; title=&quot;Basic Javascript Console Logging Techniques Every Developer Should Know&quot;&gt;here&lt;/a&gt; and Part 2 &lt;a href=&quot;https://www.andyjarrett.com/posts/2024/advanced-javascript-console-methods/&quot; title=&quot;Advanced Javascript Console Techniques Every Developer Should Be Aware Of&quot;&gt;here&lt;/a&gt;.
     &lt;/p&gt;
-    &lt;p&gt;This final part of the series which all started with &lt;a href=&quot;https://andyjarrett.com/posts/2024/advanced-javascript-console-methods/#consoleassert&quot;&gt;&lt;code&gt;console.assert()&lt;/code&gt;&lt;/a&gt;. This one covers utility/debugging methods that go beyond simple logging and help in managing and measuring console outputs when you&#39;re debugging your code:&lt;/p&gt;
+    &lt;p&gt;This final part of the series which all started with &lt;a href=&quot;https://www.andyjarrett.com/posts/2024/advanced-javascript-console-methods/#consoleassert&quot;&gt;&lt;code&gt;console.assert()&lt;/code&gt;&lt;/a&gt;. This one covers utility/debugging methods that go beyond simple logging and help in managing and measuring console outputs when you&#39;re debugging your code:&lt;/p&gt;
     &lt;ul&gt;
-      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://andyjarrett.com/posts/2024/utility-console-methods-for-debugging-workflow/#consoleclear&quot;&gt;console.clear()&lt;/a&gt; &lt;em&gt;- Clearing the console&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://andyjarrett.com/posts/2024/utility-console-methods-for-debugging-workflow/#consoletime&quot;&gt;console.time() and console.timeEnd()&lt;/a&gt; &lt;em&gt;- Measuring execution time&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://andyjarrett.com/posts/2024/utility-console-methods-for-debugging-workflow/#consolecount&quot;&gt;console.count() and console.countReset()&lt;/a&gt; &lt;em&gt;- Counting occurrences&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://www.andyjarrett.com/posts/2024/utility-console-methods-for-debugging-workflow/#consoleclear&quot;&gt;console.clear()&lt;/a&gt; &lt;em&gt;- Clearing the console&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://www.andyjarrett.com/posts/2024/utility-console-methods-for-debugging-workflow/#consoletime&quot;&gt;console.time() and console.timeEnd()&lt;/a&gt; &lt;em&gt;- Measuring execution time&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://www.andyjarrett.com/posts/2024/utility-console-methods-for-debugging-workflow/#consolecount&quot;&gt;console.count() and console.countReset()&lt;/a&gt; &lt;em&gt;- Counting occurrences&lt;/em&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -264,17 +264,17 @@ Process Count: 1&lt;/code&gt;&lt;/pre&gt;
 ]]></description>
       <pubDate>Tue, 13 Aug 2024 19:02:00 +0000</pubDate>
       <dc:creator>Andy Jarrett</dc:creator>
-      <guid>https://andyjarrett.com/posts/2024/utility-console-methods-for-debugging-workflow/</guid>
-      <enclosure url="https://andyjarrett.com/public/blogimage/altumcode-PNbDkQ2DDgM-unsplash.jpg" type="image/jpeg" />
+      <guid>https://www.andyjarrett.com/posts/2024/utility-console-methods-for-debugging-workflow/</guid>
+      <enclosure url="https://www.andyjarrett.com/public/blogimage/altumcode-PNbDkQ2DDgM-unsplash.jpg" type="image/jpeg" />
       <category>posts, javascript, console, debug, utility</category>
       <author>Andy Jarrett &lt;email@example.com&gt;</author>
     </item>
     <item>
       <title>Comments Via Giscus Now Live My Blog</title>
-      <link>https://andyjarrett.com/posts/2024/comments-via-giscus-now-live-on-my-blog/</link>
+      <link>https://www.andyjarrett.com/posts/2024/comments-via-giscus-now-live-on-my-blog/</link>
       <description><![CDATA[
 &lt;div class=&quot;image-container my-2&quot;&gt;
-  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/matt-botsford-ncmg3-bQzvQ-unsplash.jpg&quot; alt=&quot;Man running towards mountains&quot; class=&quot;img-fluid&quot; /&gt;
+  &lt;img src=&quot;https://www.andyjarrett.com/public/blogimage/matt-botsford-ncmg3-bQzvQ-unsplash.jpg&quot; alt=&quot;Man running towards mountains&quot; class=&quot;img-fluid&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;text-end&quot;&gt;
   &lt;sup&gt;
@@ -301,17 +301,17 @@ Process Count: 1&lt;/code&gt;&lt;/pre&gt;
 ]]></description>
       <pubDate>Wed, 14 Aug 2024 21:00:00 +0000</pubDate>
       <dc:creator>Andy Jarrett</dc:creator>
-      <guid>https://andyjarrett.com/posts/2024/comments-via-giscus-now-live-on-my-blog/</guid>
-      <enclosure url="https://andyjarrett.com/public/blogimage/matt-botsford-ncmg3-bQzvQ-unsplash.jpg" type="image/jpeg" />
+      <guid>https://www.andyjarrett.com/posts/2024/comments-via-giscus-now-live-on-my-blog/</guid>
+      <enclosure url="https://www.andyjarrett.com/public/blogimage/matt-botsford-ncmg3-bQzvQ-unsplash.jpg" type="image/jpeg" />
       <category>posts, BLOG, COMMENTS, GISCUS</category>
       <author>Andy Jarrett &lt;email@example.com&gt;</author>
     </item>
     <item>
       <title>Creating an Alpine.js RSS Reader with my Bluesky Profile feed</title>
-      <link>https://andyjarrett.com/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/</link>
+      <link>https://www.andyjarrett.com/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/</link>
       <description><![CDATA[
 &lt;div class=&quot;image-container my-2&quot;&gt;
-  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/alex-david-ile-n02CzpY8ZSA-unsplash.jpg&quot; alt=&quot;Developer debugging&quot; class=&quot;img-fluid&quot; /&gt;
+  &lt;img src=&quot;https://www.andyjarrett.com/public/blogimage/alex-david-ile-n02CzpY8ZSA-unsplash.jpg&quot; alt=&quot;Developer debugging&quot; class=&quot;img-fluid&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;text-end&quot;&gt;
   &lt;sup&gt;
@@ -450,17 +450,17 @@ Process Count: 1&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;]]></description>
       <pubDate>Thu, 15 Aug 2024 19:02:00 +0000</pubDate>
       <dc:creator>Andy Jarrett</dc:creator>
-      <guid>https://andyjarrett.com/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/</guid>
-      <enclosure url="https://andyjarrett.com/public/blogimage/alex-david-ile-n02CzpY8ZSA-unsplash.jpg" type="image/jpeg" />
+      <guid>https://www.andyjarrett.com/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/</guid>
+      <enclosure url="https://www.andyjarrett.com/public/blogimage/alex-david-ile-n02CzpY8ZSA-unsplash.jpg" type="image/jpeg" />
       <category>posts, javascript, console, debug</category>
       <author>Andy Jarrett &lt;email@example.com&gt;</author>
     </item>
     <item>
       <title>Adding localStorage to the Alpine.js RSS Reader</title>
-      <link>https://andyjarrett.com/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/</link>
+      <link>https://www.andyjarrett.com/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/</link>
       <description><![CDATA[
 &lt;div class=&quot;image-container my-2&quot;&gt;
-  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/nathalia-segato-auQGug8wkLM-unsplash.jpg&quot; alt=&quot;Developer debugging&quot; class=&quot;img-fluid&quot; /&gt;
+  &lt;img src=&quot;https://www.andyjarrett.com/public/blogimage/nathalia-segato-auQGug8wkLM-unsplash.jpg&quot; alt=&quot;Developer debugging&quot; class=&quot;img-fluid&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;text-end&quot;&gt;
   &lt;sup&gt;
@@ -468,7 +468,7 @@ Process Count: 1&lt;/code&gt;&lt;/pre&gt;
   &lt;/sup&gt;
 &lt;/div&gt;
 
-&lt;p&gt;The purpose of the blog post is to explain why I am adding &lt;a rel=&quot;noopener noreferrer&quot; href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage&quot;&gt;localStorage&lt;/a&gt; to my simple app at &lt;a href=&quot;https://github.com/andyj/alpine.js-rss-reader&quot; target=&quot;_blank&quot;&gt;github.com/andyj/alpine.js-rss-reader&lt;/a&gt;. If you haven&#39;t see it already, this is carrying on from my &lt;a href=&quot;https://andyjarrett.com/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/&quot;&gt;previous post&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The purpose of the blog post is to explain why I am adding &lt;a rel=&quot;noopener noreferrer&quot; href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage&quot;&gt;localStorage&lt;/a&gt; to my simple app at &lt;a href=&quot;https://github.com/andyj/alpine.js-rss-reader&quot; target=&quot;_blank&quot;&gt;github.com/andyj/alpine.js-rss-reader&lt;/a&gt;. If you haven&#39;t see it already, this is carrying on from my &lt;a href=&quot;https://www.andyjarrett.com/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/&quot;&gt;previous post&lt;/a&gt;&lt;/p&gt;
 
 &lt;h4&gt;Why Use Local Storage?&lt;/h4&gt;
 &lt;p&gt;&lt;strong&gt;Faster Development:&lt;/strong&gt; Highlight that local storage helps reduce the need to constantly fetch data from the server, which speeds up the development process since the results are instantly available from the cache.&lt;/p&gt;
@@ -579,17 +579,17 @@ return {
 ]]></description>
       <pubDate>Sun, 18 Aug 2024 19:02:00 +0000</pubDate>
       <dc:creator>Andy Jarrett</dc:creator>
-      <guid>https://andyjarrett.com/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/</guid>
-      <enclosure url="https://andyjarrett.com/public/blogimage/nathalia-segato-auQGug8wkLM-unsplash.jpg" type="image/jpeg" />
+      <guid>https://www.andyjarrett.com/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/</guid>
+      <enclosure url="https://www.andyjarrett.com/public/blogimage/nathalia-segato-auQGug8wkLM-unsplash.jpg" type="image/jpeg" />
       <category>posts, javascript, alpinejs, rss, rss reader</category>
       <author>Andy Jarrett &lt;email@example.com&gt;</author>
     </item>
     <item>
       <title>NGINX redirect loops with SSL and CloudFlare</title>
-      <link>https://andyjarrett.com/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/</link>
+      <link>https://www.andyjarrett.com/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/</link>
       <description><![CDATA[
 &lt;div class=&quot;image-container my-2&quot;&gt;
-  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/chuttersnap-9AqIdzEc9pY-unsplash.jpg&quot; alt=&quot;Clouds&quot; class=&quot;img-fluid&quot; /&gt;
+  &lt;img src=&quot;https://www.andyjarrett.com/public/blogimage/chuttersnap-9AqIdzEc9pY-unsplash.jpg&quot; alt=&quot;Clouds&quot; class=&quot;img-fluid&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;text-end&quot;&gt;
   &lt;sup&gt;
@@ -619,7 +619,7 @@ I&#39;ve been having trouble with my andyjarrett.com domain (though not my .co.u
 &lt;/div&gt;
 
 &lt;p class=&quot;text-center&quot;&gt;
-  &lt;img src=&quot;https://andyjarrett.com/public/img/nginx-redirect-loops-with-ssl-and-cloudflare.png&quot; /&gt;
+  &lt;img src=&quot;https://www.andyjarrett.com/public/img/nginx-redirect-loops-with-ssl-and-cloudflare.png&quot; /&gt;
 &lt;/p&gt;
 &lt;p&gt;
   &lt;strong&gt;Why?&lt;/strong&gt; Mine was originall set as &quot;Flexible,&quot; causing Cloudflare to make a HTTP requests to my server and causing the loop.
@@ -640,19 +640,19 @@ I&#39;ve been having trouble with my andyjarrett.com domain (though not my .co.u
 ]]></description>
       <pubDate>Wed, 21 Aug 2024 10:30:00 +0000</pubDate>
       <dc:creator>Andy Jarrett</dc:creator>
-      <guid>https://andyjarrett.com/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/</guid>
-      <enclosure url="https://andyjarrett.com/public/blogimage/chuttersnap-9AqIdzEc9pY-unsplash.jpg" type="image/jpeg" />
+      <guid>https://www.andyjarrett.com/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/</guid>
+      <enclosure url="https://www.andyjarrett.com/public/blogimage/chuttersnap-9AqIdzEc9pY-unsplash.jpg" type="image/jpeg" />
       <category>posts, nginx, cloudflare, loop, redirect, ssl</category>
       <author>Andy Jarrett &lt;email@example.com&gt;</author>
     </item>
     <item>
       <title>How to Instantly Index Your Website with IndexNow Using a Bash Script</title>
-      <link>https://andyjarrett.com/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/</link>
+      <link>https://www.andyjarrett.com/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/</link>
       <description><![CDATA[
 
 
 &lt;div class=&quot;image-container my-2&quot;&gt;
-  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/gabriel-heinzer-4Mw7nkQDByk-unsplash.jpg&quot; alt=&quot;Developer debugging&quot; class=&quot;img-fluid&quot; /&gt;
+  &lt;img src=&quot;https://www.andyjarrett.com/public/blogimage/gabriel-heinzer-4Mw7nkQDByk-unsplash.jpg&quot; alt=&quot;Developer debugging&quot; class=&quot;img-fluid&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;text-end&quot;&gt;
   &lt;sup&gt;
@@ -762,17 +762,17 @@ curl -X POST &quot;https://api.indexnow.org/indexnow&quot; &#92;
 ]]></description>
       <pubDate>Wed, 21 Aug 2024 22:30:00 +0000</pubDate>
       <dc:creator>Andy Jarrett</dc:creator>
-      <guid>https://andyjarrett.com/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/</guid>
-      <enclosure url="https://andyjarrett.com/public/blogimage/gabriel-heinzer-4Mw7nkQDByk-unsplash.jpg" type="image/jpeg" />
+      <guid>https://www.andyjarrett.com/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/</guid>
+      <enclosure url="https://www.andyjarrett.com/public/blogimage/gabriel-heinzer-4Mw7nkQDByk-unsplash.jpg" type="image/jpeg" />
       <category>posts, seo, indexnow, bash, script</category>
       <author>Andy Jarrett &lt;email@example.com&gt;</author>
     </item>
     <item>
       <title>Reclaiming Space on macOS from Docker by Pruning Docker.raw</title>
-      <link>https://andyjarrett.com/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/</link>
+      <link>https://www.andyjarrett.com/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/</link>
       <description><![CDATA[
 &lt;div class=&quot;image-container my-2&quot;&gt;
-  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/nathan-cima-2JNNpq4nGls-unsplash.jpg&quot; alt=&quot;Developer debugging&quot; class=&quot;img-fluid&quot; /&gt;
+  &lt;img src=&quot;https://www.andyjarrett.com/public/blogimage/nathan-cima-2JNNpq4nGls-unsplash.jpg&quot; alt=&quot;Developer debugging&quot; class=&quot;img-fluid&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;text-end&quot;&gt;
   &lt;sup&gt;
@@ -805,17 +805,17 @@ curl -X POST &quot;https://api.indexnow.org/indexnow&quot; &#92;
 &lt;p&gt;For more details, refer to the official Docker documentation: &lt;a href=&quot;https://docs.docker.com/desktop/faqs/macfaqs/&quot;&gt;Docker Desktop FAQs for macOS&lt;/a&gt;.&lt;/p&gt;]]></description>
       <pubDate>Thu, 29 Aug 2024 23:02:00 +0000</pubDate>
       <dc:creator>Andy Jarrett</dc:creator>
-      <guid>https://andyjarrett.com/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/</guid>
-      <enclosure url="https://andyjarrett.com/public/blogimage/nathan-cima-2JNNpq4nGls-unsplash.jpg" type="image/jpeg" />
+      <guid>https://www.andyjarrett.com/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/</guid>
+      <enclosure url="https://www.andyjarrett.com/public/blogimage/nathan-cima-2JNNpq4nGls-unsplash.jpg" type="image/jpeg" />
       <category>posts, docker, macos, disk space, docker.raw, system maintenance</category>
       <author>Andy Jarrett &lt;email@example.com&gt;</author>
     </item>
     <item>
       <title>Bluesky now has over 10 million users, and I was #56,137!</title>
-      <link>https://andyjarrett.com/posts/2024/bluesky-now-has-over-10-million-users-and-i-was-number-56137/</link>
+      <link>https://www.andyjarrett.com/posts/2024/bluesky-now-has-over-10-million-users-and-i-was-number-56137/</link>
       <description><![CDATA[
 &lt;div class=&quot;image-container my-2&quot;&gt;
-  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/adam-birkett-P2ah-LaV52I-unsplash.jpg&quot; alt=&quot;Developer debugging&quot; class=&quot;img-fluid&quot; /&gt;
+  &lt;img src=&quot;https://www.andyjarrett.com/public/blogimage/adam-birkett-P2ah-LaV52I-unsplash.jpg&quot; alt=&quot;Developer debugging&quot; class=&quot;img-fluid&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;text-end&quot;&gt;
   &lt;sup&gt;
@@ -831,26 +831,26 @@ curl -X POST &quot;https://api.indexnow.org/indexnow&quot; &#92;
 &lt;div class=&quot;row mb-5&quot;&gt;
   &lt;div class=&quot;col-6&quot;&gt;
     &lt;a href=&quot;https://bsky.app/profile/andyjarrett.com&quot;&gt;
-      &lt;img src=&quot;https://andyjarrett.com/public/img/bluesky-andyjarrett.png&quot; alt=&quot;A virtual certificate with text &#39;Celebrating 10M users on Bluesky, #56,137, Andy Jarrett @andyjarrett.com, joined on May 3, 2023&#39;&quot; class=&quot;img-fluid&quot; /&gt;
+      &lt;img src=&quot;https://www.andyjarrett.com/public/img/bluesky-andyjarrett.png&quot; alt=&quot;A virtual certificate with text &#39;Celebrating 10M users on Bluesky, #56,137, Andy Jarrett @andyjarrett.com, joined on May 3, 2023&#39;&quot; class=&quot;img-fluid&quot; /&gt;
     &lt;/a&gt;
   &lt;/div&gt;
 &lt;/div&gt;]]></description>
       <pubDate>Mon, 16 Sep 2024 18:01:00 +0000</pubDate>
       <dc:creator>Andy Jarrett</dc:creator>
-      <guid>https://andyjarrett.com/posts/2024/bluesky-now-has-over-10-million-users-and-i-was-number-56137/</guid>
-      <enclosure url="https://andyjarrett.com/public/blogimage/adam-birkett-P2ah-LaV52I-unsplash.jpg" type="image/jpeg" />
+      <guid>https://www.andyjarrett.com/posts/2024/bluesky-now-has-over-10-million-users-and-i-was-number-56137/</guid>
+      <enclosure url="https://www.andyjarrett.com/public/blogimage/adam-birkett-P2ah-LaV52I-unsplash.jpg" type="image/jpeg" />
       <category>posts, bluesky, 10million</category>
       <author>Andy Jarrett &lt;email@example.com&gt;</author>
     </item>
     <item>
       <title>Understanding Variable Scoping Differences Between Lucee 5 and Lucee 6</title>
-      <link>https://andyjarrett.com/posts/2024/understanding-variable-scoping-differences-between-lucee-5-and-lucee-6/</link>
+      <link>https://www.andyjarrett.com/posts/2024/understanding-variable-scoping-differences-between-lucee-5-and-lucee-6/</link>
       <description><![CDATA[
 
 
 
 &lt;div class=&quot;image-container my-2&quot;&gt;
-  &lt;img src=&quot;https://andyjarrett.com/public/blogimage/lewis-kang-ethe-ngugi-f5pTwLHCsAg-unsplash.jpg&quot; alt=&quot;Computer with code&quot; class=&quot;img-fluid&quot; /&gt;
+  &lt;img src=&quot;https://www.andyjarrett.com/public/blogimage/lewis-kang-ethe-ngugi-f5pTwLHCsAg-unsplash.jpg&quot; alt=&quot;Computer with code&quot; class=&quot;img-fluid&quot; /&gt;
 &lt;/div&gt;
 &lt;div class=&quot;text-end&quot;&gt;
   &lt;sup&gt;
@@ -910,7 +910,7 @@ curl -X POST &quot;https://api.indexnow.org/indexnow&quot; &#92;
     &lt;li&gt;&lt;code&gt;dump(local.c);&lt;/code&gt; outputs &lt;code&gt;&quot;c&quot;&lt;/code&gt;.&lt;/li&gt;
   &lt;/ul&gt;
 
-  &lt;img src=&quot;https://andyjarrett.com/public/postimages/understanding-variable-scoping-differences-between-lucee-5-and-lucee-6.img1.png&quot; alt=&quot;Output results&quot; /&gt;
+  &lt;img src=&quot;https://www.andyjarrett.com/public/postimages/understanding-variable-scoping-differences-between-lucee-5-and-lucee-6.img1.png&quot; alt=&quot;Output results&quot; /&gt;
 
   &lt;p&gt;The included template (&lt;code&gt;varinclude.cfm&lt;/code&gt;) inherits these variables, and everything behaves as expected. This is because, in Lucee 5, &lt;code&gt;var&lt;/code&gt; declarations work even outside of functions.&lt;/p&gt;
 
@@ -925,7 +925,7 @@ curl -X POST &quot;https://api.indexnow.org/indexnow&quot; &#92;
 &amp;lt;/cfscript&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
       &lt;p&gt;In Lucee 6, the &lt;code&gt;var&lt;/code&gt; keyword is now restricted to function scopes, and attempting to use it outside a function will result in an error. This is a notable shift from Lucee 5. &lt;/p&gt;
-      &lt;p&gt;&lt;img src=&quot;https://andyjarrett.com/public/postimages/understanding-variable-scoping-differences-between-lucee-5-and-lucee-6.img2.png&quot; alt=&quot;Output results&quot; /&gt;&lt;/p&gt;
+      &lt;p&gt;&lt;img src=&quot;https://www.andyjarrett.com/public/postimages/understanding-variable-scoping-differences-between-lucee-5-and-lucee-6.img2.png&quot; alt=&quot;Output results&quot; /&gt;&lt;/p&gt;
     &lt;/li&gt;
 
     &lt;li&gt;
@@ -935,7 +935,7 @@ curl -X POST &quot;https://api.indexnow.org/indexnow&quot; &#92;
 &amp;lt;/cfscript&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
       &lt;p&gt;Lucee 6 enforces stricter scoping rules. Without explicitly declaring &lt;code&gt;c&lt;/code&gt; in a shared scope (such as &lt;code&gt;local.c&lt;/code&gt;), it&#39;s no longer accessible in the same way as in Lucee 5.&lt;/p&gt;
-      &lt;p&gt; &lt;img src=&quot;https://andyjarrett.com/public/postimages/understanding-variable-scoping-differences-between-lucee-5-and-lucee-6.img3.png&quot; alt=&quot;Output results&quot; /&gt;&lt;/p&gt;
+      &lt;p&gt; &lt;img src=&quot;https://www.andyjarrett.com/public/postimages/understanding-variable-scoping-differences-between-lucee-5-and-lucee-6.img3.png&quot; alt=&quot;Output results&quot; /&gt;&lt;/p&gt;
     &lt;/li&gt;
   &lt;/ol&gt;
 
@@ -948,8 +948,8 @@ curl -X POST &quot;https://api.indexnow.org/indexnow&quot; &#92;
 ]]></description>
       <pubDate>Wed, 09 Oct 2024 08:28:00 +0000</pubDate>
       <dc:creator>Andy Jarrett</dc:creator>
-      <guid>https://andyjarrett.com/posts/2024/understanding-variable-scoping-differences-between-lucee-5-and-lucee-6/</guid>
-      <enclosure url="https://andyjarrett.com/public/blogimage/lewis-kang-ethe-ngugi-f5pTwLHCsAg-unsplash.jpg" type="image/jpeg" />
+      <guid>https://www.andyjarrett.com/posts/2024/understanding-variable-scoping-differences-between-lucee-5-and-lucee-6/</guid>
+      <enclosure url="https://www.andyjarrett.com/public/blogimage/lewis-kang-ethe-ngugi-f5pTwLHCsAg-unsplash.jpg" type="image/jpeg" />
       <category>posts, CFML, ColdFusion, Lucee</category>
       <author>Andy Jarrett &lt;email@example.com&gt;</author>
     </item>
