@@ -7,167 +7,6 @@
     <language>en</language>
     <atom:link href="https://www.andyjarrett.com//feed.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Advanced Javascript Console Techniques Every Developer Should Be Aware Of</title>
-      <link>https://www.andyjarrett.com/posts/2024/advanced-javascript-console-methods/</link>
-      <description><![CDATA[
-&lt;div class=&quot;image-container my-2&quot;&gt;
-  &lt;img src=&quot;https://www.andyjarrett.com/public/blogimage/kevin-ku-w7ZyuGYNpRQ-unsplash.jpg&quot; alt=&quot;Developer debugging&quot; class=&quot;img-fluid&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;text-end&quot;&gt;
-  &lt;sup&gt;
-    &lt;cite&gt;
-      Photo by &lt;a href=&quot;https://unsplash.com/@ikukevk?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Kevin Ku&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/closeup-photo-of-eyeglasses-w7ZyuGYNpRQ?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;
-    &lt;/cite&gt;
-  &lt;/sup&gt;
-&lt;/div&gt;
-
-
-
-
-&lt;div class=&quot;row&quot;&gt;
-  &lt;div class=&quot;col&quot;&gt;
-    &lt;p&gt;
-      If you&#39;ve missed it, Part 1 of this series is &lt;a href=&quot;https://www.andyjarrett.com/posts/2024/basic-javascript-console-logging-methods/&quot; titl=&quot;Basic Javascript Console Logging Techniques Every Developer Should Know&quot;&gt;here&lt;/a&gt; and the final post is  &lt;a href=&quot;https://www.andyjarrett.com/posts/2024/utility-console-methods-for-debugging-workflow/&quot;&gt;here&lt;/a&gt;.
-    &lt;/p&gt;
-    &lt;p&gt;Second part of this short series. This is when I started to really learn something new. It covers methods that offer more advanced features and capabilities for console logging rather than simply dumping variable values.&lt;/p&gt;
-    &lt;ul&gt;
-      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://www.andyjarrett.com/posts/2024/advanced-javascript-console-methods/#consoleassert&quot;&gt;console.assert()&lt;/a&gt; &lt;em&gt;- Conditional logging to verify assumptions&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://www.andyjarrett.com/posts/2024/advanced-javascript-console-methods/#consoletable&quot;&gt;console.table()&lt;/a&gt; &lt;em&gt;- Display data in a tabular format&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://www.andyjarrett.com/posts/2024/advanced-javascript-console-methods/#consolegroup&quot;&gt;console.group()&lt;/a&gt; &lt;em&gt;- Group related log messages together&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://www.andyjarrett.com/posts/2024/advanced-javascript-console-methods/#consoletrace&quot;&gt;console.trace()&lt;/a&gt; &lt;em&gt;- Print a stack trace from the point where it is called&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://www.andyjarrett.com/posts/2024/advanced-javascript-console-methods/#consolecount&quot;&gt;console.count()&lt;/a&gt; &lt;em&gt;- Count the number of times a label has been logged&lt;/em&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-
-
-&lt;a name=&quot;consoleassert&quot;&gt;&lt;/a&gt;
-&lt;div class=&quot;row mb-5&quot;&gt;
-  &lt;div class=&quot;col&quot;&gt;
-    &lt;div class=&quot;card&quot;&gt;
-      &lt;div class=&quot;card-header&quot;&gt;
-        &lt;code&gt;console.assert();&lt;/code&gt; // Conditional logging
-      &lt;/div&gt;
-      &lt;div class=&quot;card-body&quot;&gt;
-        &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;console.assert(1 === 1, &quot;This will not be logged&quot;);
-console.assert(1 === 2, &quot;This will be logged as an error&quot;);&lt;/code&gt;&lt;/pre&gt;
-        &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;Assertion failed: This will be logged as an error&lt;/code&gt;&lt;/pre&gt;
-        &lt;em&gt;n.b. This is the method that triggered me to look in to this further. So much better than simply &lt;code&gt;console.log()&lt;/code&gt;&lt;/em&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;a name=&quot;consoletable&quot;&gt;&lt;/a&gt;
-&lt;div class=&quot;row mb-5&quot;&gt;
-  &lt;div class=&quot;col&quot;&gt;
-    &lt;div class=&quot;card&quot;&gt;
-      &lt;div class=&quot;card-header&quot;&gt;
-        &lt;code&gt;console.table();&lt;/code&gt; // Tabular data display
-      &lt;/div&gt;
-      &lt;div class=&quot;card-body&quot;&gt;
-        &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;const people = [
-  { name: &quot;Alice&quot;, age: 30 },
-  { name: &quot;Bob&quot;, age: 25 }
-];
-console.table(people);&lt;/code&gt;&lt;/pre&gt;
-        &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;┌─────────┬────────────┬─────┐
-│ (index) │   name     │ age │
-├─────────┼────────────┼─────┤
-│    0    │   Alice    │ 30  │
-│    1    │    Bob     │ 25  │
-└─────────┴────────────┴─────┘&lt;/code&gt;&lt;/pre&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;a name=&quot;consolegroup&quot;&gt;&lt;/a&gt;
-&lt;div class=&quot;row mb-5&quot;&gt;
-  &lt;div class=&quot;col&quot;&gt;
-    &lt;div class=&quot;card&quot;&gt;
-      &lt;div class=&quot;card-header&quot;&gt;
-        &lt;code&gt;console.group();&lt;/code&gt; and &lt;code&gt;console.groupEnd();&lt;/code&gt; // Grouping console messages
-      &lt;/div&gt;
-      &lt;div class=&quot;card-body&quot;&gt;
-        &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;console.group(&quot;Group 1&quot;);
-console.log(&quot;Message 1&quot;);
-console.group(&quot;Group 1.1&quot;);
-console.log(&quot;Message 1.1&quot;);
-console.groupEnd();
-console.log(&quot;Message 2&quot;);
-console.groupEnd();&lt;/code&gt;&lt;/pre&gt;
-        &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;Group 1
-  Message 1
-  Group 1.1
-    Message 1.1
-  Message 2&lt;/code&gt;&lt;/pre&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;a name=&quot;consoletrace&quot;&gt;&lt;/a&gt;
-&lt;div class=&quot;row mb-5&quot;&gt;
-  &lt;div class=&quot;col&quot;&gt;
-    &lt;div class=&quot;card&quot;&gt;
-      &lt;div class=&quot;card-header&quot;&gt;
-        &lt;code&gt;console.trace();&lt;/code&gt; // Outputting stack traces
-      &lt;/div&gt;
-      &lt;div class=&quot;card-body&quot;&gt;
-        &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;function a() {
-  function b() {
-    console.trace(&quot;Trace message&quot;);
-  }
-  b();
-}
-a();&lt;/code&gt;&lt;/pre&gt;
-        &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;Trace message
-    at b (index.js:3:13)
-    at a (index.js:5:3)
-    at &lt;anonymous&gt;:1:1&lt;/anonymous&gt;&lt;/code&gt;&lt;/pre&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;a name=&quot;consolecount&quot;&gt;&lt;/a&gt;
-&lt;div class=&quot;row mb-5&quot;&gt;
-  &lt;div class=&quot;col&quot;&gt;
-    &lt;div class=&quot;card&quot;&gt;
-      &lt;div class=&quot;card-header&quot;&gt;
-        &lt;code&gt;console.count();&lt;/code&gt; and &lt;code&gt;console.countReset();&lt;/code&gt; // Counting log occurrences
-      &lt;/div&gt;
-      &lt;div class=&quot;card-body&quot;&gt;
-        &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;console.count(&quot;Count label&quot;);
-console.count(&quot;Count label&quot;);
-console.countReset(&quot;Count label&quot;);
-console.count(&quot;Count label&quot;);&lt;/code&gt;&lt;/pre&gt;
-        &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;Count label: 1
-Count label: 2
-Count label: 1&lt;/code&gt;&lt;/pre&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-
-
-&lt;div class=&quot;row&quot;&gt;
-  &lt;div class=&quot;col&quot;&gt;
-    &lt;p&gt;Why not try it out now in the developer console now? If you&#39;re on Chrone/Edge check out &lt;a href=&quot;https://developer.chrome.com/docs/devtools/console/javascript&quot; target=&quot;_blank&quot;&gt;this guide&lt;/a&gt;.&lt;/p&gt;
-
-  &lt;/div&gt;
-&lt;/div&gt;]]></description>
-      <pubDate>Thu, 08 Aug 2024 19:02:00 +0000</pubDate>
-      <dc:creator>Andy Jarrett</dc:creator>
-      <guid>https://www.andyjarrett.com/posts/2024/advanced-javascript-console-methods/</guid>
-      <enclosure url="https://www.andyjarrett.com/public/blogimage/kevin-ku-w7ZyuGYNpRQ-unsplash.jpg" type="image/jpeg" />
-      <category>posts, javascript, console, debug</category>
-      <author>Andy Jarrett &lt;email@example.com&gt;</author>
-    </item>
-    <item>
       <title>Utility Console Methods For Debugging Your Javascript Workflow</title>
       <link>https://www.andyjarrett.com/posts/2024/utility-console-methods-for-debugging-workflow/</link>
       <description><![CDATA[
@@ -951,6 +790,147 @@ curl -X POST &quot;https://api.indexnow.org/indexnow&quot; &#92;
       <guid>https://www.andyjarrett.com/posts/2024/understanding-variable-scoping-differences-between-lucee-5-and-lucee-6/</guid>
       <enclosure url="https://www.andyjarrett.com/public/blogimage/lewis-kang-ethe-ngugi-f5pTwLHCsAg-unsplash.jpg" type="image/jpeg" />
       <category>posts, CFML, ColdFusion, Lucee</category>
+      <author>Andy Jarrett &lt;email@example.com&gt;</author>
+    </item>
+    <item>
+      <title>Connection pools in Node.js with MariaDB</title>
+      <link>https://www.andyjarrett.com/posts/2024/connection-pools-in-node-with-mariadb/</link>
+      <description><![CDATA[
+&lt;div class=&quot;image-container my-2&quot;&gt;
+  &lt;img src=&quot;https://www.andyjarrett.com/public/blogimage/alec-weir-I1vgh8AJr94-unsplash.jpg&quot; alt=&quot;MariaDB optimisation&quot; class=&quot;img-fluid&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;text-end&quot;&gt;
+  &lt;sup&gt;
+    &lt;cite&gt;Photo by &lt;a href=&quot;https://unsplash.com/@xcvii?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Alec Weir&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/brown-walrus-in-rule-of-thirds-photography-I1vgh8AJr94?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;&lt;/cite&gt;
+  &lt;/sup&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;TL;DR:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Find the GitHub project here: &lt;a rel=&quot;noopener noreferrer&quot; href=&quot;https://github.com/andyj/mariadb-connection-pool&quot;&gt;github.com/andyj/mariadb-connection-pool&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+
+
+&lt;h2&gt;Why Use a Connection Pool?&lt;/h2&gt;
+
+&lt;p&gt;Database connection pooling critical for your web applications. Without a pool, every database query spins up a new connection which startes eating up your resources! A connection pool keeps a stash of open connections ready to go, slashing overhead and boosting performance.&lt;/p&gt;
+
+&lt;p&gt;This also gave me an excuse to go back over some old code of mine and start putting in &lt;a href=&quot;https://www.andyjarrett.com/posts/2024/utility-console-methods-for-debugging-workflow/&quot; title=&quot;Utility Console Methods For Debugging Your Javascript Workflow&quot;&gt;console methods for debugging&lt;/a&gt; that I&#39;ve covered &lt;a href=&quot;https://www.andyjarrett.com/posts/2024/advanced-javascript-console-methods/&quot; title=&quot;Advanced Javascript Console Techniques Every Developer Should Be Aware Of&quot;&gt;recently&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3&gt;Benefits of Connection Pooling&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Reduced latency:&lt;/strong&gt; Reusing connections cuts out the time spent establishing new ones.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Better resource management:&lt;/strong&gt; Caps the number of simultaneous connections to keep your database happy.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Improved scalability:&lt;/strong&gt; Handle more users without breaking a sweat.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Setting Up a MariaDB Connection Pool in Node.js&lt;/h3&gt;
+
+&lt;p&gt;First things first, you&#39;ll need the &lt;code&gt;mariadb&lt;/code&gt; package. Install it using:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;npm install mariadb dotenv&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here&#39;s how to set up the pool:&lt;/p&gt;
+
+&lt;h4&gt;Connection Pool Configuration&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;
+// db.js
+require(&#39;dotenv&#39;).config(); // Load environment variables
+
+const mariadb = require(&#39;mariadb&#39;);
+
+const pool = mariadb.createPool({
+  host: process.env.DB_HOST,         // Use DB_HOST environment variable from .env
+  user: process.env.DB_USER,         // Use DB_USER environment variable from .env
+  password: process.env.DB_PASSWORD, // Use DB_PASSWORD environment variable from .env
+  database: process.env.DB_NAME,     // Use DB_NAME environment variable from .env
+  port: process.env.DB_PORT,         // Use DB_PORT environment variable from .env
+  connectionLimit: 10                // Maximum number of connections in the pool
+});
+
+module.exports = pool;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This creates a pool with up to 10 connections. Feel free to tweak the &lt;code&gt;connectionLimit&lt;/code&gt; based on what your app needs.&lt;/p&gt;
+
+&lt;h3&gt;Using the Pool in Your Application&lt;/h3&gt;
+
+&lt;p&gt;Let&#39;s look at how to use the connection pool in an Express route. We&#39;ll sprinkle in some advanced console methods to make debugging a breeze.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;
+const express = require(&#39;express&#39;);
+const pool = require(&#39;./db&#39;); // Import the pool
+const app = express();
+
+app.get(&#39;/data&#39;, async (req, res) =&gt; {
+  console.group(&#39;Database Query&#39;);
+  console.time(&#39;Query Time&#39;);
+
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    console.assert(conn, &#39;Failed to obtain a database connection&#39;);
+
+    const rows = await conn.query(&#39;SELECT current_timestamp()&#39;);
+    console.table(rows);
+
+    res.json(rows);
+  } catch (err) {
+    console.error(&#39;Error executing query&#39;);
+    console.trace(err);
+    res.status(500).send(&#39;Database query error&#39;);
+  } finally {
+    if (conn) conn.release(); // Release the connection back to the pool
+    console.timeEnd(&#39;Query Time&#39;);
+    console.groupEnd();
+  }
+});
+
+app.listen(3000, () =&gt; {
+  console.log(&#39;Server is running on port 3000&#39;);
+});
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here&#39;s what those console methods are doing for you:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;console.group()&lt;/code&gt; and &lt;code&gt;console.groupEnd()&lt;/code&gt;: Groups related log messages, making your console output neater.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;console.time()&lt;/code&gt; and &lt;code&gt;console.timeEnd()&lt;/code&gt;: Measures how long your query takes, helping you spot performance issues.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;console.assert()&lt;/code&gt;: Checks if you got a connection. If not, it logs an error message.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;console.table()&lt;/code&gt;: Displays your query results in a nice table format in the console.&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;console.trace()&lt;/code&gt;: Prints a stack trace from the point where it&#39;s called, super handy for debugging errors.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;By using these methods, you get a clearer picture of what&#39;s going on under the hood, which is clutch when you&#39;re trying to debug or optimize your app.&lt;/p&gt;
+
+&lt;h3&gt;Best Practices&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Keep an eye on pool usage to tweak &lt;code&gt;connectionLimit&lt;/code&gt; as needed.&lt;/li&gt;
+  &lt;li&gt;Use connection timeouts to handle idle or long-running queries.&lt;/li&gt;
+  &lt;li&gt;Implement error handling to gracefully manage database hiccups.&lt;/li&gt;
+  &lt;li&gt;Leverage advanced console methods to make debugging smoother.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3&gt;Conclusion&lt;/h3&gt;
+
+&lt;p&gt;The mariadb package makes it easy to manage database connections efficiently.&lt;/p&gt;
+
+&lt;p&gt;And if you’re using managed database services like AWS RDS for MariaDB or Azure Database for MariaDB, there are additional settings you should consider tweaking for optimal performance:&lt;/p&gt;
+&lt;ul&gt;
+   &lt;li&gt;&lt;strong&gt;Connection Pool Limits&lt;/strong&gt;: AWS and Azure instances often come with predefined limits on concurrent connections based on the instance size. Make sure your connectionLimit aligns with these constraints to avoid hitting caps that could cause connection errors.&lt;/li&gt;
+   &lt;li&gt;&lt;strong&gt;Timeouts and Idle Connections&lt;/strong&gt;: Both AWS and Azure charge for resources tied to active connections. Use settings like idleTimeoutMillis to close unused connections after a certain period. This helps in reducing costs and freeing up database resources.&lt;/li&gt;
+   &lt;li&gt;&lt;strong&gt;Max Allowed Packet&lt;/strong&gt;: Tweak this for handling large queries or data sets, especially if your app processes bulk data.&lt;/li&gt;
+   &lt;li&gt;&lt;strong&gt;Monitoring and Scaling&lt;/strong&gt;: Both platforms offer native monitoring tools (e.g., Amazon CloudWatch or Azure Monitor) to keep an eye on metrics like CPU usage, connections, and query performance. Use these insights to adjust your pool size dynamically.&lt;/li&gt;
+&lt;/ul&gt;
+
+]]></description>
+      <pubDate>Tue, 19 Nov 2024 07:30:00 +0000</pubDate>
+      <dc:creator>Andy Jarrett</dc:creator>
+      <guid>https://www.andyjarrett.com/posts/2024/connection-pools-in-node-with-mariadb/</guid>
+      <enclosure url="https://www.andyjarrett.com/public/blogimage/alec-weir-I1vgh8AJr94-unsplash.jpg" type="image/jpeg" />
+      <category>posts</category>
       <author>Andy Jarrett &lt;email@example.com&gt;</author>
     </item>
     <image>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="description" content="Learn how to boost your Node.js app's database performance by implementing a MariaDB connection pool, with specific examples for AWS MariaDB RDS instances.">
+<meta name="author" content="Andy Jarrett">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Connection pools in Node.js with MariaDB</title>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Connection pools in Node.js with MariaDB">
+<meta name="twitter:description" content="Learn how to boost your Node.js app's database performance by implementing a MariaDB connection pool, with specific examples for AWS MariaDB RDS instances.">
+<meta name="twitter:creator" content="@andyj" />
+<meta property="og:title" content="Connection pools in Node.js with MariaDB">
+<meta property="og:description" content="Learn how to boost your Node.js app's database performance by implementing a MariaDB connection pool, with specific examples for AWS MariaDB RDS instances.">
+<meta property="og:image" content="https://www.andyjarrett.com/public/blogimage/alec-weir-I1vgh8AJr94-unsplash.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="canonical" href="https://www.andyjarrett.com/posts/2024/optimizing-mariadb-performance-in-node-js-applications/">
+<link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://www.andyjarrett.com//feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
+<link rel="sitemap" href="https://www.andyjarrett.com//sitemap.xml" type="application/xml" />
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="/public/css/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
+<link rel="stylesheet" href="/public/prismjs/prism.css">
+  <script src="https://unpkg.com/htmx.org@2.0.2" integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ" crossorigin="anonymous"></script>
+
+</head>
+<body>
+  <div class="container border-bottom pb-2">
+  <header class="d-flex flex-wrap justify-content-center">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+      <span class="fs-2">Andy Jarrett // <span class="lead">Code. Develop. Create.</span></span>
+    </a>
+    <ul class="nav nav-pills">
+      <li class="nav-item  p-2">
+        <a href="/" class="btn btn-outline-primary rounded-circle p-3 lh-1">
+          <i class="bi bi-house fs-5"></i>
+          <span class="visually-hidden">Dismiss</span>
+        </a>
+      </li>
+      <li class="nav-item  p-2">
+        <a href="/feed.xml" class="btn btn-outline-primary rounded-circle p-3 lh-1">
+          <i class="bi bi-rss fs-5"></i>
+        </a>
+      </li>
+      <li class="nav-item  p-2">
+        <a href="/linktree" class="btn btn-outline-primary rounded-circle p-3 lh-1" title="Linktree for Andy Jarrett">
+          <i class="bi bi-tree fs-5"></i>
+        </a>
+      </li>
+      <li class="nav-item  p-2">
+        <a href="https://buymeacoffee.com/mailgw" class="btn btn-outline-primary rounded-circle p-3 lh-1">
+          <i class="bi bi-cup-hot-fill fs-5"></i>
+        </a>
+      </li>
+    </ul>
+  </header>
+</div>  
+
+
+  <div class="container">
+    <div class="my-1 text-center text-primary" role="alert">
+      <a class="text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">
+        Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky
+      </a>
+    </div>
+
+    <main>
+      <article>
+        <header>
+          <h1 class="mt-5 mb-5"><b>Connection pools in Node.js with MariaDB</b></h1>
+        </header>
+
+        <section class="row">
+          <div class="col-md-9 col-12">
+            <section class="mw fw-lighter fs-5">
+              
+<div class="image-container my-2">
+  <img src="/public/blogimage/alec-weir-I1vgh8AJr94-unsplash.jpg" alt="MariaDB optimisation" class="img-fluid">
+</div>
+<div class="text-end">
+  <sup>
+    <cite>Photo by <a href="https://unsplash.com/@xcvii?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Alec Weir</a> on <a href="https://unsplash.com/photos/brown-walrus-in-rule-of-thirds-photography-I1vgh8AJr94?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a></cite>
+  </sup>
+</div>
+
+<p><strong>TL;DR:</strong></p>
+<ul>
+  <li>Find the GitHub project here: <a rel="noopener noreferrer" href="https://github.com/andyj/mariadb-connection-pool">github.com/andyj/mariadb-connection-pool</a></li>
+</ul>
+
+
+
+<h2>Why Use a Connection Pool?</h2>
+
+<p>Database connection pooling critical for your web applications. Without a pool, every database query spins up a new connection which startes eating up your resources! A connection pool keeps a stash of open connections ready to go, slashing overhead and boosting performance.</p>
+
+<p>This also gave me an excuse to go back over some old code of mine and start putting in <a href="/posts/2024/utility-console-methods-for-debugging-workflow/" title="Utility Console Methods For Debugging Your Javascript Workflow">console methods for debugging</a> that I've covered <a href="/posts/2024/advanced-javascript-console-methods/" title="Advanced Javascript Console Techniques Every Developer Should Be Aware Of">recently</a></p>
+
+<h3>Benefits of Connection Pooling</h3>
+<ul>
+  <li><strong>Reduced latency:</strong> Reusing connections cuts out the time spent establishing new ones.</li>
+  <li><strong>Better resource management:</strong> Caps the number of simultaneous connections to keep your database happy.</li>
+  <li><strong>Improved scalability:</strong> Handle more users without breaking a sweat.</li>
+</ul>
+
+<h3>Setting Up a MariaDB Connection Pool in Node.js</h3>
+
+<p>First things first, you'll need the <code>mariadb</code> package. Install it using:</p>
+
+<pre><code class="language-bash">npm install mariadb dotenv</code></pre>
+
+<p>Here's how to set up the pool:</p>
+
+<h4>Connection Pool Configuration</h4>
+
+<pre><code class="language-javascript">
+// db.js
+require('dotenv').config(); // Load environment variables
+
+const mariadb = require('mariadb');
+
+const pool = mariadb.createPool({
+  host: process.env.DB_HOST,         // Use DB_HOST environment variable from .env
+  user: process.env.DB_USER,         // Use DB_USER environment variable from .env
+  password: process.env.DB_PASSWORD, // Use DB_PASSWORD environment variable from .env
+  database: process.env.DB_NAME,     // Use DB_NAME environment variable from .env
+  port: process.env.DB_PORT,         // Use DB_PORT environment variable from .env
+  connectionLimit: 10                // Maximum number of connections in the pool
+});
+
+module.exports = pool;
+</code></pre>
+
+<p>This creates a pool with up to 10 connections. Feel free to tweak the <code>connectionLimit</code> based on what your app needs.</p>
+
+<h3>Using the Pool in Your Application</h3>
+
+<p>Let's look at how to use the connection pool in an Express route. We'll sprinkle in some advanced console methods to make debugging a breeze.</p>
+
+<pre><code class="language-javascript">
+const express = require('express');
+const pool = require('./db'); // Import the pool
+const app = express();
+
+app.get('/data', async (req, res) => {
+  console.group('Database Query');
+  console.time('Query Time');
+
+  let conn;
+  try {
+    conn = await pool.getConnection();
+    console.assert(conn, 'Failed to obtain a database connection');
+
+    const rows = await conn.query('SELECT current_timestamp()');
+    console.table(rows);
+
+    res.json(rows);
+  } catch (err) {
+    console.error('Error executing query');
+    console.trace(err);
+    res.status(500).send('Database query error');
+  } finally {
+    if (conn) conn.release(); // Release the connection back to the pool
+    console.timeEnd('Query Time');
+    console.groupEnd();
+  }
+});
+
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});
+</code></pre>
+
+<p>Here's what those console methods are doing for you:</p>
+
+<ul>
+  <li><code>console.group()</code> and <code>console.groupEnd()</code>: Groups related log messages, making your console output neater.</li>
+  <li><code>console.time()</code> and <code>console.timeEnd()</code>: Measures how long your query takes, helping you spot performance issues.</li>
+  <li><code>console.assert()</code>: Checks if you got a connection. If not, it logs an error message.</li>
+  <li><code>console.table()</code>: Displays your query results in a nice table format in the console.</li>
+  <li><code>console.trace()</code>: Prints a stack trace from the point where it's called, super handy for debugging errors.</li>
+</ul>
+
+<p>By using these methods, you get a clearer picture of what's going on under the hood, which is clutch when you're trying to debug or optimize your app.</p>
+
+<h3>Best Practices</h3>
+<ul>
+  <li>Keep an eye on pool usage to tweak <code>connectionLimit</code> as needed.</li>
+  <li>Use connection timeouts to handle idle or long-running queries.</li>
+  <li>Implement error handling to gracefully manage database hiccups.</li>
+  <li>Leverage advanced console methods to make debugging smoother.</li>
+</ul>
+
+<h3>Conclusion</h3>
+
+<p>The mariadb package makes it easy to manage database connections efficiently.</p>
+
+<p>And if you’re using managed database services like AWS RDS for MariaDB or Azure Database for MariaDB, there are additional settings you should consider tweaking for optimal performance:</p>
+<ul>
+   <li><strong>Connection Pool Limits</strong>: AWS and Azure instances often come with predefined limits on concurrent connections based on the instance size. Make sure your connectionLimit aligns with these constraints to avoid hitting caps that could cause connection errors.</li>
+   <li><strong>Timeouts and Idle Connections</strong>: Both AWS and Azure charge for resources tied to active connections. Use settings like idleTimeoutMillis to close unused connections after a certain period. This helps in reducing costs and freeing up database resources.</li>
+   <li><strong>Max Allowed Packet</strong>: Tweak this for handling large queries or data sets, especially if your app processes bulk data.</li>
+   <li><strong>Monitoring and Scaling</strong>: Both platforms offer native monitoring tools (e.g., Amazon CloudWatch or Azure Monitor) to keep an eye on metrics like CPU usage, connections, and query performance. Use these insights to adjust your pool size dynamically.</li>
+</ul>
+
+
+            </section>
+
+            <footer>
+              <p>
+                <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider
+                  <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>.
+                  Your support keeps this site running and the coffee brewing! ☕️
+                </em>
+              </p>
+            </footer>
+
+            <script
+              src="https://giscus.app/client.js"
+              data-repo="andyj/andyjarrett.com"
+              data-repo-id="R_kgDOMjCDkQ"
+              data-category="Announcements"
+              data-category-id="DIC_kwDOMjCDkc4ChlfU"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="preferred_color_scheme"
+              data-lang="en"
+              crossorigin="anonymous"
+              async></script>
+            <a name="comment"></a>
+          </div>
+
+          <aside class="col-md-3 col-12">
+            <h4>Recent Posts</h4>
+            
+              <a href="/posts/2024/optimizing-mariadb-performance-in-node-js-applications/" class="card-link link-underline-light">
+                Connection pools in Node.js with MariaDB <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/understanding-variable-scoping-differences-between-lucee-5-and-lucee-6/" class="card-link link-underline-light">
+                Understanding Variable Scoping Differences Between Lucee 5 and Lucee 6 <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/bluesky-now-has-over-10-million-users-and-i-was-number-56137/" class="card-link link-underline-light">
+                Bluesky now has over 10 million users, and I was #56,137! <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">
+                Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/" class="card-link link-underline-light">
+                How to Instantly Index Your Website with IndexNow Using a Bash Script <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/" class="card-link link-underline-light">
+                NGINX redirect loops with SSL and CloudFlare <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/" class="card-link link-underline-light">
+                Adding localStorage to the Alpine.js RSS Reader <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/" class="card-link link-underline-light">
+                Creating an Alpine.js RSS Reader with my Bluesky Profile feed <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+          </aside>
+        </section>
+      </article>
+    </main>
+  </div>
+
+  <footer class="container mt-5 border-top pt-2">
+  <div class="row justify-content-md-center">
+    <div class="col">
+      ©AndyJarrett
+      <a href="/linktree" title="Linktree for AndyJarrett" target="_blank"><i class="bi bi-tree"></i></a>
+      <a href="/sitemap.xml" title="Site map for AndyJarrett.com" target="_blank"><i class="bi bi-map"></i></a>
+      <!-- Home Link -->
+      <a href="https://www.andyjarrett.com/" class=""><i class="bi bi-globe me-2"></i></a>
+      <!-- linkedin Link -->
+      <a rel="noopener noreferrer" href="https://www.linkedin.com/in/andyjarrett/" title="inkedIn" target="_blank"><i class="bi bi-linkedin me-2"></i></a>
+      <!-- Twitter Link -->
+      <a rel="noopener noreferrer" href="https://twitter.com/andyj" title="Twitter" target="_blank"><i class="bi bi-twitter me-2"></i></a>
+      <!-- GitHub Link -->
+      <a rel="noopener noreferrer" href="https://github.com/andyj" title="GitHub" target="_blank"><i class="bi bi-github me-2"></i></a>
+      <!-- Stack Overflow Link -->
+      <a rel="noopener noreferrer" href="https://stackoverflow.com/users/371761/andy-jarrett" title="Stack overflow" target="_blank"><i class="bi bi-stack-overflow me-2"></i></a>
+      <!-- BlueSky Link -->
+      <a rel="noopener noreferrer" href="https://bsky.app/profile/andyjarrett.com" title="BlueSky" target="_blank"><i class="bi bi-cloud me-2"></i></a>
+      <!-- Instagram Link -->
+      <a rel="noopener noreferrer" href="https://instagram.com/andyjarrett" title="Instragram" target="_blank"><i class="bi bi-instagram me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://buymeacoffee.com/mailgw" title="Buy me a coffee" target="_blank"><i class="bi bi-cup-hot-fill fs-5"></i></a>
+    </div>
+    <div class="col">
+      <div class="text-end">
+        <div class="btn-group">
+          <a href="#" class="btn btn-secondary btn-sm" id="lightThemeButton" data-bs-theme-value="light">
+            <i class="bi bi-sun"></i>
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" id="darkThemeButton" data-bs-theme-value="dark">
+            <i class="bi bi-moon-stars-fill"></i>
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" id="autoThemeButton" data-bs-theme-value="auto">
+            <i class="bi bi-circle-half"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script src="/public/js/toggle.js" type="text/javascript"></script>
+<script src="/public/prismjs/prism.js"></script>
+</body>
+</html>
