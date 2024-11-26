@@ -7,108 +7,6 @@
     <language>en</language>
     <atom:link href="https://www.andyjarrett.com//feed.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Utility Console Methods For Debugging Your Javascript Workflow</title>
-      <link>https://www.andyjarrett.com/posts/2024/utility-console-methods-for-debugging-workflow/</link>
-      <description><![CDATA[
-
-&lt;div class=&quot;image-container my-2&quot;&gt;
-  &lt;img src=&quot;https://www.andyjarrett.com/public/blogimage/altumcode-PNbDkQ2DDgM-unsplash.jpg&quot; alt=&quot;Console debugging&quot; class=&quot;img-fluid&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;text-end&quot;&gt;
-  &lt;sup&gt;
-    &lt;cite&gt;Photo by &lt;a rel=&quot;noopener noreferrer&quot; href=&quot;https://unsplash.com/@altumcode?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;AltumCode&lt;/a&gt; on &lt;a rel=&quot;noopener noreferrer&quot; href=&quot;https://unsplash.com/photos/macbook-pro-on-black-wooden-table-PNbDkQ2DDgM?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt; &lt;/cite&gt;
-  &lt;/sup&gt;
-&lt;/div&gt;
-
-
-
-&lt;div class=&quot;row&quot;&gt;
-  &lt;div class=&quot;col&quot;&gt;
-    &lt;p&gt;
-      If you&#39;ve missed the previous parts of this series, you can find Part 1 &lt;a href=&quot;https://www.andyjarrett.com/posts/2024/basic-javascript-console-logging-methods/&quot; title=&quot;Basic Javascript Console Logging Techniques Every Developer Should Know&quot;&gt;here&lt;/a&gt; and Part 2 &lt;a href=&quot;https://www.andyjarrett.com/posts/2024/advanced-javascript-console-methods/&quot; title=&quot;Advanced Javascript Console Techniques Every Developer Should Be Aware Of&quot;&gt;here&lt;/a&gt;.
-    &lt;/p&gt;
-    &lt;p&gt;This final part of the series which all started with &lt;a href=&quot;https://www.andyjarrett.com/posts/2024/advanced-javascript-console-methods/#consoleassert&quot;&gt;&lt;code&gt;console.assert()&lt;/code&gt;&lt;/a&gt;. This one covers utility/debugging methods that go beyond simple logging and help in managing and measuring console outputs when you&#39;re debugging your code:&lt;/p&gt;
-    &lt;ul&gt;
-      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://www.andyjarrett.com/posts/2024/utility-console-methods-for-debugging-workflow/#consoleclear&quot;&gt;console.clear()&lt;/a&gt; &lt;em&gt;- Clearing the console&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://www.andyjarrett.com/posts/2024/utility-console-methods-for-debugging-workflow/#consoletime&quot;&gt;console.time() and console.timeEnd()&lt;/a&gt; &lt;em&gt;- Measuring execution time&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a class=&quot;text-decoration-none&quot; href=&quot;https://www.andyjarrett.com/posts/2024/utility-console-methods-for-debugging-workflow/#consolecount&quot;&gt;console.count() and console.countReset()&lt;/a&gt; &lt;em&gt;- Counting occurrences&lt;/em&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-
-
-&lt;a name=&quot;consoleclear&quot;&gt;&lt;/a&gt;
-&lt;div class=&quot;row mb-5&quot;&gt;
-  &lt;div class=&quot;col&quot;&gt;
-    &lt;div class=&quot;card&quot;&gt;
-      &lt;div class=&quot;card-header&quot;&gt;
-        &lt;code&gt;console.clear();&lt;/code&gt; // Clearing the console
-      &lt;/div&gt;
-      &lt;div class=&quot;card-body&quot;&gt;
-        &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;console.log(&quot;This will be cleared&quot;);
-console.clear();&lt;/code&gt;&lt;/pre&gt;
-        &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;// Console gets cleared, no output visible&lt;/code&gt;&lt;/pre&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;a name=&quot;consoletime&quot;&gt;&lt;/a&gt;
-&lt;div class=&quot;row mb-5&quot;&gt;
-  &lt;div class=&quot;col&quot;&gt;
-    &lt;div class=&quot;card&quot;&gt;
-      &lt;div class=&quot;card-header&quot;&gt;
-        &lt;code&gt;console.time();&lt;/code&gt; and &lt;code&gt;console.timeEnd();&lt;/code&gt; // Measuring execution time
-      &lt;/div&gt;
-      &lt;div class=&quot;card-body&quot;&gt;
-        &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;console.time(&quot;Timer&quot;);
-for(let i = 0; i &lt; 1000000; i++) {
-  // Simulate a process
-}
-console.timeEnd(&quot;Timer&quot;);&lt;/code&gt;&lt;/pre&gt;
-        &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;Timer: 2.345ms&lt;/code&gt;&lt;/pre&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;a name=&quot;consolecount&quot;&gt;&lt;/a&gt;
-&lt;div class=&quot;row mb-5&quot;&gt;
-  &lt;div class=&quot;col&quot;&gt;
-    &lt;div class=&quot;card&quot;&gt;
-      &lt;div class=&quot;card-header&quot;&gt;
-        &lt;code&gt;console.count();&lt;/code&gt; and &lt;code&gt;console.countReset();&lt;/code&gt; // Counting log occurrences
-      &lt;/div&gt;
-      &lt;div class=&quot;card-body&quot;&gt;
-        &lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;console.count(&quot;Process Count&quot;);
-console.count(&quot;Process Count&quot;);
-console.countReset(&quot;Process Count&quot;);
-console.count(&quot;Process Count&quot;);&lt;/code&gt;&lt;/pre&gt;
-        &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;Process Count: 1
-Process Count: 2
-Process Count: 1&lt;/code&gt;&lt;/pre&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-
-
-&lt;div class=&quot;row&quot;&gt;
-  &lt;div class=&quot;col&quot;&gt;
-    &lt;p&gt;This is NOT everything. Check out &lt;a rel=&quot;noopener noreferrer&quot; href=&quot;https://developer.chrome.com/docs/devtools/console/api&quot;&gt;Chromes Console API reference&lt;/a&gt; and to delve even deeper, the &lt;a rel=&quot;noopener noreferrer&quot; href=&quot;https://developer.chrome.com/docs/devtools/console/utilities&quot; target=&quot;_blank&quot;&gt;Chrome DevTools Console Utilities API&lt;/a&gt;.&lt;/p&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-]]></description>
-      <pubDate>Tue, 13 Aug 2024 19:02:00 +0000</pubDate>
-      <dc:creator>Andy Jarrett</dc:creator>
-      <guid>https://www.andyjarrett.com/posts/2024/utility-console-methods-for-debugging-workflow/</guid>
-      <enclosure url="https://www.andyjarrett.com/public/blogimage/altumcode-PNbDkQ2DDgM-unsplash.jpg" type="image/jpeg" />
-      <category>posts, javascript, console, debug, utility</category>
-      <author>Andy Jarrett &lt;email@example.com&gt;</author>
-    </item>
-    <item>
       <title>Comments Via Giscus Now Live My Blog</title>
       <link>https://www.andyjarrett.com/posts/2024/comments-via-giscus-now-live-on-my-blog/</link>
       <description><![CDATA[
@@ -931,6 +829,116 @@ app.listen(3000, () =&gt; {
       <guid>https://www.andyjarrett.com/posts/2024/connection-pools-in-node-with-mariadb/</guid>
       <enclosure url="https://www.andyjarrett.com/public/blogimage/alec-weir-I1vgh8AJr94-unsplash.jpg" type="image/jpeg" />
       <category>posts</category>
+      <author>Andy Jarrett &lt;email@example.com&gt;</author>
+    </item>
+    <item>
+      <title>How to Run SVR.JS with Docker Compose</title>
+      <link>https://www.andyjarrett.com/posts/2024/how-to-run-svrjs-with-docker-compose/</link>
+      <description><![CDATA[
+&lt;div class=&quot;image-container my-2&quot;&gt;
+  &lt;img src=&quot;https://www.andyjarrett.com/public/blogimage/florian-olivo-4hbJ-eymZ1o-unsplash.jpg&quot; alt=&quot;Man running towards mountains&quot; class=&quot;img-fluid&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;text-end&quot;&gt;
+  &lt;sup&gt;
+    &lt;cite&gt;
+      Photo by &lt;a rel=&quot;noopener noreferrer&quot; href=&quot;https://unsplash.com/@florianolv?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Florian Olivo&lt;/a&gt; on &lt;a rel=&quot;noopener noreferrer&quot; href=&quot;https://unsplash.com/photos/lines-of-html-codes-4hbJ-eymZ1o?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;
+    &lt;/cite&gt;
+  &lt;/sup&gt;
+&lt;/div&gt;
+
+
+
+&lt;p&gt;
+  &lt;strong&gt;TL;DR:&lt;/strong&gt;
+  Project code here: &lt;a rel=&quot;noopener noreferrer&quot; href=&quot;https://github.com/andyj/svrjs-with-docker&quot; target=&quot;_blank&quot;&gt;github.com/andyj/svrjs-with-docker&lt;/a&gt;
+&lt;/p&gt;
+
+
+&lt;h1&gt;Why SVR.JS?&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&quot;https://svrjs.org/&quot; rel=&quot;noopener noreferrer&quot;&gt;SVR.JS&lt;/a&gt; is a lightweight and efficient web server designed to serve static files effortlessly. It&#39;s great for scenarios where you need a quick and reliable solution to host static content without the overhead of traditional web servers. &lt;/p&gt;
+&lt;p&gt;By combining SVR.JS with Docker, you can eliminate installation dependencies and simplify deployment, making it an ideal choice for developers, testers, and small-scale projects.&lt;/p&gt;
+
+&lt;h2&gt;How to Set It Up&lt;/h2&gt;
+
+
+&lt;h3&gt;Step 1: Docker Compose Configuration&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;version: &#39;3.9&#39;
+services:
+  svrjs:
+    image: svrjs/svrjs:lts
+    container_name: svrjs-server
+    platform: linux/amd64
+    ports:
+      - &quot;8080:80&quot;  # Map port 8080 on host to port 80 in the container
+    volumes:
+      - ./www:/var/www/svrjs  # Mount the local `www` directory as the web root
+      - ./svrjs-config.json:/etc/svrjs-config.json  # Mount custom config
+    restart: always
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This &lt;code&gt;docker-compose.yml&lt;/code&gt; file defines the SVR.JS service. It maps port 8080 on the host to port 80 in the container and sets up volumes for the web root and configuration file.&lt;/p&gt;
+
+&lt;h3&gt;Step 2: Configuration File&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-json&quot;&gt;{
+  &quot;port&quot;: 80,
+  &quot;wwwroot&quot;: &quot;/var/www/svrjs&quot;,
+  &quot;logging&quot;: {
+    &quot;enabled&quot;: true,
+    &quot;level&quot;: &quot;info&quot;
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Save this as &lt;code&gt;svrjs-config.json&lt;/code&gt;. It configures SVR.JS to serve files from the specified directory and enables basic logging.&lt;/p&gt;
+
+&lt;h3&gt;Step 3: Directory Structure&lt;/h3&gt;
+&lt;p&gt;Create the following directory structure for your project:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;svrjs-with-docker
+├── README.md
+├── docker-compose.yml
+├── svrjs-config.json
+└── www
+    ├── index.html
+    └── style.css
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;www&lt;/code&gt; folder will hold your static files, such as &lt;code&gt;index.html&lt;/code&gt; and &lt;code&gt;style.css&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3&gt;Step 4: Example HTML File&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;!DOCTYPE html&amp;gt;
+&amp;lt;html lang=&quot;en&quot;&amp;gt;
+&amp;lt;head&amp;gt;
+  &amp;lt;meta charset=&quot;UTF-8&quot;&amp;gt;
+  &amp;lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&amp;gt;
+  &amp;lt;title&amp;gt;SVR.JS Test&amp;lt;/title&amp;gt;
+  &amp;lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+  &amp;lt;h1&amp;gt;Welcome to SVR.JS&amp;lt;/h1&amp;gt;
+  &amp;lt;p&amp;gt;This static file is served by SVR.JS.&amp;lt;/p&amp;gt;
+&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Save this as &lt;code&gt;index.html&lt;/code&gt; inside the &lt;code&gt;www&lt;/code&gt; directory.&lt;/p&gt;
+
+&lt;h3&gt;Step 5: Running the Server&lt;/h3&gt;
+&lt;p&gt;In the root directory of your project, run the following command:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;docker-compose up&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;After the container starts, visit &lt;a href=&quot;http://localhost:8080/&quot; target=&quot;_blank&quot;&gt;http://localhost:8080&lt;/a&gt; to see your static site in action.&lt;/p&gt;
+
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;SVR.JS, combined with Docker, provides a powerful and hassle-free way to serve static content. This setup is highly portable and easy to replicate across different environments, making it a valuable tool for developers of all levels.&lt;/p&gt;
+
+
+
+]]></description>
+      <pubDate>Tue, 26 Nov 2024 22:30:00 +0000</pubDate>
+      <dc:creator>Andy Jarrett</dc:creator>
+      <guid>https://www.andyjarrett.com/posts/2024/how-to-run-svrjs-with-docker-compose/</guid>
+      <enclosure url="https://www.andyjarrett.com/public/blogimage/florian-olivo-4hbJ-eymZ1o-unsplash.jpg" type="image/jpeg" />
+      <category>posts, docker, svrjs, tutorial</category>
       <author>Andy Jarrett &lt;email@example.com&gt;</author>
     </item>
     <image>
