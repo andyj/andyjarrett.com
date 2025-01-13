@@ -7,135 +7,6 @@
     <language>en</language>
     <atom:link href="https://www.andyjarrett.com//feed.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Adding localStorage to the Alpine.js RSS Reader</title>
-      <link>https://www.andyjarrett.com/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/</link>
-      <description><![CDATA[
-&lt;div class=&quot;image-container my-2&quot;&gt;
-  &lt;img src=&quot;https://www.andyjarrett.com/public/blogimage/nathalia-segato-auQGug8wkLM-unsplash.jpg&quot; alt=&quot;Developer debugging&quot; class=&quot;img-fluid&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;text-end&quot;&gt;
-  &lt;sup&gt;
-    &lt;cite&gt;Photo by &lt;a href=&quot;https://unsplash.com/@trintaycinco?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Nathalia Segato&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/a-store-front-at-night-with-a-person-walking-in-the-doorway-auQGug8wkLM?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;&lt;/cite&gt;
-  &lt;/sup&gt;
-&lt;/div&gt;
-
-&lt;p&gt;The purpose of the blog post is to explain why I am adding &lt;a rel=&quot;noopener noreferrer&quot; href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage&quot;&gt;localStorage&lt;/a&gt; to my simple app at &lt;a href=&quot;https://github.com/andyj/alpine.js-rss-reader&quot; target=&quot;_blank&quot;&gt;github.com/andyj/alpine.js-rss-reader&lt;/a&gt;. If you haven&#39;t see it already, this is carrying on from my &lt;a href=&quot;https://www.andyjarrett.com/posts/2024/creating-an-alpinejs-rss-reader-using-bluesky-profiles/&quot;&gt;previous post&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4&gt;Why Use Local Storage?&lt;/h4&gt;
-&lt;p&gt;&lt;strong&gt;Faster Development:&lt;/strong&gt; Highlight that local storage helps reduce the need to constantly fetch data from the server, which speeds up the development process since the results are instantly available from the cache.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Reduced Server Load:&lt;/strong&gt; Explain that using local storage reduces the number of requests made to the server, which can be particularly important if there are API rate limits or if the server is slow.&lt;/p&gt;
-
-&lt;p&gt;There isn&#39;t many changes, so its a quick walk through of the key parts of the code where we add local storage functionality:&lt;/p&gt;
-
-&lt;h3 class=&quot;mt-4&quot;&gt;1. Introducing Cache Keys&lt;/h3&gt;
-&lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;const cacheKey = &#39;rssFeedCache&#39;;
-const cacheExpiryKey = &#39;rssFeedCacheExpiry&#39;;&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;These keys will store the fetched RSS feed and its expiry time in local storage.&lt;/p&gt;
-
-&lt;h3 class=&quot;mt-4&quot;&gt;2. Checking for Cached Data&lt;/h3&gt;
-&lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;const cachedData = localStorage.getItem(cacheKey);
-const cacheExpiry = localStorage.getItem(cacheExpiryKey);
-const now = new Date().getTime();&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Before making a new request, the code checks if there’s valid cached data to use.&lt;/p&gt;
-
-&lt;h3 class=&quot;mt-4&quot;&gt;3. Using Cached Data if Valid&lt;/h3&gt;
-&lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;if (cachedData &amp;&amp; cacheExpiry &amp;&amp; now &lt; cacheExpiry) {
-  this.feedItems = JSON.parse(cachedData);
-  this.loading = false;
-  console.info(&quot;Results from cache&quot;);
-}&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If the cache is still valid, the feed is loaded from local storage, saving the need for a server request.&lt;/p&gt;
-
-&lt;h3 class=&quot;mt-4&quot;&gt;4. Fetching and Caching New Data&lt;/h3&gt;
-&lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;const response = await fetch(feedUrl);
-const data = await response.json();
-const parser = new DOMParser();
-const xml = parser.parseFromString(data.contents, &#39;text/xml&#39;);
-const items = xml.querySelectorAll(&#39;item&#39;);
-this.feedItems = Array.from(items).map(item =&gt; ({
-  link: item.querySelector(&#39;link&#39;).textContent,
-  pubDate: item.querySelector(&#39;pubDate&#39;).textContent,
-  description: item.querySelector(&#39;description&#39;).textContent
-}));
-
-localStorage.setItem(cacheKey, JSON.stringify(this.feedItems));
-localStorage.setItem(cacheExpiryKey, now + 5 * 60 * 1000); // Cache expiry set to 5 minutes
-console.info(&quot;New results stored in cache&quot;);&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;If there’s no valid cache, the code fetches new data, updates the feed items, and caches the results for future use.&lt;/p&gt;
-
-&lt;h2 class=&quot;mt-5&quot;&gt;Putting it all together&lt;/h2&gt;
-&lt;pre&gt;&lt;code class=&quot;language-javascript&quot;&gt;function rssFeed() {
-return {
-  feedItems: [],
-  loading: true,
-  error: null,
-
-  async fetchFeed() {
-    const feedUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(&#39;https://bsky.app/profile/did:plc:bd3g6lum2orsqnolbu4urvxj/rss&#39;)}`;
-    const cacheKey = &#39;rssFeedCache&#39;;
-    const cacheExpiryKey = &#39;rssFeedCacheExpiry&#39;;
-
-    // Check if cached data is available and valid
-    const cachedData = localStorage.getItem(cacheKey);
-    const cacheExpiry = localStorage.getItem(cacheExpiryKey);
-    const now = new Date().getTime();
-
-    if (cachedData &amp;&amp; cacheExpiry &amp;&amp; now &lt; cacheExpiry) {
-      // Use cached data
-      this.feedItems = JSON.parse(cachedData);
-      this.loading = false;
-      console.info(&quot;Results from cache&quot;);
-    } else {
-      try {
-        const response = await fetch(feedUrl);
-        const data = await response.json();
-        const parser = new DOMParser();
-        const xml = parser.parseFromString(data.contents, &#39;text/xml&#39;);
-        const items = xml.querySelectorAll(&#39;item&#39;);
-        this.feedItems = Array.from(items).map(item =&gt; ({
-          link: item.querySelector(&#39;link&#39;).textContent,
-          pubDate: item.querySelector(&#39;pubDate&#39;).textContent,
-          description: item.querySelector(&#39;description&#39;).textContent
-        }));
-
-        // Store the new data in local storage
-        localStorage.setItem(cacheKey, JSON.stringify(this.feedItems));
-        localStorage.setItem(cacheExpiryKey, now + 5 * 60 * 1000); // Set cache expiry to 5 minutes from now
-        console.info(&quot;New results stored in cache&quot;);
-      } catch (error) {
-        this.error = &#39;Failed to load the feed. Please try again later.&#39;;
-        console.error(error.message);
-      } finally {
-        this.loading = false;
-      }
-    }
-  },
-
-  formatDate(dateString) {
-    const options = { year: &#39;numeric&#39;, month: &#39;long&#39;, day: &#39;numeric&#39;, hour: &#39;numeric&#39;, minute: &#39;numeric&#39;, second: &#39;numeric&#39;, timeZoneName: &#39;short&#39; };
-    const date = new Date(dateString);
-    return date.toLocaleDateString(undefined, options);
-  }
-};
-}&lt;/code&gt;&lt;/pre&gt;
-
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Clearing Cache:&lt;/strong&gt; You can manually clear the cache using &lt;code&gt;localStorage.removeItem(&#39;rssFeedCache&#39;)&lt;/code&gt; if the cached data becomes stale or corrupted.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Optimising Cache Duration:&lt;/strong&gt; You may want to experiment with the cache duration (&lt;code&gt;now + 5 * 60 * 1000&lt;/code&gt;) depending on how frequently the RSS feed updates. &lt;/li&gt;
-&lt;/ul&gt;
-
-
-]]></description>
-      <pubDate>Sun, 18 Aug 2024 19:02:00 +0000</pubDate>
-      <dc:creator>Andy Jarrett</dc:creator>
-      <guid>https://www.andyjarrett.com/posts/2024/adding-local-storage-for-faster-development-to-the-alpinejs-rss-reader/</guid>
-      <enclosure url="https://www.andyjarrett.com/public/blogimage/nathalia-segato-auQGug8wkLM-unsplash.jpg" type="image/jpeg" />
-      <category>posts, javascript, alpinejs, rss, rss reader</category>
-      <author>Andy Jarrett &lt;email@example.com&gt;</author>
-    </item>
-    <item>
       <title>NGINX redirect loops with SSL and CloudFlare</title>
       <link>https://www.andyjarrett.com/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/</link>
       <description><![CDATA[
@@ -981,6 +852,84 @@ svrjs:
       <guid>https://www.andyjarrett.com/posts/2025/why-updating-alpinejs-state-with-direct-reassignme/</guid>
       <enclosure url="https://www.andyjarrett.com/public/blogimage/trevor-wilson--8uTE4FWxkU-unsplash.jpg" type="image/jpeg" />
       <category>posts, alpinejs, javascript, web development, reactivity, html</category>
+      <author>Andy Jarrett &lt;email@example.com&gt;</author>
+    </item>
+    <item>
+      <title>Fixing Alpine.js Template Rendering Issues When Your Second Tag Isn&#39;t Showing</title>
+      <link>https://www.andyjarrett.com/posts/2025/fixing-alpinejs-template-rendering-issues-when-your-second-tag-isnt-showing/</link>
+      <description><![CDATA[
+&lt;div class=&quot;image-container my-2&quot;&gt;
+  &lt;img src=&quot;https://www.andyjarrett.com/public/blogimage/ales-krivec-7wQsXq_HKJo-unsplash.jpg&quot; alt=&quot;&quot; class=&quot;img-fluid&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;text-end&quot;&gt;
+  &lt;sup&gt;
+    &lt;cite&gt;Photo by &lt;a href=&quot;https://unsplash.com/@aleskrivec?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Ales Krivec&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/fern-tree-under-white-clouds-7wQsXq_HKJo?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;&lt;/cite&gt;
+  &lt;/sup&gt;
+&lt;/div&gt;
+
+&lt;p&gt;When working with Alpine.js templates, I ran into an issue where only the first child element inside a &lt;code&gt;&amp;lt;template&amp;gt;&lt;/code&gt; tag is rendered, leaving subsequent elements mysteriously absent.&lt;/p&gt;
+
+&lt;h2&gt;Understanding the Problem&lt;/h2&gt;
+&lt;p&gt;Consider the following code:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;template x-if=&quot;products.product_id&quot;&amp;gt;
+  &amp;lt;a :href=&quot;`/products/edit/${products.item_short_ref}/${products.item_code}`&quot; class=&quot;px-2&quot;&amp;gt;
+    Edit
+  &amp;lt;/a&amp;gt;
+  &amp;lt;a :href=&quot;`/products/delete/${products.item_short_ref}/${products.item_code}`&quot; class=&quot;px-2&quot;&amp;gt;
+    Delete
+  &amp;lt;/a&amp;gt;
+&amp;lt;/template&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You might expect both &lt;code&gt;&amp;lt;a&amp;gt;&lt;/code&gt; tags to render when the &lt;code&gt;x-if&lt;/code&gt; condition is true. However, Alpine.js requires a single root element inside the &lt;code&gt;&amp;lt;template&amp;gt;&lt;/code&gt; tag. If there are multiple sibling elements, only the first one will appear.&lt;/p&gt;
+
+&lt;h2&gt;The Solution&lt;/h2&gt;
+&lt;p&gt;To resolve this, wrap the content inside the &lt;code&gt;&amp;lt;template&amp;gt;&lt;/code&gt; in a parent container, such as a &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt; or &lt;code&gt;&amp;lt;span&amp;gt;&lt;/code&gt;. Here’s the corrected code:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;template x-if=&quot;products.product_id&quot;&amp;gt;
+  &amp;lt;span class=&quot;flex&quot;&amp;gt;
+    &amp;lt;a :href=&quot;`/products/edit/${products.item_short_ref}/${products.item_code}`&quot; class=&quot;px-2&quot;&amp;gt;
+      Edit
+    &amp;lt;/a&amp;gt;
+    &amp;lt;a :href=&quot;`/products/delete/${products.item_short_ref}/${products.item_code}`&quot; class=&quot;px-2&quot;&amp;gt;
+      Delete
+    &amp;lt;/a&amp;gt;
+  &amp;lt;/span&amp;gt;
+&amp;lt;/template&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;&amp;lt;span&amp;gt;&lt;/code&gt; acts as the single root node required by Alpine.js, allowing both &lt;code&gt;&amp;lt;a&amp;gt;&lt;/code&gt; tags to render properly.&lt;/p&gt;
+
+&lt;h2&gt;A Demo of the Issue and Solution&lt;/h2&gt;
+&lt;p&gt;Here’s a simplified demonstration to illustrate the problem:&lt;/p&gt;
+
+&lt;h3&gt;Code with Issue&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;div x-data=&quot;{ open: false }&quot;&amp;gt;
+  &amp;lt;button x-on:click=&quot;open = !open&quot;&amp;gt;Toggle 1 (shows one link only)&amp;lt;/button&amp;gt;
+  &amp;lt;template x-if=&quot;open&quot;&amp;gt;
+    &amp;lt;a href=&quot;#&quot;&amp;gt;Link 1&amp;lt;/a&amp;gt;
+    &amp;lt;a href=&quot;#&quot;&amp;gt;Link 2&amp;lt;/a&amp;gt;
+  &amp;lt;/template&amp;gt;
+&amp;lt;/div&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In this case, only &quot;Link 1&quot; will appear when you click the button.&lt;/p&gt;
+
+&lt;h3&gt;Corrected Code&lt;/h3&gt;
+&lt;pre&gt;&lt;code class=&quot;language-html&quot;&gt;&amp;lt;div x-data=&quot;{ open: false }&quot;&amp;gt;
+  &amp;lt;button x-on:click=&quot;open = !open&quot;&amp;gt;Toggle 2 (shows both links)&amp;lt;/button&amp;gt;
+  &amp;lt;template x-if=&quot;open&quot;&amp;gt;
+    &amp;lt;div&amp;gt;
+      &amp;lt;a href=&quot;#&quot;&amp;gt;Link 1&amp;lt;/a&amp;gt;
+      &amp;lt;a href=&quot;#&quot;&amp;gt;Link 2&amp;lt;/a&amp;gt;
+    &amp;lt;/div&amp;gt;
+  &amp;lt;/template&amp;gt;
+&amp;lt;/div&amp;gt;&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now, both links will render correctly when the button is toggled.&lt;/p&gt;
+
+]]></description>
+      <pubDate>Mon, 13 Jan 2025 23:28:00 +0000</pubDate>
+      <dc:creator>Andy Jarrett</dc:creator>
+      <guid>https://www.andyjarrett.com/posts/2025/fixing-alpinejs-template-rendering-issues-when-your-second-tag-isnt-showing/</guid>
+      <enclosure url="https://www.andyjarrett.com/public/blogimage/ales-krivec-7wQsXq_HKJo-unsplash.jpg" type="image/jpeg" />
+      <category>posts, javascript, alpinejs, templates, frontend, web development</category>
       <author>Andy Jarrett &lt;email@example.com&gt;</author>
     </item>
     <image>
