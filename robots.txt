@@ -1,3 +1,5 @@
 User-agent: *
 Sitemap: https://www.andyjarrett.com/sitemap.xml
 Disallow: /*.php$
+
+# Algolia-Crawler-Verif: 52DE946FF0AF4A88
