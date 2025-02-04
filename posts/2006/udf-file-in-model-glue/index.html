@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
-<link rel="stylesheet" href="/public/prismjs/prism.css">
+<link rel="stylesheet" href="/public/prismjs/prism.css?load=css">
   <script src="https://unpkg.com/htmx.org@2.0.2" integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ" crossorigin="anonymous"></script>
 
 </head>
@@ -78,7 +78,7 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-This has just came up on the <a href="http://lists.topica.com/lists/modelglue/read/message.html?mid=1719874495&sort=d&start=1698">MG Lists</a> and I thought i should post my solution on how I implement a UDF file in MG1)My UDF file is a component (cfc) on the root of the site. Example UDF:<br/><code><cffunction name="getDateTime"> <cfreturn now() /></cffunction></code><br/>2)Then in my controller (in the onRequestStart):<br/><code><!--- Add a UDF ---><cfset variables.udf = createObject("component","pathTo.udf").init()><cfset arguments.event.setValue("udf", variables.udf)></code><br/>3)On my view page I have<code><!--- Get UDF ---><cfset udf = viewState.getValue('udf') /></code><br/>Then to call a function<code><cfoutput>#udf.getDateTime()#</cfoutput></code><br/><br>
+This has just came up on the <a href="http://lists.topica.com/lists/modelglue/read/message.html?mid=1719874495&sort=d&start=1698">MG Lists</a> and I thought i should post my solution on how I implement a UDF file in MG1)My UDF file is a component (cfc) on the root of the site. Example UDF:<br/><code>&lt;cffunction name="getDateTime"> &lt;cfreturn now() />&lt;/cffunction></code><br/>2)Then in my controller (in the onRequestStart):<br/><code><!--- Add a UDF --->&lt;cfset variables.udf = createObject("component","pathTo.udf").init()>&lt;cfset arguments.event.setValue("udf", variables.udf)></code><br/>3)On my view page I have<code><!--- Get UDF --->&lt;cfset udf = viewState.getValue('udf') /></code><br/>Then to call a function<code>&lt;cfoutput>#udf.getDateTime()#&lt;/cfoutput></code><br/><br>
             </section>
 
             <footer>
@@ -110,6 +110,11 @@ This has just came up on the <a href="http://lists.topica.com/lists/modelglue/re
 
           <aside class="col-md-3 col-12">
             <h4>Recent Posts</h4>
+            
+              <a href="/posts/2025/provisioning-onedrive-for-microsoft-365-users-before-first-login/" class="card-link link-underline-light">
+                Provisioning OneDrive for Microsoft365 Users Before First Login <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
             
               <a href="/posts/2025/fixing-alpinejs-template-rendering-issues-when-your-second-tag-isnt-showing/" class="card-link link-underline-light">
                 Fixing Alpine.js Template Rendering Issues When Your Second Tag Isn't Showing <i class="bi bi-box-arrow-up-right"></i>
@@ -143,11 +148,6 @@ This has just came up on the <a href="http://lists.topica.com/lists/modelglue/re
             
               <a href="/posts/2024/bluesky-now-has-over-10-million-users-and-i-was-number-56137/" class="card-link link-underline-light">
                 Bluesky now has over 10 million users, and I was #56,137! <i class="bi bi-box-arrow-up-right"></i>
-              </a>
-              <hr>
-            
-              <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">
-                Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i>
               </a>
               <hr>
             

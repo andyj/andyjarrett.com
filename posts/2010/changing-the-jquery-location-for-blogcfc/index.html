@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
-<link rel="stylesheet" href="/public/prismjs/prism.css">
+<link rel="stylesheet" href="/public/prismjs/prism.css?load=css">
   <script src="https://unpkg.com/htmx.org@2.0.2" integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ" crossorigin="anonymous"></script>
 
 </head>
@@ -78,7 +78,7 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-<p>Another title for this post could be adding a property to BlogCFC. Basically I wanted to leverage <a href="http://code.google.com/apis/ajaxlibs/">Googles ajax API</a>rather than use a local version of the jQuery library. There are a couple of reason for this such as distributed CDN delivery, better caching on the users machine etc,actually you might want to read <a href="http://ajaxian.com/archives/announcing-ajax-libraries-api-speed-up-your-ajax-apps-with-googles-infrastructure">this post</a>to understand why you would want to do this at all.</p><p>Back to adding a property.</p></more><ol><li>We're going to edit the blog.ini.cfm (settings) file in org/camden/blog and add the following<br/><code>#jQueryLocation=http://{Your Blog URL}/includes/jquery.min.jsjqueryLocation=https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js</code>The first line is there for redundancy incase you need to test something locally or you are on a closed system with no web access. The second lineis what we are insterested in for this post and points to Googles <a href="http://code.google.com/apis/ajaxlibs/">Ajax Library</a></li><li>In Blog.cfc in org/camden/blog add the following to (around) line 101. It should be obvious where its going<code><cfset instance.jquerylocation = variables.utils.configParam(variables.cfgFile, arguments.name, "jquerylocation")></code></li><li>Finally in your Layout.cfm under tags/ change:<code><script type="text/javascript" src="#application.rooturl#/includes/jquery.min.js"></script></code><p>to the following</p><code><script type="text/javascript" src="#application.blog.getProperty("jquerylocation")#"></script></code></li></ol><p>At this point we are pretty much done in terms of getting done what we set out to do. The following bit of code adds the new setting to the admin pagesso we can edit this in the future. What I explain next will add the jQuery location field to the settings.cfm in admin/</p><ol><li>Around line 91 the variable "keylist" is set. Add to the end "jqueryLocation"</li><li>Find in the form where the "blogurl" is set and underneath add the following<code><tr><td align="right">jQuery Location:</td><td><input type="text" name="jqueryLocation" value="#form.jqueryLocation#" class="txtField" maxlength="255"></td></tr></code></li><li>The final part is the validation rule. All I am doing is checking the value given is a valid URL. You could expand on this but for my purposesthis will do just fine. Look for &lt;cfif structKeyExists(form, "save")> which is the start of the validation, go down a few lines and among the otherrules add<code><cfif NOT reFind("https?://([-\\w\\.]+)+(:\\d+)?(/([\\w/_\\.]*(\\?\\S+)?)?)?", form.jqueryLocation)><cfset arrayAppend(errors, "Your jQuery location must be a valid URL.")></cfif></code></li></ol>Thats it, you're done now. Going to your settings and updating them will remove the commented out line we added in point one earlier but with a methodto easily edit the location this shouldn't be a problem now<br>
+<p>Another title for this post could be adding a property to BlogCFC. Basically I wanted to leverage <a href="http://code.google.com/apis/ajaxlibs/">Googles ajax API</a>rather than use a local version of the jQuery library. There are a couple of reason for this such as distributed CDN delivery, better caching on the users machine etc,actually you might want to read <a href="http://ajaxian.com/archives/announcing-ajax-libraries-api-speed-up-your-ajax-apps-with-googles-infrastructure">this post</a>to understand why you would want to do this at all.</p><p>Back to adding a property.</p></more><ol><li>We're going to edit the blog.ini.cfm (settings) file in org/camden/blog and add the following<br/><code>#jQueryLocation=http://{Your Blog URL}/includes/jquery.min.jsjqueryLocation=https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js</code>The first line is there for redundancy incase you need to test something locally or you are on a closed system with no web access. The second lineis what we are insterested in for this post and points to Googles <a href="http://code.google.com/apis/ajaxlibs/">Ajax Library</a></li><li>In Blog.cfc in org/camden/blog add the following to (around) line 101. It should be obvious where its going<code>&lt;cfset instance.jquerylocation = variables.utils.configParam(variables.cfgFile, arguments.name, "jquerylocation")></code></li><li>Finally in your Layout.cfm under tags/ change:<code><script type="text/javascript" src="#application.rooturl#/includes/jquery.min.js"></script></code><p>to the following</p><code><script type="text/javascript" src="#application.blog.getProperty("jquerylocation")#"></script></code></li></ol><p>At this point we are pretty much done in terms of getting done what we set out to do. The following bit of code adds the new setting to the admin pagesso we can edit this in the future. What I explain next will add the jQuery location field to the settings.cfm in admin/</p><ol><li>Around line 91 the variable "keylist" is set. Add to the end "jqueryLocation"</li><li>Find in the form where the "blogurl" is set and underneath add the following<code><tr><td align="right">jQuery Location:</td><td><input type="text" name="jqueryLocation" value="#form.jqueryLocation#" class="txtField" maxlength="255"></td></tr></code></li><li>The final part is the validation rule. All I am doing is checking the value given is a valid URL. You could expand on this but for my purposesthis will do just fine. Look for &lt;cfif structKeyExists(form, "save")> which is the start of the validation, go down a few lines and among the otherrules add<code>&lt;cfif NOT reFind("https?://([-\\w\\.]+)+(:\\d+)?(/([\\w/_\\.]*(\\?\\S+)?)?)?", form.jqueryLocation)>&lt;cfset arrayAppend(errors, "Your jQuery location must be a valid URL.")>&lt;/cfif></code></li></ol>Thats it, you're done now. Going to your settings and updating them will remove the commented out line we added in point one earlier but with a methodto easily edit the location this shouldn't be a problem now<br>
             </section>
 
             <footer>
@@ -110,6 +110,11 @@
 
           <aside class="col-md-3 col-12">
             <h4>Recent Posts</h4>
+            
+              <a href="/posts/2025/provisioning-onedrive-for-microsoft-365-users-before-first-login/" class="card-link link-underline-light">
+                Provisioning OneDrive for Microsoft365 Users Before First Login <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
             
               <a href="/posts/2025/fixing-alpinejs-template-rendering-issues-when-your-second-tag-isnt-showing/" class="card-link link-underline-light">
                 Fixing Alpine.js Template Rendering Issues When Your Second Tag Isn't Showing <i class="bi bi-box-arrow-up-right"></i>
@@ -143,11 +148,6 @@
             
               <a href="/posts/2024/bluesky-now-has-over-10-million-users-and-i-was-number-56137/" class="card-link link-underline-light">
                 Bluesky now has over 10 million users, and I was #56,137! <i class="bi bi-box-arrow-up-right"></i>
-              </a>
-              <hr>
-            
-              <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">
-                Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i>
               </a>
               <hr>
             

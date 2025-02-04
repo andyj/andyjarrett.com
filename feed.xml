@@ -7,67 +7,6 @@
     <language>en</language>
     <atom:link href="https://www.andyjarrett.com//feed.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>NGINX redirect loops with SSL and CloudFlare</title>
-      <link>https://www.andyjarrett.com/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/</link>
-      <description><![CDATA[
-&lt;div class=&quot;image-container my-2&quot;&gt;
-  &lt;img src=&quot;https://www.andyjarrett.com/public/blogimage/chuttersnap-9AqIdzEc9pY-unsplash.jpg&quot; alt=&quot;Clouds&quot; class=&quot;img-fluid&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;text-end&quot;&gt;
-  &lt;sup&gt;
-    &lt;cite&gt;Photo by &lt;a href=&quot;https://unsplash.com/@chuttersnap?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;CHUTTERSNAP&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/blue-clouds-under-white-sky-9AqIdzEc9pY?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;&lt;/cite&gt;
-  &lt;/sup&gt;
-&lt;/div&gt;
-
-I&#39;ve been having trouble with my andyjarrett.com domain (though not my .co.uk one?) and redirection issues. Sometimes it would affect the browser, sometimes it wouldn&#39;t. Well last night was the last time its happening. So this is there I was
-
-&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;curl https://www.andyjarrett.com
-&amp;lt;html&gt;
-&amp;lt;head&gt;&amp;lt;title&gt;307 Temporary Redirect&amp;lt;/title&gt;&amp;lt;/head&gt;
-&amp;lt;body&gt;
-&amp;lt;center&gt;&amp;lt;h1&gt;307 Temporary Redirect&amp;lt;/h1&gt;&amp;lt;/center&gt;
-&amp;lt;hr&gt;&amp;lt;center&gt;nginx/1.18.0 (Ubuntu)&amp;lt;/center&gt;
-&amp;lt;/body&gt;
-&amp;lt;/html&gt; &lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;When I dived deeper in to it with &lt;code&gt;curl -L https://www.andyjarrett.com&lt;/code&gt; I got this&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;curl: (47) Maximum (50) redirects followed&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Didn&#39;t really help, so next on to the logs &lt;code&gt;sudo tail -f /var/log/nginx/error.log&lt;/code&gt; which didn&#39;t tell me much but did highlight headers like &lt;code&gt;CF-RAY&lt;/code&gt;, &lt;code&gt;CF-Visitor&lt;/code&gt;, and &lt;code&gt;CDN-Loop&lt;/code&gt;. Now I&#39;m thinking Cloudflare might be the cause of the redirection loop, especially if there&#39;s a mismatch between how Cloudflare is configured to handle SSL and how my server is handling it. Finally I got to CloudFlare &gt; Domain (andyjarrett.com) &gt; SSL/TLS &gt; Overview and &quot;SSL/TLS encryption&quot;. &lt;/p&gt;
-
-&lt;div class=&quot;alert alert-success&quot;&gt;
-&lt;strong&gt;Solution: Ensure that Cloudflare is set to &quot;Full&quot; or &quot;Full (Strict)&quot; mode for SSL.&lt;/strong&gt;
-&lt;/div&gt;
-
-&lt;p class=&quot;text-center&quot;&gt;
-  &lt;img src=&quot;https://www.andyjarrett.com/public/img/nginx-redirect-loops-with-ssl-and-cloudflare.png&quot; /&gt;
-&lt;/p&gt;
-&lt;p&gt;
-  &lt;strong&gt;Why?&lt;/strong&gt; Mine was originall set as &quot;Flexible,&quot; causing Cloudflare to make a HTTP requests to my server and causing the loop.
-  From what I&#39;ve learnt
-&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;My Nginx server is configured to redirect all HTTP requests to HTTPS (i.e., redirect port 80 traffic to port 443).&lt;/li&gt;
-  &lt;li&gt;When Cloudflare operates in Flexible mode, it connects to my server via HTTP (port 80), because it assumes the server doesn&#39;t support HTTPS.&lt;/li&gt;
-  &lt;li&gt;When my server sees this incoming HTTP request, it triggers the redirection to HTTPS.&lt;/li&gt;
-  &lt;li&gt;Cloudflare receives the redirect response and tries to establish an HTTPS connection with my server again, but still over HTTP due to &quot;Flexible&quot; mode.&lt;/li&gt;
-  &lt;li&gt;This creates a loop: Cloudflare keeps making HTTP requests to my server, and my server keeps redirecting them to HTTPS.&lt;/li&gt;
-&lt;/ol&gt;
-
-
-
-
-]]></description>
-      <pubDate>Wed, 21 Aug 2024 10:30:00 +0000</pubDate>
-      <dc:creator>Andy Jarrett</dc:creator>
-      <guid>https://www.andyjarrett.com/posts/2024/nginx-redirect-loops-with-ssl-and-cloudflare/</guid>
-      <enclosure url="https://www.andyjarrett.com/public/blogimage/chuttersnap-9AqIdzEc9pY-unsplash.jpg" type="image/jpeg" />
-      <category>posts, nginx, cloudflare, loop, redirect, ssl</category>
-      <author>Andy Jarrett &lt;email@example.com&gt;</author>
-    </item>
-    <item>
       <title>How to Instantly Index Your Website with IndexNow Using a Bash Script</title>
       <link>https://www.andyjarrett.com/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/</link>
       <description><![CDATA[
@@ -930,6 +869,98 @@ svrjs:
       <guid>https://www.andyjarrett.com/posts/2025/fixing-alpinejs-template-rendering-issues-when-your-second-tag-isnt-showing/</guid>
       <enclosure url="https://www.andyjarrett.com/public/blogimage/ales-krivec-7wQsXq_HKJo-unsplash.jpg" type="image/jpeg" />
       <category>posts, javascript, alpinejs, templates, frontend, web development</category>
+      <author>Andy Jarrett &lt;email@example.com&gt;</author>
+    </item>
+    <item>
+      <title>Provisioning OneDrive for Microsoft365 Users Before First Login</title>
+      <link>https://www.andyjarrett.com/posts/2025/provisioning-onedrive-for-microsoft-365-users-before-first-login/</link>
+      <description><![CDATA[
+&lt;div class=&quot;image-container my-2&quot;&gt;
+  &lt;img src=&quot;https://www.andyjarrett.com/public/blogimage/appshunter-io-aFDdAddufcY-unsplash.jpg&quot; alt=&quot;OneDrive Automation&quot; class=&quot;img-fluid&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;text-end&quot;&gt;
+  &lt;sup&gt;
+    &lt;cite&gt;Photo by &lt;a href=&quot;https://unsplash.com/@appshunter?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;appshunter.io&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/a-close-up-of-a-cell-phone-on-a-table-aFDdAddufcY?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;&lt;/cite&gt;
+  &lt;/sup&gt;
+&lt;/div&gt;
+
+&lt;h2&gt;Why Pre-Provision OneDrive?&lt;/h2&gt;
+&lt;p&gt;By default, OneDrive accounts for Microsoft 365 users are not created until they sign in for the first time. However, if you’re planning a migration from another cloud provider, such as Google Drive, you need to provision these OneDrive accounts in advance to ensure a smooth transition as we found out.&lt;/p&gt;
+
+&lt;p&gt;Below is a rough guide and &lt;a rel=&quot;nofollow&quot; target=&quot;_blank&quot; href=&quot;https://learn.microsoft.com/en-us/powershell/sharepoint/&quot;&gt;SharePoint PowerShell&lt;/a&gt; script to automate the process.&lt;/p&gt;
+
+&lt;h2&gt;Pre-Requisites&lt;/h2&gt;
+&lt;p&gt;Before running the script, you need to ensure that PowerShell allows execution of scripts. Run the following command in PowerShell (this cannot be part of the script itself):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-powershell&quot;&gt;Set-ExecutionPolicy -Scope Process -ExecutionPolicy Unrestricted&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This enables execution for the session without changing system-wide policies.&lt;/p&gt;
+
+&lt;h2&gt;The PowerShell Script&lt;/h2&gt;
+&lt;p&gt;Save the following script as &lt;code&gt;provision_onedrive.ps1&lt;/code&gt;. It connects to your SharePoint Online admin centre and checks whether OneDrive is provisioned for each user. If not, it requests its creation.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-powershell&quot;&gt;# Define the list of user emails
+$UserEmails = @(
+&quot;firstname1.lastname1@example.com&quot;,
+&quot;firstname2.lastname2@example.com&quot;,
+&quot;firstname3.lastname3@example.com&quot;
+)
+
+# Define SharePoint Online Admin URL (replace with your actual tenant)
+$TenantAdminURL = &quot;https://[your-tenant]-admin.sharepoint.com&quot;
+
+# Connect to SharePoint Online (if not already connected)
+Try {
+    Connect-SPOService -Url $TenantAdminURL -ErrorAction Stop
+    Write-Host &quot;Connected to SharePoint Online successfully.&quot;
+} Catch {
+    Write-Host &quot;Error connecting to SharePoint Online: $_&quot; -ForegroundColor Red
+    Exit
+}
+
+# Loop through each user email
+foreach ($email in $UserEmails) {
+    Write-Host &quot;Checking OneDrive status for $email...&quot;
+
+    # Check if OneDrive is already provisioned
+    $site = Get-SPOSite -IncludePersonalSite $true -Limit all | Where-Object { $_.Owner -eq $email } -ErrorAction SilentlyContinue
+
+    if ($site) {
+        Write-Host &quot;OneDrive already exists for $email&quot; -ForegroundColor Green
+    } else {
+        Write-Host &quot;Provisioning OneDrive for $email...&quot; -ForegroundColor Yellow
+        Request-SPOPersonalSite -UserEmails $email
+        Write-Host &quot;OneDrive provisioning requested for $email&quot; -ForegroundColor Cyan
+    }
+}
+
+Write-Host &quot;OneDrive provisioning script completed.&quot; -ForegroundColor Magenta&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2&gt;How It Works&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;The script defines a list of user emails.&lt;/li&gt;
+  &lt;li&gt;It connects to the SharePoint Online admin centre.&lt;/li&gt;
+  &lt;li&gt;It checks if OneDrive is already provisioned for each user.&lt;/li&gt;
+  &lt;li&gt;If OneDrive is missing, it requests its creation.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Running the Script&lt;/h2&gt;
+&lt;p&gt;To execute the script, open PowerShell as an administrator and run:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;language-powershell&quot;&gt;.&#92;provision_onedrive.ps1&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;You&#39;ll see output indicating whether each user&#39;s OneDrive already exists or has been requested for provisioning.&lt;/p&gt;
+
+&lt;h2&gt;Final Thoughts&lt;/h2&gt;
+&lt;p&gt;Pre-provisioning OneDrive ensures a seamless migration for users switching from Google Drive or other storage solutions. This automation removes delays and guarantees that user drives are ready before they even log in.&lt;/p&gt;
+
+&lt;p&gt;Let me know in the comments if you have any questions or if you’d like additional automation enhancements!&lt;/p&gt;
+]]></description>
+      <pubDate>Tue, 04 Feb 2025 00:00:00 +0000</pubDate>
+      <dc:creator>Andy Jarrett</dc:creator>
+      <guid>https://www.andyjarrett.com/posts/2025/provisioning-onedrive-for-microsoft-365-users-before-first-login/</guid>
+      <enclosure url="https://www.andyjarrett.com/public/blogimage/appshunter-io-aFDdAddufcY-unsplash.jpg" type="image/jpeg" />
+      <category>posts, PowerShell, OneDrive, Microsoft 365, Automation</category>
       <author>Andy Jarrett &lt;email@example.com&gt;</author>
     </item>
     <image>

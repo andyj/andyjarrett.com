@@ -5,12 +5,12 @@
 <meta name="description" content="Andy Jarrett // Code. Develop. Create.">
 <meta name="author" content="Andy Jarrett">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>reReplace or replace that is the question</title>
+<title>reReplace or replace: That is the Question</title>
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="reReplace or replace that is the question">
+<meta name="twitter:title" content="reReplace or replace: That is the Question">
 <meta name="twitter:description" content="Go to AndyJarrett.com for more">
 <meta name="twitter:creator" content="@andyj" />
-<meta property="og:title" content="reReplace or replace that is the question">
+<meta property="og:title" content="reReplace or replace: That is the Question">
 <meta property="og:description" content="Go to AndyJarrett.com for more">
 <meta property="og:image" content="https://www.andyjarrett.com/public/img/hero.og.image">
 <meta property="og:image:width" content="1200">
@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
-<link rel="stylesheet" href="/public/prismjs/prism.css">
+<link rel="stylesheet" href="/public/prismjs/prism.css?load=css">
   <script src="https://unpkg.com/htmx.org@2.0.2" integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ" crossorigin="anonymous"></script>
 
 </head>
@@ -71,14 +71,111 @@
     <main>
       <article>
         <header>
-          <h1 class="mt-5 mb-5"><b>reReplace or replace that is the question</b></h1>
+          <h1 class="mt-5 mb-5"><b>reReplace or replace: That is the Question</b></h1>
         </header>
 
         <section class="row">
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-Well i had to play, these sort of things always have get my interests going. This starts in a post at<a href="http://groups.google.com/groups?dq=&hl=en&lr=&ie=UTF-8&oe=UTF-8&safe=off&threadm=qtVgb.64%24JG4.15698%40news.uswest.net&prev=/groups%3Fq%3Dalt.comp.lang.coldfusion%26ie%3DUTF-8%26oe%3DUTF-8%26hl%3Den">alt.comp.lang.coldfusion</a>where Drew asked - <i>"I'm trying to take this value 0.85 and turn it into 85, or 1.35 and turn that into 135."</i><br><br>There were a few answers but two revolved around using reReplace() & replace(), and it was these which prompted me to see which would be best for the job.Well the results we quite good, though i also tested on CF4.52 - now this was amazing. Ok, heres test 1:<br><cfset tickBegin = GetTickCount()><br><br><cfset a = "01234567.89"><br><br><cfloop from="1" to="100000" index="b"><br><cfset c = reReplace(a,'[^0-9]','','ALL')><br></cfloop><br><br><cfset tickEnd = GetTickCount()><br><cfset loopTime = tickEnd - tickBegin><br><br><cfoutput>#loopTime#</cfoutput><br><br>and heres test 2<br><br><cfset tickBegin = GetTickCount()><br><br><cfset a = "01234567.89"><br><br><cfset a = "01234567.89"><br><cfloop from="1" to="100000" index="b"><br><cfset c = replace(a,'.','','ALL')><br></cfloop><br><br><cfset tickEnd = GetTickCount()><br><cfset loopTime = tickEnd - tickBegin><br><br><cfoutput>#loopTime#</cfoutput><br><br><table cellpadding="3" cellspacing="0" border="0"><tr>  <td rowspan="2"> </td>  <td align="center" colspan="2"><b>Test 1</b></td> <td rowspan="5"> </td>  <td align="center" colspan="2"><b>Test 2</b></td></tr><tr>  <td align="center"><b>CF4.5</b></td>  <td align="center"><b>CFMX</b></td> <td align="center"><b>CF4.5</b></td>  <td align="center"><b>CFMX</b></td></tr><tr>  <td>1.</td> <td align="center">5939</td>  <td align="center" bgcolor="#ffecec">2223</td>  <td align="center">4627</td>  <td align="center" bgcolor="#ffecec">190</td></tr><tr>  <td>2.</td> <td align="center">5887</td>  <td align="center" bgcolor="#ffecec">2163</td>  <td align="center">4737</td>  <td align="center" bgcolor="#ffecec">200</td></tr><tr>  <td>3.</td> <td align="center">5908</td>  <td align="center" bgcolor="#ffecec">2153</td>  <td align="center">4817</td>  <td align="center" bgcolor="#ffecec">191</td></tr></table>First thing, WOW how did we work with CF4.5.<br>Anyway as you can see that by not using the regex engine the CFMX the times drop by roughly 100%.<br>
+<h1>reReplace or replace: That is the Question</h1>
+
+<p>I had to investigate this, as these sorts of performance comparisons always grab my interest. It all started with a post in 
+<a href="http://groups.google.com/groups?dq=&hl=en&lr=&ie=UTF-8&oe=UTF-8&safe=off&threadm=qtVgb.64%24JG4.15698%40news.uswest.net&prev=/groups%3Fq%3Dalt.comp.lang.coldfusion%26ie%3DUTF-8%26oe%3DUTF-8%26hl%3Den">
+    alt.comp.lang.coldfusion</a>, 
+where Drew asked: <i>"I'm trying to take this value 0.85 and turn it into 85, or 1.35 and turn that into 135."</i></p>
+
+<p>There were several suggestions, but two stood out: using <code>reReplace()</code> and <code>replace()</code>. These prompted me to test which one would perform better. The results were quite interesting, especially when tested on **ColdFusion 4.5**—and those were shocking! Below are the tests.</p>
+
+<h2>Test 1: Using <code>reReplace()</code></h2>
+
+<pre><code class="language-cfml">
+&lt;cfset tickBegin = GetTickCount()&gt;
+
+&lt;cfset a = "01234567.89"&gt;
+
+&lt;cfloop from="1" to="100000" index="b"&gt;
+    &lt;cfset c = reReplace(a,'[^0-9]','','ALL')&gt;
+&lt;/cfloop&gt;
+
+&lt;cfset tickEnd = GetTickCount()&gt;
+&lt;cfset loopTime = tickEnd - tickBegin&gt;
+
+&lt;cfoutput&gt;#loopTime#&lt;/cfoutput&gt;
+</code></pre>
+
+<h2>Test 2: Using <code>replace()</code></h2>
+
+<pre><code class="language-cfml">
+&lt;cfset tickBegin = GetTickCount()&gt;
+
+&lt;cfset a = "01234567.89"&gt;
+
+&lt;cfloop from="1" to="100000" index="b"&gt;
+    &lt;cfset c = replace(a,'.','','ALL')&gt;
+&lt;/cfloop&gt;
+
+&lt;cfset tickEnd = GetTickCount()&gt;
+&lt;cfset loopTime = tickEnd - tickBegin&gt;
+
+&lt;cfoutput&gt;#loopTime#&lt;/cfoutput&gt;
+</code></pre>
+
+<h2>Performance Comparison</h2>
+
+<table class="table table-bordered">
+  <thead class="table-light">
+    <tr>
+      <th></th>
+      <th colspan="2" class="text-center"><b>Test 1: reReplace()</b></th>
+      <th></th>
+      <th colspan="2" class="text-center"><b>Test 2: replace()</b></th>
+    </tr>
+    <tr>
+      <th>#</th>
+      <th class="text-center"><b>CF4.5</b></th>
+      <th class="text-center"><b>CFMX</b></th>
+      <th></th>
+      <th class="text-center"><b>CF4.5</b></th>
+      <th class="text-center"><b>CFMX</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1.</td>
+      <td class="text-center">5939</td>
+      <td class="text-center bg-danger text-white">2223</td>
+      <td></td>
+      <td class="text-center">4627</td>
+      <td class="text-center bg-danger text-white">190</td>
+    </tr>
+    <tr>
+      <td>2.</td>
+      <td class="text-center">5887</td>
+      <td class="text-center bg-danger text-white">2163</td>
+      <td></td>
+      <td class="text-center">4737</td>
+      <td class="text-center bg-danger text-white">200</td>
+    </tr>
+    <tr>
+      <td>3.</td>
+      <td class="text-center">5908</td>
+      <td class="text-center bg-danger text-white">2153</td>
+      <td></td>
+      <td class="text-center">4817</td>
+      <td class="text-center bg-danger text-white">191</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Conclusion</h2>
+
+<p>First thing—WOW! How did we ever manage to work efficiently with CF4.5?</p>
+
+<p>As you can see, by avoiding the regex engine, the execution times in **ColdFusion MX** drop significantly—by almost **100%**. This proves that for simple string replacements, avoiding regex (using <code>replace()</code>) can provide massive performance improvements.</p>
+
+<p>Would love to hear your thoughts—let me know if you've found similar results in your own testing!</p>
+
             </section>
 
             <footer>
@@ -110,6 +207,11 @@ Well i had to play, these sort of things always have get my interests going. Thi
 
           <aside class="col-md-3 col-12">
             <h4>Recent Posts</h4>
+            
+              <a href="/posts/2025/provisioning-onedrive-for-microsoft-365-users-before-first-login/" class="card-link link-underline-light">
+                Provisioning OneDrive for Microsoft365 Users Before First Login <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
             
               <a href="/posts/2025/fixing-alpinejs-template-rendering-issues-when-your-second-tag-isnt-showing/" class="card-link link-underline-light">
                 Fixing Alpine.js Template Rendering Issues When Your Second Tag Isn't Showing <i class="bi bi-box-arrow-up-right"></i>
@@ -143,11 +245,6 @@ Well i had to play, these sort of things always have get my interests going. Thi
             
               <a href="/posts/2024/bluesky-now-has-over-10-million-users-and-i-was-number-56137/" class="card-link link-underline-light">
                 Bluesky now has over 10 million users, and I was #56,137! <i class="bi bi-box-arrow-up-right"></i>
-              </a>
-              <hr>
-            
-              <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">
-                Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i>
               </a>
               <hr>
             

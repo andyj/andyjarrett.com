@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
-<link rel="stylesheet" href="/public/prismjs/prism.css">
+<link rel="stylesheet" href="/public/prismjs/prism.css?load=css">
   <script src="https://unpkg.com/htmx.org@2.0.2" integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ" crossorigin="anonymous"></script>
 
 </head>
@@ -78,7 +78,7 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-I've been working on a app with a couple of forms and wanted to break the validation rules into different group of rules e.g.<br><br>1. Rules for address<br>2. Rules for personal information<br>3. Rules specific per form.<br><br>What this allows me to do is is per validation call in the controller just use the validators i need.<br><br>How I am doing it:<br><br>1. Create a controller called validator.cfc<br>2. Create you validation.cfc's i.e.<br><ol> <li>validator_Personal.cfc</li> <li>validator_address.cfc</li>  <li>validator_other.cfc</li></ol>Your validation cfc's should look like this:<code><cfcomponent> <cffunction name="validate" returnType="ModelGlue.Util.ValidationErrorCollection">    <cfargument name="formFields">    <cfset var val = createObject("component", "ModelGlue.Util.ValidationErrorCollection").init() />    <cfif structKeyExists(formFields, "address1") AND not len(trim(formFields.address1))>     <cfset val.addError("address1", "Please enter the first line of your address.") />    </cfif> </cffunction></cfcomponent></code> <br/><br/>3. In validator controller create a listener which has calls the validator objects e.g.<br/><br/><code><cffunction name="validateDetails" access="Public" returnType="ModelGlue.Core.Event" output="false" hint="I am an event handler.">  <cfargument name="event" type="ModelGlue.Core.Event" required="true">     <!--- These are added here for clarity. Usually they should go in the init() ---> <cfset variables.validatePersonal = createObject("component", "model.validator_Personal") > <cfset variables.validateAddress = createObject("component", "model.validator_address")>    <!--- Validate the values --->  <cfset valReq = variables.validatePersonal.validate(arguments.event.getAllValues()) />  <cfset valAddress = variables.validateAddress.validate(arguments.event.getAllValues()) />       <!--- here we bring to the sets of rules together into on value---> <cfset valReq.merge(valAddress) />    <!--- Now we set the result --->  <cfif valReq.hasErrors()>   <cfset arguments.event.addResult("inValid") />      <cfset arguments.event.setValue("validation", valReq.getErrors()) />  <cfelse>    <cfset arguments.event.addResult("valid") />  </cfif>  <cfreturn arguments.event /></cffunction></code><br/><br/>4. To finish it off, in your form you need the usual viewState calls<br/><br/><code><!--- Gets any validation errors ---><cfset val = viewState.getValue("validation", structNew()) /></code><br>
+I've been working on a app with a couple of forms and wanted to break the validation rules into different group of rules e.g.<br><br>1. Rules for address<br>2. Rules for personal information<br>3. Rules specific per form.<br><br>What this allows me to do is is per validation call in the controller just use the validators i need.<br><br>How I am doing it:<br><br>1. Create a controller called validator.cfc<br>2. Create you validation.cfc's i.e.<br><ol> <li>validator_Personal.cfc</li> <li>validator_address.cfc</li>  <li>validator_other.cfc</li></ol>Your validation cfc's should look like this:<code>&lt;cfcomponent> &lt;cffunction name="validate" returnType="ModelGlue.Util.ValidationErrorCollection">    &lt;cfargument name="formFields">    &lt;cfset var val = createObject("component", "ModelGlue.Util.ValidationErrorCollection").init() />    &lt;cfif structKeyExists(formFields, "address1") AND not len(trim(formFields.address1))>     &lt;cfset val.addError("address1", "Please enter the first line of your address.") />    &lt;/cfif> &lt;/cffunction>&lt;/cfcomponent></code> <br/><br/>3. In validator controller create a listener which has calls the validator objects e.g.<br/><br/><code>&lt;cffunction name="validateDetails" access="Public" returnType="ModelGlue.Core.Event" output="false" hint="I am an event handler.">  &lt;cfargument name="event" type="ModelGlue.Core.Event" required="true">     <!--- These are added here for clarity. Usually they should go in the init() ---> &lt;cfset variables.validatePersonal = createObject("component", "model.validator_Personal") > &lt;cfset variables.validateAddress = createObject("component", "model.validator_address")>    <!--- Validate the values --->  &lt;cfset valReq = variables.validatePersonal.validate(arguments.event.getAllValues()) />  &lt;cfset valAddress = variables.validateAddress.validate(arguments.event.getAllValues()) />       <!--- here we bring to the sets of rules together into on value---> &lt;cfset valReq.merge(valAddress) />    <!--- Now we set the result --->  &lt;cfif valReq.hasErrors()>   &lt;cfset arguments.event.addResult("inValid") />      &lt;cfset arguments.event.setValue("validation", valReq.getErrors()) />  &lt;cfelse>    &lt;cfset arguments.event.addResult("valid") />  &lt;/cfif>  &lt;cfreturn arguments.event />&lt;/cffunction></code><br/><br/>4. To finish it off, in your form you need the usual viewState calls<br/><br/><code><!--- Gets any validation errors --->&lt;cfset val = viewState.getValue("validation", structNew()) /></code><br>
             </section>
 
             <footer>
@@ -110,6 +110,11 @@ I've been working on a app with a couple of forms and wanted to break the valida
 
           <aside class="col-md-3 col-12">
             <h4>Recent Posts</h4>
+            
+              <a href="/posts/2025/provisioning-onedrive-for-microsoft-365-users-before-first-login/" class="card-link link-underline-light">
+                Provisioning OneDrive for Microsoft365 Users Before First Login <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
             
               <a href="/posts/2025/fixing-alpinejs-template-rendering-issues-when-your-second-tag-isnt-showing/" class="card-link link-underline-light">
                 Fixing Alpine.js Template Rendering Issues When Your Second Tag Isn't Showing <i class="bi bi-box-arrow-up-right"></i>
@@ -143,11 +148,6 @@ I've been working on a app with a couple of forms and wanted to break the valida
             
               <a href="/posts/2024/bluesky-now-has-over-10-million-users-and-i-was-number-56137/" class="card-link link-underline-light">
                 Bluesky now has over 10 million users, and I was #56,137! <i class="bi bi-box-arrow-up-right"></i>
-              </a>
-              <hr>
-            
-              <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">
-                Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i>
               </a>
               <hr>
             

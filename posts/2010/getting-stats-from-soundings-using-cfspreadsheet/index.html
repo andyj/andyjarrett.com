@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
-<link rel="stylesheet" href="/public/prismjs/prism.css">
+<link rel="stylesheet" href="/public/prismjs/prism.css?load=css">
   <script src="https://unpkg.com/htmx.org@2.0.2" integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ" crossorigin="anonymous"></script>
 
 </head>
@@ -78,7 +78,7 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-<p>I'm hoping to post this over on <a href="http://soundings.riaforge.org/">soundings.riaforge.org</a> later but I am having trouble with the site. Plus also thought good to throw out here.</p><p>Below I have hacked at the Sounding app by Ray (ColdFusion Jedi) Camdon to use cfspreadsheet to create the Excel stat sheet. All this code I have put in the IF block stating "form.format is 'excel'". It requires the query "getSurveyTakers" which should be just before it.</p><code><!--- cfspreadsheet works off a query so that is what we are going to create ---><!--- Query cols ---><cfset colList = ['Survey_Taker_ID', 'Survey_Taken' ]/><cfloop query="questions">  <cfset colName = reReplace( question, "[^A-Za-z0-9 _]", "", "all" ) />  <cfset colName = reReplace( colName, "(amp)| ", "_", "all" ) />       <cfset arrayAppend(colList, colName ) /></cfloop><cfset reportQry = queryNew( arrayToList(colList) )/><cfset QueryAddRow(reportQry, getSurveyTakers.recordCount +1)> <!--- Create the header row in the query as cdSpreadsheet doesn't do this ---><cfset QuerySetCell(reportQry, colList[1], "Survey Taker ID", 1)> <cfset QuerySetCell(reportQry, colList[2], "Survey Taken", 1 )><cfloop query="questions"> <cfset thisRow = questions.currentRow+2 />  <cfset QuerySetCell(reportQry, colList[thisRow], questions.question, 1)> </cfloop>  <!--- Start adding the data to our new query ---><cfloop query="getSurveyTakers"> <cfset answerRow = getSurveyTakers.currentRow + 1>  <cfset oid = ownerid>     <cfset QuerySetCell(reportQry, colList[1], ownerid, answerRow)>   <cfset QuerySetCell(reportQry, colList[2], "#dateFormat(completed,"mm/dd/yy")# #timeFormat(completed,"h:mm tt")#", answerRow )>   <cfloop query="questions">    <cfset i = questions.currentRow+2 />    <cfset QuerySetCell(reportQry, colList[i], htmlEditFormat(application.survey.getAnswerResult(id,oid)), answerRow )>   </cfloop>     </cfloop> <cfscript>  //Use an absolute path for the files. --->  theFile = expandPath( "report.xls" );   //Create empty ColdFusion spreadsheet objects. --->   theSheet = SpreadsheetNew("CourseData");    //Populate  object with a query. --->   SpreadsheetAddRows(theSheet,reportQry); </cfscript>         <!--- Write the file to the disk ---><cfspreadsheet action="write" filename="#theFile#" name="theSheet" sheetname="courses" overwrite=true> <!--- Throw it at the user (and hope it sticks) ---><cfheader name="content-disposition" value="attachment;filename=report.xls"><cfcontent type="application/msexcel" file="#theFile#" deletefile="true" reset="true">      <cfabort></code><p>There might be more efficient (read: quicker) ways of doing the above so always happy for feedback!</p><br>
+<p>I'm hoping to post this over on <a href="http://soundings.riaforge.org/">soundings.riaforge.org</a> later but I am having trouble with the site. Plus also thought good to throw out here.</p><p>Below I have hacked at the Sounding app by Ray (ColdFusion Jedi) Camdon to use cfspreadsheet to create the Excel stat sheet. All this code I have put in the IF block stating "form.format is 'excel'". It requires the query "getSurveyTakers" which should be just before it.</p><code><!--- cfspreadsheet works off a query so that is what we are going to create ---><!--- Query cols --->&lt;cfset colList = ['Survey_Taker_ID', 'Survey_Taken' ]/>&lt;cfloop query="questions">  &lt;cfset colName = reReplace( question, "[^A-Za-z0-9 _]", "", "all" ) />  &lt;cfset colName = reReplace( colName, "(amp)| ", "_", "all" ) />       &lt;cfset arrayAppend(colList, colName ) />&lt;/cfloop>&lt;cfset reportQry = queryNew( arrayToList(colList) )/>&lt;cfset QueryAddRow(reportQry, getSurveyTakers.recordCount +1)> <!--- Create the header row in the query as cdSpreadsheet doesn't do this --->&lt;cfset QuerySetCell(reportQry, colList[1], "Survey Taker ID", 1)> &lt;cfset QuerySetCell(reportQry, colList[2], "Survey Taken", 1 )>&lt;cfloop query="questions"> &lt;cfset thisRow = questions.currentRow+2 />  &lt;cfset QuerySetCell(reportQry, colList[thisRow], questions.question, 1)> &lt;/cfloop>  <!--- Start adding the data to our new query --->&lt;cfloop query="getSurveyTakers"> &lt;cfset answerRow = getSurveyTakers.currentRow + 1>  &lt;cfset oid = ownerid>     &lt;cfset QuerySetCell(reportQry, colList[1], ownerid, answerRow)>   &lt;cfset QuerySetCell(reportQry, colList[2], "#dateFormat(completed,"mm/dd/yy")# #timeFormat(completed,"h:mm tt")#", answerRow )>   &lt;cfloop query="questions">    &lt;cfset i = questions.currentRow+2 />    &lt;cfset QuerySetCell(reportQry, colList[i], htmlEditFormat(application.survey.getAnswerResult(id,oid)), answerRow )>   &lt;/cfloop>     &lt;/cfloop> &lt;cfscript>  //Use an absolute path for the files. --->  theFile = expandPath( "report.xls" );   //Create empty ColdFusion spreadsheet objects. --->   theSheet = SpreadsheetNew("CourseData");    //Populate  object with a query. --->   SpreadsheetAddRows(theSheet,reportQry); &lt;/cfscript>         <!--- Write the file to the disk --->&lt;cfspreadsheet action="write" filename="#theFile#" name="theSheet" sheetname="courses" overwrite=true> <!--- Throw it at the user (and hope it sticks) --->&lt;cfheader name="content-disposition" value="attachment;filename=report.xls">&lt;cfcontent type="application/msexcel" file="#theFile#" deletefile="true" reset="true">      &lt;cfabort></code><p>There might be more efficient (read: quicker) ways of doing the above so always happy for feedback!</p><br>
             </section>
 
             <footer>
@@ -110,6 +110,11 @@
 
           <aside class="col-md-3 col-12">
             <h4>Recent Posts</h4>
+            
+              <a href="/posts/2025/provisioning-onedrive-for-microsoft-365-users-before-first-login/" class="card-link link-underline-light">
+                Provisioning OneDrive for Microsoft365 Users Before First Login <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
             
               <a href="/posts/2025/fixing-alpinejs-template-rendering-issues-when-your-second-tag-isnt-showing/" class="card-link link-underline-light">
                 Fixing Alpine.js Template Rendering Issues When Your Second Tag Isn't Showing <i class="bi bi-box-arrow-up-right"></i>
@@ -143,11 +148,6 @@
             
               <a href="/posts/2024/bluesky-now-has-over-10-million-users-and-i-was-number-56137/" class="card-link link-underline-light">
                 Bluesky now has over 10 million users, and I was #56,137! <i class="bi bi-box-arrow-up-right"></i>
-              </a>
-              <hr>
-            
-              <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">
-                Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i>
               </a>
               <hr>
             

@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
-<link rel="stylesheet" href="/public/prismjs/prism.css">
+<link rel="stylesheet" href="/public/prismjs/prism.css?load=css">
   <script src="https://unpkg.com/htmx.org@2.0.2" integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ" crossorigin="anonymous"></script>
 
 </head>
@@ -78,7 +78,7 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-Unlike <a href="http://www.fusebox.org">Fusebox</a> there is not a global init variable setting file With <a href="http://www.model-glue.com/">MG</a>. If you do need to set up some global vars the way i'm doing this (and seems to be the norm nearly) is:<ol><li>Set up a cfc called /config/beans/global.cfc</li><li>Create an xml file at /config/beans/global.xml - (for my current site this covered about 5-8 smallstructures/arrays/values that is used through out the site)</li><li>In the controller add the following line -<br/> <span style="color:maroon">&lt;cfset variables.global = GetModelGlue().GetConfigBean("global.xml") /></span></li><li>and on request start - <br/><span style="color:maroon">&lt;cfset arguments.event.setValue("global", variables.global) /></span></li></ol><br/>Now on any page to get the variable you want you can use<code><cfset customerTitles = viewState.getValue('global').getTitles() /></code><br/>I've seen no documentation on this, but have posted to the Topica List. <a href="http://corfield.org/blog/index.cfm?">Sean Corfield</a> has another method using a new controller you can find it on the <a href="http://lists.topica.com/lists/modelglue/read/message.html?mid=1719702090&sort=d&start=1479">Topica lists</a> also see the GGCC examples (7/8/9) in his frameworks Pod.<br/><br/><br/>For more information on Config beans in MG see :<br/><a href="http://www.model-glue.com/index.cfm?mode=entry&entry=1EA76969-E081-2BAC-695D63CAE46CD2A6">Eat Your Beans: ConfigBeans in Model-Glue</a><br>
+Unlike <a href="http://www.fusebox.org">Fusebox</a> there is not a global init variable setting file With <a href="http://www.model-glue.com/">MG</a>. If you do need to set up some global vars the way i'm doing this (and seems to be the norm nearly) is:<ol><li>Set up a cfc called /config/beans/global.cfc</li><li>Create an xml file at /config/beans/global.xml - (for my current site this covered about 5-8 smallstructures/arrays/values that is used through out the site)</li><li>In the controller add the following line -<br/> <span style="color:maroon">&lt;cfset variables.global = GetModelGlue().GetConfigBean("global.xml") /></span></li><li>and on request start - <br/><span style="color:maroon">&lt;cfset arguments.event.setValue("global", variables.global) /></span></li></ol><br/>Now on any page to get the variable you want you can use<code>&lt;cfset customerTitles = viewState.getValue('global').getTitles() /></code><br/>I've seen no documentation on this, but have posted to the Topica List. <a href="http://corfield.org/blog/index.cfm?">Sean Corfield</a> has another method using a new controller you can find it on the <a href="http://lists.topica.com/lists/modelglue/read/message.html?mid=1719702090&sort=d&start=1479">Topica lists</a> also see the GGCC examples (7/8/9) in his frameworks Pod.<br/><br/><br/>For more information on Config beans in MG see :<br/><a href="http://www.model-glue.com/index.cfm?mode=entry&entry=1EA76969-E081-2BAC-695D63CAE46CD2A6">Eat Your Beans: ConfigBeans in Model-Glue</a><br>
             </section>
 
             <footer>
@@ -110,6 +110,11 @@ Unlike <a href="http://www.fusebox.org">Fusebox</a> there is not a global init v
 
           <aside class="col-md-3 col-12">
             <h4>Recent Posts</h4>
+            
+              <a href="/posts/2025/provisioning-onedrive-for-microsoft-365-users-before-first-login/" class="card-link link-underline-light">
+                Provisioning OneDrive for Microsoft365 Users Before First Login <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
             
               <a href="/posts/2025/fixing-alpinejs-template-rendering-issues-when-your-second-tag-isnt-showing/" class="card-link link-underline-light">
                 Fixing Alpine.js Template Rendering Issues When Your Second Tag Isn't Showing <i class="bi bi-box-arrow-up-right"></i>
@@ -143,11 +148,6 @@ Unlike <a href="http://www.fusebox.org">Fusebox</a> there is not a global init v
             
               <a href="/posts/2024/bluesky-now-has-over-10-million-users-and-i-was-number-56137/" class="card-link link-underline-light">
                 Bluesky now has over 10 million users, and I was #56,137! <i class="bi bi-box-arrow-up-right"></i>
-              </a>
-              <hr>
-            
-              <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">
-                Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i>
               </a>
               <hr>
             

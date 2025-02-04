@@ -1,4 +1,111 @@
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="description" content="Learn how to quickly set up and run SVR.JS using Docker Compose without installing additional dependencies."><meta name="author" content="Andy Jarrett"><meta name="viewport" content="width=device-width,initial-scale=1"><title>How to Run SVR.JS with Docker Compose</title><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="How to Run SVR.JS with Docker Compose"><meta name="twitter:description" content="Learn how to quickly set up and run SVR.JS using Docker Compose without installing additional dependencies."><meta name="twitter:creator" content="@andyj"><meta property="og:title" content="How to Run SVR.JS with Docker Compose"><meta property="og:description" content="Learn how to quickly set up and run SVR.JS using Docker Compose without installing additional dependencies."><meta property="og:image" content="https://www.andyjarrett.com/public/blogimage/florian-olivo-4hbJ-eymZ1o-unsplash.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><link rel="canonical" href="https://www.andyjarrett.com/posts/2024/how-to-run-svrjs-with-docker-compose/"><link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon"><link rel="alternate" type="application/rss+xml" title="RSS" href="https://www.andyjarrett.com//feed.xml"><link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"><link rel="sitemap" href="https://www.andyjarrett.com//sitemap.xml" type="application/xml"><link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"><link rel="stylesheet" href="/public/css/style.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css"><link rel="stylesheet" href="/public/prismjs/prism.css"><script src="https://unpkg.com/htmx.org@2.0.2" integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ" crossorigin="anonymous"></script></head><body><div class="container border-bottom pb-2"><header class="d-flex flex-wrap justify-content-center"><a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none"><span class="fs-2">Andy Jarrett // <span class="lead">Code. Develop. Create.</span></span></a><ul class="nav nav-pills"><li class="nav-item p-2"><a href="/" class="btn btn-outline-primary rounded-circle p-3 lh-1"><i class="bi bi-house fs-5"></i> <span class="visually-hidden">Dismiss</span></a></li><li class="nav-item p-2"><a href="/feed.xml" class="btn btn-outline-primary rounded-circle p-3 lh-1"><i class="bi bi-rss fs-5"></i></a></li><li class="nav-item p-2"><a href="/linktree" class="btn btn-outline-primary rounded-circle p-3 lh-1" title="Linktree for Andy Jarrett"><i class="bi bi-tree fs-5"></i></a></li><li class="nav-item p-2"><a href="https://buymeacoffee.com/mailgw" class="btn btn-outline-primary rounded-circle p-3 lh-1"><i class="bi bi-cup-hot-fill fs-5"></i></a></li></ul></header></div><div class="container"><div class="my-1 text-center text-primary" role="alert"><a class="text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky</a></div><main><article><header><h1 class="mt-5 mb-5"><b>How to Run SVR.JS with Docker Compose</b></h1></header><section class="row"><div class="col-md-9 col-12"><section class="mw fw-lighter fs-5"><div class="image-container my-2"><img src="/public/blogimage/florian-olivo-4hbJ-eymZ1o-unsplash.jpg" alt="Man running towards mountains" class="img-fluid"></div><div class="text-end"><sup><cite>Photo by <a rel="noopener noreferrer" href="https://unsplash.com/@florianolv?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Florian Olivo</a> on <a rel="noopener noreferrer" href="https://unsplash.com/photos/lines-of-html-codes-4hbJ-eymZ1o?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a></cite></sup></div><p><strong>TL;DR:</strong> Project code here: <a href="https://github.com/andyj/svrjs-with-docker" rel="noopener noreferrer" target="_blank">github.com/andyj/svrjs-with-docker</a></p><h1>Why SVR.JS?</h1><p><a href="https://svrjs.org/" rel="noopener noreferrer">SVR.JS</a> is a lightweight and efficient web server designed to serve static files effortlessly. It's great for scenarios where you need a quick and reliable solution to host static content without the overhead of traditional web servers.</p><p>By combining SVR.JS with Docker, you can eliminate installation dependencies and simplify deployment, making it an ideal choice for developers, testers, and small-scale projects.</p><h2>How to Set It Up</h2><h3>Step 1: Docker Compose Configuration</h3><pre><code class="language-bash">version: '3.9'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="description" content="Learn how to quickly set up and run SVR.JS using Docker Compose without installing additional dependencies.">
+<meta name="author" content="Andy Jarrett">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How to Run SVR.JS with Docker Compose</title>
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How to Run SVR.JS with Docker Compose">
+<meta name="twitter:description" content="Learn how to quickly set up and run SVR.JS using Docker Compose without installing additional dependencies.">
+<meta name="twitter:creator" content="@andyj" />
+<meta property="og:title" content="How to Run SVR.JS with Docker Compose">
+<meta property="og:description" content="Learn how to quickly set up and run SVR.JS using Docker Compose without installing additional dependencies.">
+<meta property="og:image" content="https://www.andyjarrett.com/public/blogimage/florian-olivo-4hbJ-eymZ1o-unsplash.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="canonical" href="https://www.andyjarrett.com/posts/2024/how-to-run-svrjs-with-docker-compose/">
+<link rel="icon" href="/public/img/AJ_ICON.png" type="image/x-icon">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://www.andyjarrett.com//feed.xml"/>
+<link rel="alternate" type="application/rss+xml" title="RSS" href="https://feeds.feedburner.com/andyj"/>
+<link rel="sitemap" href="https://www.andyjarrett.com//sitemap.xml" type="application/xml" />
+<link rel="stylesheet" href="https://bootswatch.com/5/materia/bootstrap.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="/public/css/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
+<link rel="stylesheet" href="/public/prismjs/prism.css?load=css">
+  <script src="https://unpkg.com/htmx.org@2.0.2" integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ" crossorigin="anonymous"></script>
+
+</head>
+<body>
+  <div class="container border-bottom pb-2">
+  <header class="d-flex flex-wrap justify-content-center">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+      <span class="fs-2">Andy Jarrett // <span class="lead">Code. Develop. Create.</span></span>
+    </a>
+    <ul class="nav nav-pills">
+      <li class="nav-item  p-2">
+        <a href="/" class="btn btn-outline-primary rounded-circle p-3 lh-1">
+          <i class="bi bi-house fs-5"></i>
+          <span class="visually-hidden">Dismiss</span>
+        </a>
+      </li>
+      <li class="nav-item  p-2">
+        <a href="/feed.xml" class="btn btn-outline-primary rounded-circle p-3 lh-1">
+          <i class="bi bi-rss fs-5"></i>
+        </a>
+      </li>
+      <li class="nav-item  p-2">
+        <a href="/linktree" class="btn btn-outline-primary rounded-circle p-3 lh-1" title="Linktree for Andy Jarrett">
+          <i class="bi bi-tree fs-5"></i>
+        </a>
+      </li>
+      <li class="nav-item  p-2">
+        <a href="https://buymeacoffee.com/mailgw" class="btn btn-outline-primary rounded-circle p-3 lh-1">
+          <i class="bi bi-cup-hot-fill fs-5"></i>
+        </a>
+      </li>
+    </ul>
+  </header>
+</div>  
+
+
+  <div class="container">
+    <div class="my-1 text-center text-primary" role="alert">
+      <a class="text-decoration-none badge text-bg-primary" href="https://bsky.app/profile/andyjarrett.com">
+        Find me and reach out on <i class="bi bi-cloud me-2"></i>BlueSky
+      </a>
+    </div>
+
+    <main>
+      <article>
+        <header>
+          <h1 class="mt-5 mb-5"><b>How to Run SVR.JS with Docker Compose</b></h1>
+        </header>
+
+        <section class="row">
+          <div class="col-md-9 col-12">
+            <section class="mw fw-lighter fs-5">
+              
+<div class="image-container my-2">
+  <img src="/public/blogimage/florian-olivo-4hbJ-eymZ1o-unsplash.jpg" alt="Man running towards mountains" class="img-fluid">
+</div>
+<div class="text-end">
+  <sup>
+    <cite>
+      Photo by <a rel="noopener noreferrer" href="https://unsplash.com/@florianolv?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Florian Olivo</a> on <a rel="noopener noreferrer" href="https://unsplash.com/photos/lines-of-html-codes-4hbJ-eymZ1o?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+    </cite>
+  </sup>
+</div>
+
+
+
+<p>
+  <strong>TL;DR:</strong>
+  Project code here: <a href="https://github.com/andyj/svrjs-with-docker" rel="noopener noreferrer" target="_blank">github.com/andyj/svrjs-with-docker</a>
+</p>
+
+
+<h1>Why SVR.JS?</h1>
+<p><a href="https://svrjs.org/" rel="noopener noreferrer">SVR.JS</a> is a lightweight and efficient web server designed to serve static files effortlessly. It's great for scenarios where you need a quick and reliable solution to host static content without the overhead of traditional web servers. </p>
+<p>By combining SVR.JS with Docker, you can eliminate installation dependencies and simplify deployment, making it an ideal choice for developers, testers, and small-scale projects.</p>
+
+<h2>How to Set It Up</h2>
+
+
+<h3>Step 1: Docker Compose Configuration</h3>
+<pre><code class="language-bash">version: '3.9'
 services:
   svrjs:
     image: svrjs/svrjs:lts
@@ -10,7 +117,12 @@ services:
       - ./www:/var/www/svrjs  # Mount the local `www` directory as the web root
       - ./svrjs-config.json:/etc/svrjs-config.json  # Mount custom config
     restart: always
-</code></pre><p>This <code>docker-compose.yml</code> file defines the SVR.JS service. It maps port 8080 on the host to port 80 in the container and sets up volumes for the web root and configuration file.</p><h3>Step 2: Configuration File</h3><pre><code class="language-json">{
+</code></pre>
+
+<p>This <code>docker-compose.yml</code> file defines the SVR.JS service. It maps port 8080 on the host to port 80 in the container and sets up volumes for the web root and configuration file.</p>
+
+<h3>Step 2: Configuration File</h3>
+<pre><code class="language-json">{
   "port": 80,
   "wwwroot": "/var/www/svrjs",
   "logging": {
@@ -18,14 +130,25 @@ services:
     "level": "info"
   }
 }
-</code></pre><p>Save this as <code>svrjs-config.json</code>. It configures SVR.JS to serve files from the specified directory and enables basic logging.</p><h3>Step 3: Directory Structure</h3><p>Create the following directory structure for your project:</p><pre><code class="language-bash">svrjs-with-docker
+</code></pre>
+
+<p>Save this as <code>svrjs-config.json</code>. It configures SVR.JS to serve files from the specified directory and enables basic logging.</p>
+
+<h3>Step 3: Directory Structure</h3>
+<p>Create the following directory structure for your project:</p>
+<pre><code class="language-bash">svrjs-with-docker
 ├── README.md
 ├── docker-compose.yml
 ├── svrjs-config.json
 └── www
     ├── index.html
     └── style.css
-</code></pre><p>The <code>www</code> folder will hold your static files, such as <code>index.html</code> and <code>style.css</code>.</p><h3>Step 4: Example HTML File</h3><pre><code class="language-html">&lt;!DOCTYPE html&gt;
+</code></pre>
+
+<p>The <code>www</code> folder will hold your static files, such as <code>index.html</code> and <code>style.css</code>.</p>
+
+<h3>Step 4: Example HTML File</h3>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
   &lt;meta charset="UTF-8"&gt;
@@ -38,4 +161,141 @@ services:
   &lt;p&gt;This static file is served by SVR.JS.&lt;/p&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre><p>Save this as <code>index.html</code> inside the <code>www</code> directory.</p><h3>Step 5: Running the Server</h3><p>In the root directory of your project, run the following command:</p><pre><code class="language-bash">docker-compose up</code></pre><p>After the container starts, visit <a href="http://localhost:8080" target="_blank">http://localhost:8080</a> to see your static site in action.</p><h2>Conclusion</h2><p>SVR.JS, combined with Docker, provides a powerful and hassle-free way to serve static content. This setup is highly portable and easy to replicate across different environments, making it a valuable tool for developers of all levels.</p></section><footer><p><em>I’m here, learning and working away. If you liked this content and want to keep me going, consider <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>. Your support keeps this site running and the coffee brewing! ☕️</em></p></footer><script src="https://giscus.app/client.js" data-repo="andyj/andyjarrett.com" data-repo-id="R_kgDOMjCDkQ" data-category="Announcements" data-category-id="DIC_kwDOMjCDkc4ChlfU" data-mapping="pathname" data-strict="0" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="preferred_color_scheme" data-lang="en" crossorigin="anonymous" async></script><a name="comment"></a></div><aside class="col-md-3 col-12"><h4>Recent Posts</h4><a href="/posts/2025/fixing-alpinejs-template-rendering-issues-when-your-second-tag-isnt-showing/" class="card-link link-underline-light">Fixing Alpine.js Template Rendering Issues When Your Second Tag Isn't Showing <i class="bi bi-box-arrow-up-right"></i></a><hr><a href="/posts/2025/why-updating-alpinejs-state-with-direct-reassignme/" class="card-link link-underline-light">Why Updating Alpine.js State with Direct Reassignment Fails (and How to Fix It) <i class="bi bi-box-arrow-up-right"></i></a><hr><a href="/posts/2024/using-svr-js-to-run-server-side-javascript/" class="card-link link-underline-light">Using SVR.js to Run Server-Side JavaScript <i class="bi bi-box-arrow-up-right"></i></a><hr><a href="/posts/2024/how-to-run-svrjs-with-docker-compose/" class="card-link link-underline-light">How to Run SVR.JS with Docker Compose <i class="bi bi-box-arrow-up-right"></i></a><hr><a href="/posts/2024/connection-pools-in-node-with-mariadb/" class="card-link link-underline-light">Connection pools in Node.js with MariaDB <i class="bi bi-box-arrow-up-right"></i></a><hr><a href="/posts/2024/understanding-variable-scoping-differences-between-lucee-5-and-lucee-6/" class="card-link link-underline-light">Understanding Variable Scoping Differences Between Lucee 5 and Lucee 6 <i class="bi bi-box-arrow-up-right"></i></a><hr><a href="/posts/2024/bluesky-now-has-over-10-million-users-and-i-was-number-56137/" class="card-link link-underline-light">Bluesky now has over 10 million users, and I was #56,137! <i class="bi bi-box-arrow-up-right"></i></a><hr><a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i></a><hr></aside></section></article></main></div><footer class="container mt-5 border-top pt-2"><div class="row justify-content-md-center"><div class="col">©AndyJarrett <a href="/linktree" title="Linktree for AndyJarrett" target="_blank"><i class="bi bi-tree"></i></a> <a href="/sitemap.xml" title="Site map for AndyJarrett.com" target="_blank"><i class="bi bi-map"></i></a><a href="https://www.andyjarrett.com/"><i class="bi bi-globe me-2"></i></a><a rel="noopener noreferrer" href="https://www.linkedin.com/in/andyjarrett/" title="inkedIn" target="_blank"><i class="bi bi-linkedin me-2"></i></a><a rel="noopener noreferrer" href="https://twitter.com/andyj" title="Twitter" target="_blank"><i class="bi bi-twitter me-2"></i></a><a rel="noopener noreferrer" href="https://github.com/andyj" title="GitHub" target="_blank"><i class="bi bi-github me-2"></i></a><a rel="noopener noreferrer" href="https://stackoverflow.com/users/371761/andy-jarrett" title="Stack overflow" target="_blank"><i class="bi bi-stack-overflow me-2"></i></a><a rel="noopener noreferrer" href="https://bsky.app/profile/andyjarrett.com" title="BlueSky" target="_blank"><i class="bi bi-cloud me-2"></i></a><a rel="noopener noreferrer" href="https://instagram.com/andyjarrett" title="Instragram" target="_blank"><i class="bi bi-instagram me-2"></i></a> <a rel="noopener noreferrer" href="https://buymeacoffee.com/mailgw" title="Buy me a coffee" target="_blank"><i class="bi bi-cup-hot-fill fs-5"></i></a></div><div class="col"><div class="text-end"><div class="btn-group"><a href="#" class="btn btn-secondary btn-sm" id="lightThemeButton" data-bs-theme-value="light"><i class="bi bi-sun"></i> </a><a href="#" class="btn btn-secondary btn-sm" id="darkThemeButton" data-bs-theme-value="dark"><i class="bi bi-moon-stars-fill"></i> </a><a href="#" class="btn btn-secondary btn-sm" id="autoThemeButton" data-bs-theme-value="auto"><i class="bi bi-circle-half"></i></a></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script><script src="/public/js/toggle.js" type="text/javascript"></script><script src="/public/prismjs/prism.js"></script></body></html>
+</code></pre>
+
+<p>Save this as <code>index.html</code> inside the <code>www</code> directory.</p>
+
+<h3>Step 5: Running the Server</h3>
+<p>In the root directory of your project, run the following command:</p>
+<pre><code class="language-bash">docker-compose up</code></pre>
+
+<p>After the container starts, visit <a href="http://localhost:8080" target="_blank">http://localhost:8080</a> to see your static site in action.</p>
+
+<h2>Conclusion</h2>
+<p>SVR.JS, combined with Docker, provides a powerful and hassle-free way to serve static content. This setup is highly portable and easy to replicate across different environments, making it a valuable tool for developers of all levels.</p>
+
+
+
+
+            </section>
+
+            <footer>
+              <p>
+                <em>I’m here, learning and working away. If you liked this content and want to keep me going, consider
+                  <a href="https://buymeacoffee.com/mailgw" title="Buy me a coffee!">buying me a coffee</a>.
+                  Your support keeps this site running and the coffee brewing! ☕️
+                </em>
+              </p>
+            </footer>
+
+            <script
+              src="https://giscus.app/client.js"
+              data-repo="andyj/andyjarrett.com"
+              data-repo-id="R_kgDOMjCDkQ"
+              data-category="Announcements"
+              data-category-id="DIC_kwDOMjCDkc4ChlfU"
+              data-mapping="pathname"
+              data-strict="0"
+              data-reactions-enabled="1"
+              data-emit-metadata="0"
+              data-input-position="top"
+              data-theme="preferred_color_scheme"
+              data-lang="en"
+              crossorigin="anonymous"
+              async></script>
+            <a name="comment"></a>
+          </div>
+
+          <aside class="col-md-3 col-12">
+            <h4>Recent Posts</h4>
+            
+              <a href="/posts/2025/provisioning-onedrive-for-microsoft-365-users-before-first-login/" class="card-link link-underline-light">
+                Provisioning OneDrive for Microsoft365 Users Before First Login <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2025/fixing-alpinejs-template-rendering-issues-when-your-second-tag-isnt-showing/" class="card-link link-underline-light">
+                Fixing Alpine.js Template Rendering Issues When Your Second Tag Isn't Showing <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2025/why-updating-alpinejs-state-with-direct-reassignme/" class="card-link link-underline-light">
+                Why Updating Alpine.js State with Direct Reassignment Fails (and How to Fix It) <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/using-svr-js-to-run-server-side-javascript/" class="card-link link-underline-light">
+                Using SVR.js to Run Server-Side JavaScript <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/how-to-run-svrjs-with-docker-compose/" class="card-link link-underline-light">
+                How to Run SVR.JS with Docker Compose <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/connection-pools-in-node-with-mariadb/" class="card-link link-underline-light">
+                Connection pools in Node.js with MariaDB <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/understanding-variable-scoping-differences-between-lucee-5-and-lucee-6/" class="card-link link-underline-light">
+                Understanding Variable Scoping Differences Between Lucee 5 and Lucee 6 <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+              <a href="/posts/2024/bluesky-now-has-over-10-million-users-and-i-was-number-56137/" class="card-link link-underline-light">
+                Bluesky now has over 10 million users, and I was #56,137! <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
+            
+          </aside>
+        </section>
+      </article>
+    </main>
+  </div>
+
+  <footer class="container mt-5 border-top pt-2">
+  <div class="row justify-content-md-center">
+    <div class="col">
+      ©AndyJarrett
+      <a href="/linktree" title="Linktree for AndyJarrett" target="_blank"><i class="bi bi-tree"></i></a>
+      <a href="/sitemap.xml" title="Site map for AndyJarrett.com" target="_blank"><i class="bi bi-map"></i></a>
+      <!-- Home Link -->
+      <a href="https://www.andyjarrett.com/" class=""><i class="bi bi-globe me-2"></i></a>
+      <!-- linkedin Link -->
+      <a rel="noopener noreferrer" href="https://www.linkedin.com/in/andyjarrett/" title="inkedIn" target="_blank"><i class="bi bi-linkedin me-2"></i></a>
+      <!-- Twitter Link -->
+      <a rel="noopener noreferrer" href="https://twitter.com/andyj" title="Twitter" target="_blank"><i class="bi bi-twitter me-2"></i></a>
+      <!-- GitHub Link -->
+      <a rel="noopener noreferrer" href="https://github.com/andyj" title="GitHub" target="_blank"><i class="bi bi-github me-2"></i></a>
+      <!-- Stack Overflow Link -->
+      <a rel="noopener noreferrer" href="https://stackoverflow.com/users/371761/andy-jarrett" title="Stack overflow" target="_blank"><i class="bi bi-stack-overflow me-2"></i></a>
+      <!-- BlueSky Link -->
+      <a rel="noopener noreferrer" href="https://bsky.app/profile/andyjarrett.com" title="BlueSky" target="_blank"><i class="bi bi-cloud me-2"></i></a>
+      <!-- Instagram Link -->
+      <a rel="noopener noreferrer" href="https://instagram.com/andyjarrett" title="Instragram" target="_blank"><i class="bi bi-instagram me-2"></i></a>
+      <a rel="noopener noreferrer" href="https://buymeacoffee.com/mailgw" title="Buy me a coffee" target="_blank"><i class="bi bi-cup-hot-fill fs-5"></i></a>
+    </div>
+    <div class="col">
+      <div class="text-end">
+        <div class="btn-group">
+          <a href="#" class="btn btn-secondary btn-sm" id="lightThemeButton" data-bs-theme-value="light">
+            <i class="bi bi-sun"></i>
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" id="darkThemeButton" data-bs-theme-value="dark">
+            <i class="bi bi-moon-stars-fill"></i>
+          </a>
+          <a href="#" class="btn btn-secondary btn-sm" id="autoThemeButton" data-bs-theme-value="auto">
+            <i class="bi bi-circle-half"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script src="/public/js/toggle.js" type="text/javascript"></script>
+<script src="/public/prismjs/prism.js"></script>
+</body>
+</html>

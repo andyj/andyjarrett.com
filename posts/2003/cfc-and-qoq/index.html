@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
-<link rel="stylesheet" href="/public/prismjs/prism.css">
+<link rel="stylesheet" href="/public/prismjs/prism.css?load=css">
   <script src="https://unpkg.com/htmx.org@2.0.2" integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ" crossorigin="anonymous"></script>
 
 </head>
@@ -78,7 +78,46 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-I ran into an odd problem today. I was trying to do a Query of a Query (QoQ) in a CFC function, from a query ran in another function.When it came to testing the page CFMX returned that it could not find the first query in memory. So i did some playing and set upa function to just check if the query existed with the following code in there<br/><br/><span style="color:#800000"> <cfif isDefined("queryName")>TRUE<br><cfelse>FALSE<br></cfif></span><br/><br/>Then right after calling this method i put the same code in my CF page. So it looked like:<br/><br/><div style="border:3px double #ededed;margin:10px;">  <ol>    <li>      <span style="color:#800000">        <cfinvoke component="comName" method="originalQuery">     </span>   </li>   <li>      <span style="color:#800000"><cfinclude template="comName" method="QoQ"></span>      - this holds the <span style="color:#800000"><cfif></span>    </li>   <li>      <span style="color:#800000">        <cfif isDefined("queryName")>TRUE<br><cfelse>FALSE<br></cfif>     </span>   </li> </ul> <br/></div><br/>When i ran the page the returned result was:<br/>FALSE<br/>TRUE<br/><br/>All i can see is that i will need to assign the "this" scope to the originalQuery so that it can be seen through the CFC.Though i havent got time to test it now (its the weekend WooHoo) i'll look into it later unless anyone knows the reason why?<br>
+<div class="image-container my-2">
+  <img src="" alt="ColdFusion Code" class="img-fluid">
+</div>
+<div class="text-end">
+  <sup>
+    <cite></cite>
+  </sup>
+</div>
+
+<h1>CFC and QoQ</h1>
+
+<p>I ran into an odd problem today. I was trying to do a Query of a Query (QoQ) inside a CFC function, using a query that was executed in another function. When testing the page, ColdFusion MX (CFMX) returned an error stating that it could not find the first query in memory.</p>
+
+<p>To debug, I created a function just to check whether the query existed, using the following code:</p>
+
+<pre><code class="language-cfml">
+&lt;cfif isDefined("queryName")>
+    TRUE
+&lt;cfelse>
+    FALSE
+&lt;/cfif>
+</code></pre>
+
+<p>Then, right after calling this method, I added the same check in my ColdFusion page. The setup looked like this:</p>
+
+<pre><code class="language-cfml">
+1. &lt;cfinvoke component="comName" method="originalQuery">
+2. &lt;cfinclude template="comName" method="QoQ"> <!-- This holds the &lt;cfif> -->
+3. &lt;cfif isDefined("queryName")>TRUE&lt;cfelse>FALSE&lt;/cfif>
+</code></pre>
+
+<p>When I ran the page, the output was:</p>
+
+<pre><code class="language-text">
+FALSE
+TRUE
+</code></pre>
+
+<p>It seems that I will need to assign the <code>this</code> scope to <code>originalQuery</code> so that the result can be accessed throughout the CFC. I haven’t had time to test this yet (it’s the weekend—woohoo!), but I’ll look into it later unless someone already knows the reason why?</p>
+
             </section>
 
             <footer>
@@ -110,6 +149,11 @@ I ran into an odd problem today. I was trying to do a Query of a Query (QoQ) in 
 
           <aside class="col-md-3 col-12">
             <h4>Recent Posts</h4>
+            
+              <a href="/posts/2025/provisioning-onedrive-for-microsoft-365-users-before-first-login/" class="card-link link-underline-light">
+                Provisioning OneDrive for Microsoft365 Users Before First Login <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
             
               <a href="/posts/2025/fixing-alpinejs-template-rendering-issues-when-your-second-tag-isnt-showing/" class="card-link link-underline-light">
                 Fixing Alpine.js Template Rendering Issues When Your Second Tag Isn't Showing <i class="bi bi-box-arrow-up-right"></i>
@@ -143,11 +187,6 @@ I ran into an odd problem today. I was trying to do a Query of a Query (QoQ) in 
             
               <a href="/posts/2024/bluesky-now-has-over-10-million-users-and-i-was-number-56137/" class="card-link link-underline-light">
                 Bluesky now has over 10 million users, and I was #56,137! <i class="bi bi-box-arrow-up-right"></i>
-              </a>
-              <hr>
-            
-              <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">
-                Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i>
               </a>
               <hr>
             

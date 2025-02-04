@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
-<link rel="stylesheet" href="/public/prismjs/prism.css">
+<link rel="stylesheet" href="/public/prismjs/prism.css?load=css">
   <script src="https://unpkg.com/htmx.org@2.0.2" integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ" crossorigin="anonymous"></script>
 
 </head>
@@ -78,7 +78,7 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-<p>Apache uses .htaccess files as a way to make configuration changes on a per-directory (and subdirectories) basis. They are a powerful tool when it comes to moving folders of changed files or in my case domain name rewriting. </p><p>Currently I am using a short domain name (<a href="http://www.prsos.co.uk">prsos.co.uk</a>) as a redirect to a specific page on the full domain name <a href="http://www.petrescuesos.co.uk">petrescuesos.co.uk</a>. In the past I've even used ColdFusion to do by putting something along the lines in my Application.cfm.</p><code><cfif findNoCase('prsos', cgi.server_name)><cfheader statustext="Moved permanently" statuscode="301" /><cfheader value="http://www.petrescuesos.co.uk" name="Location"></cfif></code><p>This still gives the browser/spider the correct http header but why waste cpu styles on even doing this when the web-server can handle it natively. Below is the Apache .htaccess I've just put in place.</p><code>#Turn rewrite onRewriteEngine on#Look at the HTTP_HOST and regex search for old domain namerewritecond %{http_host} ^(.*)prsos.co.uk [nc]# The rule. Change the http_host to the new domain location. NC means NoCaserewriterule ^(.*)$ http://www.petrescuesos.co.uk/index.cfm?action=pets.found [r=301,nc]</code><br>
+<p>Apache uses .htaccess files as a way to make configuration changes on a per-directory (and subdirectories) basis. They are a powerful tool when it comes to moving folders of changed files or in my case domain name rewriting. </p><p>Currently I am using a short domain name (<a href="http://www.prsos.co.uk">prsos.co.uk</a>) as a redirect to a specific page on the full domain name <a href="http://www.petrescuesos.co.uk">petrescuesos.co.uk</a>. In the past I've even used ColdFusion to do by putting something along the lines in my Application.cfm.</p><code>&lt;cfif findNoCase('prsos', cgi.server_name)>&lt;cfheader statustext="Moved permanently" statuscode="301" />&lt;cfheader value="http://www.petrescuesos.co.uk" name="Location">&lt;/cfif></code><p>This still gives the browser/spider the correct http header but why waste cpu styles on even doing this when the web-server can handle it natively. Below is the Apache .htaccess I've just put in place.</p><code>#Turn rewrite onRewriteEngine on#Look at the HTTP_HOST and regex search for old domain namerewritecond %{http_host} ^(.*)prsos.co.uk [nc]# The rule. Change the http_host to the new domain location. NC means NoCaserewriterule ^(.*)$ http://www.petrescuesos.co.uk/index.cfm?action=pets.found [r=301,nc]</code><br>
             </section>
 
             <footer>
@@ -110,6 +110,11 @@
 
           <aside class="col-md-3 col-12">
             <h4>Recent Posts</h4>
+            
+              <a href="/posts/2025/provisioning-onedrive-for-microsoft-365-users-before-first-login/" class="card-link link-underline-light">
+                Provisioning OneDrive for Microsoft365 Users Before First Login <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
             
               <a href="/posts/2025/fixing-alpinejs-template-rendering-issues-when-your-second-tag-isnt-showing/" class="card-link link-underline-light">
                 Fixing Alpine.js Template Rendering Issues When Your Second Tag Isn't Showing <i class="bi bi-box-arrow-up-right"></i>
@@ -143,11 +148,6 @@
             
               <a href="/posts/2024/bluesky-now-has-over-10-million-users-and-i-was-number-56137/" class="card-link link-underline-light">
                 Bluesky now has over 10 million users, and I was #56,137! <i class="bi bi-box-arrow-up-right"></i>
-              </a>
-              <hr>
-            
-              <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">
-                Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i>
               </a>
               <hr>
             

@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
-<link rel="stylesheet" href="/public/prismjs/prism.css">
+<link rel="stylesheet" href="/public/prismjs/prism.css?load=css">
   <script src="https://unpkg.com/htmx.org@2.0.2" integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ" crossorigin="anonymous"></script>
 
 </head>
@@ -78,7 +78,7 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-Opening textmate from cfdebugging output<p>  I use <a href="http://www.adobe.com/products/coldfusion-builder/">CFBuilder</a> and <a href="http://macromates.com/">Textmate</a> ( with <a href="http://cftextmate.andyjarrett.co.uk/">CFTextMate</a>) for my web development needs. While CFBuilder is is a great tool it lacks (and this is thanks to the underlying Eclipse IDE) speed and that is when I use Textmate  as I can open up a file from the Terminal quickly with the command <b>mate ~/Sites/somesite/someFileWithError.cfm</b>.</p><p>What I have always wanted to do is launch Textmate direct from the HTML output on a page and luckily you can do this with <a href="http://blog.macromates.com/2007/the-textmate-url-scheme/" title="TextMate Blog &raquo; The TextMate URL Scheme">TextMates URL Scheme</a>.</p><p>The format is: <b>txmt://open?[url=file]&[line=linenumber]&[column=columnnumber]</b> with the arguments:</p><ul><li><b>url</b> &dash; the actual file to open (i.e. a <b>file://...</b> URL), if you leave out this argument, the frontmost document is implied.</li><li><b>line</b> &dash; line number to go to (one based).</li><li><b>column</b> &dash; column number to go to (one based).</li></ul><p>If you have Textmate installed click on the following link to open <a href="txmt://open?url=file:///etc/hosts"><b>/etc/hosts</b></a>, this <b>href</b> is simply <a href="txmt://open?url=file:///etc/hosts"<b>txmt://open?url=file:///etc/hosts</b></a>.</p><p>So far pretty cool, but we can now take this one step further and edit a template listed on the debugging output so we can quickly access and update a template without reverting back to CFBuilder. The next set of instructions are for <a href="http://www.getrailo.org/" title="Railo - Accelerate Your Web Development">Railo</a> but are easily applied to other engines.</p><p>In Railo I am going to change the <b>/railo-context/templates/debugging/debugging-neo.cfm</b> template around line 1110 which should currently looks like this:</p><code><td align="left" class="cfdebug" nowrap><cfif bad><font color="red"><span class="template_overage"></cfif>#pages.src#<cfif bad></span></font></cfif></td></cfloop>  </code><p>We want to change this last &lt;td> to the following</p><code><td align="left" class="cfdebug" nowrap>  <cfif bad><font color="red"><span class="template_overage"></cfif>  <a href="txmt://open/?url=file://#listFirst(pages.src,"$")#"> #pages.src# </a>  <cfif bad></span></font></cfif></td>  </code><p>All you need to do now is select the <b>debugging-neo.cfm</b> template from your web context admin, restart Railo, and you are good to go.</p><p>After this you could then create a Texmate &lt;a> link on a CFML error template, allowing you to quickly jump to a line and edit a problem.</p><br>
+Opening textmate from cfdebugging output<p>  I use <a href="http://www.adobe.com/products/coldfusion-builder/">CFBuilder</a> and <a href="http://macromates.com/">Textmate</a> ( with <a href="http://cftextmate.andyjarrett.co.uk/">CFTextMate</a>) for my web development needs. While CFBuilder is is a great tool it lacks (and this is thanks to the underlying Eclipse IDE) speed and that is when I use Textmate  as I can open up a file from the Terminal quickly with the command <b>mate ~/Sites/somesite/someFileWithError.cfm</b>.</p><p>What I have always wanted to do is launch Textmate direct from the HTML output on a page and luckily you can do this with <a href="http://blog.macromates.com/2007/the-textmate-url-scheme/" title="TextMate Blog &raquo; The TextMate URL Scheme">TextMates URL Scheme</a>.</p><p>The format is: <b>txmt://open?[url=file]&[line=linenumber]&[column=columnnumber]</b> with the arguments:</p><ul><li><b>url</b> &dash; the actual file to open (i.e. a <b>file://...</b> URL), if you leave out this argument, the frontmost document is implied.</li><li><b>line</b> &dash; line number to go to (one based).</li><li><b>column</b> &dash; column number to go to (one based).</li></ul><p>If you have Textmate installed click on the following link to open <a href="txmt://open?url=file:///etc/hosts"><b>/etc/hosts</b></a>, this <b>href</b> is simply <a href="txmt://open?url=file:///etc/hosts"<b>txmt://open?url=file:///etc/hosts</b></a>.</p><p>So far pretty cool, but we can now take this one step further and edit a template listed on the debugging output so we can quickly access and update a template without reverting back to CFBuilder. The next set of instructions are for <a href="http://www.getrailo.org/" title="Railo - Accelerate Your Web Development">Railo</a> but are easily applied to other engines.</p><p>In Railo I am going to change the <b>/railo-context/templates/debugging/debugging-neo.cfm</b> template around line 1110 which should currently looks like this:</p><code><td align="left" class="cfdebug" nowrap>&lt;cfif bad><font color="red"><span class="template_overage">&lt;/cfif>#pages.src#&lt;cfif bad></span></font>&lt;/cfif></td>&lt;/cfloop>  </code><p>We want to change this last &lt;td> to the following</p><code><td align="left" class="cfdebug" nowrap>  &lt;cfif bad><font color="red"><span class="template_overage">&lt;/cfif>  <a href="txmt://open/?url=file://#listFirst(pages.src,"$")#"> #pages.src# </a>  &lt;cfif bad></span></font>&lt;/cfif></td>  </code><p>All you need to do now is select the <b>debugging-neo.cfm</b> template from your web context admin, restart Railo, and you are good to go.</p><p>After this you could then create a Texmate &lt;a> link on a CFML error template, allowing you to quickly jump to a line and edit a problem.</p><br>
             </section>
 
             <footer>
@@ -110,6 +110,11 @@ Opening textmate from cfdebugging output<p>  I use <a href="http://www.adobe.com
 
           <aside class="col-md-3 col-12">
             <h4>Recent Posts</h4>
+            
+              <a href="/posts/2025/provisioning-onedrive-for-microsoft-365-users-before-first-login/" class="card-link link-underline-light">
+                Provisioning OneDrive for Microsoft365 Users Before First Login <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
             
               <a href="/posts/2025/fixing-alpinejs-template-rendering-issues-when-your-second-tag-isnt-showing/" class="card-link link-underline-light">
                 Fixing Alpine.js Template Rendering Issues When Your Second Tag Isn't Showing <i class="bi bi-box-arrow-up-right"></i>
@@ -143,11 +148,6 @@ Opening textmate from cfdebugging output<p>  I use <a href="http://www.adobe.com
             
               <a href="/posts/2024/bluesky-now-has-over-10-million-users-and-i-was-number-56137/" class="card-link link-underline-light">
                 Bluesky now has over 10 million users, and I was #56,137! <i class="bi bi-box-arrow-up-right"></i>
-              </a>
-              <hr>
-            
-              <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">
-                Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i>
               </a>
               <hr>
             

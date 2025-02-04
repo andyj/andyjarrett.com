@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
-<link rel="stylesheet" href="/public/prismjs/prism.css">
+<link rel="stylesheet" href="/public/prismjs/prism.css?load=css">
   <script src="https://unpkg.com/htmx.org@2.0.2" integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ" crossorigin="anonymous"></script>
 
 </head>
@@ -78,7 +78,7 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-<p>As i'm preparing to type this post what I'm about to says is so obvious its annoying.   When you are using the &lt;cfxml> tag you cannot have xml tags that begin with "cf" as Coldfusion tries to parse them. For example:</p><code><cfxml variable="xml1">  <myXml>   <cftest>my data</cftest>  </myXml></cfxml></code><p>Would fail with something like <em>"A tag starting with 'CF' has been detected. This tag is not supported by this version of ColdFusion. Please verify your typo and try again.Unknown tag: cftest. "</em></p>The workaround: Modify the tag from &lt;cftest>  to &lt;ctest><code><cfxml variable="xml2"><myXml>  <ctest>my data</ctest></myXml></cfxml></code>The afterwards get regex to make the changes.<code><cfset xml2 = reReplace(xml2, "<(.*?)c", "<\\1cf" , "all") /></code>To explain the regex. <ul><li>Attribute 1, is the string your are modifying.</li><li>Attribute 2, is the regex here. Here I am using creating a back reference (think of it as a variable) to catch the closing tag backslash.</li><li>Attribute 3, is the same as att. 2 but we remove the brackers and call the back reference via "\\1". </li><li>Tells us to capturing all occurances.</li></ul><br>
+<p>As i'm preparing to type this post what I'm about to says is so obvious its annoying.   When you are using the &lt;cfxml> tag you cannot have xml tags that begin with "cf" as Coldfusion tries to parse them. For example:</p><code>&lt;cfxml variable="xml1">  <myXml>   &lt;cftest>my data&lt;/cftest>  </myXml>&lt;/cfxml></code><p>Would fail with something like <em>"A tag starting with 'CF' has been detected. This tag is not supported by this version of ColdFusion. Please verify your typo and try again.Unknown tag: cftest. "</em></p>The workaround: Modify the tag from &lt;cftest>  to &lt;ctest><code>&lt;cfxml variable="xml2"><myXml>  <ctest>my data</ctest></myXml>&lt;/cfxml></code>The afterwards get regex to make the changes.<code>&lt;cfset xml2 = reReplace(xml2, "<(.*?)c", "<\\1cf" , "all") /></code>To explain the regex. <ul><li>Attribute 1, is the string your are modifying.</li><li>Attribute 2, is the regex here. Here I am using creating a back reference (think of it as a variable) to catch the closing tag backslash.</li><li>Attribute 3, is the same as att. 2 but we remove the brackers and call the back reference via "\\1". </li><li>Tells us to capturing all occurances.</li></ul><br>
             </section>
 
             <footer>
@@ -110,6 +110,11 @@
 
           <aside class="col-md-3 col-12">
             <h4>Recent Posts</h4>
+            
+              <a href="/posts/2025/provisioning-onedrive-for-microsoft-365-users-before-first-login/" class="card-link link-underline-light">
+                Provisioning OneDrive for Microsoft365 Users Before First Login <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
             
               <a href="/posts/2025/fixing-alpinejs-template-rendering-issues-when-your-second-tag-isnt-showing/" class="card-link link-underline-light">
                 Fixing Alpine.js Template Rendering Issues When Your Second Tag Isn't Showing <i class="bi bi-box-arrow-up-right"></i>
@@ -143,11 +148,6 @@
             
               <a href="/posts/2024/bluesky-now-has-over-10-million-users-and-i-was-number-56137/" class="card-link link-underline-light">
                 Bluesky now has over 10 million users, and I was #56,137! <i class="bi bi-box-arrow-up-right"></i>
-              </a>
-              <hr>
-            
-              <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">
-                Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i>
               </a>
               <hr>
             

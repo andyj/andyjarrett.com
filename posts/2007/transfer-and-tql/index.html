@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
-<link rel="stylesheet" href="/public/prismjs/prism.css">
+<link rel="stylesheet" href="/public/prismjs/prism.css?load=css">
   <script src="https://unpkg.com/htmx.org@2.0.2" integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ" crossorigin="anonymous"></script>
 
 </head>
@@ -78,7 +78,7 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-I love working with Transfer and Mark Mandel has done an amazing feat of giving it some really good documentation. But I remember when I was getting started I was looking for a rough guide to the TQL language for Transfer and how to implement it. So based on all the information at <a href="http://www.transfer-orm.com/transfer/documentation/">www.transfer-orm.com/transfer/documentation/</a> here's a quick start to TQL.Please note: I am presuming you already know how to set up Transfer and have basic knowledge of how it works.For this example here is our Transfer.xml configuration file:<code><package name="post">  <object name="Post" table="post_table">   <id name="postid" column="postid" type="numeric"/>    <property name="postText" type="string" column="postText" />    <property name="postDate" type="date" column="postDate" />  </object></package></code> First we need to create our <span style="text-decoration:line-through;">(S)</span>TQL statement. TQL is Transfers own scripting language written in Java and ColdFusion. The main difference over SQL is that you are referencing classes and properties from your Transfer.xml file (see above). So to run a "SELECT * FROM" the post_table our TQL would look like:<code><cfsavecontent variable="tql"><cfoutput>  SELECT * FROM post.Post</cfoutput></cfsavecontent></code>You can see here that in the query instead of using the table name after FROM we are using the Transfer Class post.Post. Next we use the TQL and create the query. Note at this point you are not running the statement against the database, you are just creating a TQL.query object.<code><!--- getTransfer().createQuery() returns a transfer.com.tql.Query object ---><cfset tqlObj = getTransfer().createQuery(TQL);</code>Once we have the object returned we just need to pass it on to one of Transfers generated methods such as .readByQuery() or .ListByQuery()<code><cfset query = getTransfer().listbyQuery(query) /><cfdump var="#query#" /></code>That's it. Nothing really new hear and like I said you can get all of this from the <a href="http://www.transfer-orm.com/transfer/documentation/">documentation</a>. There are some limits still to TQL, one of the is using TOP/LIMIT (see <a href="http://groups.google.com/group/transfer-dev/browse_thread/thread/c776ed68e63e5eeb/889bf30467e1f71d?lnk=gst&q=limit+top#889bf30467e1f71d">this thread</a>). In my next post i'll go into passing values to the TQL statement and look at other methods that can effect how the TQL script is resolved by TransferQuick reference points:<ul><li><a href="http://www.transfer-orm.com">www.transfer-orm.com</a></li><li><a href="http://groups.google.com/group/transfer-dev/">Mailing List/Google Group</a></li><li><a href="http://transfer.riaforge.org/index.cfm?event=page.forums">Forum at RiaForge</a></li></ul><br>
+I love working with Transfer and Mark Mandel has done an amazing feat of giving it some really good documentation. But I remember when I was getting started I was looking for a rough guide to the TQL language for Transfer and how to implement it. So based on all the information at <a href="http://www.transfer-orm.com/transfer/documentation/">www.transfer-orm.com/transfer/documentation/</a> here's a quick start to TQL.Please note: I am presuming you already know how to set up Transfer and have basic knowledge of how it works.For this example here is our Transfer.xml configuration file:<code><package name="post">  <object name="Post" table="post_table">   <id name="postid" column="postid" type="numeric"/>    <property name="postText" type="string" column="postText" />    <property name="postDate" type="date" column="postDate" />  </object></package></code> First we need to create our <span style="text-decoration:line-through;">(S)</span>TQL statement. TQL is Transfers own scripting language written in Java and ColdFusion. The main difference over SQL is that you are referencing classes and properties from your Transfer.xml file (see above). So to run a "SELECT * FROM" the post_table our TQL would look like:<code>&lt;cfsavecontent variable="tql">&lt;cfoutput>  SELECT * FROM post.Post&lt;/cfoutput>&lt;/cfsavecontent></code>You can see here that in the query instead of using the table name after FROM we are using the Transfer Class post.Post. Next we use the TQL and create the query. Note at this point you are not running the statement against the database, you are just creating a TQL.query object.<code><!--- getTransfer().createQuery() returns a transfer.com.tql.Query object --->&lt;cfset tqlObj = getTransfer().createQuery(TQL);</code>Once we have the object returned we just need to pass it on to one of Transfers generated methods such as .readByQuery() or .ListByQuery()<code>&lt;cfset query = getTransfer().listbyQuery(query) />&lt;cfdump var="#query#" /></code>That's it. Nothing really new hear and like I said you can get all of this from the <a href="http://www.transfer-orm.com/transfer/documentation/">documentation</a>. There are some limits still to TQL, one of the is using TOP/LIMIT (see <a href="http://groups.google.com/group/transfer-dev/browse_thread/thread/c776ed68e63e5eeb/889bf30467e1f71d?lnk=gst&q=limit+top#889bf30467e1f71d">this thread</a>). In my next post i'll go into passing values to the TQL statement and look at other methods that can effect how the TQL script is resolved by TransferQuick reference points:<ul><li><a href="http://www.transfer-orm.com">www.transfer-orm.com</a></li><li><a href="http://groups.google.com/group/transfer-dev/">Mailing List/Google Group</a></li><li><a href="http://transfer.riaforge.org/index.cfm?event=page.forums">Forum at RiaForge</a></li></ul><br>
             </section>
 
             <footer>
@@ -110,6 +110,11 @@ I love working with Transfer and Mark Mandel has done an amazing feat of giving 
 
           <aside class="col-md-3 col-12">
             <h4>Recent Posts</h4>
+            
+              <a href="/posts/2025/provisioning-onedrive-for-microsoft-365-users-before-first-login/" class="card-link link-underline-light">
+                Provisioning OneDrive for Microsoft365 Users Before First Login <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
             
               <a href="/posts/2025/fixing-alpinejs-template-rendering-issues-when-your-second-tag-isnt-showing/" class="card-link link-underline-light">
                 Fixing Alpine.js Template Rendering Issues When Your Second Tag Isn't Showing <i class="bi bi-box-arrow-up-right"></i>
@@ -143,11 +148,6 @@ I love working with Transfer and Mark Mandel has done an amazing feat of giving 
             
               <a href="/posts/2024/bluesky-now-has-over-10-million-users-and-i-was-number-56137/" class="card-link link-underline-light">
                 Bluesky now has over 10 million users, and I was #56,137! <i class="bi bi-box-arrow-up-right"></i>
-              </a>
-              <hr>
-            
-              <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">
-                Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i>
               </a>
               <hr>
             

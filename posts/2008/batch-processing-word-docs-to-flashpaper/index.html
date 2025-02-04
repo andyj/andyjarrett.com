@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="/public/css/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css">
-<link rel="stylesheet" href="/public/prismjs/prism.css">
+<link rel="stylesheet" href="/public/prismjs/prism.css?load=css">
   <script src="https://unpkg.com/htmx.org@2.0.2" integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ" crossorigin="anonymous"></script>
 
 </head>
@@ -78,7 +78,7 @@
           <div class="col-md-9 col-12">
             <section class="mw fw-lighter fs-5">
               
-Recently for work I have had to convert quite a few word docs to the FlashPaper format.Realising how long this would take I looked into an undocumented feature of the FlashPrinter.exe of callingit from the command line and passing the required arguments.You can easily take my code and get any language like Java or even Ant to do the following. The command you need to run is:<code>FlashPrinter.exe {PATH TO DOCUMENT} -o {OUTPUT PATH & FILE with SWF extention}</code>All the CF code below does is filter on the directory query looking for word documents.If you have any changes or suggestions <a href="http://andyjarrett.co.uk/andy/blog/page.cfm/Contact-Me">contace me here</a><code> <!--- Path to Flash Paper exe --->  <cfset flashPrinter = "C:\\Program Files\\Macromedia\\FlashPaper 2\\FlashPrinter.exe">  <!--- Path to documents --->  <cfset originalPath = expandPath(".") />  <!--- Can be either doc|pdf --->  <cfset filter = "doc">    <!--- Path to the exported swf's' --->  <cfset outputPath = expandPath(".") />    <!--- get a query list of all the fiels --->  <cfdirectory action="list" name="qry" directory="#originalPath#" filter="*.#filter#" />     <cfoutput>    <cfloop query="qry">      <cfset fileLoc = qry.directory&"\\"&qry.name />     <cfset outputFile = outputPath & "\\" & replace(qry.name, ".#filter#", ".swf")>           <!--- Set the arguments to be passed to CFEXECUTE --->      <cfset args = '"#flashPrinter#" "#fileLoc#" -o "#outputFile#"' />           <!--- Output the args to the screen to see what got passed --->       #args#      <hr/>     <!--- Use the command line to execute the function --->     <cfexecute name = "#flashPrinter#"         arguments = "#args#">      </cfexecute>          </cfloop> </cfoutput></code><br>
+Recently for work I have had to convert quite a few word docs to the FlashPaper format.Realising how long this would take I looked into an undocumented feature of the FlashPrinter.exe of callingit from the command line and passing the required arguments.You can easily take my code and get any language like Java or even Ant to do the following. The command you need to run is:<code>FlashPrinter.exe {PATH TO DOCUMENT} -o {OUTPUT PATH & FILE with SWF extention}</code>All the CF code below does is filter on the directory query looking for word documents.If you have any changes or suggestions <a href="http://andyjarrett.co.uk/andy/blog/page.cfm/Contact-Me">contace me here</a><code> <!--- Path to Flash Paper exe --->  &lt;cfset flashPrinter = "C:\\Program Files\\Macromedia\\FlashPaper 2\\FlashPrinter.exe">  <!--- Path to documents --->  &lt;cfset originalPath = expandPath(".") />  <!--- Can be either doc|pdf --->  &lt;cfset filter = "doc">    <!--- Path to the exported swf's' --->  &lt;cfset outputPath = expandPath(".") />    <!--- get a query list of all the fiels --->  &lt;cfdirectory action="list" name="qry" directory="#originalPath#" filter="*.#filter#" />     &lt;cfoutput>    &lt;cfloop query="qry">      &lt;cfset fileLoc = qry.directory&"\\"&qry.name />     &lt;cfset outputFile = outputPath & "\\" & replace(qry.name, ".#filter#", ".swf")>           <!--- Set the arguments to be passed to CFEXECUTE --->      &lt;cfset args = '"#flashPrinter#" "#fileLoc#" -o "#outputFile#"' />           <!--- Output the args to the screen to see what got passed --->       #args#      <hr/>     <!--- Use the command line to execute the function --->     &lt;cfexecute name = "#flashPrinter#"         arguments = "#args#">      &lt;/cfexecute>          &lt;/cfloop> &lt;/cfoutput></code><br>
             </section>
 
             <footer>
@@ -110,6 +110,11 @@ Recently for work I have had to convert quite a few word docs to the FlashPaper 
 
           <aside class="col-md-3 col-12">
             <h4>Recent Posts</h4>
+            
+              <a href="/posts/2025/provisioning-onedrive-for-microsoft-365-users-before-first-login/" class="card-link link-underline-light">
+                Provisioning OneDrive for Microsoft365 Users Before First Login <i class="bi bi-box-arrow-up-right"></i>
+              </a>
+              <hr>
             
               <a href="/posts/2025/fixing-alpinejs-template-rendering-issues-when-your-second-tag-isnt-showing/" class="card-link link-underline-light">
                 Fixing Alpine.js Template Rendering Issues When Your Second Tag Isn't Showing <i class="bi bi-box-arrow-up-right"></i>
@@ -143,11 +148,6 @@ Recently for work I have had to convert quite a few word docs to the FlashPaper 
             
               <a href="/posts/2024/bluesky-now-has-over-10-million-users-and-i-was-number-56137/" class="card-link link-underline-light">
                 Bluesky now has over 10 million users, and I was #56,137! <i class="bi bi-box-arrow-up-right"></i>
-              </a>
-              <hr>
-            
-              <a href="/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/" class="card-link link-underline-light">
-                Reclaiming Space on macOS from Docker by Pruning Docker.raw <i class="bi bi-box-arrow-up-right"></i>
               </a>
               <hr>
             
