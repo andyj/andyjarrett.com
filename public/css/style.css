@@ -1,3 +1,7 @@
+@view-transition {
+navigation : auto;
+}
+
 .image-container {
   height: 315px;
   overflow: hidden;
