@@ -7,128 +7,6 @@
     <language>en</language>
     <atom:link href="https://www.andyjarrett.com//feed.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>How to Instantly Index Your Website with IndexNow Using a Bash Script</title>
-      <link>https://www.andyjarrett.com/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/</link>
-      <description><![CDATA[
-
-
-&lt;div class=&quot;image-container my-2&quot;&gt;
-  &lt;img src=&quot;https://www.andyjarrett.com/public/blogimage/gabriel-heinzer-4Mw7nkQDByk-unsplash.jpg&quot; alt=&quot;Developer debugging&quot; class=&quot;img-fluid&quot; /&gt;
-&lt;/div&gt;
-&lt;div class=&quot;text-end&quot;&gt;
-  &lt;sup&gt;
-    &lt;cite&gt;Photo by &lt;a href=&quot;https://unsplash.com/@6heinz3r?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Gabriel Heinzer&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/text-4Mw7nkQDByk?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;&lt;/cite&gt;
-  &lt;/sup&gt;
-&lt;/div&gt;
-
-&lt;p&gt;If you’re looking to ensure that your website’s content is indexed by search engines as quickly as possible, &lt;a rel=&quot;noopener noreferrer&quot; href=&quot;https://www.bing.com/indexnow&quot; target=&quot;_blank&quot;&gt;IndexNow&lt;/a&gt; is another tool to add to your toolbelt. Below, is my bash script helped me get started quickly with IndexNow. Afterwards, I’ll break down what each part of the script does and what it does, along with how to create and execute the script.&lt;/p&gt;
-
-&lt;h2&gt;The Script&lt;/h2&gt;
-
-&lt;p&gt;Let’s start with the script that automates the process of submitting a URL to be indexed via the IndexNow protocol.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;# Constants for example.com
-HOST=&quot;example.com&quot;
-KEY=&quot;your_unique_key_here&quot;
-KEY_LOCATION=&quot;https://example.com/your_unique_key_here.txt&quot;
-
-# Check if the URL path is passed as an argument
-if [ -z &quot;$1&quot; ]; then
-  echo &quot;Usage: $0 &lt;url_path&gt;&quot;
-  exit 1
-fi
-
-# Assign the first argument to a variable
-URL_PATH=&quot;$1&quot;
-
-# Submit URL list for example.com
-curl -X POST &quot;https://api.indexnow.org/indexnow&quot; &#92;
-  -H &quot;Content-Type: application/json; charset=utf-8&quot; &#92;
-  -d &quot;{
-    &#92;&quot;host&#92;&quot;: &#92;&quot;$HOST&#92;&quot;,
-    &#92;&quot;key&#92;&quot;: &#92;&quot;$KEY&#92;&quot;,
-    &#92;&quot;keyLocation&#92;&quot;: &#92;&quot;$KEY_LOCATION&#92;&quot;,
-    &#92;&quot;urlList&#92;&quot;: [
-      &#92;&quot;https://$HOST$URL_PATH&#92;&quot;
-    ]
-  }&quot;&lt;/url_path&gt;&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2&gt;How to Create and Execute the Script&lt;/h2&gt;
-
-&lt;h3&gt;Step 1: Create the Script&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Open your text editor:&lt;/strong&gt; You can use any text editor like Nano, Vim, or even Visual Studio Code.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Copy the script:&lt;/strong&gt; Copy the bash script provided above.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Save the script:&lt;/strong&gt; Save the file with a &lt;code&gt;.sh&lt;/code&gt; extension, for example, &lt;code&gt;indexnow_submit.sh&lt;/code&gt;.&lt;/li&gt;
-  &lt;pre&gt;&lt;code&gt;nano indexnow_submit.sh&lt;/code&gt;&lt;/pre&gt;
-  &lt;li&gt;&lt;strong&gt;Make the script executable:&lt;/strong&gt; Before you can run the script, you need to give it execute permissions.&lt;/li&gt;
-  &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;chmod +x indexnow_submit.sh&lt;/code&gt;&lt;/pre&gt;
-&lt;/ol&gt;
-
-&lt;h3&gt;Step 2: Execute the Script&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Run the script:&lt;/strong&gt; To use the script, open your terminal, navigate to the directory where your script is saved, and execute it by providing the path to the URL you want to index.&lt;/li&gt;
-  &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;./indexnow_submit.sh /path-to-your-page&lt;/code&gt;&lt;/pre&gt;
-  &lt;li&gt;&lt;strong&gt;Example command:&lt;/strong&gt; If you want to index a page located at &lt;code&gt;https://example.com/blog/my-latest-post&lt;/code&gt;, you would run:&lt;/li&gt;
-  &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;./indexnow_submit.sh /blog/my-latest-post&lt;/code&gt;&lt;/pre&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;This will prompt the IndexNow API to index the specified URL immediately.&lt;/p&gt;
-
-&lt;h2&gt;Breaking Down the Script&lt;/h2&gt;
-
-&lt;p&gt;Now that you’ve seen the script and know how to run it, let’s dive into what each part does and why it’s important.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Setting Up Constants:&lt;/strong&gt; At the top of the script, we define some constants. These include the domain of your website (&lt;code&gt;HOST&lt;/code&gt;), the IndexNow key (&lt;code&gt;KEY&lt;/code&gt;), and the location where this key is hosted (&lt;code&gt;KEY_LOCATION&lt;/code&gt;). These are essential for the search engines to verify your site and the URLs you submit.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Checking for a URL Path:&lt;/strong&gt; The script checks if you’ve provided a URL path as an argument when running the script. If you forget to include a URL path, the script will prompt you and exit. This step is crucial for ensuring that you don’t accidentally run the script without specifying which URL you want to index.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Submitting the URL:&lt;/strong&gt; The heart of the script is the &lt;code&gt;curl&lt;/code&gt; command, which sends a POST request to the IndexNow API. This command submits a JSON payload that includes your site’s details and the URL you want indexed. The search engines will then use this information to quickly index the specified URL.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2&gt;What is IndexNow?&lt;/h2&gt;
-
-&lt;p&gt;Having seen the script in action, it’s helpful to understand a bit more about what IndexNow is and why you might want to use it.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;IndexNow&lt;/strong&gt; is a protocol that allows website owners to notify search engines immediately when content on their site is updated. Instead of waiting for search engines to crawl your site periodically, IndexNow lets you proactively inform them about changes, ensuring that your content is indexed much faster.&lt;/p&gt;
-
-&lt;h2&gt;Why Use IndexNow?&lt;/h2&gt;
-
-&lt;p&gt;There are several benefits to using IndexNow:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Speed:&lt;/strong&gt; Instant indexing of new or updated content can be critical, especially for news or time-sensitive posts.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Efficiency:&lt;/strong&gt; It reduces unnecessary server load by cutting down on the frequency of search engine crawls.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;SEO Advantage:&lt;/strong&gt; Faster indexing can lead to quicker visibility in search results, potentially driving more traffic to your site.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;Setting Up Your IndexNow Key&lt;/h2&gt;
-
-&lt;p&gt;To use IndexNow, you’ll need to generate and host a key that validates your submissions.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Generate Your Key:&lt;/strong&gt; Visit the &lt;a rel=&quot;noopener noreferrer&quot; href=&quot;https://www.indexnow.org/&quot;&gt;IndexNow Key Generation page&lt;/a&gt; and create your unique key.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Host the Key:&lt;/strong&gt; Save the key as a text file and upload it to the root directory of your website. For example:&lt;/li&gt;
-  &lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;https://example.com/your_unique_key_here.txt&lt;/code&gt;&lt;/pre&gt;
-  &lt;li&gt;&lt;strong&gt;Verify:&lt;/strong&gt; Ensure the key file is accessible via the URL.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;Starting with a practical script and then delving into the details can make it easier for you to implement IndexNow on your site. By using this simple bash script, you can ensure that your content gets indexed promptly, giving you a potential edge in search engine visibility.&lt;/p&gt;
-
-&lt;p&gt;If you want to make sure your content is seen as soon as it’s published, IndexNow is a great tool to have in your SEO toolkit.&lt;/p&gt;
-
-]]></description>
-      <pubDate>Wed, 21 Aug 2024 22:30:00 +0000</pubDate>
-      <dc:creator>Andy Jarrett</dc:creator>
-      <guid>https://www.andyjarrett.com/posts/2024/how-to-instantly-index-your-website-with-indexnow-using-a-bash-script/</guid>
-      <enclosure url="https://www.andyjarrett.com/public/blogimage/gabriel-heinzer-4Mw7nkQDByk-unsplash.jpg" type="image/jpeg" />
-      <category>posts, seo, indexnow, bash, script</category>
-      <author>Andy Jarrett &lt;email@example.com&gt;</author>
-    </item>
-    <item>
       <title>Reclaiming Space on macOS from Docker by Pruning Docker.raw</title>
       <link>https://www.andyjarrett.com/posts/2024/reclaiming-space-on-macos-from-docker-by-pruning-docker-raw/</link>
       <description><![CDATA[
@@ -961,6 +839,52 @@ Write-Host &quot;OneDrive provisioning script completed.&quot; -ForegroundColor 
       <guid>https://www.andyjarrett.com/posts/2025/provisioning-onedrive-for-microsoft-365-users-before-first-login/</guid>
       <enclosure url="https://www.andyjarrett.com/public/blogimage/appshunter-io-aFDdAddufcY-unsplash.jpg" type="image/jpeg" />
       <category>posts, PowerShell, OneDrive, Microsoft 365, Automation</category>
+      <author>Andy Jarrett &lt;email@example.com&gt;</author>
+    </item>
+    <item>
+      <title>Learning Python Offline with a PWA</title>
+      <link>https://www.andyjarrett.com/posts/2025/learning_python_offline_with_a_pwa/</link>
+      <description><![CDATA[
+&lt;div class=&quot;image-container my-2&quot;&gt;
+  &lt;img src=&quot;https://www.andyjarrett.com/public/blogimage/rubaitul-azad-ZIPFteu-R8k-unsplash.jpg&quot; alt=&quot;Offline Python PWA Screenshot&quot; class=&quot;img-fluid&quot; /&gt;
+&lt;/div&gt;
+&lt;div class=&quot;text-end&quot;&gt;
+  &lt;sup&gt;
+    &lt;cite&gt;Photo by &lt;a href=&quot;https://unsplash.com/@rubaitulazad?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Rubaitul Azad&lt;/a&gt; on &lt;a href=&quot;https://unsplash.com/photos/a-white-cube-with-a-yellow-and-blue-logo-on-it-ZIPFteu-R8k?utm_content=creditCopyText&amp;utm_medium=referral&amp;utm_source=unsplash&quot;&gt;Unsplash&lt;/a&gt;&lt;/cite&gt;
+  &lt;/sup&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;TL;DR:&lt;/strong&gt; Explore the offline Python PWA on GitHub: &lt;a href=&quot;https://github.com/andyj/learn_python_offline_pwa&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;github.com/andyj/learn_python_offline_pwa&lt;/a&gt;&lt;/p&gt;
+
+&lt;h1&gt;Learning Python Offline with a PWA&lt;/h1&gt;
+
+&lt;h2&gt;Why AI, Why Offline?&lt;/h2&gt;
+&lt;p&gt;I’ve always wanted to get back to basics and truly understand Python’s core concepts without being tethered to a network. When my family and I started planning a trip I realised I’d be offline for a bit and I saw an opportunity. Why not build a Progressive Web App (PWA) that teaches Python fundamentals entirely client-side, even when you’ve got zero signal?&lt;/p&gt;
+
+&lt;h2&gt;Building Skulpt Locally&lt;/h2&gt;
+&lt;p&gt;Rather than pulling Skulpt from a CDN, I cloned the public repositories, ran the build process locally (with a quick &lt;code&gt;nvm&lt;/code&gt; switch to Node 16 to avoid OpenSSL issues), and bundled the minified &lt;code&gt;skulpt.min.js&lt;/code&gt; and &lt;code&gt;skulpt-stdlib.js&lt;/code&gt; into &lt;code&gt;dist/&lt;/code&gt;. That way the entire runtime ships with the app—no internet required.&lt;/p&gt;
+
+&lt;h2&gt;Technical Highlights&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Offline-first:&lt;/strong&gt; A service worker precaches every HTML, CSS, JS and Skulpt asset.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Single page layout:&lt;/strong&gt; Collapsible sidebar for navigation; main pane for lessons, code editors and quizzes.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Interactive code:&lt;/strong&gt; Editable Python snippets powered by Skulpt, with real-time output.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Progress tracking:&lt;/strong&gt; Quiz results saved in &lt;code&gt;localStorage&lt;/code&gt;, so you can pick up where you left off.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Lightweight styling:&lt;/strong&gt; Mobile-first, plain CSS—no frameworks—so it’s lightning fast and fully functional offline.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;Try It Yourself&lt;/h2&gt;
+&lt;p&gt;You can explore the code, clone the repo, or file issues over on GitHub:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/andyj/learn_python_offline_pwa&quot; target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot;&gt;🔗 https://github.com/andyj/learn_python_offline_pwa&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;p&gt;Whether you’re a digital nomad, a commuter or just someone who likes to tinker offline, this PWA lets you learn Python wherever you are. Give it a spin on your phone—just add it to your home screen and you’re good to go.&lt;/p&gt;
+]]></description>
+      <pubDate>Sat, 17 May 2025 08:01:00 +0000</pubDate>
+      <dc:creator>Andy Jarrett</dc:creator>
+      <guid>https://www.andyjarrett.com/posts/2025/learning_python_offline_with_a_pwa/</guid>
+      <enclosure url="https://www.andyjarrett.com/public/blogimage/rubaitul-azad-ZIPFteu-R8k-unsplash.jpg" type="image/jpeg" />
+      <category>posts, python, pwa, offline, skulpt, tutorial</category>
       <author>Andy Jarrett &lt;email@example.com&gt;</author>
     </item>
     <image>
